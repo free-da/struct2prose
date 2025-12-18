@@ -1,0 +1,567 @@
+{
+  "title": "Update 6.0 - XWiki",
+  "sections": [
+    {
+      "heading": "Einleitung",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "Alexandra Freytag Abmelden A4 Dokumentenindex Benutzerverzeichnis Anwendungen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki",
+            "…",
+            "S0FTW4RE-Plattform",
+            "S0FTW4RE Releases",
+            "Update 6.0"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Update 6.0"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Zuletzt geändert von Alexandra Freytag am 2024/12/18 11:17"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Bearbeiten"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Verwalten",
+            "Kopieren",
+            "Verschieben / Umbenennen",
+            "Löschen",
+            "Aktionen",
+            "Exportieren",
+            "Anmerken",
+            "Druckvorschau",
+            "Als E-Mail versenden",
+            "Ansichten",
+            "Quellcode",
+            "Untergeordnete Seiten",
+            "Kommentare",
+            "Anhänge (4)",
+            "Historie",
+            "Information",
+            "\"Gefällt mir\" anzeigen"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Office Formate"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als PDF exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Andere Formate"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Seiten für den Export auswählen:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Angelegte Seiten Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.",
+            "Erstellte und geänderte Seiten Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).",
+            "Alle Seiten Enthält Erweiterungsseiten, die nicht weiter geändert wurden."
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Alles auswählen / Keine"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Update 6.0"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als HTML exportieren"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Homeverzeichnis s0ftw4re-user",
+            "Ressourcen bereitstellen",
+            "Update Java",
+            "Update erp-dbtool",
+            "Datenbankupdate durchführen",
+            "ORGA Views und Tabellen einspielen",
+            "Applicationserver installieren Linux-Betriebssystem vorbereiten Font-Installation für Standard-BI-Berichte JAVA mit Benutzerverzeichnis verlinken Wildfly installieren",
+            "Systemdienst einrichten",
+            "Applicationserver konfigurieren Oracle-DB-Treiber installieren AS + JBoss-cli starten Treiberinstallation überprüfen: Datenbankverbindungen einrichten TEST DEMO Datenbankverbindung überprüfen DEMO Datenbank Connection-Pool-Größe über jboss.cli konfigurieren TEST DEMO PROD Logging konfigurieren Timeout konfigurieren SSL-Verschlüsselung Datenbank-Validation hinzufügen",
+            "S0FTW4REWeb-Anwendung installieren",
+            "DAP 3.0 installieren",
+            "Webservices anschalten",
+            "Jobrunner + VTindex installieren"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Punkt abgearbeitet DEMO Version"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Punkt abgearbeitet TEST Version"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Punkt abgearbeitet PROD Version"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "⌛  Punkt in Bearbeitung alle Versionen"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "🚩 Achtung zweiter Check nötig"
+        }
+      ]
+    },
+    {
+      "heading": "Homeverzeichnis s0ftw4re-user Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Wegen der neuen Installierbarkeit einzelner Komponenten als rpm-package ist es nötig, das Homeverzeichnis des s0ftw4re -user zu ändern von s0ftw4reweb nach s0ftw4re."
+        },
+        {
+          "block_type": "div_text",
+          "content": "# als user orga-admin sudo mkdir /opt/s0ftw4re sudo usermod -d /opt/s0ftw4re/ s0ftw4re # git-Repo rüberkopieren und anpassen cd /opt/s0ftw4reweb sudo cp -r /opt/s0ftw4reweb/2012-S0FTW4RE/ /opt/s0ftw4re/ # Konfigdateien rüberkopieren und anpassen sudo cp /opt/s0ftw4reweb/.bash* /opt/s0ftw4re/ vi /opt/s0ftw4re/.bashrc # anpassen: :%s/s0ftw4reweb/s0ftw4re/gc # Berechtigungen anpassen sudo chown -R s0ftw4re:users /opt/s0ftw4re/ # symlinks neu erstellen # als user s0ftw4re su s0ftw4re cd ln -s 2012 -S0FTW4RE/ S0FTW4RE_REPO ln -s S0FTW4RE_REPO/s0ftw4re_resources/resources_6.0 s0ftw4re_resources"
+        }
+      ]
+    },
+    {
+      "heading": "Ressourcen bereitstellen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Folgende Dateien ins S0FTW4RE-Repo einchecken und auf dem Zielserver auschecken:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "$ ls -la | tr -s ' ' | cut -d \" \" -f9 ./ ../ ERP-DBTool_6.0.121.x86_64.rpm S0FTW4REAnwenderprofil_ORGA_6.0.dat S0FTW4REWeb_6.0.87.x86_64.rpm S0FTW4RE_Web_6.0.87.zip erp-dbtool_6.0.87.zip jobrunnerweb_6.0.87.zip vtindextool_6.0_240425.zip wildfly-28.0.1.Final-6.0.2-S0FTW4RE_Erweiterung.zip wildfly-28.0.1.Final.zip"
+        }
+      ]
+    },
+    {
+      "heading": "Update Java Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# als user orga-admin sudo yum install java-17-openjdk.x86_64 # bestätigen mit j sudo alternatives --config java Es gibt 2 Programme, welche »java« zur Verfügung stellen. Auswahl    Befehl ----------------------------------------------- *+ 1 java-11-openjdk.x86_64 ( /usr/lib/jvm/java-11-openjdk-11.0.20.0.8-3.el8.x86_64/bin/java ) 2 java-17-openjdk.x86_64 ( /usr/lib/jvm/java-17-openjdk-17.0.11.0.9-2.el8.x86_64/bin/java ) Eingabe um die vorgegebene Auswahl [ + ] zu behalten, oder geben Sie die Nummer an:2"
+        }
+      ]
+    },
+    {
+      "heading": "Update erp-dbtool Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# als user orga-admin cd /opt/s0ftw4reweb/S0FTW4RE_REPO/s0ftw4re_resources/resources_6.0/ sudo rpm -ivh ERP-DBTool_6.0.121.x86_64.rpm sudo chown -R s0ftw4re:users erpdbtool/ # als user s0ftw4re su s0ftw4re cd cp S0FTW4RE_REPO/s0ftw4re_configfiles/ojdbc8.jar erpdbtool/jdbc/ # default-Dateien löschen cd /opt/s0ftw4re/erpdbtool/ rm dbserver.config rm erp-dbtool-update.sh # Serverkonfig für aktuelle Anwenderprofildatei anpassen cd /opt/s0ftw4re/S0FTW4RE_REPO/s0ftw4re_configfiles/TEST/ cp dbserver.config_5.0 dbserver.config_6.0 vi dbserver.config_6.0 #### anpassen: --licensepath = /opt/s0ftw4re/S0FTW4RE_REPO/s0ftw4re_resources/resources_6.0/S0FTW4REAnwenderprofil_ORGA_6.0.dat # symlinks auf konfigurierte Dateien setzen cd /opt/s0ftw4re/erpdbtool ln -s ../S0FTW4RE_REPO/s0ftw4re_configfiles/TEST/dbserver.config_6.0 dbserver.config ln -s ../S0FTW4RE_REPO/s0ftw4re_configfiles/erp-dbtool-update.sh erp-dbtool-update.sh ln -s ../S0FTW4RE_REPO/s0ftw4re_configfiles/erp-dbtool-connect.sh erp-dbtool-connect.sh # Installation überprüfen durch Verbindungs-Check: cd /opt/s0ftw4re/erpdbtool ./erp-dbtool-connect.sh ########## # ... # 2024-05-14 11:04:14.217  INFO : Starting ErpDbtoolApplication v6.0.121 using Java 17.0.11 with PID 376503 (/opt/s0ftw4re/erpdbtool/erp-dbtool-cli.jar started by s0ftw4re in /opt/s0ftw4re/erpdbtool) # 2024-05-14 11:04:14.221  INFO : The following 1 profile is active: \"oracle\" # 2024-05-14 11:04:18.689  INFO : Started ErpDbtoolApplication in 4.917 seconds (process running for 5.834) # 2024-05-14 11:04:18.697  INFO : ERP-DBTOOL Software-Version: 6.0.0; Datenmodell-Version: 6.0.33 # 2024-05-14 11:04:18.906  INFO : Datenmodell-Version der DB: 5.0.1 # 2024-05-14 11:04:19.278  INFO : Verbindung erfolgreich hergestellt. S0FTW4RE Datenbank erkannt. #########"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbankupdate durchführen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "cd /opt/s0ftw4re/erpdbtool ./erp-dbtool-update.sh ######### # ... # 2024-05-14 15:24:11.977  INFO : Update von Version 5.0.1 zu 6.0.33 erfolgreich ausgeführt. #########"
+        }
+      ]
+    },
+    {
+      "heading": "ORGA Views und Tabellen einspielen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "s. ORGA Views und Tabellen"
+        }
+      ]
+    },
+    {
+      "heading": "Applicationserver installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Seit\n dieser Version bietet S0FTW4RE die Möglichkeit, die Konfiguration des \nWebservers und die Installation der Anwendung per RPM-Packet und \nAnsible-Skripten zu orchestrieren. Wir wollen diesen Weg gerne \nausprobieren. Zunächst werden wir den gewohnten, \"manuellen\" \nInstallationsweg auf den bekannten TEST- und DEMO-Maschinen ausführen. \nParallel dazu haben wir eine weitere TEST-VM beantragt, auf der wir \nzunächst die Installation per Wildfly und RPM-Paketen testen wollen, \nspäter dann auch den von A42 bereitgestellten JBoss EAP 8.0. Für die \nAnsible-Orchestrierung wird es nach Absprache mit Thorsten absehbar \neinen User-Ansible-Agent geben, der für solche Zwecke geeignet ist. All \ndies braucht noch etwas Vorlauf. Deswegen wird hier der gewohnte Weg \nbeschrieben."
+        }
+      ]
+    },
+    {
+      "heading": "Linux-Betriebssystem vorbereiten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Die S0FTW4RE-AG empfiehlt, den Applicationserver in einem eigenen Benutzerkontext zu betreiben. Dies ist neu für uns."
+        },
+        {
+          "block_type": "div_text",
+          "content": "# als user orga-admin # user wildfly erstellen und ihm eine Gruppe und Home-Verzeichnis zuweisen sudo useradd -d /opt/s0ftw4re/s0ftw4reweb -U wildfly # Passwort entfernen sudo passwd -d wildfly # Anzahl zu öffnender Dateien anpassen: ulimit -n # Antwort: mind. 1024, dann: vi /etc/security/limits.conf # enter: wildfly soft nofile 65535 wildfly hard nofile 65535 # Konsolenkonfiguration entspr. TEST vorbereiten und verlinken # als user wildfly ln -s ../S0FTW4RE_REPO/s0ftw4re_configfiles/TEST/.vimrc .vimrc ln -s ../S0FTW4RE_REPO/s0ftw4re_configfiles/TEST/.bashrc .bashrc"
+        }
+      ]
+    },
+    {
+      "heading": "Font-Installation für Standard-BI-Berichte Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# ORGA-Schriften sudo cp -r /opt/s0ftw4re/S0FTW4RE_REPO/Schriften/* /usr/share/fonts/ # Deja-vu muss entfernt werden, da sonst ORGA-Schriften nicht greifen cd /usr/share/fonts sudo rm -rf dejavu/ # Font-config-cache aktualisieren fc-cache -vf"
+        }
+      ]
+    },
+    {
+      "heading": "JAVA mit Benutzerverzeichnis verlinken Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# als user s0ftw4re ln -s /usr/lib/jvm/java-17-openjdk-17.0.11.0.9-2.el8.x86_64 /opt/s0ftw4re/java/jdk # als user wildfly vi ~.bashrc # enter: export JAVA_HOME = /opt/s0ftw4re/java/jdk export PATH = $JAVA_HOME /bin: $PATH"
+        }
+      ]
+    },
+    {
+      "heading": "Wildfly installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# als user wildfly cd /opt/s0ftw4re/S0FTW4RE_REPO/s0ftw4re_resources/resources_6.0 unzip wildfly-28.0.1.Final.zip -d /opt/s0ftw4re/s0ftw4reweb/ unzip wildfly-28.0.1.Final-6.0.2-S0FTW4RE_Erweiterung.zip -d /opt/s0ftw4re/s0ftw4reweb/ cd ln -s wildfly-28.0.1.Final wildfly"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Bestätigen Sie das Überschreiben vorhandener Dateien beim Entpacken des Erweiterungspaketes. Beachten Sie die Dateiberechtigungen für das unprivilegierte Benutzerkonto wildfly."
+        }
+      ]
+    },
+    {
+      "heading": "Systemdienst einrichten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "su wildfly cd vi wildfly-28.0.1.Final/bin/systemd/s0ftw4reweb.service # user und group jboss durch wildfly ersetzen # JAVA_HOME-Pfad anpassen zu /opt/s0ftw4re/java/jdk\" # als user orga-admin sudo cp /opt/s0ftw4re/s0ftw4reweb/wildfly-28.0.1.Final/bin/systemd/s0ftw4reweb.service /etc/systemd/system/ ; sudo systemctl daemon-reload sudo systemctl enable s0ftw4reweb.service"
+        }
+      ]
+    },
+    {
+      "heading": "Applicationserver konfigurieren Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Oracle-DB-Treiber installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "su wildfly cd mkdir -p modules/com/oracle/database/jdbc/main cp ../S0FTW4RE_REPO/s0ftw4re_configfiles/ojdbc8.jar wildfly-28.0.1.Final/modules/com/oracle/database/jdbc/main"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Achtung: Damit der Treiber korrekt erkannt wird, muss die standalone-s0ftw4reweb.xml angepasst werden"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<!-- Folgende Zeilen einkommentieren: --> <driver name= \"oracle\" module= \"com.oracle.database.jdbc\" > <driver-class> oracle.jdbc.driver.OracleDriver </driver-class> </driver>"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<!-- Treiber-Nr. anpassen von 11 auf 8 --> <resources> <resource-root path= \"ojdbc8.jar\" ></resource-root> </resources>"
+        },
+        {
+          "block_type": "div_text",
+          "content": "// in wildfly/bin/standalone.conf hinzufügen: JAVA_OPTS = \"$JAVA_OPTS -Xrs -Xms16g -Xmx16g -XX:MaxMetaspaceSize=1g -XX:ReservedCodeCacheSize=750m\" // 64G für's PROD-System"
+        }
+      ]
+    },
+    {
+      "heading": "AS + JBoss-cli starten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# wildfly starten als orga-admin sudo systemctl start s0ftw4reweb # wildfly konfigurieren über jboss-cli su wildfly cd cd wildfly-28.0.1.Final/bin/ ./jboss-cli.sh"
+        },
+        {
+          "block_type": "div_text",
+          "content": "2024-05-22 14:00:55,891 INFO  [main] [o.j.as.cli.CommandContext] You are disconnected at the moment. Type 'connect' to connect to the server or 'help' for the list of supported commands. You are disconnected at the moment. Type 'connect' to connect to the server or 'help' for the list of supported commands. [disconnected /] connect 2024-05-22 14:00:58,947 INFO  [CLI command executor] [org.jboss.remoting] JBoss Remoting version 5.0.27.Final 2024-05-22 14:00:58,954 INFO  [CLI command executor] [org.jboss.threads] JBoss Threads version 2.4.0.Final"
+        }
+      ]
+    },
+    {
+      "heading": "Treiberinstallation überprüfen: Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "[standalone@localhost:9990 /] /schwubsystem=datasources:installed-drivers-list { \"outcome\" => \"success\", \"result\" => [{ \"driver-name\" => \"oracle\", \"deployment-name\" => undefined, \"driver-module-name\" => \"com.oracle\", \"module-slot\" => \"main\", \"driver-datasource-class-name\" => \"\", \"driver-xa-datasource-class-name\" => \"\", \"datasource-class-info\" => undefined, \"driver-class-name\" => \"oracle.jdbc.driver.OracleDriver\", \"driver-major-version\" => 19, \"driver-minor-version\" => 14, \"jdbc-compliant\" => true }] }"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbankverbindungen einrichten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Achtung: Passwort anpassen"
+        }
+      ]
+    },
+    {
+      "heading": "TEST",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "data-source add --name=TEST --connection-url=jdbc:oracle:thin:@s-0953.db.domain.de:1522:test --jndi-name=java:/test --user-name=s0ftw4re --password=xxxxx --driver-name=oracle --use-ccm=true --background-validation=true --use-java-context=true"
+        }
+      ]
+    },
+    {
+      "heading": "DEMO",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "data-source add --name=DEMO --connection-url=jdbc:oracle:thin:@s-0953.db.domain.de:1521:demo --jndi-name=java:/demo --user-name=s0ftw4re --password=xxxxxxxx --driver-name=oracle --use-ccm=true --background-validation=true --use-java-context=true"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbankverbindung überprüfen Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "DEMO",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "/schwubsystem=datasources/data-source=DEMO:test-connection-in-pool"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbank Connection-Pool-Größe über jboss.cli konfigurieren Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "TEST",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "/schwubsystem=datasources/data-source=TEST:write-attribute(name=min-pool-size,value=20) /schwubsystem=datasources/data-source=TEST:write-attribute(name=max-pool-size,value=50) reload"
+        }
+      ]
+    },
+    {
+      "heading": "DEMO",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "/schwubsystem=datasources/data-source=DEMO:write-attribute(name=min-pool-size,value=20) /schwubsystem=datasources/data-source=DEMO:write-attribute(name=max-pool-size,value=50) reload"
+        }
+      ]
+    },
+    {
+      "heading": "PROD",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "tba."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Die Änderungen treten nach Neustart des WildFly in Kraft."
+        }
+      ]
+    },
+    {
+      "heading": "Logging konfigurieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Die vorkonfigurierte logback.xml aus S0FTW4RE_REPO in den wildfly verlinken:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "# als user wildfly aus wildfly-Homeverzeichnis ln -s /opt/s0ftw4re/S0FTW4RE_REPO/s0ftw4re_configfiles/TEST/logback.xml /opt/s0ftw4re/s0ftw4reweb/wildfly/standalone/configuration/logback.xml"
+        }
+      ]
+    },
+    {
+      "heading": "Timeout konfigurieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "in\n der standalone-s0ftw4reweb.xml an entsprechender Stelle im http- UND im \nhttps-listener die Parameter \"read-timeout\" und \"write-timeout\" auf 0 \nsetzen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<http-listener name= \"default\" socket-binding= \"http\" max-post-size= \"209715200\" max-parameters= \"10000\" url-charset= \"utf-8\" redirect-socket= \"https\" enable-http2= \"false\" read-timeout= \"0\" write-timeout= \"0\" ></http-listener> <https-listener name= \"https\" socket-binding= \"https\" max-post-size= \"209715200\" max-parameters= \"10000\" url-charset= \"utf-8\" ssl-context= \"applicationSSC\" enable-http2= \"false\" read-timeout= \"0\" write-timeout= \"0\" ></https-listener>"
+        }
+      ]
+    },
+    {
+      "heading": "SSL-Verschlüsselung Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Der Ort der Angabe des keystore hat sich von wildfly-23 zu wildfly-28 geändert."
+        },
+        {
+          "block_type": "div_text",
+          "content": "# als user wildfly in jboss-cli /schwubsystem = elytron/key-store = applicationKS:add ( path = /opt/s0ftw4re/S0FTW4RE_REPO/keystore/cacerts,credential-reference ={ clear-text = keystore-password } ,type = JKS ) /schwubsystem = elytron/key-manager = applicationKM:add ( key-store = applicationKS,credential-reference ={ clear-text = key-password } ,alias-filter = s-0220.srv.domain.de ) /schwubsystem = elytron/server-ssl-context = applicationSSC:add ( key-manager = httpsKM,protocols =[ \"TLSv1.2\" ]) # https-Listener konfigurieren batch /schwubsystem = undertow/server = default-server/https-listener = https:undefine-attribute ( name = security-realm ) /schwubsystem = undertow/server = default-server/https-listener = https:write-attribute ( name = ssl-context,value = applicationSSC ) run-batch # Server Neustart reload"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbank-Validation hinzufügen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Nach einem Verlust der DB-Verbindung wird diese automatisch wieder hergestellt. Ein Serverneustart ist dann nicht notwendig."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Folgenden Codeblock innerhalb des <datasource> -Elements hinzufügen:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<validation> <check-valid-connection-sql> select 1 from dual </check-valid-connection-sql> <validate-on-match> false </validate-on-match> <background-validation> true </background-validation> <background-validation-millis> 120000 </background-validation-millis> </validation>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Danach den Server neustarten."
+        }
+      ]
+    },
+    {
+      "heading": "S0FTW4REWeb-Anwendung installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "mit Skript, installS0ftw4reWeb();"
+        }
+      ]
+    },
+    {
+      "heading": "DAP 3.0 installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "s. DAP 3.0 installieren"
+        }
+      ]
+    },
+    {
+      "heading": "Webservices anschalten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "# als user wildfly cd /opt/s0ftw4re/s0ftw4reweb/wildfly/modules/de/s0ftw4re/configuration/webservices/main mv wsdeploy.properties wsdeploy.properties.default ln -s /opt/s0ftw4re/S0FTW4RE_REPO/s0ftw4re_configfiles/wsdeploy.properties wsdeploy.properties"
+        }
+      ]
+    },
+    {
+      "heading": "Jobrunner + VTindex installieren Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "per Skript install_s0ftw4re.sh"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "evtl. Symlink unter ~/cronjobs/cron-s0ftw4re/jobrunner kontrollieren"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Jobrunner starten nach JobRunner"
+        },
+        {
+          "block_type": "div_text",
+          "content": "0"
+        },
+        {
+          "block_type": "div_text",
+          "content": "[+]"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellt von Alexandra Freytag am 2024/05/13 14:32"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Kommentare (0)",
+            "Anhänge (4)",
+            "Historie",
+            "Information"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Keine Kommentare zu diesem Dokument"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Kommentar hinzufügen Alexandra Freytag sagt: Abbrechen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Permalink"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Löschen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?"
+        }
+      ]
+    },
+    {
+      "heading": "Navigation",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "XWiki 12.10.10"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Seite auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Anhang auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Failed to load the action buttons."
+        }
+      ]
+    }
+  ],
+  "source_file": "Update_6.0.htm"
+}

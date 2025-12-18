@@ -1,0 +1,309 @@
+{
+  "title": "Logging und Log-Rotation - XWiki",
+  "sections": [
+    {
+      "heading": "Einleitung",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "Alexandra Freytag Abmelden A4 Dokumentenindex Benutzerverzeichnis Anwendungen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki",
+            "…",
+            "S0FTW4RE-Plattform",
+            "Know How",
+            "Logging und Log-Rotation"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Logging und Log-Rotation"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Zuletzt geändert von admin am 2024/05/07 14:14"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Bearbeiten"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Verwalten",
+            "Kopieren",
+            "Verschieben / Umbenennen",
+            "Löschen",
+            "Aktionen",
+            "Exportieren",
+            "Anmerken",
+            "Druckvorschau",
+            "Als E-Mail versenden",
+            "Ansichten",
+            "Quellcode",
+            "Untergeordnete Seiten",
+            "Kommentare (0)",
+            "Anhänge",
+            "Historie",
+            "Information",
+            "\"Gefällt mir\" anzeigen"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Office Formate"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als PDF exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Andere Formate"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Seiten für den Export auswählen:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Angelegte Seiten Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.",
+            "Erstellte und geänderte Seiten Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).",
+            "Alle Seiten Enthält Erweiterungsseiten, die nicht weiter geändert wurden."
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Alles auswählen / Keine"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als HTML exportieren"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Logging-Anpassungen zur Laufzeit vornehmen",
+            "server.log",
+            "Logger-Einstellung"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Auf allen S0FTW4RE-Instanzen wird das Logging durch die Datei wildfly/standalone/configuration/logback.xml konfiguriert.\n Die Logging-Konfigurationen sind auf allen Instanzen gleich, außer dass\n in TEST und DEMO ein Loglevel von \"INFO\" und auf PROD \"ERROR\" \neingestellt ist. Um eine Versionierung dieser Datei zu gewährleisten, \nwird diese Datei durch einen Symlink auf das S0FTW4RE-REPO bereitgestellt:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "ln -s /opt/s0ftw4reweb/S0FTW4RE_REPO/s0ftw4re_configfiles/ [ PROD|DEMO|TEST ] /logback.xml /opt/s0ftw4reweb/wildfly/standalone/logback.xml"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Jede\n Konfigurationsdatei soll AUSSCHLIEßLICH aus dem Repo verlinkt werden \nund auch nur dort bearbeitet und nach Bearbeitung wieder eingecheckt \nwerden. Es sollen KEINE Dateien aus dem Repo kopiert werden!"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Die logback.xml wird von S0FTW4RE ausgeliefert und folgende ORGA-spezifische Anpassungen werden vorgenommen:"
+        }
+      ]
+    },
+    {
+      "heading": "Logging-Anpassungen zur Laufzeit vornehmen",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "<!-- Zeile 2: regelmäßiges Scannen nach Veränderungen in der Datei --> <configuration scan= \"true\" scanPeriod= \"30 seconds\" >"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Indem\n das Logging-Framework alle 30 Sekunden nach Veränderungen in der \nLogging-Konfiguration sucht, können Anpassungen im laufenden Betrieb \nohne Neustart vorgenommen werden."
+        }
+      ]
+    },
+    {
+      "heading": "server.log Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Das eigentliche Logging wird in der Datei /opt/s0ftw4reweb/wildfly/standalone/log/server.log vorgenommen. Diese Datei soll täglich rotiert werden. Die Logs werden \n30 Tage aufbewahrt, und bis zu einem Gesamtvolumen von 30 GB."
+        },
+        {
+          "block_type": "div_text",
+          "content": "<!-- ab Z. 55 --> <!-- Definition des Appender für das Schreiben der Logdateien \"server.log\" --> <appender name= \"RequestLogAppender\" class= \"ch.qos.logback.core.rolling.RollingFileAppender\" > <file> ${JBOSS_HOME}/standalone/log/server.log </file> <rollingPolicy class= \"ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy\" > <!-- rollover daily --> <fileNamePattern> /opt/s0ftw4reweb/wildfly/standalone/log/server.%d{yyyy-MM-dd}.%i.txt </fileNamePattern> <!-- each file should be at most 100MB, keep 30 days worth of history, but at most 3GB --> <maxFileSize> 100MB </maxFileSize> <maxHistory> 30 </maxHistory> <totalSizeCap> 3GB </totalSizeCap> </rollingPolicy> <encoder> <pattern> %date - %logger:\\n [%level]: %message%n%xException </pattern> </encoder> </appender>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Zu\n Beachten, falls Konfigurationen kopiert werden: Der Name des Appenders \n\"RequestLogAppender\" muss zwingend erhalten werden, sonst weiß die \nAnwendung nicht, wo die zu loggenden Daten hingeschickt werden müssen."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Hier eine Erklärung der Einstellungen:"
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Element-Name",
+              "Erläuterung des Wert"
+            ],
+            [
+              "file",
+              "die zu konfigurierende Log-Datei"
+            ],
+            [
+              "rollingPolicy",
+              "durch welche Regel ist die Log-Rotation festgelegt? hier: SizeAndTimeBasedRollingPolicy , also eine Rotation basierend auf verstreichender Zeit (täglich) und Größe (maxFileSize, hier: 100MB)"
+            ],
+            [
+              "fileNamePattern",
+              "der\n Ausgabeort der rotierten Log-Datei. Hier: am gleichen Ort wie das \nOriginal, mit dem Datums- und Nummerierungs-Suffix. Die Operatoren %d \n(date) und %i (Nummerierung) sind zwingend notwendig für die Verwendung der SizeAndTimeBasedRollingPolicy. Hier wird ein Benennungsschema von bspw. server.2024-01-04.0.txt erreicht."
+            ],
+            [
+              "maxFileSize",
+              "die maximale Größe einer Datei, bevor sie rotiert wird"
+            ],
+            [
+              "maxHistory",
+              "die maximale Anzahl an aufbewahrten Logging-Dateien"
+            ],
+            [
+              "totalSizeCap",
+              "das Gesamtvolumen an aufbewahrten Logging-Dateien"
+            ],
+            [
+              "pattern",
+              "das Layout, in dem die Log-Nachrichten in die Logdatei geschrieben werden"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Logger-Einstellung Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Im letzten Teil der logback.xml werden die verwendeten Logger eingebunden und deren Loglevel festgelegt:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<!-- Z. 82 --> <logger name= \"de.s0ftw4re.system.ui.component.demo\" level= \"INFO\" ></logger> <logger name= \"org.apache.cxf.services\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.system.ui\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.system.jpql\" level= \"INFO\" ></logger> <logger name= \"org.hibernate\" level= \"INFO\" ></logger> <!-- <logger name=\"org.hibernate.SQL\" level=\"INFO\" ></logger> --> <!-- <logger name=\"org.jboss.as.ee\" level=\"INFO\"></logger> --> <!-- <logger name=\"org.hibernate\" level=\"INFO\"></logger> --> <!-- <logger name=\"org.jboss.jca\" level=\"INFO\"></logger> --> <!-- <logger name=\"com.arjuna\" level=\"INFO\"></logger> --> <!-- <logger name=\"de.s0ftw4re.system.jpql\" level=\"INFO\"></logger> --> <logger name= \"de.s0ftw4re.system.attach\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.system.service\" level= \"INFO\" ></logger> <logger name= \"org.springframework.orm\" level= \"INFO\" ></logger> <!-- <logger name=\"org.apache.activemq\" level=\"INFO\"></logger> --> <logger name= \"de.s0ftw4re.system.log\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.dapservice\" level= \"INFO\" ></logger> <logger name= \"org.jboss\" level= \"INFO\" ></logger> <logger name= \"org.springframework\" level= \"INFO\" ></logger> <root level= \"WARN\" > <appender-ref ref= \"RequestLogAppender\" ></appender-ref> <appender-ref ref= \"S0ftw4re-Ondemand-Appender\" ></appender-ref> <appender-ref ref= \"Stdout\" ></appender-ref> </root>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Für TEST und DEMO wird standardmäßig das Loglevel auf INFO, für PROD auf ERROR gestellt."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Zu Beachten: die Einbindung der Zeile <logger name=\"de.s0ftw4re.dapservice\" level=\"INFO\"/> , die standardmäßig NICHT vorhanden ist, uns aber wichtige Informationen über die DAP-Komponente gibt."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Um\n den Loglevel zu ändern, muss, sofern in Z.2 (s.o.) der Scanner \neingeschaltet ist, die Anwendung nicht neugestartet werden. Es reicht, \nfolgende Schritte auszuführen:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "vim logback.xml",
+            "Taste \"v\" für visuellen Modus, damit die zu bearbeitenden Zeilen auswählen",
+            ":s/FIND/REPLACE/[Enter] (Bsp.: :s/INFO/ERROR/[Enter] )",
+            "30 Sekunden warten, bevor Änderung in Kraft tritt"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Automatisch Speichern alle minutes"
+        },
+        {
+          "block_type": "div_text",
+          "content": "0"
+        },
+        {
+          "block_type": "div_text",
+          "content": "[+]"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellt von Alexandra Freytag am 2024/01/05 14:54"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Kommentare (0)",
+            "Anhänge (0)",
+            "Historie",
+            "Information"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Keine Kommentare zu diesem Dokument"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Kommentar hinzufügen Alexandra Freytag sagt: Abbrechen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Permalink"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Löschen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?"
+        }
+      ]
+    },
+    {
+      "heading": "Navigation",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki Administration Allgemeines Anwendungen Anwendungen Java CKAN ClamAV Domain Fachanwendungen IT-Anwendungen OBO-Edit Obsolet Online-Bibliothekskatalog des ORGA (GBV) Server Anwendungen AddressDB Alfresco BLtU Cadenza DB108 ELKE EUginius EUginius alt Freisetzungsliste Handlungshilfe I-doit-(inÜberarbeitung) Infozupf Internetplattform Lebensmittelwarnung S0FTW4RE-Plattform Datenbanken im S0FTW4RE-Bereich DOC-GEN Know How Abgleich Ansprechpartner / Mitarbeiter Aktualisierung der Partnerdaten Analyse des Timeouts bei Zip-Export Berliner E-Mailserver einbinden ORGA Views und Tabellen Erhöhung Rastertyp Kalenderwochen in S0FTW4RE C/S Farbkombination in der Kopfleiste ändern HTTPS Umstellung der S0FTW4RE-Komponenten JAVA Keystore Konfiguration SQuirreL SQL Konfigurationsübersicht Leitfaden zum automatisierten Anlegen der Jahresbände für alle Sachakten Logging und Log-Rotation S0FTW4RE Aktualisierung Datenbestand Test-Systeme S0FTW4RE_REPO 9 more ... Known Issues S0FTW4RE S0FTW4RE Komponenten S0FTW4RE Releases S0FTW4RE Web zzz_Archiv NGS 6 more ... SVN Ultramobile IT Basisdienste Betriebssysteme Datenbanken Entwicklung Hardware Infrastruktur (A43) IT-Service Management Know-How Medientechnik Netzwerk Projekte RZ Umzug 2 more ...",
+            "03 Archiv",
+            "04 Hilfe",
+            "05 Feedback",
+            "06 Statuslisten",
+            "02 Altes IT Wiki - Read Only"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "XWiki 12.10.10"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Seite auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Anhang auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        }
+      ]
+    }
+  ],
+  "source_file": "Logging.htm"
+}

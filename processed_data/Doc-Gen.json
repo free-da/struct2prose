@@ -1,0 +1,957 @@
+{
+  "title": "DOC-GEN - XWiki",
+  "sections": [
+    {
+      "heading": "Einleitung",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "Alexandra Freytag Abmelden A4 Dokumentenindex Benutzerverzeichnis Anwendungen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki",
+            "…",
+            "Server Anwendungen",
+            "S0FTW4RE-Plattform",
+            "DOC-GEN"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "DOC-GEN"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Zuletzt geändert von Alexandra Freytag am 2025/06/27 10:30"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Bearbeiten"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Verwalten",
+            "Kopieren",
+            "Aktionen",
+            "Exportieren",
+            "Anmerken",
+            "Druckvorschau",
+            "Als E-Mail versenden",
+            "Ansichten",
+            "Quellcode",
+            "Untergeordnete Seiten",
+            "Kommentare (0)",
+            "Anhänge (6)",
+            "Historie",
+            "Information",
+            "\"Gefällt mir\" anzeigen"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Office Formate"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als PDF exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Andere Formate"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Seiten für den Export auswählen:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Angelegte Seiten Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.",
+            "Erstellte und geänderte Seiten Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).",
+            "Alle Seiten Enthält Erweiterungsseiten, die nicht weiter geändert wurden."
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Alles auswählen / Keine"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "DOC-GEN"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als HTML exportieren"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Vorwort",
+            "Ansprechpartner Fachlich IT Extern",
+            "Dokumentenablage ORGA Dateisystem Doc-Gen Wiki GIT Anleitungen",
+            "Server Anwendungsserver Datenbank Server Nützliche Server Befehle",
+            "Verarbeitete Daten Fachliche Daten Personenbezogene Daten",
+            "Systemarchitektur Doc-Gen Ver. 1.8",
+            "Bestandteile der Anwendung Doc-Gen Ver. 1.8 Testsystem Testsystem Operator/Converter 1.8 Testsystem Doc-Gen Integration Server (EIS) 1.8 Konfigurationseiten Doc-Gen Ver. 1.8 Produktivsystem Produktivsystem Doc-Gen Intergation Server (EIS) 1.8 Konfigurationseiten Client Gruppen in der AD",
+            "Abhängigkeit von anderen Anwendungen",
+            "Termine",
+            "zeitlicher Verlauf 09.10.2023 Plan-B-Migration in RZ Bundesallee 08.12.2022 Installation Doc-Gen Operator, Converter, tw. EIS auf schwubs374 07.12.2022 Installation JBoss 01.12.2022 neuer Doc-Gen Server schwubs374 21.09.2022 Start für das Update auf Version 1.8 19.01.2017 OTRS: Ticket#10021325 27.10.2016 (Aktualisierung Testdatenbank) 11.01.2017 (Vorbereitung Aktualisierung Produktion) 2018-08-27 (Untersuchung Ghostscript Schwachstelle)"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Vorwort Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Generierung von Dokumenten für die Zulassung von Pflanzenschutzmitteln auf Basis von Faktendatenbanken (Bsp. Abt. 2 INFOZUPF) Die Dokumente werden in das VBS übertragen und von dort aus an den Antragsteller übermittelt"
+        }
+      ]
+    },
+    {
+      "heading": "Ansprechpartner Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Fachlich Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Britta Busch"
+        }
+      ]
+    },
+    {
+      "heading": "IT Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "@Diana Stölzel",
+            "@Vladislav Konov",
+            "@Hans Labod",
+            "@Alexandra Freytag",
+            "@Andreas Stengl"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Extern Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Account Manager: Claudia.Theobald@doc-gen.de",
+            "technische Koordination: Lars Decker (Decker, Lars < Lars.Decker@doc-gen.de >)",
+            "Doc-Gen EIS: Frederik.Zimmer@doc-gen.de",
+            "Support: https://service.doc-gen-software.de (Support-Portal)"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Dokumentenablage Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "ORGA Dateisystem Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "\\\\dateiablage1-bs\\Projekte\\DokGen",
+            "\\\\dateiablage1-bs\\Projekte\\IT-Anwendungen-Abt2\\04_DOC-GEN\\04_Dokumentation\\DOC-GEN"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Doc-Gen Wiki Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "DOC-GEN Wiki - hier findet man Handbücher, Hilfestellung zur Installation, Wartung URL: www.doc-gen-wiki.de User: doc-gen-help Passwort: siehe Keepass S0FTW4RE-Kennwoerter.kdbx"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "GIT Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master/"
+        },
+        {
+          "block_type": "div_text",
+          "content": "git clone https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen"
+        }
+      ]
+    },
+    {
+      "heading": "Anleitungen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Installationshandbuch \\\\dateiablage1-bs\\Abteilung_Z\\Grp_A4_Allgemein\\Dokumentation\\Installationshandbücher",
+            "Betriebshandbuch \\\\dateiablage1-bs\\Abteilung_Z\\Grp_A4_Allgemein\\Dokumentation\\Betriebshandbücher",
+            "Übernahme der Änderungen aus dem Entwicklungssystem in das Produktivsystem Domänen_transportieren"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Server Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Anwendungsserver Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Produktiv: s-0214m.srv.domain.de"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Test: s-0224m.srv.domain.de"
+        }
+      ]
+    },
+    {
+      "heading": "Datenbank Server Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Datenbank Server Produktiv: s-0941.db.domain.de:1521/doc-gen19"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Datenbank Server Test: s-0941.db.domain.de:1521/tbv19"
+        }
+      ]
+    },
+    {
+      "heading": "Nützliche Server Befehle Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Server starten (als root)"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "systemctl start jboss-eap-rhel systemctl start tomcat"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Server stoppen (als root)"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "systemctl stop jboss-eap-rhel systemctl stop tomcat"
+        }
+      ]
+    },
+    {
+      "heading": "Verarbeitete Daten Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Fachliche Daten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Zulassungsdaten der Abteilung 2"
+        }
+      ]
+    },
+    {
+      "heading": "Personenbezogene Daten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Antragstellerdaten"
+        }
+      ]
+    },
+    {
+      "heading": "Systemarchitektur Doc-Gen Ver. 1.8 Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master/Doc-Gen1.8/Systemarchitektur_Doc-Gen.png/"
+        }
+      ]
+    },
+    {
+      "heading": "Bestandteile der Anwendung Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Doc-Gen Ver. 1.8 Testsystem Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Beispielaufruf Webcomposer:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "https://\ndoc-gen-test.domain.de:6228/generator-launcher/ui/orga/\ntemplate-list?antragsnummer=00Z001-00/00&vorgang=27596"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Doc-Gen Operator"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "http://doc-gen-test.domain.de:6260/doc-gen-web/operator/",
+            "https://doc-gen-test.domain.de:6428/doc-gen-web/operator/"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Testsystem Operator/Converter 1.8",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Bezeichnung",
+              "Wert"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Applikation"
+            ],
+            [
+              "Server",
+              "188.455.5.174 ( s-0224m.srv.domain.de )"
+            ],
+            [
+              "",
+              "JBoss 7.4"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Datenbank"
+            ],
+            [
+              "Server",
+              "188.455.6.52 (s-0941.db.domain.de)"
+            ],
+            [
+              "Port",
+              "1521"
+            ],
+            [
+              "SID",
+              "tbv19"
+            ],
+            [
+              "User",
+              "doc-gentest18"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Testsystem Doc-Gen Integration Server (EIS) 1.8",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Bezeichnung",
+              "Wert"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Applikation"
+            ],
+            [
+              "Server",
+              "188.455.5.174 ( s-0224m.srv.domain.de )"
+            ],
+            [
+              "",
+              "Tomcat 9"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Datenbank"
+            ],
+            [
+              "Server",
+              "188.455.6.52 (s-0941.db.domain.de)"
+            ],
+            [
+              "Port",
+              "1521"
+            ],
+            [
+              "SID",
+              "tbv19"
+            ],
+            [
+              "User",
+              "EISKARMA_dev EISJPAStore_dev EISLockRegistry_dev EISTBHStore_dev EISUserService_dev"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Konfigurationseiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Konfigurationfiles liegen im GIT: https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master/Doc-Gen1.8/Prod/"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Anpassungen\n können auf den entsprechenden Komponenten in den o.g. \nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\n auf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev \nhochgeladen werden."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Bei Änderungen an Datenfeldern oder sonstigen \nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im \nDoc-Gen Operator (s.o.) nötig."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/authorization-server/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/eis-runtime/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/eis-runtime/admin/ui/services/orga-adapter"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/eis-user-manager/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/eis-sql-adapter/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/generator-launcher/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/s0ftw4re-persistence/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen-test.domain.de:6228/eis-user-manager/ui/orga/usermanagement/login - Benutzer und Rollenadmin"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "User: doc-gen_admin_dev"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Password: S0ftw4re Kennwortdatenbank"
+        }
+      ]
+    },
+    {
+      "heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Beispielaufruf Webcomposer:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=009999-00/00&vorgang=27596",
+            "https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list?",
+            "Bitte keine Bescheide erstellen, weil die sonst im Infozupf landen!"
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Bezeichnung",
+              "Wert"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Applikation"
+            ],
+            [
+              "Server",
+              "188.455.5.164 (s-0214m.srv.domain.de/doc-gen.domain.de)"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Datenbank"
+            ],
+            [
+              "Server",
+              "188.455.6.52 (s-0941.db.domain.de)"
+            ],
+            [
+              "Port",
+              "1521"
+            ],
+            [
+              "SID",
+              "doc-gen19"
+            ],
+            [
+              "User",
+              "DOC-GEN_PROD"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Produktivsystem Doc-Gen Intergation Server (EIS) 1.8",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Bezeichnung",
+              "Wert"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Applikation"
+            ],
+            [
+              "Server",
+              "188.455.5.164 ( doc-gen.domain.de )"
+            ]
+          ]
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Datenbank"
+            ],
+            [
+              "Server",
+              "188.455.6.52 (s-0941.db.domain.de)"
+            ],
+            [
+              "Port",
+              "1521"
+            ],
+            [
+              "SID",
+              "doc-gen19"
+            ],
+            [
+              "User",
+              "EISKARMA EISJPAStore EISLockRegistry EISTBHStore EISUserService"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Konfigurationseiten Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Konfigurationfiles liegen im GIT: https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master/Doc-Gen1.8/Prod/"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Anpassungen\n können auf den entsprechenden Komponenten in den o.g. \nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\n auf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev \nhochgeladen werden."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Bei Änderungen an Datenfeldern oder sonstigen \nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im \nDoc-Gen Operator (s.o.) nötig."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/authorization-server/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/eis-runtime/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/eis-runtime/admin/ui/services/orga-adapter"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/eis-user-manager/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/eis-sql-adapter/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/generator-launcher/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/s0ftw4re-persistence/admin/ui/services/orga"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://doc-gen.domain.de:6228/eis-user-manager/ui/orga/usermanagement/login - Benutzer und Rollenadmin"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "User: doc-gen_admin"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Password: S0ftw4re Kennwortdatenbank"
+        }
+      ]
+    },
+    {
+      "heading": "Client Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Webbrowser für Endanwenderdoc-gen19",
+            "Doc-Gen_Designer_für_Administratoren"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Gruppen in der AD Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Doc-Gen_Zwimis_PSM",
+            "Doc-Gen_Bescheide_PSM",
+            "Doc-Gen_Zulassungsberichte_PSM",
+            "WebAuthor_PSM"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Abhängigkeit von anderen Anwendungen Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Infozupf"
+        }
+      ]
+    },
+    {
+      "heading": "Termine Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "zeitlicher Verlauf Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "09.10.2023 Plan-B-Migration in RZ Bundesallee Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "neuer Server Doc-Gen TEST: s-0224m.srv.domain.de, PROD: s-0214.srv.domain.de"
+        }
+      ]
+    },
+    {
+      "heading": "08.12.2022 Installation Doc-Gen Operator, Converter, tw. EIS auf schwubs374 Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "07.12.2022 Installation JBoss Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "01.12.2022 neuer Doc-Gen Server schwubs374 Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Robert hat den neuen Server gestern zur Verfügung gestellt. Java 1.8 und JBoss 7.4 müssen noch installiert werden"
+        }
+      ]
+    },
+    {
+      "heading": "21.09.2022 Start für das Update auf Version 1.8 Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "19.01.2017 OTRS: Ticket#10021325 Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Für\n die finalen Tests wurden die beiden alten Testdatenbanken \n(schwubs098.old.domain.de, SID enzo, Benutzernamen db_doc-gen & \ndb_tbv) noch einmal in die beiden neuen Testdatenbanken \n(schwubs169.old.domain.de, SID tbv, Benutzernamen doc-gentest & \ntbvtest) kopiert."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "In der Doc-Gen Datenbank wurde die Tabelle Property wie im Betriebshandbuch beschrieben angepasst."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Weiterhin wurde vom bisherigen Testsystem Jackrabbit Subs029.old.domain.de das Repository auf den neuen Testserver Jackrabbit Subs172.old.domain.de kopiert."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Folgende Dateien werden im Vorfeld gesichert."
+        },
+        {
+          "block_type": "code",
+          "content": "/opt/jackrabbit/repository/conf/repository.xml\n/opt/jackrabbit/repository/repository/workspaces/default/workspace.xml\n/opt/jackrabbit/repository/repository/workspaces/security/workspace.xml\n/opt/jackrabbit/repository/workspaces/default/workspace.xml\n/opt/jackrabbit/repository/workspaces/security/workspace.xml"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "SSH Schlüssel auf schwubs172.old.domain.de als tomcat erzeugen"
+        },
+        {
+          "block_type": "code",
+          "content": "ssh-keygen -b 2048 -t rsa"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Inhalt\n von /opt/apache-tomcat-6.0.32/.ssh/id_rsa.pub auf den Server \nschwubs029.old.domain.de (/opt/apache-tomcat-6.0.32/.ssh/authorized_keys) \nanhängen"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Test des Zugriffs"
+        },
+        {
+          "block_type": "code",
+          "content": "ssh -l tomcat6 schwubs029.old.domain.de"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Anschließend den Ordner /opt/jackrabbit verschieben (sichern)."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Anschließend über scp den Ordner /opt/jackrabbit vom schwubs029.old.domain.de auf den schwubs172.old.domain.de kopieren"
+        },
+        {
+          "block_type": "code",
+          "content": "scp -r tomcat6@schwubs029.old.domain.de:/opt/jackrabbit/ /opt/"
+        }
+      ]
+    },
+    {
+      "heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Geplant ist die Umstellung für den 19.01. 15.00 Uhr. ist das richtig?"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Für erledigte Aufgaben ✔ verwenden."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Test:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Ein Template in der neuen Entwicklung anlegen (H: Busch) ✔",
+            "Den Domänentransport einmal mit den Template testen (H: Busch/ Stölzel) ✔",
+            "die Gen-Admin Konfigurationsdatei nochmal anpassen, um die beiden Testvorlagenschlüssel wieder zu entfernen (H: Stölzel/Busch) ✔",
+            "einen Zulassungsbericht erstellen (H: Stölzel) ✔",
+            "Berechtigungen mit Frau Bolten oder Stevens überprüfen (H: Stölzel) ✔",
+            "Testaufbau Apache auf schwubs172.old.domain.de für Weiterleitung auf schwubs174.old.domain.de:4040/secure/webauthor/ ✖ Warten auf Rückkehr Henrik, da für SLES eine Installations-DVD gemountet werden muss.",
+            "Untersuchung, warum beim Aufruf von http://webauthor.old.domain.de:4040/secure/webauthor/ auf http://schwubs031.old.domain.de:4040/secure/webauthor/ umgeleitet wird. Ggf. Anpassung, dass URL auf http://webauthor.old.domain.de:4040/secure/webauthor/ stehen bleibt. (Gabel) ✔ durch die Anwendung wird offensichtlich der HTTP-Header location:SERVERNAME gesetzt. vermutlich nur durch Softwareanpassung zu ändern",
+            "Bescheiddaten kontrollieren (H: Busch/Stölzel) ✔",
+            "Fehler in Formatierung im Testsystem Subs172.old.domain.de untersuchen und beheben (H: Gabel) ✔",
+            "Einrichtung Apache auf schwubs174.old.domain.de und Erstellung einer index.html, die beim Aufruf von http://webauthor.old.domain.de auf schwubs174.old.domain.de:4040/secure/webauthor/ weiterleitet. (Gabel) ✔"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Am Tag der Umstellung :"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "TBV alte Produktion exportieren und in neue Produktion importieren (amir) ✔ von srvlnx170.old.domain.de :prodtbv (user db_tbv) nach Subs169.old.domain.de :doc-gen (user db_tbv)",
+            "TBV Jackrabbit Repository aktualisieren (H: Gabel) ✔ von Subs031.old.domain.de nach Subs174.old.domain.de",
+            "DNS Umstellung doc-gen.old.domain.de von schwubs031.old.domain.de auf schwubs174.old.domain.de (Gabel, Lux) ✔ Mit Dennis per E-Mail abgestimmt. ✔",
+            "DNS Umstellung webauthor.old.domain.de von schwubs031.old.domain.de auf schwubs174.old.domain.de (Gabel, Lux) ✔",
+            "fachliche Freigabe (H: Britta Busch) ✔",
+            "Abschaltung Altsysteme Subs028.old.domain.de bis Subs031.old.domain.de (H: Gabel) ✔",
+            "Beantragung Anpassung Nagios Überwachung (H: Gabel) ✔",
+            "Aktualisierung Dokumenation (Wiki, Installation/Betriebshandbuch) (H: Gabel)"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Ein Ticket im Supportportal geöffnet ( DOC-GEN Support ESP-5481 )"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Ergebnis:"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Ghostskript wird nicht verwendet."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "... Nein. Ghostscript wird von Doc-Gen nicht verwendet. ... {{/7box}} {{/box}}"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Automatisch Speichern alle minutes"
+        },
+        {
+          "block_type": "div_text",
+          "content": "0"
+        },
+        {
+          "block_type": "div_text",
+          "content": "[+]"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellt von admin am 2022/02/14 21:18"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Kommentare (0)",
+            "Anhänge (6)",
+            "Historie",
+            "Information"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Keine Kommentare zu diesem Dokument"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Kommentar hinzufügen Alexandra Freytag sagt: Abbrechen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Permalink"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Löschen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?"
+        }
+      ]
+    },
+    {
+      "heading": "Navigation",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki Administration Allgemeines Anwendungen Anwendungen Java CKAN ClamAV Domain Fachanwendungen IT-Anwendungen OBO-Edit Obsolet Online-Bibliothekskatalog des ORGA (GBV) Server Anwendungen AddressDB Alfresco BLtU Cadenza DB108 ELKE EUginius EUginius alt Freisetzungsliste Handlungshilfe I-doit-(inÜberarbeitung) Infozupf Internetplattform Lebensmittelwarnung S0FTW4RE-Plattform Datenbanken im S0FTW4RE-Bereich DOC-GEN Benutzer im EIS-User-Manager anlegen CSS Upload für den Dynamic Composer Den gesperrten Admin User über die Datenbank entsperren Domänen transportieren Doc-Gen Converter installieren Doc-Gen Designer 1.8 Doc-Gen EIS 1.0.28 installieren Doc-Gen HTTPS einrichten Doc-Gen Kerberos Einrichtung Doc-Gen Keycloak Einrichtung Doc-Gen Rollen und Gruppen Doc-Gen Server (JBoss 7.4) installieren Farbcodes ändern von grün nach blau Neuen Vorlagenschlüssel auf dem Entwicklungsserver anlegen Umleitung für URL-Verkürzung Know How Known Issues S0FTW4RE S0FTW4RE Komponenten S0FTW4RE Releases S0FTW4RE Web zzz_Archiv NGS 6 more ... SVN Ultramobile IT Basisdienste Betriebssysteme Datenbanken Entwicklung Hardware Infrastruktur (A43) IT-Service Management Know-How Medientechnik Netzwerk Projekte RZ Umzug 2 more ...",
+            "03 Archiv",
+            "04 Hilfe",
+            "05 Feedback",
+            "06 Statuslisten",
+            "02 Altes IT Wiki - Read Only"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "XWiki 12.10.10"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Seite auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Anhang auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        }
+      ]
+    }
+  ],
+  "source_file": "Doc-Gen.htm"
+}

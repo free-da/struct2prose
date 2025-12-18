@@ -1,0 +1,579 @@
+{
+  "title": "Konfigurationsübersicht - XWiki",
+  "sections": [
+    {
+      "heading": "Einleitung",
+      "blocks": [
+        {
+          "block_type": "div_text",
+          "content": "Alexandra Freytag Abmelden A4 Dokumentenindex Benutzerverzeichnis Anwendungen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki",
+            "…",
+            "S0FTW4RE-Plattform",
+            "Know How",
+            "Konfigurationsübersicht"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Konfigurationsübersicht"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Zuletzt geändert von admin am 2024/05/07 14:41"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Bearbeiten"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellen"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Verwalten",
+            "Kopieren",
+            "Verschieben / Umbenennen",
+            "Löschen",
+            "Aktionen",
+            "Exportieren",
+            "Anmerken",
+            "Druckvorschau",
+            "Als E-Mail versenden",
+            "Ansichten",
+            "Quellcode",
+            "Untergeordnete Seiten",
+            "Kommentare",
+            "Anhänge",
+            "Historie",
+            "Information",
+            "\"Gefällt mir\" anzeigen"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Office Formate"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als PDF exportieren"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Andere Formate"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Seiten für den Export auswählen:"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Angelegte Seiten Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.",
+            "Erstellte und geänderte Seiten Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).",
+            "Alle Seiten Enthält Erweiterungsseiten, die nicht weiter geändert wurden."
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Alles auswählen / Keine"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Als HTML exportieren"
+        }
+      ]
+    },
+    {
+      "heading": "Konfigurationen",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Hier\n werden alle wesentlichen Konfigurationen für den laufenden Betrieb in \nPROD, TEST und DEMO festgehalten. Änderungen müssen IMMER hier \ndokumentiert werden. Dies soll die einzige Referenz darstellen."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Diese Seite ist nicht aktuell und muss überarbeitet werden! Stand: 26.10.2023"
+        }
+      ]
+    },
+    {
+      "heading": ".profile",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Setzt Betriebssystemparameter für den Benutzer. Pfad: /home/s0ftw4re/.profile"
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Parameter",
+              "Wert"
+            ],
+            [
+              "JAVA_BINDIR",
+              "/opt/s0ftw4reweb/java/jdk/bin/"
+            ],
+            [
+              "JAVA_HOME",
+              "/opt/s0ftw4reweb/java/jdk"
+            ],
+            [
+              "JAVA_ROOT",
+              "/opt/s0ftw4reweb/java/jdk"
+            ],
+            [
+              "JBOSS_HOME",
+              "/opt/s0ftw4reweb/wildfly"
+            ],
+            [
+              "PATH",
+              "$JAVA_HOME/bin:$JBOSS_HOME/bin:$PATH2."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "standalone.conf",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Wildfly Konfiguration für den Java-Prozess."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Pfad: /opt/s0ftw4reweb/wildfly/bin/standalone.conf"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Die vorhandenen Java Parameter (JAVA_OPTS) werden um folgende Einträge erweitert."
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "",
+              "Parameter",
+              "Wert"
+            ],
+            [
+              "",
+              "-Dde.s0ftw4re.logpath",
+              "/opt/s0ftw4reweb/logs"
+            ],
+            [
+              "",
+              "-Dmail.imap.starttls.enable",
+              "True 🚩 imap/imaps Verwendung?"
+            ]
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Bei dem Eintrag -Dhttp.nonProxyHosts sind die \\ Zeichen notwendig, um die | zu maskieren. Andernfalls startet der Wildfly nicht."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Der Parameter -Dmail.imap.starttls.enable wird verwendet, damit bei der Funktion \"Mit dem E-Mail Server \nverbinden\" beim Einsatz von IMAP auch eine verschlüsselte Verbindung \naufgebaut wird."
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Instanz-Name",
+              "Parameter",
+              "Wert"
+            ],
+            [
+              "Produktiv",
+              "-Xms",
+              "64G"
+            ],
+            [
+              "",
+              "-Xmx",
+              "64G"
+            ],
+            [
+              "",
+              "ReservedCodeCacheSize",
+              "1024m"
+            ],
+            [
+              "Test/Demo",
+              "-Xms",
+              "16G"
+            ],
+            [
+              "",
+              "-Xmx",
+              "16G"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "standalone.xml",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Pfad: /opt/s0ftw4reweb/wildfly/standalone/configuration/standalone.xml"
+        }
+      ]
+    },
+    {
+      "heading": "datasource",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Bereich datasource gemäß den folgenden Angaben anpassen:"
+        },
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Instanz-Name",
+              "Parameter",
+              "Wert"
+            ],
+            [
+              "Produktion",
+              "jndi-name",
+              "java:/database1"
+            ],
+            [
+              "",
+              "pool-name",
+              "S0FTW4RE"
+            ],
+            [
+              "",
+              "connection-url",
+              "jdbc:oracle:thin:@schwubs097.old.domain.de:1521/s0ftw4re"
+            ],
+            [
+              "",
+              "driver",
+              "Oracle"
+            ],
+            [
+              "",
+              "user-name",
+              "S0ftw4re"
+            ],
+            [
+              "",
+              "password",
+              "Xxxx"
+            ],
+            [
+              "Demo",
+              "jndi-name",
+              "java:/demo"
+            ],
+            [
+              "",
+              "pool-name",
+              "Demo"
+            ],
+            [
+              "",
+              "connection-url",
+              "jdbc:oracle:thin:@schwubs098.old.domain.de:1521:demo"
+            ],
+            [
+              "",
+              "driver",
+              "Oracle"
+            ],
+            [
+              "",
+              "user-name",
+              "s0ftw4re"
+            ],
+            [
+              "",
+              "password",
+              "Xxxx"
+            ],
+            [
+              "",
+              "Parameter",
+              "Wert"
+            ],
+            [
+              "Test",
+              "jndi-name",
+              "java:/test"
+            ],
+            [
+              "",
+              "pool-name",
+              "TEST"
+            ],
+            [
+              "",
+              "connection-url",
+              "jdbc:oracle:thin:@srvlnx97.old.domain.de:1521/test"
+            ],
+            [
+              "",
+              "driver",
+              "Oracle"
+            ],
+            [
+              "",
+              "user-name",
+              "S0FTW4RE"
+            ],
+            [
+              "",
+              "password",
+              "Xxxx"
+            ]
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Im Bereich datasource wird der folgende Block validation verwendet."
+        },
+        {
+          "block_type": "div_text",
+          "content": "<validation> <valid-connection-checker class-name= \"org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker\" ></valid-connection-checker> <check-valid-connection-sql> select 1 from dual </check-valid-connection-sql> <background-validation> true </background-validation> <stale-connection-checker class-name= \"org.jboss.jca.adapters.jdbc.extensions.oracle.OracleStaleConnectionChecker\" ></stale-connection-checker> <exception-sorter class-name= \"org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter\" ></exception-sorter> </validation>"
+        }
+      ]
+    },
+    {
+      "heading": "HTTP-Listener",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Im Bereich <schwubsystem xmlns=\"urn:jboss:domain:undertow:10.0\"> wird für den Parameter http-listener der Wert max-post-size von 50 MB auf 200 MB erhöht."
+        },
+        {
+          "block_type": "div_text",
+          "content": "<http-listener name=\"default\" socket-binding=\"http\" max-post-size=\"209715200\" max-parameters=\"10000\" url-charset=\"utf-8\" enable-http2=\"false\"></http-listener> #aktuelle standalone Demo <http-listener name=\"default\" socket-binding=\"http\" redirect-socket=\"https\" enable-http2=\"false\" max-parameters=\"10000\" url-charset=\"utf-8\" max-post-size=\"209715200\"></http-listener>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Folgenden https-listener hinzufügen (wenn bereits einer vorhanden ist ggf. deaktivieren):"
+        },
+        {
+          "block_type": "div_text",
+          "content": "< https-listener name = \"httpsServer\" socket-binding = \"https\" securityrealm = \"ApplicationRealm\" max-parameters = \"10000\" url-charset = \"utf-8\" max-post-size = \"209715200\" ></ https-listener > #aktuelle standalone Demo < https-listener name = \"httpsServer\" socket-binding = \"https\" security-realm = \"ApplicationRealm\" enable-http2 = \"false\" max-parameters = \"10000\" url-charset = \"utf-8\" max-post-size = \"209715200\" ></ https-listener >"
+        }
+      ]
+    },
+    {
+      "heading": "Logdateien",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Bereich: <schwubsystem xmlns=\"urn:jboss:domain:logging:8.0\"> Hier muss ebenfalls der Loglevel abgeändert werden, damit der logger.level=INFO und andere auf ERROR gesetzt werden kann.:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<console-handler name= \"CONSOLE\" > <level name= \"ERROR\" ></level> <formatter> <named-formatter name= \"COLOR-PATTERN\" ></named-formatter> </formatter> </console-handler>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Sowie"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<root-logger> <level name= \"ERROR\" ></level> <handlers> <handler name= \"CONSOLE\" ></handler> <handler name= \"FILE\" ></handler> </handlers> </root-logger>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Außerdem\n müssen der DAP- und S0ftw4re-Logger angeschaltet werden (alle anderen \nkönnen auskommentiert werden. Welche davon für uns auch sinnvoll sein \nkönnten, kann weiter untersucht werden). Das Loglevel wird so restriktiv\n gehandhabt wie oben definiert. Wenn ein höheres Loglevel benötigt wird,\n oben anpassen."
+        },
+        {
+          "block_type": "div_text",
+          "content": "<logger category= \"de.s0ftw4re.dapservice\" > <level name= \"DEBUG\" ></level> </logger> <logger category= \"de.s0ftw4re.system.log\" > <level name= \"DEBUG\" ></level> </logger>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Für die Log-Rotation den <file-handler> austauschen gegen:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<periodic-rotating-file-handler name= \"FILE\" autoflush= \"true\" > <formatter> <named-formatter name= \"PATTERN\" ></named-formatter> </formatter> <file relative-to= \"jboss.server.log.dir\" path= \"server.log\" ></file> <suffix value= \".yyyy-MM-dd\" ></suffix> <append value= \"true\" ></append> </periodic-rotating-file-handler>"
+        }
+      ]
+    },
+    {
+      "heading": "logback.xml",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Diese Datei hat sich zwischen v. 1.90 und 3.0 NICHT verändert und kann beibehalten werden!"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "unter <!-- Definition des Appender für das Schreiben der Logdateien \"server.log\" --> den Block ersetzen durch:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<appender name= \"RequestLogAppender\" class= \"ch.qos.logback.core.rolling.RollingFileAppender\" > <file> ${JBOSS_HOME}/standalone/log/server.log </file> <rollingPolicy class= \"ch.qos.logback.core.rolling.TimeBasedRollingPolicy\" > <!-- daily rollover --> <fileNamePattern> ${JBOSS_HOME}/standalone/log/server.%d{yyyy-MM-dd}.log.zip </fileNamePattern> <!-- keep 30 days' worth of history capped at 3GB total size --> <maxHistory> 30 </maxHistory> <totalSizeCap> 3GB </totalSizeCap> </rollingPolicy> <triggeringPolicy class= \"ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy\" > <maxFileSize> 100MB </maxFileSize> </triggeringPolicy> <encoder> <pattern> %d %-5p [%thread] [%c] %m%n </pattern> </encoder> </appender>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "folgende Logger werden für TEST und für DEMO eingestellt:"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<logger name= \"de.s0ftw4re.system.ui.component.demo\" level= \"DEBUG\" ></logger> <!--logger name=\"org.apache.cxf.services\" level=\"DEBUG\"/--> <logger name= \"de.s0ftw4re.system.ui\" level= \"DEBUG\" ></logger> <logger name= \"de.s0ftw4re.system.jpql\" level= \"INFO\" ></logger> <logger name= \"org.hibernate\" level= \"INFO\" ></logger> <!-- <logger name=\"org.hibernate.SQL\" level=\"DEBUG\" ></logger> --> <!-- <logger name=\"org.jboss.as.ee\" level=\"DEBUG\"></logger> --> <!-- <logger name=\"org.hibernate\" level=\"INFO\"></logger> --> <!-- <logger name=\"org.jboss.jca\" level=\"INFO\"></logger> --> <!-- <logger name=\"com.arjuna\" level=\"INFO\"></logger> --> <!-- <logger name=\"de.s0ftw4re.system.jpql\" level=\"INFO\"></logger> --> <logger name= \"de.s0ftw4re.system.attach\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.system.service\" level= \"INFO\" ></logger> <logger name= \"org.springframework.orm\" level= \"INFO\" ></logger> <!-- <logger name=\"org.apache.activemq\" level=\"INFO\"></logger> --> <logger name= \"de.s0ftw4re.system.log\" level= \"INFO\" ></logger> <logger name= \"de.s0ftw4re.dapservice\" level= \"INFO\" ></logger> <logger name= \"org.jboss\" level= \"INFO\" ></logger> <logger name= \"org.springframework\" level= \"INFO\" ></logger> <root level= \"WARN\" > <appender-ref ref= \"RequestLogAppender\" ></appender-ref> <appender-ref ref= \"S0ftw4re-Ondemand-Appender\" ></appender-ref> <appender-ref ref= \"Stdout\" ></appender-ref> </root>"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Für PROD werden alle Logger auf ERROR gestellt!"
+        }
+      ]
+    },
+    {
+      "heading": "module.xml (Oracle)",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Konfigurationsdatei für den Oracle-Treiber im Wildfly."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Pfad: /opt/s0ftw4reweb/wildfly/modules/com/oracle/main"
+        },
+        {
+          "block_type": "div_text",
+          "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <module xmlns= \"urn:jboss:module:1.9\" name= \"com.oracle\" > <resources> <resource-root path= \"ojdbc8.jar\" ></resource-root> </resources> <dependencies> <module name= \"javax.api\" ></module> <module name= \"javax.transaction.api\" ></module> </dependencies> </module>"
+        }
+      ]
+    },
+    {
+      "heading": "limits.conf",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Steuert die Limits (z.B. Anzahl gleichzeitig geöffneter Dateien) im System."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Pfad: /etc/security/limits.conf"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Für den Betriebssystemnutzer s0ftw4re muss die Anzahl der offenen Dateien von 1024 (Standard) auf 8192 erhöht werden."
+        },
+        {
+          "block_type": "div_text",
+          "content": "s0ftw4re         soft      nofile           8192 s0ftw4re         hard      nofile           8192"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Konfigurationen",
+            ".profile",
+            "standalone.conf",
+            "standalone.xml datasource HTTP-Listener Logdateien",
+            "logback.xml",
+            "module.xml (Oracle)",
+            "limits.conf"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "Automatisch Speichern alle minutes"
+        },
+        {
+          "block_type": "div_text",
+          "content": "0"
+        },
+        {
+          "block_type": "div_text",
+          "content": "[+]"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Erstellt von Alexandra Freytag am 2022/07/05 11:51"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Kommentare (0)",
+            "Anhänge (0)",
+            "Historie",
+            "Information"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Keine Kommentare zu diesem Dokument"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Kommentar hinzufügen Alexandra Freytag sagt: Abbrechen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Permalink"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Löschen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?"
+        }
+      ]
+    },
+    {
+      "heading": "Navigation",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "01 Neues IT Wiki Administration Allgemeines Anwendungen Anwendungen Java CKAN ClamAV Domain Fachanwendungen IT-Anwendungen OBO-Edit Obsolet Online-Bibliothekskatalog des ORGA (GBV) Server Anwendungen AddressDB Alfresco BLtU Cadenza DB108 ELKE EUginius EUginius alt Freisetzungsliste Handlungshilfe I-doit-(inÜberarbeitung) Infozupf Internetplattform Lebensmittelwarnung S0FTW4RE-Plattform Datenbanken im S0FTW4RE-Bereich DOC-GEN Know How Abgleich Ansprechpartner / Mitarbeiter Aktualisierung der Partnerdaten Analyse des Timeouts bei Zip-Export Berliner E-Mailserver einbinden ORGA Views und Tabellen Erhöhung Rastertyp Kalenderwochen in S0FTW4RE C/S Farbkombination in der Kopfleiste ändern HTTPS Umstellung der S0FTW4RE-Komponenten JAVA Keystore Konfiguration SQuirreL SQL Konfigurationsübersicht Leitfaden zum automatisierten Anlegen der Jahresbände für alle Sachakten Logging und Log-Rotation S0FTW4RE Aktualisierung Datenbestand Test-Systeme S0FTW4RE_REPO 9 more ... Known Issues S0FTW4RE S0FTW4RE Komponenten S0FTW4RE Releases S0FTW4RE Web zzz_Archiv NGS 6 more ... SVN Ultramobile IT Basisdienste Betriebssysteme Datenbanken Entwicklung Hardware Infrastruktur (A43) IT-Service Management Know-How Medientechnik Netzwerk Projekte RZ Umzug 2 more ...",
+            "03 Archiv",
+            "04 Hilfe",
+            "05 Feedback",
+            "06 Statuslisten",
+            "02 Altes IT Wiki - Read Only"
+          ]
+        },
+        {
+          "block_type": "div_text",
+          "content": "XWiki 12.10.10"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Seite auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "× Anhang auswählen"
+        },
+        {
+          "block_type": "div_text",
+          "content": "Abbrechen Auswählen"
+        }
+      ]
+    }
+  ],
+  "source_file": "Konfigurationsübersicht.htm"
+}

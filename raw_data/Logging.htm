@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de" data-xwiki-reference="a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-xwiki-document="01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-xwiki-wiki="a4" data-xwiki-space="01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration" data-xwiki-page="WebHome" data-xwiki-isnew="false" data-xwiki-version="7.1" data-xwiki-rest-url="/rest/wikis/a4/spaces/01%20Neues%20IT%20Wiki/spaces/Anwendungen/spaces/Server%20Anwendungen/spaces/S0FTW4RE-Plattform/spaces/Know%20How/spaces/Logging-Konfiguration/pages/WebHome" data-xwiki-form-token="8ind590UMDBy9UqTMIEmIw" data-xwiki-user-reference="a4:XWiki.nutzer-freytag" data-xwiki-locale=""><head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                                                    <title>Logging und Log-Rotation - XWiki</title>
+                                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="shortcut icon" href="https://wiki.domain.de/wiki/a4/skin/XWiki/DefaultSkin/icons.xwiki.favicon.ico">
+        <link rel="icon" href="https://wiki.domain.de/resources/icons/xwiki/favicon16.png?cache-version=1633707954000" type="image/png">
+        <link rel="icon" href="https://wiki.domain.de/resources/icons/xwiki/favicon.svg?cache-version=1633707954000" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="https://wiki.domain.de/resources/icons/xwiki/favicon144.png?cache-version=1633707954000">
+                      <link rel="alternate" type="application/x-wiki" title="Edit" href="https://wiki.domain.de/wiki/a4/edit/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome">
+                    <link rel="canonical" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/">
+                    <meta name="revisit-after" content="7 days">
+<meta name="description" content="Logging und Log-Rotation">
+<meta name="keywords" content="wiki">
+<meta name="rating" content="General">
+<meta name="author" content="admin">
+<link rel="alternate" type="application/rss+xml" title="Wiki Feed RSS" href="https://wiki.domain.de/wiki/a4/view/Main/WebRss?xpage=rdf">
+<link rel="alternate" type="application/rss+xml" title="Blog RSS Feed" href="https://wiki.domain.de/wiki/a4/view/Blog/GlobalBlogRss?xpage=plain">
+                <link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/bootstrap-switch.min.css" type="text/css" rel="stylesheet"><link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tree.min.css" type="text/css" rel="stylesheet"><link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/selectize.bootstrap3.css" type="text/css" rel="stylesheet">
+    <link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/drawer.min.css" rel="stylesheet" type="text/css">
+                
+                                                                                                                    
+
+
+
+<link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/style.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/print.min.css" rel="stylesheet" type="text/css" media="print">
+        <!--[if IE]>
+  <link href="      /wiki/a4/skin/skins/flamingo/ie-all.min.css?cache-version=1633708508000&skin=XWiki.DefaultSkin&#38;colorTheme=a4%3AFlamingoThemes.Sandstone&#38;colorThemeVersion=7.1
+  " rel="stylesheet" type="text/css" />
+<![endif]-->
+    
+    <link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/xwiki.bundle.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/searchSuggest.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/xwiki.selectize.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tags.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/comments.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/upload.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/attachments.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/pagination.min.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/information.min.css">
+    <link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/Settings.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/MentionsMacro.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/Style.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/RefactoringConfiguration.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/WebHome.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/FontAwesome.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/NotificationsMacro.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/NotificationsDisplayerUIX.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/InplaceEditing.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/SharePage.css"><link rel="stylesheet" type="text/css" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/LikeUIX.css">
+
+    <script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/require.min.js" data-wysiwyg="true"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/prototype.min.js"></script>
+<script data-wysiwyg="true">
+// <![CDATA[
+                                                require.config({"paths":{"jquery":"/webjars/wiki%3Aa4/jquery/2.2.4/jquery.min.js?r=1","bootstrap":"/webjars/wiki%3Aa4/bootstrap/3.4.1/js/bootstrap.min.js?r=1","xwiki-meta":"/resources/js/xwiki/meta.min.js?cache-version=1633708526000","xwiki-events-bridge":"/resources/js/xwiki/eventsBridge.min.js?cache-version=1633708524000","xwiki-locale-picker":"/wiki/a4/skin/skins/flamingo/localePicker.min.js?cache-version=1633708508000","iscroll":"/webjars/wiki%3Aa4/iscroll/5.1.3/build/iscroll-lite.js?r=1","drawer":"/webjars/wiki%3Aa4/drawer/2.4.0/js/jquery.drawer.min.js?r=1","deferred":"/resources/uicomponents/require/deferred.min.js?cache-version=1633708542000","xwiki-ckeditor-inline":"/wiki/a4/jsx/CKEditor/InlineEditor?v=1.55&xwiki-version=12.10.10","xwiki-ckeditor":"/wiki/a4/jsx/CKEditor/EditSheet?v=1.55&xwiki-version=12.10.10&fast-diff-version=1.2.0&bs3typeahead-version=4.0.2"},"shim":{"bootstrap":["jquery"],"drawer":["jquery","iscroll"]},"bundles":{},"config":{},"map":{"*":{"jquery":"jQueryNoConflict"},"jQueryNoConflict":{"jquery":"jquery"}}});
+define('jQueryNoConflict', ['jquery'], function ($) {
+  return $.noConflict();
+});
+if (window.Prototype && Prototype.BrowserFeatures.ElementExtensions) {
+  require(['jquery', 'bootstrap'], function ($) {
+    // Fix incompatibilities between BootStrap and Prototype
+    var disablePrototypeJS = function (method, pluginsToDisable) {
+      var handler = function (event) {
+        event.target[method] = undefined;
+        setTimeout(function () {
+            delete event.target[method];
+        }, 0);
+      };
+      pluginsToDisable.each(function (plugin) { 
+          $(window).on(method + '.bs.' + plugin, handler); 
+      });
+    },
+    pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip', 'tab', 'popover'];
+    disablePrototypeJS('show', pluginsToDisable);
+    disablePrototypeJS('hide', pluginsToDisable);
+  });
+}
+require(['jquery', 'drawer'], function($) {
+  $(document).ready(function() {
+    $('.drawer-main').closest('body').drawer();
+  });
+});
+window.XWiki = window.XWiki || {};
+XWiki.webapppath = "/";
+XWiki.servletpath = "wiki/a4/";
+XWiki.contextPath = "";
+XWiki.mainWiki = "xwiki";
+// Deprecated: replaced by meta data in the HTML element
+XWiki.currentWiki = "a4";
+XWiki.currentSpace = "01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration";
+XWiki.currentPage = "WebHome";
+XWiki.editor = "";
+XWiki.viewer = "";
+XWiki.contextaction = "view";
+XWiki.skin = 'XWiki.DefaultSkin';
+XWiki.docisnew = false;
+XWiki.docsyntax = "xwiki/2.1";
+XWiki.docvariant = "";
+XWiki.blacklistedSpaces = [ "Import","Panels","Scheduler","Stats","XAppClasses","XAppSheets","XAppTemplates","XWiki","WatchCode","WatchSheets","XApp","WatchAdmin","Watch","ColorThemes","AnnotationCode" ];
+XWiki.hasEdit = true;
+XWiki.hasProgramming = false;
+XWiki.hasBackupPackImportRights = false;
+XWiki.hasRenderer = true;
+window.docviewurl = "/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/";
+window.docediturl = "/wiki/a4/edit/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome";
+window.docsaveurl = "/wiki/a4/save/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome";
+window.docgeturl = "/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome";
+// ]]>
+</script>
+                                                                        
+                                                                    
+    <script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/xwiki.bundle.min.js"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/flamingo.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/searchSuggest.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/async.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/hierarchy.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tree.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/suggestUsersAndGroups.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/exporter.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tags.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/comments.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/upload.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/attachments.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/history.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/information.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/editableProperty.min.js" defer="defer"></script>
+
+    <script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/Script" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/Settings" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/TourJS" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/MentionsMacro" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/FontAwesome" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/NotificationsMacro" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/NotificationsDisplayerUIX" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/QuickSearchUIX" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/InplaceEditing" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/SharePage" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/LikeUIX" defer="defer"></script>
+
+
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/compatibility.min.js" defer="defer"></script>
+<script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/markerScript.min.js" defer="defer"></script>
+<!--[if lt IE 9]>
+    <script src="/webjars/wiki%3Aa4/html5shiv/3.7.2/html5shiv.min.js?r=1"></script>
+    <script src="/webjars/wiki%3Aa4/respond/1.4.2/dest/respond.min.js?r=1" defer="defer"></script>
+<![endif]-->
+
+  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/jquery.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/webjars/wiki%3Aa4/Keypress/2.1.5/keypress.min.js?r=1" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/keypress.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-meta" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/meta.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-events-bridge" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/eventsBridge.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/webjars/wiki%3Aa4/xwiki-platform-tree-webjar/12.10.10/require-config.min.js?evaluate=true&amp;minify=true" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/require-config.min_002.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-selectize" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/xwiki.selectize.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="deferred" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/deferred.min.js"></script><meta name="document" content="01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome"><meta name="wiki" content="a4"><meta name="space" content="01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration"><meta name="page" content="WebHome"><meta name="version" content="7.1"><meta name="restURL" content="/rest/wikis/a4/spaces/01%20Neues%20IT%20Wiki/spaces/Anwendungen/spaces/Server%20Anwendungen/spaces/S0FTW4RE-Plattform/spaces/Know%20How/spaces/Logging-Konfiguration/pages/WebHome"><meta name="form_token" content="8ind590UMDBy9UqTMIEmIw"><meta name="language" content="de"><script src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/prompt.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/bootstrap.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="iscroll" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/iscroll-lite.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="selectize" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/selectize.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="tree" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tree.min_002.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap-switch" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/bootstrap-switch.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-ckeditor-inline" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/InlineEditor"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="drawer" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/jquery.drawer.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="JobRunner" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/jobRunner.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="tree-finder" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/finder.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jsTree" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/jstree.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-ckeditor" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/EditSheet"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/webjars/wiki%3Aa4/xwiki-platform-tree-webjar/12.10.10/require-config.min.js?evaluate=true" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/require-config.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="resource" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/resourcePicker.bundle.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="macroWizard" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/macroWizard.bundle.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="l10n" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/l10n.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap3-typeahead" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/bootstrap3-typeahead.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="modal" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/modal.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ckeditor" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/ckeditor.js"></script><style>.cke{visibility:hidden;}</style><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/EditSheet.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/ContentSheet.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/resourcePicker.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/macroWizard.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/tree.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/finder.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/actionButtons.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/autosave.min.css"><link type="text/css" rel="stylesheet" href="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/diff.min.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="/wiki/a4/jsx/CKEditor/Translations?language=de" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/Translations"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-actionButtons" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/actionButtons.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-diff" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/diff.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="xwiki-autoSave" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/autosave.min.js"></script></head>
+  <body id="body" class="skin-flamingo wiki-a4 space-01_Neues_IT_Wiki.Anwendungen.Server_Anwendungen.S0FTW4RE-Plattform.Know_How.Logging-Konfiguration viewbody hideright  panel-left-width-Large panel-right-width-Medium drawer drawer-right drawer-close">
+<div id="xwikimaincontainer">
+<div id="xwikimaincontainerinner">
+
+  <div id="menuview">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      <nav class="navbar navbar-default actionmenu">
+    <div class="container-fluid">
+            <div class="navbar-header">
+                  <div id="companylogo">
+  <a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/" title="Home" rel="home" class="navbar-brand">
+    <img src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/logo-white.svg" alt="Wiki Logo">
+  </a>
+</div>
+
+              </div>
+            <div id="xwikimainmenu">
+    
+          <ul class="nav navbar-nav navbar-left">
+      <li class="divider" role="separator"></li>
+              </ul>
+    
+          <ul class="nav navbar-nav navbar-right">
+        <li>
+    <a class="icon-navbar drawer-toggle" id="tmDrawerActivator" title="Menüleiste"><span class="sr-only">Navigation ein-/ausblenden</span><span class="fa fa-bars"></span></a>
+  </li>
+                  <li class="navbar-avatar">
+<a href="https://wiki.domain.de/wiki/a4/view/XWiki/nutzer-freytag" class="icon-navbar">
+<span class="sr-only">Benutzerprofil</span>
+                                <img class="avatar avatar_50" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/noavatar.png" alt="Alexandra Freytag" title="Alexandra Freytag"></a>
+</li>
+                   
+<li class="dropdown" id="tmNotifications">
+<a class="icon-navbar dropdown-toggle" data-toggle="dropdown" role="button" title="Benachrichtigungen">
+<span class="sr-only">
+Navigation ein-/ausblenden
+</span>
+<span class="fa fa-bell"></span>
+</a><span class="notifications-count badge">20+</span>
+<ul class="dropdown-menu">
+ <li class="notification-uix loading"></li>
+
+</ul>
+</li>
+                 <li>
+<form class="navbar-form globalsearch globalsearch-close form-inline" id="globalsearch" action="/wiki/a4/view/Main/Search" role="search">
+<label class="hidden" for="headerglobalsearchinput">Suche</label>
+<input type="text" name="text" placeholder="suche..." id="headerglobalsearchinput" autocomplete="off">
+<button type="submit" class="btn" title="Suche"><span class="fa fa-search"></span></button>
+</form>
+</li>
+            </ul>
+    
+          </div>    </div>   </nav>
+  
+  
+
+
+
+
+
+<div class="drawer-main drawer-default" id="tmDrawer">
+  <nav class="drawer-nav" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px) translateZ(0px);">
+  
+                <div class="drawer-brand clearfix">
+      <a href="https://wiki.domain.de/wiki/a4/view/XWiki/nutzer-freytag">
+                                    <img class="avatar avatar_120" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/noavatar.png" alt="Alexandra Freytag" title="Alexandra Freytag">      </a>
+      <div class="brand-links">
+                  <a href="https://wiki.domain.de/wiki/a4/view/XWiki/nutzer-freytag" class="brand-user" id="tmUser">Alexandra Freytag</a>
+          <a href="https://wiki.domain.de/wiki/a4/logout/XWiki/XWikiLogout?xredirect=%2Fwiki%2Fa4%2Fview%2F01%2520Neues%2520IT%2520Wiki%2FAnwendungen%2FServer%2520Anwendungen%2FS0FTW4RE-Plattform%2FKnow%2520How%2FLogging-Konfiguration%2F" id="tmLogout" rel="nofollow"><span class="fa fa-sign-out"></span> Abmelden</a>
+                                                          </div>
+    </div>
+
+                <ul class="drawer-menu">
+                                      <li class="drawer-menu-item drawer-category-header"><hr class="hidden">A4</li>
+                                                                                        
+                                
+
+
+
+
+
+  <li class="drawer-menu-item">
+    <a href="https://wiki.domain.de/wiki/a4/view/Main/AllDocs" id="tmWikiDocumentIndex">
+      <div class="drawer-menu-item-icon">
+        <span class="fa fa-book"></span>
+      </div>
+      <div class="drawer-menu-item-text">Dokumentenindex</div>
+    </a>
+  </li>
+                                      
+
+
+
+
+
+  <li class="drawer-menu-item">
+    <a href="https://wiki.domain.de/wiki/a4/view/Main/UserDirectory" id="tmMainUserIndex">
+      <div class="drawer-menu-item-icon">
+        <span class="fa fa-user"></span>
+      </div>
+      <div class="drawer-menu-item-text">Benutzerverzeichnis</div>
+    </a>
+  </li>
+                                
+
+
+
+
+
+  <li class="drawer-menu-item">
+    <a href="https://wiki.domain.de/wiki/a4/view/Applications/" id="tmMainApplicationIndex">
+      <div class="drawer-menu-item-icon">
+        <span class="fa fa-th"></span>
+      </div>
+      <div class="drawer-menu-item-text">Anwendungen</div>
+    </a>
+  </li>
+                                              </ul>
+  </nav>
+</div>
+
+
+
+
+
+  </div>
+ <div id="headerglobal">
+  <div id="globallinks">
+  </div>   <div class="clearfloats"></div>
+                <div class="hidden" data-inplace-editing-config="{&quot;contentType&quot;:&quot;org.xwiki.rendering.syntax.SyntaxContent&quot;,&quot;editMode&quot;:&quot;wysiwyg&quot;,&quot;wysiwygEditor&quot;:&quot;ckeditor&quot;,&quot;enableSourceMode&quot;:true,&quot;enableOfficeImport&quot;:false,&quot;paths&quot;:{&quot;js&quot;:{&quot;xwiki-actionButtons&quot;:&quot;/wiki/a4/skin/resources/js/xwiki/actionbuttons/actionButtons.min.js?cache-version=1633708520000&amp;language=de\n&quot;,&quot;xwiki-autoSave&quot;:&quot;/wiki/a4/skin/resources/js/xwiki/editors/autosave.min.js?cache-version=1633708522000&amp;language=de\n&quot;,&quot;xwiki-diff&quot;:&quot;/resources/uicomponents/viewers/diff.min.js?cache-version=1633708548000&quot;},&quot;css&quot;:[&quot;/wiki/a4/skin/resources/js/xwiki/actionbuttons/actionButtons.min.css?cache-version=1633708564000&amp;skin=XWiki.DefaultSkin&amp;colorTheme=a4%3AFlamingoThemes.Sandstone\n&quot;,&quot;/wiki/a4/skin/resources/js/xwiki/editors/autosave.min.css?cache-version=1633708564000&amp;skin=XWiki.DefaultSkin&amp;colorTheme=a4%3AFlamingoThemes.Sandstone\n&quot;,&quot;/wiki/a4/skin/resources/uicomponents/viewers/diff.min.css?cache-version=1633708564000&amp;skin=XWiki.DefaultSkin&amp;colorTheme=a4%3AFlamingoThemes.Sandstone\n&quot;]},&quot;l10n&quot;:{&quot;edit.inplace.page.renderFailed&quot;:&quot;Failed to render the page.&quot;,&quot;edit.inplace.page.lockFailed&quot;:&quot;Failed to lock the page.&quot;,&quot;edit.inplace.close&quot;:&quot;Close&quot;,&quot;edit.inplace.page.loadFailed&quot;:&quot;Failed to load the page.&quot;,&quot;edit.inplace.actionButtons.loadFailed&quot;:&quot;Failed to load the action buttons.&quot;,&quot;core.editors.content.titleField.label&quot;:&quot;Titel&quot;,&quot;edit.inplace.page.translate.messageBefore&quot;:&quot;You're editing the Deutsch translation of this page (its original version) because this page has not been translated in Deutsch (the current locale) yet.&quot;,&quot;edit.inplace.page.translate.messageAfter&quot;:&quot;You're now editing the Deutsch translation. Start by translating the page title.&quot;}}"></div>
+      
+      
+  </div> 
+
+
+<div class="contenthideright" id="contentcontainer">
+<div id="contentcontainerinner">
+<div class="leftsidecolumns">
+  <div id="contentcolumn"> 
+
+        
+  <div class="main">
+  <div id="mainContentArea">
+  
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                    <ol id="hierarchy" class="breadcrumb breadcrumb-expandable" data-entity="01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-id="hierarchy" data-limit="5" data-treenavigation="true" data-entities="{Space a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration=01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome}"><li class="wiki dropdown"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/"><span class="fa fa-home"></span></a><span class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></span><div class="dropdown-menu">
+                                                                        
+                                                                        
+                                    <div class="breadcrumb-tree" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showTranslations=false&amp;limit=10" data-root="{}" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-finder="false"></div>
+</div></li><li class="space dropdown"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/">01 Neues IT Wiki</a><span class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></span><div class="dropdown-menu">
+                                                                        
+                                                                        
+                                                  <div class="breadcrumb-tree" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showTranslations=false&amp;limit=10&amp;root=wiki%3Aa4" data-root="{&quot;type&quot;:&quot;wiki&quot;,&quot;id&quot;:&quot;a4&quot;}" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.WebHome" data-finder="false"></div>
+</div></li><li class="ellipsis"><a href="#">…</a></li><li class="space dropdown"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/">S0FTW4RE-Plattform</a><span class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></span><div class="dropdown-menu">
+                                                                        
+                                                                        
+                                                  <div class="breadcrumb-tree" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showTranslations=false&amp;limit=10&amp;root=document%3Aa4%3A01%20Neues%20IT%20Wiki.Anwendungen.Server%20Anwendungen.WebHome" data-root="{&quot;type&quot;:&quot;document&quot;,&quot;id&quot;:&quot;a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome&quot;}" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.WebHome" data-finder="false"></div>
+</div></li><li class="space dropdown"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/">Know How</a><span class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></span><div class="dropdown-menu">
+                                                                        
+                                                                        
+                                                  <div class="breadcrumb-tree" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showTranslations=false&amp;limit=10&amp;root=document%3Aa4%3A01%20Neues%20IT%20Wiki.Anwendungen.Server%20Anwendungen.S0FTW4RE-Plattform.WebHome" data-root="{&quot;type&quot;:&quot;document&quot;,&quot;id&quot;:&quot;a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.WebHome&quot;}" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome" data-finder="false"></div>
+</div></li><li class="active space dropdown"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/">Logging und Log-Rotation</a><span class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></span><div class="dropdown-menu">
+                                                                        
+                                                                        
+                                                  <div class="breadcrumb-tree" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showTranslations=false&amp;limit=10&amp;root=document%3Aa4%3A01%20Neues%20IT%20Wiki.Anwendungen.Server%20Anwendungen.S0FTW4RE-Plattform.Know%20How.WebHome" data-root="{&quot;type&quot;:&quot;document&quot;,&quot;id&quot;:&quot;a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome&quot;}" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-finder="false"></div>
+</div>      </li></ol>
+    
+      
+
+
+    
+
+
+
+
+
+
+
+<div class="xcontent">
+  <div class="row document-header">
+  <div class="document-info col-xs-12 col-md-7">
+                    <div id="document-title"><h1>Logging und Log-Rotation</h1></div>
+          <div class="xdocLastModification">
+                  Zuletzt geändert von <span class="wikilink"><a href="https://wiki.domain.de/bin/view/XWiki/admin">admin</a></span> am 2024/05/07 14:14
+              </div>
+      </div>
+      <div class="document-menu col-xs-12 col-md-5">
+      
+
+
+    
+                                                  <div id="contentmenu" class="pull-right actionmenu">
+                                                            
+                                          <div class="btn-group" id="tmEdit">
+    <a class="btn btn-default" title="Bearbeiten" href="https://wiki.domain.de/wiki/a4/edit/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome" role="button" rel="nofollow" data-editor="inplace">
+      <span class="fa fa-pencil"></span>
+              <span class="btn-label">Bearbeiten</span>
+          </a>
+      </div>
+      
+                                                                        <div class="btn-group" id="tmCreate">
+    <a class="btn btn-default" title="Erstellen" href="https://wiki.domain.de/wiki/a4/create/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome" role="button" rel="nofollow">
+      <span class="fa fa-plus"></span>
+              <span class="btn-label">Erstellen</span>
+          </a>
+      </div>
+      
+                                                      <div class="btn-group" id="tmMoreActions">
+    <a class="btn btn-default dropdown-toggle" title="Weitere Aktionen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+      <span class="fa fa-ellipsis-v"></span>
+          </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">Verwalten</li>
+                                                                                       
+                            <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?xpage=copy" id="tmActionCopy" title="Kopieren" rel="nofollow"><span class="fa fa-copy"></span> Kopieren</a></li>
+    
+                                <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?xpage=rename&amp;step=1" id="tmActionRename" title="Verschieben / Umbenennen" rel="nofollow"><span class="fa fa-external-link"></span> Verschieben / Umbenennen</a></li>
+    
+                                <li class=""><a href="https://wiki.domain.de/wiki/a4/delete/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome" id="tmActionDelete" title="Löschen" rel="nofollow"><span class="fa fa-times-circle"></span> Löschen</a></li>
+    
+            
+                                                    <li class="divider" role="separator"></li>
+                  <li class="dropdown-header">Aktionen</li>
+                                                                                      
+      
+                                                                <li class=""><a href="" id="tmExport" title="Exportieren" data-toggle="modal" data-target="#exportModal"><span class="fa fa-download"></span> Exportieren</a></li>
+      
+                         
+    <li class="tme"><a href="#Comments" id="tmAnnotationsTrigger" title="Anmerken" rel="nofollow"><span class="fa fa-edit"></span> Anmerken</a></li>
+                                <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?xpage=print" id="tmPrintPreview" title="Druckvorschau" rel="nofollow"><span class="fa fa-print"></span> Druckvorschau</a></li>
+    
+                                  <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=share" id="tmActionShare" title="Als E-Mail versenden" rel="nofollow"><span class="fa fa-envelope-o"></span> Als E-Mail versenden</a></li>
+          
+        
+            
+                                                                  <li class="divider" role="separator"></li>
+                  <li class="dropdown-header">Ansichten</li>
+                                            <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=code" id="tmViewSource" title="Quellcode" rel="nofollow"><span class="fa fa-search"></span> Quellcode</a></li>
+        
+                  
+      <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=children" id="tmChildren" title="Untergeordnete Seiten" rel="nofollow"><span class="fa fa-folder"></span> Untergeordnete Seiten</a></li>
+                  
+      <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=comments" id="tmComment" title="Kommentare" rel="nofollow"><span class="fa fa-comment"></span> Kommentare (0)</a></li>
+                  
+      <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=attachments" id="tmAttachments" title="Anhänge" rel="nofollow"><span class="fa fa-paperclip"></span> Anhänge</a></li>
+                  
+      <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=history" id="tmHistory" title="Historie" rel="nofollow"><span class="fa fa-clock-o"></span> Historie</a></li>
+                  
+      <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=information" id="tmInformation" title="Information" rel="nofollow"><span class="fa fa-info-circle"></span> Information</a></li>
+
+<script>
+      //<![CDATA[
+    /**
+     * Perform a PUT on the given REST API. If the request is successful, reload the page.
+     *
+     * We use this function in order to quickly edit the user properties for developer shortcuts.
+     * Also note that JQuery is not supported here, so we use a starndard XMLHttpRequest.
+     *
+     * @param restUrl the URL to use
+     * @param errorMessage the message to display if an error ocurred in the request
+     */
+    var developerShortcutsRestCall = function(restUrl, errorMessage) {
+        const req = new XMLHttpRequest();
+        var notification = new XWiki.widgets.Notification(
+            "REST Anfrage wird ausgef\u00FChrt...",
+            'inprogress');
+
+        req.onreadystatechange = function(event) {
+            if (this.readyState === XMLHttpRequest.DONE) {
+                if (this.status >= 200 && this.status < 300) {
+                    // Reload the page to apply the user modifications
+                    notification.replace(new XWiki.widgets.Notification(
+                        "REST Anfrage erfolgreich!", 'done'));
+                    location.reload()
+                } else if (this.status == 500) {
+                    notification.replace(new XWiki.widgets.Notification(this.data, 'error'));
+                } else {
+                    notification.replace(new XWiki.widgets.Notification(errorMessage, 'error'));
+                }
+            }
+        };
+
+        req.open('PUT', restUrl, true);
+        req.send(null);
+    };
+
+    // Append developer shortcuts for toggeling userType and hiddenDocuments in the current user profile
+    shortcut.add("x+x+x+a", function() {
+        developerShortcutsRestCall("/rest/currentuser/properties/usertype/next",
+                "Aktueller Benutzertyp kann nicht ge\u00E4ndert werden");
+    }, {'type': shortcut.type.SEQUENCE, 'disable_in_input': true });
+
+    shortcut.add("x+x+x+h", function () {
+        developerShortcutsRestCall("/rest/currentuser/properties/displayHiddenDocuments/next",
+                "Die Eigenschaft Versteckte Dokumente des aktuellen Benutzers kann nicht ge\u00E4ndert werden");
+    }, {'type': shortcut.type.SEQUENCE, 'disable_in_input': true });
+    //]]>
+  </script>
+
+
+                                                        
+    <li class=""><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?viewer=likers" id="likers" title="" gefällt="" mir"="" anzeigen"="" rel="nofollow"><span class="fa fa-heart"></span> "Gefällt mir" anzeigen</a></li>
+                        
+      </ul>
+      </div>
+              
+
+
+
+
+
+
+
+
+
+
+
+          <div class="modal fade text-left" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <div class="modal-title" id="exportModalLabel">Exportieren</div>
+        </div>
+        <div class="modal-body">
+          <div class="panel-group" id="exportModalAccordion" role="tablist" aria-multiselectable="true">
+                          <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="exportModalHeadingOffice">
+      <div class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#exportModalAccordion" href="#exportModelOfficeCollapse" aria-expanded="true" aria-controls="exportModelOfficeCollapse">
+          Office Formate
+        </a>
+      </div>
+    </div>
+    <div id="exportModelOfficeCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="exportModalHeadingOffice">
+      <div class="panel-body">
+        <a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?xpage=pdfoptions&amp;qs=" class="btn btn-primary" rel="nofollow">Als PDF exportieren</a>
+                      </div>
+    </div>
+  </div>
+              <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="exportModalHeadingOther">
+      <div class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#exportModalAccordion" href="#exportModalOtherCollapse" aria-expanded="false" aria-controls="exportModalOtherCollapse">
+          Andere Formate
+        </a>
+      </div>
+    </div>
+    <div id="exportModalOtherCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exportModalHeadingOther">
+      <div class="panel-body xform">
+                          <p>Seiten für den Export auswählen:</p>
+            <div class="export-tree-container">
+    <div class="clearfix">
+                    <div class="btn-group export-tree-filter pull-left">
+    <input type="hidden" name="filter" value="">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Auswahl von:
+      <span class="active-filter-title">Alle Seiten</span>
+      <span class="caret"></span>
+    </button>
+      <ul class="dropdown-menu">
+          <li>
+        <a href="#" data-filter="installedExtensionDocument">
+          <span class="text-success"><span class="fa fa-file-text-o"></span></span>
+                              <span class="export-tree-filter-title">Angelegte Seiten</span>
+          <span class="xHint">Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.</span>
+        </a>
+      </li>
+          <li>
+        <a href="#" data-filter="pristineInstalledExtensionDocument">
+          <span class="text-warning"><span class="fa fa-file-code-o"></span></span>
+                              <span class="export-tree-filter-title">Erstellte und geänderte Seiten</span>
+          <span class="xHint">Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).</span>
+        </a>
+      </li>
+          <li class="active">
+        <a href="#" data-filter="">
+          <span class="text-danger"><span class="fa fa-file-o"></span></span>
+                                        <span class="export-tree-filter-title">Alle Seiten</span>
+          <span class="xHint">Enthält Erweiterungsseiten, die nicht weiter geändert wurden.</span>
+        </a>
+      </li>
+      </ul>
+
+  </div>
+        <div class="export-tree-actions pull-right">
+    <a href="#" class="export-tree-action selectAll btn btn-link">Alles auswählen</a>/<a href="#" class="export-tree-action selectNone btn btn-link">
+      Keine</a>
+  </div>
+    </div>
+                                                                        
+                                                                        
+                                                          <div class="export-tree jstree-no-links jstree jstree-2 jstree-xwiki jstree-xwiki-responsive jstree-checkbox-selection jstree-leaf" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.ExportDocumentTree&amp;filterHiddenDocuments=false&amp;showAttachments=false&amp;showTranslations=false&amp;root=document%3Aa4%3A01%20Neues%20IT%20Wiki.Anwendungen.Server%20Anwendungen.S0FTW4RE-Plattform.Know%20How.Logging-Konfiguration.WebHome&amp;showRoot=true" data-draganddrop="false" data-contextmenu="false" data-icons="true" data-edges="true" data-checkboxes="false" data-opento="" data-finder="false" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j2_loading" aria-busy="false"><ul class="jstree-container-ul jstree-children jstree-contextmenu" role="group"></ul></div><div class="hidden"></div>
+      <dl class="export-tree-legend xHint">
+    <dt>Legende:</dt>
+    <dd></dd>
+    <dt class="text-success"><span class="fa fa-file-text-o"></span></dt>
+    <dd>Seite angelegt</dd>
+    <dt class="text-warning"><span class="fa fa-file-code-o"></span></dt>
+    <dd>Veränderte Seite einer Erweiterung</dd>
+    <dt class="text-danger"><span class="fa fa-file-o"></span></dt>
+    <dd>Saubere Seite einer Erweiterung</dd>
+  </dl>
+  </div>
+                <div class="export-buttons">
+          <a href="https://wiki.domain.de/wiki/a4/export/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?format=html" class="btn btn-primary disabled" rel="nofollow">Als HTML exportieren</a>
+                            </div>
+      </div>
+    </div>
+  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+            
+              
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+<hr>
+
+            
+        <div class="row">
+    <div id="xwikicontent" class="col-xs-12">
+              <div class="box floatinginfobox"><strong>Inhaltsverzeichnis</strong><ul><li><span class="wikilink"><a href="#HLogging-AnpassungenzurLaufzeitvornehmen">Logging-Anpassungen zur Laufzeit vornehmen</a></span></li><li><span class="wikilink"><a href="#Hserver.log">server.log</a></span></li><li><span class="wikilink"><a href="#HLogger-Einstellung">Logger-Einstellung</a></span></li></ul></div><p>Auf allen S0FTW4RE-Instanzen wird das Logging durch die Datei <span class="monospace">wildfly/standalone/configuration/logback.xml&nbsp;</span>konfiguriert.
+ Die Logging-Konfigurationen sind auf allen Instanzen gleich, außer dass
+ in TEST und DEMO ein Loglevel von "INFO" und auf PROD "ERROR" 
+eingestellt ist. Um eine Versionierung dieser Datei zu gewährleisten, 
+wird diese Datei durch einen Symlink auf das <span class="wikilink"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/S0FTW4RE_REPO/">S0FTW4RE-REPO</a></span> bereitgestellt:</p><div class="box"><div class="code">ln -s /opt/s0ftw4reweb/S0FTW4RE_REPO/s0ftw4re_configfiles/<span style="color: #666666; ">[</span>PROD|DEMO|TEST<span style="color: #666666; ">]</span>/logback.xml /opt/s0ftw4reweb/wildfly/standalone/logback.xml</div></div><div><div class="box infomessage"><p>Jede
+ Konfigurationsdatei soll AUSSCHLIEßLICH aus dem Repo verlinkt werden 
+und auch nur dort bearbeitet und nach Bearbeitung wieder eingecheckt 
+werden. Es sollen KEINE Dateien aus dem Repo kopiert werden!</p></div><p>Die <span class="monospace">logback.xml&nbsp;</span>wird von S0FTW4RE ausgeliefert und folgende ORGA-spezifische Anpassungen werden vorgenommen:</p><h1 id="HLogging-AnpassungenzurLaufzeitvornehmen" class="wikigeneratedid"><span>Logging-Anpassungen zur Laufzeit vornehmen</span></h1><div class="box"><div class="code"><span style="font-style: italic; color: #404040; ">&lt;!-- Zeile 2: regelmäßiges Scannen nach Veränderungen in der Datei --&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;configuration</span> <span style="color: #7D9029; ">scan=</span><span style="color: #BA2121; ">"true"</span> <span style="color: #7D9029; ">scanPeriod=</span><span style="color: #BA2121; ">"30 seconds"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br></div></div></div><p>Indem
+ das Logging-Framework alle 30 Sekunden nach Veränderungen in der 
+Logging-Konfiguration sucht, können Anpassungen im laufenden Betrieb 
+ohne Neustart vorgenommen werden.</p><h1 id="Hserver.log" class="wikigeneratedid"><span>server.log</span><a class="edit_section" role="button" title="Bearbeiten" href="https://wiki.domain.de/wiki/a4/edit/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?section=1"><span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span></a></h1><p>Das eigentliche Logging wird in der Datei <span class="monospace">/opt/s0ftw4reweb/wildfly/standalone/log/server.log</span>
+ vorgenommen. Diese Datei soll täglich rotiert werden. Die Logs werden 
+30 Tage aufbewahrt, und bis zu einem Gesamtvolumen von 30 GB.</p><div class="box"><div class="code"><span style="font-style: italic; color: #404040; ">&lt;!-- ab Z. 55 --&gt;</span><br><span style="font-style: italic; color: #404040; ">&lt;!-- Definition des Appender für das Schreiben der Logdateien "server.log" --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;appender</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"RequestLogAppender"</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"ch.qos.logback.core.rolling.RollingFileAppender"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;file&gt;</span>${JBOSS_HOME}/standalone/log/server.log<span style="font-weight: bold; color: #008000; ">&lt;/file&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;rollingPolicy</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- rollover daily --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;fileNamePattern&gt;</span>/opt/s0ftw4reweb/wildfly/standalone/log/server.%d{yyyy-MM-dd}.%i.txt<span style="font-weight: bold; color: #008000; ">&lt;/fileNamePattern&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- each file should be at most 100MB, keep 30 days worth of history, but at most 3GB --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;maxFileSize&gt;</span>100MB<span style="font-weight: bold; color: #008000; ">&lt;/maxFileSize&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;maxHistory&gt;</span>30<span style="font-weight: bold; color: #008000; ">&lt;/maxHistory&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;totalSizeCap&gt;</span>3GB<span style="font-weight: bold; color: #008000; ">&lt;/totalSizeCap&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/rollingPolicy&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;encoder&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;pattern&gt;</span>%date - %logger:\n [%level]: %message%n%xException<span style="font-weight: bold; color: #008000; ">&lt;/pattern&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/encoder&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/appender&gt;</span><br></div></div><div class="box warningmessage"><p>Zu
+ Beachten, falls Konfigurationen kopiert werden: Der Name des Appenders 
+"RequestLogAppender" muss zwingend erhalten werden, sonst weiß die 
+Anwendung nicht, wo die zu loggenden Daten hingeschickt werden müssen.</p></div><p>Hier eine Erklärung der Einstellungen:</p><table style="margin-right:auto"><tbody><tr><th style="width: 324px;" scope="col">Element-Name</th><th style="width: 1151px;" scope="col">Erläuterung des Wert</th></tr><tr><td style="width:324px">file</td><td style="width:1151px">die zu konfigurierende Log-Datei</td></tr><tr><td style="width:324px">rollingPolicy</td><td style="width:1151px">durch welche Regel ist die Log-Rotation festgelegt? hier: <span class="monospace">SizeAndTimeBasedRollingPolicy</span>, also eine Rotation basierend auf verstreichender Zeit (täglich) und Größe (maxFileSize, hier: 100MB)</td></tr><tr><td style="width:324px">fileNamePattern</td><td style="width:1151px">der
+ Ausgabeort der rotierten Log-Datei. Hier: am gleichen Ort wie das 
+Original, mit dem Datums- und Nummerierungs-Suffix. Die Operatoren %d 
+(date) und %i (Nummerierung) sind <em>zwingend</em> notwendig für die Verwendung der <span class="monospace">SizeAndTimeBasedRollingPolicy.</span> Hier wird ein Benennungsschema von bspw. <span class="monospace">server.2024-01-04.0.txt&nbsp;</span>erreicht.</td></tr><tr><td style="width:324px">maxFileSize</td><td style="width:1151px">die maximale Größe einer Datei, bevor sie rotiert wird</td></tr><tr><td style="width:324px">maxHistory</td><td style="width:1151px">die maximale Anzahl an aufbewahrten Logging-Dateien</td></tr><tr><td style="width:324px">totalSizeCap</td><td style="width:1151px">das Gesamtvolumen an aufbewahrten Logging-Dateien</td></tr><tr><td style="width:324px">pattern</td><td style="width:1151px">das Layout, in dem die Log-Nachrichten in die Logdatei geschrieben werden</td></tr></tbody></table><div class="wikimodel-emptyline"></div><div class="wikimodel-emptyline"></div><div class="wikimodel-emptyline"></div><div class="wikimodel-emptyline"></div><div class="wikimodel-emptyline"></div><div class="wikimodel-emptyline"></div><h1 id="HLogger-Einstellung" class="wikigeneratedid"><span>Logger-Einstellung</span><a class="edit_section" role="button" title="Bearbeiten" href="https://wiki.domain.de/wiki/a4/edit/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?section=2"><span class="fa fa-pencil"></span><span class="sr-only">Bearbeiten</span></a></h1><p>Im letzten Teil der logback.xml werden die verwendeten Logger eingebunden und deren Loglevel festgelegt:</p><div class="box"><div class="code"><span style="font-style: italic; color: #404040; ">&lt;!-- Z. 82 --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.ui.component.demo"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"org.apache.cxf.services"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.ui"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.jpql"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"org.hibernate"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="org.hibernate.SQL" level="INFO" &gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="org.jboss.as.ee" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="org.hibernate" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="org.jboss.jca" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="com.arjuna" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="de.s0ftw4re.system.jpql" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.attach"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.service"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"org.springframework.orm"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-style: italic; color: #404040; ">&lt;!-- &lt;logger name="org.apache.activemq" level="INFO"&gt;&lt;/logger&gt; --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.system.log"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"de.s0ftw4re.dapservice"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"org.jboss"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;logger</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"org.springframework"</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"INFO"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/logger&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;root</span> <span style="color: #7D9029; ">level=</span><span style="color: #BA2121; ">"WARN"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;appender-ref</span> <span style="color: #7D9029; ">ref=</span><span style="color: #BA2121; ">"RequestLogAppender"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/appender-ref&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;appender-ref</span> <span style="color: #7D9029; ">ref=</span><span style="color: #BA2121; ">"S0ftw4re-Ondemand-Appender"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/appender-ref&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;appender-ref</span> <span style="color: #7D9029; ">ref=</span><span style="color: #BA2121; ">"Stdout"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/appender-ref&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/root&gt;</span><br><br></div></div><p>Für TEST und DEMO wird standardmäßig das Loglevel auf INFO, für PROD auf ERROR gestellt.</p><div class="box warningmessage"><p>Zu Beachten: die Einbindung der Zeile <span class="monospace">&lt;logger name="de.s0ftw4re.dapservice" level="INFO"/&gt;</span>, die standardmäßig NICHT vorhanden ist, uns aber wichtige Informationen über die DAP-Komponente gibt.</p></div><p>Um
+ den Loglevel zu ändern, muss, sofern in Z.2 (s.o.) der Scanner 
+eingeschaltet ist, die Anwendung nicht neugestartet werden. Es reicht, 
+folgende Schritte auszuführen:</p><ol><li>vim logback.xml</li><li>Taste "v" für visuellen Modus, damit die zu bearbeitenden Zeilen auswählen</li><li>:s/FIND/REPLACE/[Enter] (Bsp.: :s/INFO/ERROR/[Enter] )</li><li>30 Sekunden warten, bevor Änderung in Kraft tritt</li></ol>
+          </div><div class="sticky-buttons-wrapper col-xs-12" style="display: none;"><div style="height: 0px;"></div><div class="inplace-editing-buttons sticky-buttons"><div class="buttons">
+    <div class="btn-group">
+      <input class="btn btn-primary" type="submit" name="action_save" title="Alt+S" value="Speichern &amp; Ansehen" disabled="disabled">
+<input type="hidden" name="xaction" value="$escapetool.xml($action)" disabled="disabled">
+      <input class="btn btn-default" type="submit" name="action_saveandcontinue" title="Alt+Shift+S" value="Speichern" disabled="disabled">
+<input type="hidden" name="xaction" value="saveandcontinue" disabled="disabled">
+          </div>
+    <input class="btn btn-default" type="submit" name="action_cancel" title="Alt+C" value="Abbrechen" disabled="disabled">
+<input type="hidden" name="xaction" value="cancel" disabled="disabled">
+
+        <span class="meta-versionSummary metamodifs">
+      <input type="hidden" name="xeditaction" value="get" disabled="disabled">
+                        <label class="hidden" for="previousVersion">Previous version</label>
+      <input type="text" class="hidden" id="previousVersion" name="previousVersion" value="7.1" disabled="disabled">
+            <label class="hidden" for="isNew">Is new document?</label>
+      <input type="text" class="hidden" id="isNew" name="isNew" value="false" disabled="disabled">
+            <label class="hidden" for="editingVersionDate">Date of latest edition</label>
+      <input type="text" class="hidden" id="editingVersionDate" name="editingVersionDate" value="1765273694442" disabled="disabled">
+                        <label class="hidden" for="commentinput">Versionszusammenfassung</label>
+          <input type="text" name="comment" id="commentinput" size="40" title="Geben Sie eine kurze Beschreibung ihrer Änderungen ein" placeholder="Zusammenfassung hinzufügen…" disabled="disabled">
+                            <span class="meta-minorEdit text-nowrap">
+          <input type="checkbox" name="minorEdit" id="minorEdit" disabled="disabled">
+          <label for="minorEdit">Kleine Änderungen</label>
+        </span>
+          </span>   <div id="autosaveControl"><label class="autosave" for="doAutosave"><input type="checkbox" name="doAutosave" id="doAutosave" disabled="disabled"> Automatisch Speichern</label> <label class="frequency" style="opacity: 0.2;">alle <input type="text" value="5" size="2" class="autosave-frequency" disabled="disabled"> <span>minutes</span></label> </div></div><input type="hidden" name="form_token" value="8ind590UMDBy9UqTMIEmIw" disabled="disabled"><div class="hidden extra"></div></div></div>
+  </div>
+</div>
+
+
+
+
+
+    <div class="clearfloats"></div>
+  </div>            <div id="xdocFooter">
+                  <div class="like-container">
+<input id="is-liked" type="hidden" value="false">
+<div class="like-button btn btn-primary  badge" title="Klicken Sie, um die aktuelle Seite zu &quot;Liken&quot;. Anzahl der Likes auf dieser Seite: 0.">
+<span class="fa fa-heart"></span> <span class="like-number">0</span>
+</div>
+</div>
+                  
+         <div class="doc-tags" id="xdocTags">
+                        Tags:
+                              <div class="tag-tool tag-add"><a href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/?showTagAddForm=true#xdocTags" rel="nofollow" title="Tags hinzufügen">[+]</a></div>
+            </div>
+    
+                  <div id="xdocAuthors">
+<div class="xdocCreation"> Erstellt von <span class="wikilink"><a href="https://wiki.domain.de/wiki/a4/view/XWiki/nutzer-freytag">Alexandra Freytag</a></span> am 2024/01/05 14:54<br>
+</div>
+</div>
+              </div>
+              <div id="xwikidata">
+      
+    
+              
+    
+    
+    
+                        
+            
+    
+    
+        <div id="docextraanchors">
+  <span id="Commentsanchor">&nbsp;</span><span id="Attachmentsanchor">&nbsp;</span><span id="Historyanchor">&nbsp;</span><span id="Informationanchor">&nbsp;</span>  </div>
+  <div id="xwikidatacontents">
+    <div class="floatcontainer" id="docExtraTabs">
+      <ul class="xwikitabbar" id="docExtrasTabsUl">
+                  <li id="Commentstab" data-template="commentsinline.vm" class="active">
+                        <a id="Commentslink" href="#Comments" rel="nofollow">
+              Kommentare  <span class="itemCount">(0)</span>             </a>
+          </li>
+                  <li id="Attachmentstab" data-template="attachmentsinline.vm">
+                        <a id="Attachmentslink" href="#Attachments" rel="nofollow">
+              Anhänge  <span class="itemCount">(0)</span>             </a>
+          </li>
+                  <li id="Historytab" data-template="historyinline.vm">
+                        <a id="Historylink" href="#History" rel="nofollow">
+              Historie             </a>
+          </li>
+                  <li id="Informationtab" data-template="informationinline.vm">
+                        <a id="Informationlink" href="#Information" rel="nofollow">
+              Information             </a>
+          </li>
+              </ul>
+    </div>
+                <div id="docextrapanes" class="">
+              <div id="Commentspane" class=""><div id="commentscontent" class="xwikiintracontent">
+  <div id="_comments">
+  <p class="noitems">Keine Kommentare zu diesem Dokument</p>
+
+      <button type="button" id="openCommentForm" class="btn btn-default">
+  <span class="fa fa-comment"></span>
+  Kommentieren
+</button>
+    <div id="commentFormPlaceholder" class="hidden">
+            <form action="/wiki/a4/commentadd/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?xpage=view&amp;viewer=comments#commentform" method="post" id="AddComment">
+      <fieldset id="commentform">
+        <legend class="sr-only">Kommentar hinzufügen</legend>
+        <div class="commentavatar">                                <img class="avatar avatar_120" src="Logging%20und%20Log-Rotation%20-%20XWiki-Dateien/noavatar.png" alt="Alexandra Freytag" title="Alexandra Freytag"></div>
+                  <label><span class="wikilink"><a href="https://wiki.domain.de/wiki/a4/view/XWiki/nutzer-freytag">Alexandra Freytag</a></span> sagt:</label>
+          <input type="hidden" name="XWiki.XWikiComments_author" value="XWiki.nutzer-freytag">
+                        <input type="hidden" name="form_token" value="8ind590UMDBy9UqTMIEmIw">
+        <input type="hidden" name="XWiki.XWikiComments_date" value="">
+        <input type="hidden" name="XWiki.XWikiComments_replyto" value="">
+        <div class="commentcontainer">
+          <div class="commenteditor">
+            <!-- loaded by javascript (see comments.js) -->
+            <!-- stores the submitted comment in case of error during the submission (eg, invalid captcha). -->
+                      </div>
+        </div>
+                <div>
+          <input type="submit" value="Kommentar hinzufügen" class="btn btn-primary">
+          <a class="cancel btn btn-default" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/">Abbrechen</a>
+        </div>
+      </fieldset>
+    </form>
+      </div>
+    </div>     <div class="modal fade" id="permalinkModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <div class="modal-title">Permalink</div>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <div class="input-group-addon"><span class="fa fa-link"></span></div>
+            <input type="text" class="form-control" title="Permalink">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Gehe zu permalink">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Abbrechen">
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <div class="modal-title">Löschen</div>
+        </div>
+        <div class="modal-body">
+          <div>Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?</div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-danger" value="Löschen" data-dismiss="modal">
+          <input type="button" class="btn btn-default" value="Abbrechen" data-dismiss="modal">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+              <div id="Attachmentspane" class="hidden empty"></div>
+              <div id="Historypane" class="hidden empty"></div>
+              <div id="Informationpane" class="hidden empty"></div>
+          </div>
+                <script>
+      var hashviewer = self.document.location.hash.schwubstring(1);
+                                                var extraInit = function(){ XWiki.displayDocExtra("Comments", "commentsinline.vm", false) };
+                if (hashviewer == "Comments") {
+          var extraInit = function(){ XWiki.displayDocExtra("Comments", "commentsinline.vm", true) };
+        }
+                                if ($("Commentslink") != null) {
+          $("Commentslink").href="#Comments";
+          Event.observe($("Commentslink"), "click", function(){ XWiki.displayDocExtra("Comments", "commentsinline.vm", false); }, false);
+        }
+                                if ($("tmShowComments") != null) {
+          $("tmShowComments").href="#Comments";
+          Event.observe($("tmShowComments"), "click", function(){ XWiki.displayDocExtra("Comments", "commentsinline.vm", true); }, false);
+        }
+                                if ($("commentsshortcut") != null) {
+          $("commentsshortcut").down('a').href="#comments";
+          Event.observe($("commentsshortcut"), "click", function(){ XWiki.displayDocExtra("Comments", "commentsinline.vm", true); }, false);
+        }
+                                                                              if (hashviewer == "Attachments") {
+          var extraInit = function(){ XWiki.displayDocExtra("Attachments", "attachmentsinline.vm", true) };
+        }
+                                if ($("Attachmentslink") != null) {
+          $("Attachmentslink").href="#Attachments";
+          Event.observe($("Attachmentslink"), "click", function(){ XWiki.displayDocExtra("Attachments", "attachmentsinline.vm", false); }, false);
+        }
+                                if ($("tmShowAttachments") != null) {
+          $("tmShowAttachments").href="#Attachments";
+          Event.observe($("tmShowAttachments"), "click", function(){ XWiki.displayDocExtra("Attachments", "attachmentsinline.vm", true); }, false);
+        }
+                                if ($("attachmentsshortcut") != null) {
+          $("attachmentsshortcut").down('a').href="#attachments";
+          Event.observe($("attachmentsshortcut"), "click", function(){ XWiki.displayDocExtra("Attachments", "attachmentsinline.vm", true); }, false);
+        }
+                                                                              if (hashviewer == "History") {
+          var extraInit = function(){ XWiki.displayDocExtra("History", "historyinline.vm", true) };
+        }
+                                if ($("Historylink") != null) {
+          $("Historylink").href="#History";
+          Event.observe($("Historylink"), "click", function(){ XWiki.displayDocExtra("History", "historyinline.vm", false); }, false);
+        }
+                                if ($("tmShowHistory") != null) {
+          $("tmShowHistory").href="#History";
+          Event.observe($("tmShowHistory"), "click", function(){ XWiki.displayDocExtra("History", "historyinline.vm", true); }, false);
+        }
+                                if ($("historyshortcut") != null) {
+          $("historyshortcut").down('a').href="#history";
+          Event.observe($("historyshortcut"), "click", function(){ XWiki.displayDocExtra("History", "historyinline.vm", true); }, false);
+        }
+                                                                              if (hashviewer == "Information") {
+          var extraInit = function(){ XWiki.displayDocExtra("Information", "informationinline.vm", true) };
+        }
+                                if ($("Informationlink") != null) {
+          $("Informationlink").href="#Information";
+          Event.observe($("Informationlink"), "click", function(){ XWiki.displayDocExtra("Information", "informationinline.vm", false); }, false);
+        }
+                                if ($("tmShowInformation") != null) {
+          $("tmShowInformation").href="#Information";
+          Event.observe($("tmShowInformation"), "click", function(){ XWiki.displayDocExtra("Information", "informationinline.vm", true); }, false);
+        }
+                                if ($("informationshortcut") != null) {
+          $("informationshortcut").down('a').href="#information";
+          Event.observe($("informationshortcut"), "click", function(){ XWiki.displayDocExtra("Information", "informationinline.vm", true); }, false);
+        }
+                                            document.observe("dom:loaded", extraInit, false);
+    </script>
+  </div> </div>  
+        </div>  </div><div id="leftPanels" class="panels left panel-width-Large">
+      <div class="panel expanded PanelsNavigation Navigation"><h1 class="xwikipaneltitle">Navigation</h1><div class="xwikipanelcontents">
+
+
+
+
+
+
+
+                                                                        
+                                                                        
+                                                  <div class="xtree jstree jstree-1 jstree-xwiki jstree-xwiki-responsive" data-responsive="true" data-url="/wiki/a4/get/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/WebHome?outputSyntax=plain&amp;sheet=XWiki.DocumentTree&amp;showAttachments=false&amp;showTranslations=false&amp;exclusions=document%3Aa4%3ASandbox.WebHome&amp;exclusions=document%3Aa4%3AXWiki.WebHome&amp;exclusions=document%3Aa4%3AFAQ.WebHome" data-draganddrop="false" data-contextmenu="false" data-icons="false" data-edges="false" data-checkboxes="false" data-opento="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" data-finder="false" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="document:a4:01 Neues IT Wiki.WebHome" aria-busy="false"><ul class="jstree-container-ul jstree-children jstree-no-dots jstree-no-icons" role="group"><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:01 Neues IT Wiki.WebHome_anchor" aria-expanded="true" id="document:a4:01 Neues IT Wiki.WebHome" class="jstree-node  jstree-open" aria-busy="false"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/" tabindex="-1" id="document:a4:01 Neues IT Wiki.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>01 Neues IT Wiki</a><ul role="group" class="jstree-children"><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Administration.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Administration.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Administration/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Administration.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Administration</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Allgemeines.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Allgemeines.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Allgemeines/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Allgemeines.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Allgemeines</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.WebHome_anchor" aria-expanded="true" id="document:a4:01 Neues IT Wiki.Anwendungen.WebHome" class="jstree-node  jstree-open" aria-busy="false"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Anwendungen</a><ul role="group" class="jstree-children"><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Anwendungen Java.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Anwendungen Java.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Anwendungen%20Java/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Anwendungen Java.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Anwendungen Java</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.CKAN.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.CKAN.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/CKAN/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.CKAN.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>CKAN</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.ClamAV.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.ClamAV.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/ClamAV/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.ClamAV.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>ClamAV</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Domain.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Domain.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Domain/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Domain.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Domain</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Fachanwendungen.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Fachanwendungen.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Fachanwendungen/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Fachanwendungen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Fachanwendungen</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.IT-Anwendungen.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.IT-Anwendungen.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/IT-Anwendungen/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.IT-Anwendungen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>IT-Anwendungen</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.OBO-Edit.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.OBO-Edit.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/OBO-Edit/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.OBO-Edit.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>OBO-Edit</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Obsolet.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Obsolet.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Obsolet/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Obsolet.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Obsolet</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Online-Bibliothekskatalog des ORGA.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Online-Bibliothekskatalog des ORGA.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Online-Bibliothekskatalog%20des%20ORGA/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Online-Bibliothekskatalog des ORGA.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Online-Bibliothekskatalog des ORGA (GBV)</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome_anchor" aria-expanded="true" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome" class="jstree-node  jstree-open" aria-busy="false"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Server Anwendungen</a><ul role="group" class="jstree-children"><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.AddressDB.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.AddressDB.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/AddressDB/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.AddressDB.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>AddressDB</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Alfresco.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Alfresco.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Alfresco/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Alfresco.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Alfresco</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.BLtU.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.BLtU.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/BLtU/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.BLtU.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>BLtU</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Cadenza.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Cadenza.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Cadenza/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Cadenza.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Cadenza</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.DB108.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.DB108.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/DB108/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.DB108.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>DB108</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.ELKE.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.ELKE.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/ELKE/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.ELKE.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>ELKE</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.EUginius neu.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.EUginius neu.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/EUginius%20neu/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.EUginius neu.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>EUginius</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Euginius.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Euginius.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Euginius/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Euginius.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>EUginius alt</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Freisetzungsdatenbank.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Freisetzungsdatenbank.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Freisetzungsdatenbank/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Freisetzungsdatenbank.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Freisetzungsliste</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Handlungshilfe.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Handlungshilfe.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Handlungshilfe/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Handlungshilfe.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Handlungshilfe</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.I-doit.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.I-doit.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/I-doit/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.I-doit.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>I-doit-(inÜberarbeitung)</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Infozupf.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Infozupf.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Infozupf/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Infozupf.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Infozupf</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Internetplattform_Lebensmittelwarnung.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Internetplattform_Lebensmittelwarnung.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/Internetplattform_Lebensmittelwarnung/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.Internetplattform_Lebensmittelwarnung.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Internetplattform Lebensmittelwarnung</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.WebHome_anchor" aria-expanded="true" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.WebHome" class="jstree-node  jstree-open" aria-busy="false"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE-Plattform</a><ul role="group" class="jstree-children"><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Datenbanken im S0FTW4RE-Bereich.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Datenbanken im S0FTW4RE-Bereich.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Datenbanken%20im%20S0FTW4RE-Bereich/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Datenbanken im S0FTW4RE-Bereich.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Datenbanken im S0FTW4RE-Bereich</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.DOC-GEN.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.DOC-GEN.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/DOC-GEN/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.DOC-GEN.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>DOC-GEN</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome_anchor" aria-expanded="true" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome" class="jstree-node  jstree-open" aria-busy="false"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Know How</a><ul role="group" class="jstree-children"><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Abgleich Ansprechpartner  Mitarbeiter.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Abgleich Ansprechpartner  Mitarbeiter.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Abgleich%20Ansprechpartner%20%20Mitarbeiter/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Abgleich Ansprechpartner  Mitarbeiter.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Abgleich Ansprechpartner / Mitarbeiter</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung der Partnerdaten.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung der Partnerdaten.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Aktualisierung%20der%20Partnerdaten/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung der Partnerdaten.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Aktualisierung der Partnerdaten</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Analyse des Timeouts bei Zip-Export.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Analyse des Timeouts bei Zip-Export.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Analyse%20des%20Timeouts%20bei%20Zip-Export/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Analyse des Timeouts bei Zip-Export.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Analyse des Timeouts bei Zip-Export</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Berliner E-Mailserver einbinden.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Berliner E-Mailserver einbinden.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Berliner%20E-Mailserver%20einbinden/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Berliner E-Mailserver einbinden.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Berliner E-Mailserver einbinden</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.ORGA Views und Tabellen.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.ORGA Views und Tabellen.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/ORGA%20Views%20und%20Tabellen/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.ORGA Views und Tabellen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>ORGA Views und Tabellen</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Erhöhung Rastertyp Kalenderwochen in S0FTW4RE CS.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Erhöhung Rastertyp Kalenderwochen in S0FTW4RE CS.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Erh%C3%B6hung%20Rastertyp%20Kalenderwochen%20in%20S0FTW4RE%20CS/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Erhöhung Rastertyp Kalenderwochen in S0FTW4RE CS.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Erhöhung Rastertyp Kalenderwochen in S0FTW4RE C/S</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Farbkombination in der Kopfleiste ändern.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Farbkombination in der Kopfleiste ändern.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Farbkombination%20in%20der%20Kopfleiste%20%C3%A4ndern/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Farbkombination in der Kopfleiste ändern.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Farbkombination in der Kopfleiste ändern</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.HTTPS Umstellung der S0FTW4RE-Komponenten.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.HTTPS Umstellung der S0FTW4RE-Komponenten.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/HTTPS%20Umstellung%20der%20S0FTW4RE-Komponenten/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.HTTPS Umstellung der S0FTW4RE-Komponenten.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>HTTPS Umstellung der S0FTW4RE-Komponenten</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.JAVA Keystore.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.JAVA Keystore.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/JAVA%20Keystore/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.JAVA Keystore.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>JAVA Keystore</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfiguration SQuirreL SQL.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfiguration SQuirreL SQL.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Konfiguration%20SQuirreL%20SQL/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfiguration SQuirreL SQL.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Konfiguration SQuirreL SQL</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfigurationsübersicht.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfigurationsübersicht.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Konfigurations%C3%BCbersicht/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Konfigurationsübersicht.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Konfigurationsübersicht</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Leitfaden Import Jahresbände.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Leitfaden Import Jahresbände.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Leitfaden%20Import%20Jahresb%C3%A4nde/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Leitfaden Import Jahresbände.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i> Leitfaden zum automatisierten Anlegen der Jahresbände für alle Sachakten</a></li><li role="treeitem" aria-selected="true" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor jstree-clicked" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Logging-Konfiguration/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Logging-Konfiguration.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Logging und Log-Rotation</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung Datenbestand Test-System.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung Datenbestand Test-System.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/Aktualisierung%20Datenbestand%20Test-System/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.Aktualisierung Datenbestand Test-System.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE Aktualisierung Datenbestand Test-Systeme</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.S0FTW4RE_REPO.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.S0FTW4RE_REPO.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20How/S0FTW4RE_REPO/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.S0FTW4RE_REPO.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE_REPO</a></li><li role="treeitem" aria-selected="false" aria-level="6" aria-labelledby="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome_anchor" id="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome" class="jstree-node  jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know How.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-eye jstree-themeicon-custom" role="presentation"></i>9 more ...</a></li></ul></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know Issues S0FTW4RE.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know Issues S0FTW4RE.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/Know%20Issues%20S0FTW4RE/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.Know Issues S0FTW4RE.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Known Issues S0FTW4RE</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Komponenten.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Komponenten.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/S0FTW4RE%20Komponenten/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Komponenten.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE Komponenten</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Releases.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Releases.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/S0FTW4RE%20Releases/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE Releases.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE Releases</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE_Web.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE_Web.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/S0FTW4RE_Web/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.S0FTW4RE_Web.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>S0FTW4RE Web</a></li><li role="treeitem" aria-selected="false" aria-level="5" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.zzz_Archiv.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.zzz_Archiv.WebHome" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/S0FTW4RE-Plattform/zzz_Archiv/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.S0FTW4RE-Plattform.zzz_Archiv.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>zzz_Archiv</a></li></ul></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.NGS.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.NGS.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Server%20Anwendungen/NGS/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.NGS.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>NGS</a></li><li role="treeitem" aria-selected="false" aria-level="4" aria-labelledby="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome_anchor" id="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome" class="jstree-node  jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="pagination:document:a4:01 Neues IT Wiki.Anwendungen.Server Anwendungen.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-eye jstree-themeicon-custom" role="presentation"></i>6 more ...</a></li></ul></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.SVN.WebHome_anchor" id="document:a4:01 Neues IT Wiki.Anwendungen.SVN.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/SVN/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.SVN.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>SVN</a></li><li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="document:a4:01 Neues IT Wiki.Anwendungen.Ultramobile_IT.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Anwendungen.Ultramobile_IT.WebHome" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Anwendungen/Ultramobile_IT/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Anwendungen.Ultramobile_IT.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Ultramobile IT</a></li></ul></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Basisdienste.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Basisdienste.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Basisdienste/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Basisdienste.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Basisdienste</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Betriebssysteme.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Betriebssysteme.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Betriebssysteme/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Betriebssysteme.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Betriebssysteme</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Datenbanken.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Datenbanken.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Datenbanken/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Datenbanken.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Datenbanken</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Entwicklung.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Entwicklung.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Entwicklung/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Entwicklung.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Entwicklung</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Hardware.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Hardware.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Hardware/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Hardware.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Hardware</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Infrastruktur (A43).WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Infrastruktur (A43).WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Infrastruktur%20%28A43%29/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Infrastruktur (A43).WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Infrastruktur (A43)</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.IT-Service Management.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.IT-Service Management.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/IT-Service%20Management/" tabindex="-1" id="document:a4:01 Neues IT Wiki.IT-Service Management.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>IT-Service Management</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Know-How.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Know-How.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Know-How/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Know-How.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Know-How</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Medientechnik.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Medientechnik.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Medientechnik/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Medientechnik.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Medientechnik</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Netzwerk.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Netzwerk.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Netzwerk/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Netzwerk.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Netzwerk</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.Projekte.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.Projekte.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/Projekte/" tabindex="-1" id="document:a4:01 Neues IT Wiki.Projekte.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>Projekte</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="document:a4:01 Neues IT Wiki.RZ Umzug.WebHome_anchor" aria-expanded="false" id="document:a4:01 Neues IT Wiki.RZ Umzug.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/01%20Neues%20IT%20Wiki/RZ%20Umzug/" tabindex="-1" id="document:a4:01 Neues IT Wiki.RZ Umzug.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>RZ Umzug</a></li><li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="pagination:document:a4:01 Neues IT Wiki.WebHome_anchor" id="pagination:document:a4:01 Neues IT Wiki.WebHome" class="jstree-node  jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="pagination:document:a4:01 Neues IT Wiki.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-eye jstree-themeicon-custom" role="presentation"></i>2 more ...</a></li></ul></li><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:03 Archiv.WebHome_anchor" aria-expanded="false" id="document:a4:03 Archiv.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/03%20Archiv/" tabindex="-1" id="document:a4:03 Archiv.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>03 Archiv</a></li><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:Hilfe.WebHome_anchor" aria-expanded="false" id="document:a4:Hilfe.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/Hilfe/" tabindex="-1" id="document:a4:Hilfe.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>04 Hilfe</a></li><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:05 Feedback.WebHome_anchor" id="document:a4:05 Feedback.WebHome" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/05%20Feedback/" tabindex="-1" id="document:a4:05 Feedback.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>05 Feedback</a></li><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:06 Statuslisten.WebHome_anchor" aria-expanded="false" id="document:a4:06 Statuslisten.WebHome" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/06%20Statuslisten/" tabindex="-1" id="document:a4:06 Statuslisten.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>06 Statuslisten</a></li><li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="document:a4:Main.WebHome_anchor" aria-expanded="false" id="document:a4:Main.WebHome" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="https://wiki.domain.de/wiki/a4/view/Main/" tabindex="-1" id="document:a4:Main.WebHome_anchor"><i class="jstree-icon jstree-themeicon fa fa-file-o jstree-themeicon-custom" role="presentation"></i>02 Altes IT Wiki - Read Only</a></li></ul></div></div></div>
+  </div>
+
+  </div>
+<div class="clearfloats"></div>
+  </div></div><div id="footerglobal">
+  <div id="xwikilicence"></div>
+            <div id="xwikiplatformversion">
+                    <a href="http://extensions.xwiki.org/?id=org.xwiki.platform:xwiki-platform-distribution-war:12.10.10:::/xwiki-commons-pom/xwiki-platform/xwiki-platform-distribution/xwiki-platform-distribution-war">
+                XWiki 12.10.10
+              </a>
+          </div>
+  </div>
+
+</div></div>
+<form id="export-modal-form" method="post"></form><div class="drawer-overlay-upper drawer-toggle"></div><div class="modal entity-resource-picker-modal" tabindex="-1" role="dialog" data-backdrop="static"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Schließen" title="Schließen"><span aria-hidden="true">×</span></button><h4 class="modal-title">Seite auswählen</h4></div><div class="modal-body"><div class="ckeditor-tree jstree-no-links" data-edges="true" data-finder="true" data-icons="true" data-responsive="true" data-url="/wiki/a4/get/XWiki/DocumentTree?outputSyntax=plain&amp;language=de&amp;showAttachments=false&amp;showTranslations=false&amp;showWikis=true"></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button><button type="button" class="btn btn-primary" disabled="disabled">Auswählen</button></div></div></div></div><div class="modal entity-resource-picker-modal" tabindex="-1" role="dialog" data-backdrop="static"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Schließen" title="Schließen"><span aria-hidden="true">×</span></button><h4 class="modal-title">Anhang auswählen</h4></div><div class="modal-body"><div class="ckeditor-tree jstree-no-links" data-edges="true" data-finder="true" data-icons="true" data-responsive="true" data-url="/wiki/a4/get/XWiki/DocumentTree?outputSyntax=plain&amp;language=de&amp;showTranslations=false&amp;showWikis=true"></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button><button type="button" class="btn btn-primary" disabled="disabled">Auswählen</button></div></div></div></div></body></html>
