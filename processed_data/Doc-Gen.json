@@ -1,101 +1,9 @@
 {
-  "title": "DOC-GEN - XWiki",
+  "title": "Doc-Gen",
   "sections": [
     {
       "heading": "Einleitung",
       "blocks": [
-        {
-          "block_type": "div_text",
-          "content": "Alexandra Freytag Abmelden A4 Dokumentenindex Benutzerverzeichnis Anwendungen"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "01 Neues IT Wiki",
-            "…",
-            "Server Anwendungen",
-            "S0FTW4RE-Plattform",
-            "DOC-GEN"
-          ]
-        },
-        {
-          "block_type": "div_text",
-          "content": "DOC-GEN"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Zuletzt geändert von Alexandra Freytag am 2025/06/27 10:30"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Bearbeiten"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Erstellen"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "Verwalten",
-            "Kopieren",
-            "Aktionen",
-            "Exportieren",
-            "Anmerken",
-            "Druckvorschau",
-            "Als E-Mail versenden",
-            "Ansichten",
-            "Quellcode",
-            "Untergeordnete Seiten",
-            "Kommentare (0)",
-            "Anhänge (6)",
-            "Historie",
-            "Information",
-            "\"Gefällt mir\" anzeigen"
-          ]
-        },
-        {
-          "block_type": "div_text",
-          "content": "Exportieren"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Office Formate"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Als PDF exportieren"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Andere Formate"
-        },
-        {
-          "block_type": "paragraph",
-          "content": "Seiten für den Export auswählen:"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "Angelegte Seiten Die vom Benutzer erstellten Seiten, oder von XWiki-Erweiterungen die der Benutzer installiert hat.",
-            "Erstellte und geänderte Seiten Inklusive geänderter Erweiterungsseiten (normalerweise Konfigurationsseiten).",
-            "Alle Seiten Enthält Erweiterungsseiten, die nicht weiter geändert wurden."
-          ]
-        },
-        {
-          "block_type": "div_text",
-          "content": "Alles auswählen / Keine"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "DOC-GEN"
-          ]
-        },
-        {
-          "block_type": "div_text",
-          "content": "Als HTML exportieren"
-        },
         {
           "block_type": "list",
           "content": [
@@ -199,7 +107,7 @@
           "content": "https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master/"
         },
         {
-          "block_type": "div_text",
+          "block_type": "code",
           "content": "git clone https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen"
         }
       ]
@@ -257,8 +165,8 @@
           ]
         },
         {
-          "block_type": "div_text",
-          "content": "systemctl start jboss-eap-rhel systemctl start tomcat"
+          "block_type": "code",
+          "content": "systemctl start jboss-eap-rhel\nsystemctl start tomcat"
         },
         {
           "block_type": "list",
@@ -267,8 +175,8 @@
           ]
         },
         {
-          "block_type": "div_text",
-          "content": "systemctl stop jboss-eap-rhel systemctl stop tomcat"
+          "block_type": "code",
+          "content": "systemctl stop jboss-eap-rhel\nsystemctl stop tomcat"
         }
       ]
     },
@@ -450,11 +358,11 @@
         },
         {
           "block_type": "paragraph",
-          "content": "Anpassungen\n können auf den entsprechenden Komponenten in den o.g. \nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\n auf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev \nhochgeladen werden."
+          "content": "Anpassungen\nkönnen auf den entsprechenden Komponenten in den o.g.\nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\nauf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev\nhochgeladen werden."
         },
         {
           "block_type": "paragraph",
-          "content": "Bei Änderungen an Datenfeldern oder sonstigen \nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im \nDoc-Gen Operator (s.o.) nötig."
+          "content": "Bei Änderungen an Datenfeldern oder sonstigen\nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im\nDoc-Gen Operator (s.o.) nötig."
         },
         {
           "block_type": "paragraph",
@@ -619,11 +527,11 @@
         },
         {
           "block_type": "paragraph",
-          "content": "Anpassungen\n können auf den entsprechenden Komponenten in den o.g. \nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\n auf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev \nhochgeladen werden."
+          "content": "Anpassungen\nkönnen auf den entsprechenden Komponenten in den o.g.\nKonfigurationsdateien (env.xml und main.xml) vorgenommen werden und dann\nauf den dazugehörigen Seiten (s.u.) mit dem user doc-gen_admin_dev\nhochgeladen werden."
         },
         {
           "block_type": "paragraph",
-          "content": "Bei Änderungen an Datenfeldern oder sonstigen \nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im \nDoc-Gen Operator (s.o.) nötig."
+          "content": "Bei Änderungen an Datenfeldern oder sonstigen\nDB-relevanten Einstellungen ist möglicherweise eine Synchronisierung im\nDoc-Gen Operator (s.o.) nötig."
         },
         {
           "block_type": "paragraph",
@@ -749,7 +657,7 @@
       "blocks": [
         {
           "block_type": "paragraph",
-          "content": "Für\n die finalen Tests wurden die beiden alten Testdatenbanken \n(schwubs098.old.domain.de, SID enzo, Benutzernamen db_doc-gen & \ndb_tbv) noch einmal in die beiden neuen Testdatenbanken \n(schwubs169.old.domain.de, SID tbv, Benutzernamen doc-gentest & \ntbvtest) kopiert."
+          "content": "Für\ndie finalen Tests wurden die beiden alten Testdatenbanken\n(schwubs098.old.domain.de, SID enzo, Benutzernamen db_doc-gen &\ndb_tbv) noch einmal in die beiden neuen Testdatenbanken\n(schwubs169.old.domain.de, SID tbv, Benutzernamen doc-gentest &\ntbvtest) kopiert."
         },
         {
           "block_type": "paragraph",
@@ -777,7 +685,7 @@
         },
         {
           "block_type": "paragraph",
-          "content": "Inhalt\n von /opt/apache-tomcat-6.0.32/.ssh/id_rsa.pub auf den Server \nschwubs029.old.domain.de (/opt/apache-tomcat-6.0.32/.ssh/authorized_keys) \nanhängen"
+          "content": "Inhalt\nvon /opt/apache-tomcat-6.0.32/.ssh/id_rsa.pub auf den Server\nschwubs029.old.domain.de (/opt/apache-tomcat-6.0.32/.ssh/authorized_keys)\nanhängen"
         },
         {
           "block_type": "paragraph",
@@ -868,87 +776,6 @@
         {
           "block_type": "paragraph",
           "content": "... Nein. Ghostscript wird von Doc-Gen nicht verwendet. ... {{/7box}} {{/box}}"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Automatisch Speichern alle minutes"
-        },
-        {
-          "block_type": "div_text",
-          "content": "0"
-        },
-        {
-          "block_type": "div_text",
-          "content": "[+]"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Erstellt von admin am 2022/02/14 21:18"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "Kommentare (0)",
-            "Anhänge (6)",
-            "Historie",
-            "Information"
-          ]
-        },
-        {
-          "block_type": "paragraph",
-          "content": "Keine Kommentare zu diesem Dokument"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Kommentar hinzufügen Alexandra Freytag sagt: Abbrechen"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Permalink"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Löschen"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Sind Sie sicher, dass Sie diesen Kommentar löschen wollen?"
-        }
-      ]
-    },
-    {
-      "heading": "Navigation",
-      "blocks": [
-        {
-          "block_type": "list",
-          "content": [
-            "01 Neues IT Wiki Administration Allgemeines Anwendungen Anwendungen Java CKAN ClamAV Domain Fachanwendungen IT-Anwendungen OBO-Edit Obsolet Online-Bibliothekskatalog des ORGA (GBV) Server Anwendungen AddressDB Alfresco BLtU Cadenza DB108 ELKE EUginius EUginius alt Freisetzungsliste Handlungshilfe I-doit-(inÜberarbeitung) Infozupf Internetplattform Lebensmittelwarnung S0FTW4RE-Plattform Datenbanken im S0FTW4RE-Bereich DOC-GEN Benutzer im EIS-User-Manager anlegen CSS Upload für den Dynamic Composer Den gesperrten Admin User über die Datenbank entsperren Domänen transportieren Doc-Gen Converter installieren Doc-Gen Designer 1.8 Doc-Gen EIS 1.0.28 installieren Doc-Gen HTTPS einrichten Doc-Gen Kerberos Einrichtung Doc-Gen Keycloak Einrichtung Doc-Gen Rollen und Gruppen Doc-Gen Server (JBoss 7.4) installieren Farbcodes ändern von grün nach blau Neuen Vorlagenschlüssel auf dem Entwicklungsserver anlegen Umleitung für URL-Verkürzung Know How Known Issues S0FTW4RE S0FTW4RE Komponenten S0FTW4RE Releases S0FTW4RE Web zzz_Archiv NGS 6 more ... SVN Ultramobile IT Basisdienste Betriebssysteme Datenbanken Entwicklung Hardware Infrastruktur (A43) IT-Service Management Know-How Medientechnik Netzwerk Projekte RZ Umzug 2 more ...",
-            "03 Archiv",
-            "04 Hilfe",
-            "05 Feedback",
-            "06 Statuslisten",
-            "02 Altes IT Wiki - Read Only"
-          ]
-        },
-        {
-          "block_type": "div_text",
-          "content": "XWiki 12.10.10"
-        },
-        {
-          "block_type": "div_text",
-          "content": "× Seite auswählen"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Abbrechen Auswählen"
-        },
-        {
-          "block_type": "div_text",
-          "content": "× Anhang auswählen"
-        },
-        {
-          "block_type": "div_text",
-          "content": "Abbrechen Auswählen"
         }
       ]
     }

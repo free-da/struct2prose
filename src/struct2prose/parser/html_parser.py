@@ -8,6 +8,19 @@ from struct2prose.parser.models import WikiDocument, Section, ContentBlock
 
 BLOCK_TAGS = {"p", "ul", "ol", "table", "pre", "code", "div"}
 
+def extract_text_with_breaks(tag: Tag) -> str:
+    """
+    Extract text from a tag, converting <br> to line breaks and
+    normalizing whitespace.
+    """
+    for br in tag.find_all("br"):
+        br.replace_with("\n")
+
+    text = tag.get_text(separator=" ", strip=True)
+
+    # Normalize excessive whitespace but keep line breaks
+    lines = [line.strip() for line in text.splitlines()]
+    return "\n".join(line for line in lines if line)
 
 def _parse_container(container: Tag, sections: list[Section], current: Section) -> Section:
     for child in container.find_all(recursive=False):
@@ -23,7 +36,7 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
             current = Section(heading=heading)
 
         elif name == "p":
-            text = child.get_text(" ", strip=True)
+            text = extract_text_with_breaks(child)
             if text:
                 current.blocks.append(ContentBlock("paragraph", text))
 
@@ -41,17 +54,38 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
             current.blocks.append(ContentBlock("table", rows))
 
         elif name in {"pre", "code"}:
-            code = child.get_text("\n", strip=True)
+            code = extract_text_with_breaks(child)
             if code:
                 current.blocks.append(ContentBlock("code", code))
 
+
         elif name == "div":
+
+            # XWiki: code blocks are often rendered as <div class="code">...</div>
+
+            classes = set(child.get("class", []) or [])
+
+            if "code" in classes:
+
+                code = child.get_text("\n", strip=True)
+
+                if code:
+                    current.blocks.append(ContentBlock("code", code))
+
+                continue
+
             # div als Container; wenn keine Block-Kinder: als Textblock
+
             has_block_children = child.find(list(BLOCK_TAGS), recursive=False) is not None
+
             if has_block_children:
+
                 current = _parse_container(child, sections, current)
+
             else:
-                text = child.get_text(" ", strip=True)
+
+                text = extract_text_with_breaks(child)
+
                 if text:
                     current.blocks.append(ContentBlock("div_text", text))
 
