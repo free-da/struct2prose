@@ -385,18 +385,6 @@
         {
           "block_type": "code",
           "content": "s0ftw4re         soft      nofile           8192\ns0ftw4re         hard      nofile           8192"
-        },
-        {
-          "block_type": "list",
-          "content": [
-            "Konfigurationen",
-            ".profile",
-            "standalone.conf",
-            "standalone.xml datasource HTTP-Listener Logdateien",
-            "logback.xml",
-            "module.xml (Oracle)",
-            "limits.conf"
-          ]
         }
       ]
     }

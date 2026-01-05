@@ -1,0 +1,15 @@
+# Datenbanken
+
+## S0FTW4RE
+
+S0FTW4RE-PROD:      188.455.7.247 (schwubs097.old.domain.de) SID  s0ftw4re User s0ftw4re Port        1521 S0FTW4RE-TEST:  188.455.6.64 (s-0953.db.domain.de) SID  test User s0ftw4re Port 1522 S0FTW4RE-DEMO:      188.455.6.64 (s-0953.db.domain.de) SID  Demo User s0ftw4re Port 1521
+
+## S0FTW4RE BI
+
+PROD: Server    s-0941.db.domain.de SID  s0ftw4rebi19 User jasperdb19 Port    1521 TEST: Server  188.455.6.58 (s-0947.db.domain.de) SID  mbit19 User jaspertest
+
+## DOC-GEN
+
+TEST: Operator/Converter Server  188.455.6.52 (s-0941.db.domain.de) Port 1521 SID  tbv19 User doc-gentest18 EIS: Server  188.455.6.52 (s-0941.db.domain.de) Port 1521 SID  tbv19 User EISKARMA_dev EISJPAStore_dev EISLockRegistry_dev EISTBHStore_dev EISUserService_dev
+
+PROD: Operator/Converter: Server  188.455.6.52 (s-0941.db.domain.de) Port 1521 SID  doc-gen19 User DOC-GEN_PROD EIS: Server  188.455.6.52 (s-0941.db.domain.de) Port 1521 SID  doc-gen19 User EISKARMA EISJPAStore EISLockRegistry EISTBHStore EISUserService
