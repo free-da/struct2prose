@@ -37,14 +37,16 @@ Tabelleninhalt (CSV):
 {table_csv}
 
 Aufgabe:
-1) Beschreibe kurz, was diese Tabelle insgesamt darstellt (1-2 Sätze).
-2) Erkläre die Bedeutung jeder Spalte (stichpunktartig oder kurze Sätze).
-3) Formuliere jede Tabellenzeile als beschreibenden Satz (pro Zeile ein Satz).
+1) Gib den Titel der Tabelle an, wenn es einen gibt. Nutze dafür entweder die Über- oder Unterschrift der Tabelle. Wenn es keinen Titel gibt, gib der Tabelle eine inhaltlich passende Bezeichnung.
+2) Beschreibe kurz, was diese Tabelle insgesamt darstellt (1-2 Sätze).
+3) Erkläre die Bedeutung jeder Spalte (stichpunktartig oder kurze Sätze).
+4) Formuliere jede Tabellenzeile als beschreibenden Satz (pro Zeile ein Satz).
    - Wenn eine Zeile eine Art "Fortsetzung" ist (z.B. erste Spalte leer), beziehe dich auf die letzte nicht-leere Kategorie/Instanz aus der ersten Spalte.
-4) Gib KEINEN CSV/Tabellen-Output zurück, sondern gut lesbaren Fließtext.
+5) Gib KEINEN CSV/Tabellen-Output zurück, sondern gut lesbaren Fließtext.
+6) Erfinde keine Inhalte oder Angaben darüber, was in der Tabelle enthalten sein könnte. Wenn eine Tabelle oder einzelne Felder leer sind, dann gib das einfach so wieder.
 
 Format:
-- Keine Überschriften auf Markdown-Ebene (die kommen außerhalb).
+- Wenn möglich Überschriften auf Markdown-Ebene auf sinnvoller Strukturebene.
 - Nutze, wenn sinnvoll, kurze Absätze und Aufzählungen.
 """.strip()
 

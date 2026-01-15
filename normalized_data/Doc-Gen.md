@@ -4,15 +4,13 @@
 
 Die Liste aus der technischen Wiki-Seite für Doc-Gen umfasst verschiedene Aspekte und Schritte im Zusammenhang mit der Anwendung und ihrer Entwicklung. Hier ist eine Zusammenfassung der Liste in gut lesbarer Form:
 
-Die Dokumentation von Doc-Gen beginnt mit einem **Vorwort**, gefolgt von Informationen über den **Ansprechpartner Fachlich IT Extern**, der für Fragen und Anliegen zur Verfügung steht. Die **Dokumentenablage** ist in verschiedenen Systemen wie ORGA Dateisystem, Doc-Gen Wiki und GIT Anleitungen zu finden.
+Die Dokumentation von Doc-Gen beginnt mit einem **Vorwort**, das den Kontext und den Zweck der Anwendung einführt. Für fachliche Fragen und IT-externen Ansprechpartner gibt es spezifische **Ansprechpartner**, die für Unterstützung zur Verfügung stehen.
 
-Ein wichtiger Teil der Dokumentation sind die **Server**, die für die Anwendung notwendig sind, einschließlich Anwendungsserver, Datenbank-Server und nützliche Server-Befehle. Darüber hinaus werden **verarbeitete Daten** wie fachliche Daten und personenbezogene Daten behandelt.
+Die **Dokumentenablage** erfolgt in verschiedenen Systemen, einschließlich ORGA-Dateisystem, Doc-Gen-Wiki und GIT-Anleitungen. Für die technische Infrastruktur sind **Server** wie Anwendungsserver, Datenbank-Server und nützliche Server-Befehle relevant. Die Anwendung verarbeitet verschiedene Arten von **Daten**, darunter fachliche Daten und personenbezogene Daten.
 
-Die **Systemarchitektur** von Doc-Gen Version 1.8 wird detailliert beschrieben, einschließlich der **Bestandteile der Anwendung**, wie dem Testsystem, dem Operator/Converter und dem Integration Server (EIS). Es gibt auch Informationen über die **Konfigurationseiten** und die **Client-Gruppen** in der Active Directory (AD).
+Ein wichtiger Aspekt ist die **Systemarchitektur** von Doc-Gen, Version 1.8, die die Struktur und die Komponenten der Anwendung beschreibt. Die Anwendung besteht aus verschiedenen **Bestandteilen**, einschließlich Testsystemen, Operator/Converter, Integration Server (EIS) und Konfigurationseiten. Diese Komponenten sind sowohl im Test- als auch im Produktivsystem vorhanden.
 
-Die Anwendung ist von anderen Anwendungen **abhängig**, und es gibt einen **zeitlichen Verlauf** wichtiger Ereignisse, wie die Plan-B-Migration, die Installation von Doc-Gen-Komponenten und die Untersuchung von Sicherheitsschwachstellen.
-
-Hier sind die wichtigsten Schritte im zeitlichen Verlauf:
+Für die Konfiguration und den Betrieb der Anwendung sind **Abhängigkeiten von anderen Anwendungen** zu berücksichtigen. Darüber hinaus gibt es wichtige **Termine** und einen **zeitlichen Verlauf**, der die Entwicklung und die Aktualisierungen der Anwendung dokumentiert. Hier sind die wichtigsten Schritte:
 
 1. **09.10.2023**: Plan-B-Migration in RZ Bundesallee
 2. **08.12.2022**: Installation von Doc-Gen Operator, Converter und teilweise EIS auf schwubs374
@@ -24,7 +22,7 @@ Hier sind die wichtigsten Schritte im zeitlichen Verlauf:
 8. **11.01.2017**: Vorbereitung der Aktualisierung der Produktion
 9. **27.08.2018**: Untersuchung der Ghostscript-Schwachstelle
 
-Insgesamt bietet die Liste eine umfassende Übersicht über die Anwendung Doc-Gen, ihre Komponenten, ihre Abhängigkeiten und ihre Entwicklungsgeschichte.
+Zusammenfassend umfasst die Liste eine Vielzahl von Aspekten, von der Systemarchitektur und den Bestandteilen der Anwendung bis hin zu wichtigen Terminen und Schritten in der Entwicklung und Wartung von Doc-Gen.
 
 ## Vorwort Bearbeiten
 
@@ -38,47 +36,49 @@ Britta Busch
 
 ## IT Bearbeiten
 
-Die Liste aus dem Abschnitt "IT" des Dokuments "Doc-Gen" enthält eine Aufzählung von Personen, die offensichtlich mit IT-bezogenen Aufgaben oder Projekten in Verbindung stehen. Die Liste umfasst insgesamt fünf Personen:
+Die Liste aus dem Abschnitt "IT" des Dokuments "Doc-Gen" enthält eine Aufzählung von Personen, die offensichtlich mit IT-bezogenen Aufgaben oder Projekten in Verbindung stehen. Die Liste umfasst folgende Personen:
 
-Die folgenden Personen sind in der Liste aufgeführt: @Diana Stölzel, @Vladislav Konov, @Hans Labod, @Alexandra Freytag und @Andreas Stengl. Diese Liste scheint eine Zusammenstellung von Teammitgliedern oder Verantwortlichen für bestimmte IT-Aufgaben zu sein, ohne dass spezifische Schritte oder Anweisungen genannt werden. Es handelt sich daher um eine einfache Auflistung von Namen, die möglicherweise für Kommunikations- oder Koordinationszwecke verwendet wird.
+Die Liste besteht aus einer Reihe von Namen, die möglicherweise an einem IT-Projekt oder einer IT-Abteilung beteiligt sind. Die genannten Personen sind:
+- Diana Stölzel
+- Vladislav Konov
+- Hans Labod
+- Alexandra Freytag
+- Andreas Stengl
+
+Diese Personen könnten als Teammitglieder, Experten oder Verantwortliche für bestimmte IT-Aufgaben fungieren. Ohne weitere Kontextinformationen ist es schwierig, ihre genaue Rolle oder den Zweck der Liste zu bestimmen. Es könnte sich jedoch um eine Kontaktliste, eine Teamzusammensetzung oder eine Liste von Fachleuten handeln, die für bestimmte IT-bezogene Anliegen zuständig sind.
 
 ## Extern Bearbeiten
 
-Die Liste enthält Kontaktdaten und Ressourcen für die externe Bearbeitung von Doc-Gen. Zusammengefasst bietet sie Informationen über die Ansprechpartner und Unterstützungsangebote für Benutzer. Hier sind die Details:
+Die Liste fasst die Kontaktdaten und Ressourcen für die externe Bearbeitung von Doc-Gen zusammen. Hier sind die wichtigsten Informationen:
 
-Für Fragen oder Anliegen stehen verschiedene Ansprechpartner zur Verfügung:
-- Der Account Manager ist Claudia Theobald, die unter der E-Mail-Adresse Claudia.Theobald@doc-gen.de erreichbar ist.
-- Für technische Koordination ist Lars Decker zuständig, der unter der E-Mail-Adresse Lars.Decker@doc-gen.de kontaktiert werden kann.
-- Für spezifische Anfragen zu Doc-Gen EIS kann man sich an Frederik Zimmer unter der E-Mail-Adresse Frederik.Zimmer@doc-gen.de wenden.
-- Für weitere Unterstützung und Hilfe bietet Doc-Gen ein Support-Portal unter der Adresse https://service.doc-gen-software.de an.
+Für Fragen und Anliegen stehen verschiedene Ansprechpartner zur Verfügung. Der Account Manager ist Claudia Theobald, die unter der E-Mail-Adresse Claudia.Theobald@doc-gen.de erreichbar ist. Für technische Fragen und Koordination ist Lars Decker zuständig, der unter Lars.Decker@doc-gen.de kontaktiert werden kann. Darüber hinaus gibt es einen speziellen Ansprechpartner für Doc-Gen EIS, nämlich Frederik Zimmer, der unter Frederik.Zimmer@doc-gen.de erreichbar ist.
 
-Es handelt sich nicht um eine Schrittfolge, sondern um eine Auflistung von Kontaktdaten und Ressourcen. Diese Informationen ermöglichen es Benutzern, schnell und einfach die richtigen Ansprechpartner zu finden oder Unterstützung zu erhalten, wenn sie mit Doc-Gen arbeiten.
+Wenn Sie technische Probleme haben oder Unterstützung benötigen, können Sie auch das Support-Portal unter https://service.doc-gen-software.de besuchen.
+
+Es gibt keine spezifischen Schritte, die befolgt werden müssen, da es sich hier um eine Liste von Kontaktdaten und Ressourcen handelt. Stattdessen können Sie die oben genannten Informationen verwenden, um den richtigen Ansprechpartner für Ihre Anliegen zu finden.
 
 ## Dokumentenablage Bearbeiten
 
 ## ORGA Dateisystem Bearbeiten
 
-Die Liste enthält Pfadangaben für die Dateiablage im Rahmen des Dokumenttitels "Doc-Gen" im Abschnitt "ORGA Dateisystem Bearbeiten". Zusammengefasst handelt es sich um zwei verschiedene Speicherorte für Dokumente und Projekte im Dateisystem.
+Die Liste bezieht sich auf die Speicherorte von Dateien im Zusammenhang mit dem Dokumenttitel "Doc-Gen" im Abschnitt "ORGA Dateisystem Bearbeiten". Zusammengefasst handelt es sich um zwei verschiedene Pfade, an denen relevante Dateien oder Dokumente abgelegt sind.
 
-Die Liste kann wie folgt zusammengefasst werden:
+Die beiden Speicherorte sind:
+1. **\\dateiablage1-bs\Projekte\DokGen**: Dieser Pfad bezieht sich auf den Hauptordner für das Projekt "DokGen" innerhalb des Dateisystems.
+2. **\\dateiablage1-bs\Projekte\IT-Anwendungen-Abt2\04_DOC-GEN\04_Dokumentation\DOC-GEN**: Dieser Pfad führt zu einem spezifischen Unterordner innerhalb des Projekts, der sich auf die Dokumentation von "DOC-GEN" konzentriert.
 
-Es gibt zwei wichtige Speicherorte im Dateisystem:
-1. Der erste Speicherort ist `\dateiablage1-bs\Projekte\DokGen`, der möglicherweise als Hauptspeicherort für das Projekt "DokGen" dient.
-2. Der zweite Speicherort ist `\dateiablage1-bs\Projekte\IT-Anwendungen-Abt2\04_DOC-GEN\04_Dokumentation\DOC-GEN`, der spezifischer für die Dokumentation innerhalb des Projekts "DokGen" oder der IT-Anwendungen der Abteilung 2 sein könnte.
-
-Diese beiden Speicherorte bieten eine klare Struktur für die Organisation von Dokumenten und Projekten im Dateisystem.
+Diese Informationen liefern eine Übersicht über die Organisation der Dateien und Dokumente im Rahmen des Doc-Gen-Projekts und können bei der Suche nach bestimmten Dateien oder bei der Navigation durch das Dateisystem hilfreich sein.
 
 ## Doc-Gen Wiki Bearbeiten
 
 Die Liste bezieht sich auf den Zugriff auf die DOC-GEN Wiki-Seite. Hier finden Sie eine Zusammenfassung der Informationen:
 
-Die DOC-GEN Wiki-Seite ist ein zentrales Informationsportal, auf dem Sie Handbücher und Hilfestellungen zur Installation und Wartung finden können. Um auf diese Ressourcen zuzugreifen, müssen Sie die folgenden Schritte befolgen:
+Um auf die DOC-GEN Wiki zuzugreifen, müssen Sie folgende Schritte befolgen:
+1. Öffnen Sie den Browser und geben Sie die URL **www.doc-gen-wiki.de** ein.
+2. Melden Sie sich an, indem Sie den Benutzernamen **doc-gen-help** und das entsprechende Passwort verwenden.
+3. Das Passwort finden Sie in der Datei **S0FTW4RE-Kennwoerter.kdbx**, die mit dem Tool Keepass verwaltet wird.
 
-1. Öffnen Sie den Browser und navigieren Sie zur URL: www.doc-gen-wiki.de
-2. Melden Sie sich an, indem Sie den Benutzernamen "doc-gen-help" und das entsprechende Passwort verwenden. 
-3. Um das Passwort zu finden, öffnen Sie die Datei "S0FTW4RE-Kennwoerter.kdbx" mit dem Tool Keepass.
-
-Nachdem Sie diese Schritte befolgt haben, sollten Sie Zugriff auf die DOC-GEN Wiki-Seite haben und die verfügbaren Ressourcen nutzen können.
+Die DOC-GEN Wiki-Seite bietet Handbücher und Hilfestellung zur Installation und Wartung von Doc-Gen. Durch die Anmeldung auf dieser Seite können Sie auf diese Ressourcen zugreifen und weitere Informationen erhalten.
 
 ## GIT Bearbeiten
 
@@ -90,15 +90,14 @@ git clone https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen
 
 ## Anleitungen Bearbeiten
 
-Die Liste aus der technischen Wiki-Seite enthält wichtige Dokumente und Schritte für die Implementierung und den Betrieb eines Systems. Zusammengefasst umfasst sie die folgenden Punkte:
+Die Liste aus der technischen Wiki-Seite umfasst verschiedene Dokumente und Schritte, die für die Installation, den Betrieb und die Wartung von Systemen relevant sind. Zusammengefasst finden sich hier Anleitungen für verschiedene Phasen des Systemlebenszyklus.
 
-Um das System erfolgreich zu implementieren und zu betreiben, müssen einige wichtige Schritte und Dokumente berücksichtigt werden. Dazu gehören:
+Die Liste enthält folgende Punkte:
+1. **Installationshandbuch**: Dieses Handbuch befindet sich im Verzeichnis `\\dateiablage1-bs\Abteilung_Z\Grp_A4_Allgemein\Dokumentation\Installationshandbücher` und dient als Leitfaden für die Installation des Systems.
+2. **Betriebshandbuch**: Im Verzeichnis `\\dateiablage1-bs\Abteilung_Z\Grp_A4_Allgemein\Dokumentation\Betriebshandbücher` zu finden, bietet es Anleitungen für den täglichen Betrieb und die Wartung des Systems.
+3. **Übernahme von Änderungen**: Der letzte Punkt bezieht sich auf den Prozess der Übernahme von Änderungen aus dem Entwicklungssystem in das Produktivsystem, wobei der Schritt "Domänen transportieren" eine spezifische Aktion innerhalb dieses Prozesses darstellt.
 
-1. **Installationshandbuch**: Dieses Handbuch befindet sich unter \\dateiablage1-bs\Abteilung_Z\Grp_A4_Allgemein\Dokumentation\Installationshandbücher und enthält alle notwendigen Anweisungen für die Installation des Systems.
-2. **Betriebshandbuch**: Nach der Installation ist das Betriebshandbuch unter \\dateiablage1-bs\Abteilung_Z\Grp_A4_Allgemein\Dokumentation\Betriebshandbücher zu finden. Es bietet Anleitungen für den täglichen Betrieb und die Wartung des Systems.
-3. **Übernahme von Änderungen**: Schließlich ist es wichtig, Änderungen aus dem Entwicklungssystem in das Produktivsystem zu übernehmen. Dieser Prozess wird als "Domänen_transportieren" bezeichnet und ist ein entscheidender Schritt, um sicherzustellen, dass das System auf dem neuesten Stand bleibt und alle notwendigen Funktionen und Updates enthält.
-
-Diese Schritte und Dokumente sind entscheidend für eine erfolgreiche Implementierung und den reibungslosen Betrieb des Systems. Durch die Befolgung dieser Anleitungen kann man sicherstellen, dass das System korrekt installiert, betrieben und aktualisiert wird.
+Diese Liste bietet somit eine Übersicht über die wichtigsten Dokumente und Schritte, die für den reibungslosen Betrieb und die Weiterentwicklung des Systems erforderlich sind.
 
 ## Server Bearbeiten
 
@@ -116,26 +115,24 @@ Datenbank Server Test: s-0941.db.domain.de:1521/tbv19
 
 ## Nützliche Server Befehle Bearbeiten
 
-Der Abschnitt "Nützliche Server Befehle" im Dokument "Doc-Gen" bietet eine Übersicht über wichtige Befehle für die Verwaltung von Servern. Eine der wichtigsten Aktionen ist das Starten des Servers. Dieser Vorgang sollte sorgfältig durchgeführt werden, um sicherzustellen, dass der Server ordnungsgemäß funktioniert.
+Der Abschnitt "Nützliche Server Befehle" im Dokument "Doc-Gen" enthält eine Liste mit wichtigen Anweisungen für die Verwaltung von Servern. Eine der wichtigsten Aufgaben ist das Starten des Servers. Hier sind die Schritte, um den Server erfolgreich zu starten:
 
-Um den Server zu starten, sollten Sie folgende Schritte befolgen:
-1. Stellen Sie sicher, dass Sie als root-Benutzer angemeldet sind, da das Starten des Servers administrative Rechte erfordert.
-2. Führen Sie den entsprechenden Befehl zum Starten des Servers aus. Der genaue Befehl kann je nach Server-Software und Betriebssystem variieren, daher sollten Sie sich an die spezifischen Anweisungen für Ihr System halten.
+1. **Server starten (als root)**: Um den Server zu starten, müssen Sie als root-Benutzer angemeldet sein. Dieser Schritt ist entscheidend, da nur der root-Benutzer die notwendigen Rechte besitzt, um den Server zu starten und zu konfigurieren.
 
-Es ist wichtig, dass Sie diese Schritte sorgfältig befolgen, um sicherzustellen, dass der Server korrekt gestartet wird und keine Probleme oder Sicherheitsrisiken verursacht.
+Zusammenfassend lässt sich sagen, dass die Liste im Abschnitt "Nützliche Server Befehle" vor allem Anweisungen für die grundlegende Verwaltung von Servern enthält, wobei das Starten des Servers als root-Benutzer eine der wichtigsten und grundlegendsten Aufgaben darstellt.
 
 ```
 systemctl start jboss-eap-rhel
 systemctl start tomcat
 ```
 
-Der Abschnitt "Nützliche Server Befehle" im Dokument "Doc-Gen" enthält eine Liste mit wichtigen Befehlen für die Verwaltung von Servern. Eine der wichtigsten Aktionen, die in dieser Liste erwähnt wird, ist das Stoppen des Servers.
+Der Abschnitt "Nützliche Server Befehle" im Dokument "Doc-Gen" behandelt verschiedene Befehle, die für die Verwaltung eines Servers nützlich sein können. Eine der wichtigsten Aktionen, die aufgeführt ist, ist das Stoppen des Servers. Dieser Vorgang ist wichtig, um Wartungsarbeiten durchzuführen oder um den Server aus anderen Gründen zu deaktivieren.
 
 Um den Server zu stoppen, sollten Sie folgende Schritte befolgen:
 1. Stellen Sie sicher, dass Sie als root-Benutzer angemeldet sind, da dieser Vorgang administrative Rechte erfordert.
-2. Führen Sie den entsprechenden Befehl aus, um den Server zu stoppen. Der genaue Befehl kann je nach Server-Software und Betriebssystem variieren, daher sollten Sie sich an die spezifischen Anweisungen für Ihr System halten.
+2. Führen Sie den Befehl zum Stoppen des Servers aus. Der genaue Befehl kann je nach Betriebssystem und Server-Software variieren, daher sollten Sie sich an die spezifischen Anweisungen für Ihr System halten.
 
-Es ist wichtig, dass Sie diese Schritte sorgfältig befolgen, um sicherzustellen, dass der Server ordnungsgemäß heruntergefahren wird und keine Daten verloren gehen. Wenn Sie weitere Informationen oder spezifische Anweisungen benötigen, sollten Sie sich an die offizielle Dokumentation oder den Support Ihres Servers wenden.
+Es ist wichtig, dass Sie vor dem Stoppen des Servers alle notwendigen Sicherheitsmaßnahmen treffen und sicherstellen, dass alle Benutzer und Prozesse, die vom Server abhängig sind, informiert und vorbereitet sind. Durch das Befolgen dieser Schritte können Sie den Server sicher und kontrolliert stoppen.
 
 ```
 systemctl stop jboss-eap-rhel
@@ -162,100 +159,107 @@ https://devops.cloud.orga.in.bund.de/scm/repo/A2/2012-DokGen/code/sources/master
 
 Beispielaufruf Webcomposer:
 
-Die Liste scheint eine URL zu enthalten, die zum Testsystem von Doc-Gen Ver. 1.8 gehört. Zusammengefasst handelt es sich um eine spezifische Webadresse, die für den Zugriff auf das Testsystem benötigt wird.
+Die Liste bezieht sich auf eine URL, die zum Testsystem von Doc-Gen Ver. 1.8 gehört. Zusammengefasst ermöglicht diese URL den Zugriff auf eine bestimmte Funktion innerhalb des Doc-Gen-Systems.
 
-Um auf das Testsystem zuzugreifen, können Sie folgende Schritte befolgen:
+Um auf diese Funktion zuzugreifen, können Sie folgenden Schritt ausführen:
 
-1. Öffnen Sie Ihren Webbrowser und geben Sie die folgende URL ein: https://doc-gen-test.domain.de:6228/generator-launcher/ui/orga/template-list
-2. Fügen Sie die erforderlichen Parameter an die URL an, um auf die gewünschte Ressource zuzugreifen. Die Parameter sind:
- * antragsnummer: 00Z001-00/00
- * vorgang: 27596
-3. Die vollständige URL sollte dann wie folgt aussehen: https://doc-gen-test.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=00Z001-00/00&vorgang=27596
+1. Öffnen Sie Ihren Webbrowser und geben Sie die folgende URL ein: https://doc-gen-test.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=00Z001-00/00&vorgang=27596
 
-Wenn Sie diese Schritte befolgen, sollten Sie in der Lage sein, auf das Testsystem von Doc-Gen Ver. 1.8 zuzugreifen und die gewünschten Funktionen zu nutzen.
+Diese URL enthält spezifische Parameter wie die Antragsnummer (00Z001-00/00) und den Vorgang (27596), die für den Zugriff auf bestimmte Funktionen oder Daten innerhalb des Testsystems erforderlich sind. Durch die Eingabe dieser URL können Sie auf die Template-Liste des Doc-Gen-Systems zugreifen und die entsprechenden Funktionen nutzen.
 
 Doc-Gen Operator
 
-Die Liste enthält zwei URLs, die auf verschiedene Testsysteme für Doc-Gen Ver. 1.8 hinweisen. Zusammengefasst bieten diese URLs Zugriff auf Testumgebungen für das Doc-Gen-System, die über unterschiedliche Protokolle und Ports erreichbar sind.
+Die Liste enthält zwei URLs, die auf das Testsystem von Doc-Gen Ver. 1.8 verweisen. Diese URLs können verwendet werden, um auf die Operator-Oberfläche des Testsystems zuzugreifen.
 
-Um auf diese Testsysteme zuzugreifen, können Sie die folgenden Schritte befolgen:
+Zusammengefasst bieten diese URLs zwei Möglichkeiten, auf das Testsystem zuzugreifen:
 
-1. Öffnen Sie Ihren bevorzugten Webbrowser.
-2. Geben Sie eine der folgenden URLs in die Adresszeile ein:
-   - Für den ersten Testsystem-Zugriff: http://doc-gen-test.domain.de:6260/doc-gen-web/operator/
-   - Für den zweiten Testsystem-Zugriff: https://doc-gen-test.domain.de:6428/doc-gen-web/operator/
-3. Drücken Sie die Enter-Taste, um die entsprechende Testumgebung aufzurufen.
+1. Über die HTTP-Verbindung: http://doc-gen-test.domain.de:6260/doc-gen-web/operator/
+2. Über die HTTPS-Verbindung: https://doc-gen-test.domain.de:6428/doc-gen-web/operator/
 
-Diese URLs ermöglichen es Ihnen, die Funktionalität und Leistung des Doc-Gen-Systems in verschiedenen Testumgebungen zu überprüfen und zu testen. Beachten Sie dabei die Unterschiede in den Protokollen (http vs. https) und den Ports (6260 vs. 6428), die für den Zugriff auf die jeweiligen Testsysteme erforderlich sind.
+Diese beiden URLs ermöglichen es, auf die Operator-Oberfläche des Testsystems zuzugreifen, wobei die erste URL eine unverschlüsselte Verbindung (HTTP) und die zweite URL eine verschlüsselte Verbindung (HTTPS) verwendet.
 
 ## Testsystem Operator/Converter 1.8
 
-Die Tabelle stellt eine Sammlung von Bezeichnungen und ihren entsprechenden Werten im Kontext des Testsystem Operator/Converter 1.8 dar. Sie bietet eine Übersicht über verschiedene Konfigurationen oder Einstellungen, die für das System relevant sind.
+### Tabelle: Kein Titel verfügbar
+Da die Tabelle keinen expliziten Titel hat, kann sie basierend auf ihrem Inhalt und dem Kontext, in dem sie gefunden wurde, als "Testsystem-Parameter" bezeichnet werden.
+
+Diese Tabelle stellt eine Sammlung von Parametern oder Konfigurationen für ein Testsystem dar, spezifisch im Zusammenhang mit dem Operator/Converter 1.8. Sie enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.
+
+Die Spalten haben folgende Bedeutungen:
+- Bezeichnung: Hier werden die Namen oder Identifikatoren der Parameter oder Konfigurationen aufgelistet.
+- Wert: Diese Spalte enthält die jeweiligen Werte oder Einstellungen, die den Bezeichnungen zugeordnet sind.
+
+Da die Tabelle leer ist, gibt es keine spezifischen Zeilen, die beschrieben werden können. Die Tabelle bleibt somit ohne weitere Einträge.
+
+### Tabelle: Applikationseinstellungen
+Die Tabelle stellt die Einstellungen für eine bestimmte Applikation dar, insbesondere in Bezug auf den Server und die verwendete Software.
 
 Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die Spalte "Bezeichnung" enthält die Namen oder Identifikatoren für verschiedene Einstellungen oder Konfigurationen.
-* Die Spalte "Wert" enthält die spezifischen Werte, die jeder Bezeichnung zugeordnet sind.
-
-Leider ist die Tabelle leer, daher kann ich keine beschreibenden Sätze für die Tabellenzeilen formulieren. Wenn die Tabelle gefüllt wäre, würde ich jeden Eintrag in einen Satz umwandeln, um die Beziehung zwischen Bezeichnung und Wert zu beschreiben. Zum Beispiel: "Die Bezeichnung X hat den Wert Y." Wenn eine Zeile eine leere Bezeichnung enthält, würde ich mich auf die letzte nicht-leere Bezeichnung beziehen und den entsprechenden Wert dazu beschreiben.
-
-Diese Tabelle stellt Informationen über eine bestimmte Applikation und ihre Umgebung im Kontext des Testsystems Operator/Converter 1.8 dar. Sie enthält Details über den Server und die verwendete Software.
-
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte gibt den Typ oder die Kategorie der Information an, wie z.B. "Applikation" oder "Server".
-* Die zweite Spalte enthält spezifische Details zu der in der ersten Spalte genannten Kategorie, wie z.B. die Server-Adresse oder die Software-Version.
+* Die erste Spalte enthält den Namen der Applikation oder eine Beschreibung der Einstellung.
+* Die zweite Spalte enthält die Server-Adresse oder weitere Details zur Einstellung.
 
 Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Applikation wird auf einem Server mit der Adresse 188.455.5.174 (s-0224m.srv.domain.de) gehostet. 
-Die Applikation verwendet JBoss 7.4. 
+* Die Applikation verwendet den Server mit der Adresse 188.455.5.174, der auch als s-0224m.srv.domain.de bekannt ist.
+* Die Applikation verwendet JBoss 7.4, was auf den zuvor genannten Server bezogen ist.
 
-Es ist zu beachten, dass die zweite und dritte Zeile der Tabelle auf die "Applikation" Bezug nehmen, da die erste Spalte leer ist und somit als Fortsetzung der vorherigen Kategorie interpretiert wird.
+Es ist zu beachten, dass die Tabelle sehr knapp gehalten ist und nur wenige Informationen enthält. Es gibt keine explizite Überschrift oder Unterschrift, die den Titel der Tabelle angibt, daher wurde der Titel "Applikationseinstellungen" gewählt, um den Inhalt der Tabelle zu beschreiben.
 
-Diese Tabelle stellt eine Zusammenstellung von Konfigurationsparametern für eine Datenbankverbindung dar. Sie enthält Informationen, die für den Zugriff auf eine bestimmte Datenbank erforderlich sind.
+### Tabelle: Datenbankverbindungsinformationen
+Die Tabelle stellt die Verbindungsinformationen zu einer Datenbank dar, die für den Testsystem Operator/Converter 1.8 verwendet wird.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält die Kategorie oder den Typ der Konfiguration, wie z.B. "Datenbank", "Server", "Port", "SID" und "User".
-* Die zweite Spalte enthält den entsprechenden Wert oder die spezifische Einstellung für jede Kategorie.
+Die Tabelle enthält folgende Spalten:
+* Datenbank: Enthält die Informationen zur Datenbank
+* Wert: Enthält die entsprechenden Werte zu den Datenbankinformationen
 
 Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Datenbank verwendet den Server 188.455.6.52, der auch als s-0941.db.domain.de bekannt ist. 
-Der Port, der für die Datenbankverbindung verwendet wird, ist 1521. 
-Die System-ID (SID) der Datenbank ist tbv19. 
-Der Benutzername für den Zugriff auf die Datenbank ist doc-gentest18.
+* Die Datenbankverbindung verwendet den Server 188.455.6.52 (s-0941.db.domain.de).
+* Die Datenbankverbindung verwendet den Port 1521.
+* Die Datenbankverbindung verwendet die SID tbv19.
+* Die Datenbankverbindung verwendet den User doc-gentest18.
+
+Es ist zu beachten, dass die Tabelle keine explizite Überschrift enthält, daher wurde der Titel "Datenbankverbindungsinformationen" vergeben, um den Inhalt der Tabelle zu beschreiben.
 
 ## Testsystem Doc-Gen Integration Server (EIS) 1.8
 
-Die Tabelle stellt eine Sammlung von Bezeichnungen und ihren entsprechenden Werten im Kontext des Doc-Gen Integration Servers (EIS) 1.8 dar. Sie bietet eine Übersicht über verschiedene Konfigurationen oder Eigenschaften des Systems.
+### Tabelle: Eigenschaften von Doc-Gen
+Die Tabelle "Eigenschaften von Doc-Gen" stellt die verschiedenen Eigenschaften und Werte des Doc-Gen-Systems dar, insbesondere im Kontext der Integration mit dem EIS 1.8. Diese Tabelle bietet einen Überblick über die wichtigsten Parameter und Konfigurationen des Systems.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Bezeichnung: Diese Spalte enthält die Namen oder Identifikatoren von verschiedenen Komponenten, Eigenschaften oder Konfigurationen innerhalb des Doc-Gen Integration Servers.
-* Wert: Diese Spalte enthält die entsprechenden Werte oder Einstellungen, die jeder Bezeichnung zugeordnet sind.
+### Spaltenbeschreibung
+* Bezeichnung: Diese Spalte enthält die Namen oder Bezeichnungen der verschiedenen Eigenschaften oder Parameter des Doc-Gen-Systems.
+* Wert: Hier sind die entsprechenden Werte oder Einstellungen für jede der aufgelisteten Eigenschaften angegeben.
 
-Leider ist die Tabelle leer, daher kann ich keine spezifischen Tabellenzeilen als beschreibende Sätze formulieren. Wenn die Tabelle jedoch gefüllt wäre, würde ich jede Zeile in einen Satz übersetzen, der die Bezeichnung und ihren entsprechenden Wert beschreibt. Zum Beispiel, wenn eine Zeile "Bezeichnung1,Wert1" enthielte, würde der entsprechende Satz lauten: "Die Bezeichnung1 hat den Wert Wert1." Für Zeilen, die als Fortsetzung einer vorherigen Bezeichnung dienen, würde ich mich auf die letzte nicht-leere Kategorie beziehen und den Satz entsprechend anpassen.
+### Tabelleninhalte
+Da die Tabelle leer ist, gibt es keine spezifischen Zeilen, die beschrieben werden können. Die Tabelle besteht lediglich aus den beiden Spalten "Bezeichnung" und "Wert", ohne weitere Einträge.
 
-Diese Tabelle stellt Informationen über eine bestimmte Applikation und deren Server- und Software-Konfiguration dar. Sie bietet einen Überblick über die technischen Details einer bestimmten Umgebung, in diesem Fall des Doc-Gen Integration Servers.
+### Tabelle: Server-Konfiguration
+Die Tabelle hat keinen expliziten Titel, daher wird sie als "Server-Konfiguration" bezeichnet.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält den Namen oder die Kategorie der Applikation oder des Servers.
-* Die zweite Spalte enthält spezifische Details oder Konfigurationen, wie z.B. die IP-Adresse oder den Server-Namen.
-* Die dritte Spalte enthält Informationen über die verwendete Software oder den Server-Typ.
+Diese Tabelle stellt die Konfiguration eines Servers im Zusammenhang mit der Doc-Gen Integration Server (EIS) 1.8 dar. Sie enthält Informationen über die Applikation und den Server.
 
-Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Applikation wird auf einem Server mit der IP-Adresse 188.455.5.174 (s-0224m.srv.domain.de) gehostet. 
-Die Applikation verwendet Tomcat 9 als Server-Software. 
-
-Insgesamt bietet diese Tabelle einen schnellen Überblick über die technischen Details der Doc-Gen Integration Server-Umgebung.
-
-Diese Tabelle stellt die Konfigurationsdetails für die Verbindung zu einer Datenbank im Rahmen des Doc-Gen Integration Servers (EIS) 1.8 dar. Sie enthält Informationen über den Server, den Port, die System-ID (SID) und die Benutzer, die für die Verbindung verwendet werden.
-
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-- Die erste Spalte enthält die Kategorie oder den Typ der Konfiguration, wie z.B. "Datenbank", "Server", "Port", "SID" und "User".
-- Die zweite Spalte enthält die entsprechenden Werte oder Details zu jeder Kategorie.
+Die Bedeutung jeder Spalte ist wie folgt:
+* Die erste Spalte enthält den Namen der Applikation.
+* Die zweite Spalte enthält die Server-Adresse.
+* Die dritte Spalte enthält die Version des Tomcat-Servers.
 
 Die Tabellenzeilen können wie folgt beschrieben werden:
-- Die Datenbank ist auf dem Server mit der Adresse 188.455.6.52 (s-0941.db.domain.de) konfiguriert.
-- Der Port, der für die Verbindung zur Datenbank verwendet wird, ist 1521.
-- Die System-ID (SID) der Datenbank ist tbv19.
-- Die Benutzer, die für die Verbindung zur Datenbank verwendet werden, sind EISKARMA_dev, EISJPAStore_dev, EISLockRegistry_dev, EISTBHStore_dev und EISUserService_dev.
+* Die erste Zeile beschreibt die Applikation.
+* Die zweite Zeile beschreibt den Server, der der Applikation zugeordnet ist, mit der Adresse 188.455.5.174 (s-0224m.srv.domain.de).
+* Die dritte Zeile beschreibt den Tomcat-Server, der mit der Version 9 verwendet wird, in Bezug auf die zuvor genannte Applikation.
+
+### Tabelle: EIS-Server-Konfiguration
+Die Tabelle "EIS-Server-Konfiguration" stellt die Konfigurationsdetails für den Doc-Gen Integration Server (EIS) 1.8 dar. Sie enthält Informationen über die Datenbankverbindung, die für den Betrieb des Servers erforderlich sind.
+
+Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
+* Die erste Spalte enthält die Kategorie oder den Typ der Konfigurationseinstellung (z.B. Datenbank, Server, Port, SID, User).
+* Die zweite Spalte enthält den entsprechenden Wert oder die Details zu jeder Kategorie.
+
+Die Tabellenzeilen können wie folgt beschrieben werden:
+* Der Server für die Datenbank ist 188.455.6.52 (s-0941.db.domain.de).
+* Der Port für die Datenbankverbindung ist 1521.
+* Der SID (System Identifier) für die Datenbank ist tbv19.
+* Die Benutzer für die Datenbank sind EISKARMA_dev, EISJPAStore_dev, EISLockRegistry_dev, EISTBHStore_dev und EISUserService_dev.
+
+Es ist zu beachten, dass die Tabelle keine explizite Überschrift enthält, daher wurde der Titel "EIS-Server-Konfiguration" basierend auf dem Inhalt gewählt.
 
 ## Konfigurationseiten
 
@@ -295,86 +299,94 @@ Password: S0ftw4re Kennwortdatenbank
 
 Beispielaufruf Webcomposer:
 
-Die Liste bezieht sich auf den Abschnitt "Doc-Gen Ver. 1.8 Produktivsystem" in der technischen Wiki-Seite. Sie enthält zwei URLs und eine wichtige Anmerkung. Hier ist eine Zusammenfassung der Liste als gut lesbarer Fließtext:
+Die Liste bezieht sich auf den Abschnitt "Doc-Gen Ver. 1.8 Produktivsystem" und enthält Informationen über die Verwendung des Doc-Gen-Systems. Zusammengefasst handelt es sich um Hinweise und Links zur Nutzung des Systems.
 
-Die Liste enthält zwei URLs, die zum Doc-Gen-System gehören. Die erste URL ist spezifisch für eine bestimmte Antragsnummer und einen Vorgang:
-https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=009999-00/00&vorgang=27596
+Die Liste enthält zwei spezifische URLs, die zum Doc-Gen-System führen. Die erste URL enthält spezifische Parameter wie eine Antragsnummer und einen Vorgang, während die zweite URL ohne diese Parameter ist. Es gibt auch einen Hinweis darauf, dass keine Bescheide erstellt werden sollten, da diese sonst im Infozupf landen würden.
 
-Die zweite URL ist eine allgemeine URL für den Template-List-Bereich:
-https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list
+Um die Liste besser zu verstehen, kann man folgende Schritte befolgen:
 
-Es ist wichtig zu beachten, dass Bescheide nicht erstellt werden sollten, da sie sonst im Infozupf landen. Dies ist eine wichtige Anweisung, um sicherzustellen, dass die Dokumente korrekt verarbeitet werden.
+1. **Zugriff auf das Doc-Gen-System**: Man kann auf das Doc-Gen-System über die bereitgestellten URLs zugreifen. Die erste URL (`https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=009999-00/00&vorgang=27596`) enthält spezifische Parameter, die für bestimmte Anträge oder Vorgänge relevant sind.
+2. **Verwendung der zweiten URL**: Die zweite URL (`https://doc-gen.domain.de:6228/generator-launcher/ui/orga/template-list?`) kann ohne spezifische Parameter verwendet werden, um allgemeine Informationen oder Listen im Doc-Gen-System abzurufen.
+3. **Wichtiger Hinweis**: Es ist wichtig zu beachten, dass keine Bescheide im Doc-Gen-System erstellt werden sollten, da diese sonst im Infozupf landen könnten. Dieser Hinweis dient dazu, eine ungewollte Weiterleitung von Dokumenten zu vermeiden.
 
-Es gibt keine spezifischen Schritte, die in dieser Liste beschrieben werden, sondern eher eine Sammlung von Informationen und einer wichtigen Anmerkung. Wenn Sie jedoch die URLs verwenden möchten, können Sie folgende Schritte befolgen:
+Insgesamt bietet die Liste eine kurze Anleitung und wichtige Hinweise zur Nutzung des Doc-Gen-Systems, um sicherzustellen, dass die Benutzer die Plattform effektiv und korrekt verwenden können.
 
-1. Öffnen Sie die erste URL, um auf die spezifische Antragsnummer und den Vorgang zuzugreifen.
-2. Öffnen Sie die zweite URL, um auf den allgemeinen Template-List-Bereich zuzugreifen.
-3. Beachten Sie die Anweisung, keine Bescheide zu erstellen, um sicherzustellen, dass die Dokumente korrekt verarbeitet werden.
+### Tabelle: Doc-Gen Ver. 1.8 Produktivsystem
+Die Tabelle stellt die Konfiguration oder Eigenschaften des Doc-Gen Ver. 1.8 Produktivsystems dar. Sie enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.
 
-Die Tabelle stellt die Konfiguration oder Eigenschaften des Doc-Gen Ver. 1.8 Produktivsystems dar. Sie enthält Informationen über verschiedene Aspekte des Systems, die in zwei Spalten aufgelistet sind.
+### Spaltenbeschreibung
+* Bezeichnung: Diese Spalte enthält die Namen oder Identifikatoren für verschiedene Eigenschaften oder Konfigurationen.
+* Wert: Diese Spalte enthält die Werte, die jeder Bezeichnung zugeordnet sind.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte "Bezeichnung" enthält die Namen oder Kategorien der Eigenschaften oder Konfigurationen.
-* Die zweite Spalte "Wert" enthält die entsprechenden Werte oder Einstellungen für jede Bezeichnung.
+### Tabelleninhalte
+Leider ist die Tabelle leer, es gibt keine Zeilen mit Inhalten. Daher kann keine detaillierte Beschreibung der Tabellenzeilen erfolgen. Die Tabelle bleibt ohne Inhalt.
 
-Leider ist die Tabelle leer, daher gibt es keine Zeilen, die beschrieben werden können. Wenn die Tabelle gefüllt wäre, würde jede Zeile als beschreibender Satz formuliert werden, der die Bezeichnung und den entsprechenden Wert enthält. Zum Beispiel: 
-- Wenn eine Zeile die Bezeichnung "Systemversion" und den Wert "1.8" enthält, würde der Satz lauten: Die Systemversion ist 1.8.
-- Wenn eine Zeile eine leere Bezeichnung und einen Wert enthält, würde sich der Satz auf die letzte nicht-leere Bezeichnung beziehen.
-
-Diese Tabelle stellt eine Übersicht über die Applikationen und deren zugehörigen Server dar. Sie enthält Informationen über die Verbindung zwischen bestimmten Anwendungen und den Servern, auf denen sie gehostet werden.
+### Tabelle: Applikationsserver
+Die Tabelle "Applikationsserver" stellt die Verbindung zwischen einer Applikation und ihrem entsprechenden Server dar. Sie enthält Informationen über die Applikation und die zugehörige Server-Adresse.
 
 Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
 * Die erste Spalte enthält den Namen der Applikation.
-* Die zweite Spalte enthält die Informationen über den Server, einschließlich der IP-Adresse und des Domain-Namens.
+* Die zweite Spalte enthält die Adresse des Servers, auf dem die Applikation gehostet wird.
 
-Die Tabellenzeile kann wie folgt beschrieben werden: Die Applikation wird auf dem Server mit der IP-Adresse 188.455.5.164 und dem Domain-Namen s-0214m.srv.domain.de/doc-gen.domain.de gehostet.
+Die Tabellenzeile kann wie folgt beschrieben werden:
+Die Applikation wird auf dem Server mit der Adresse 188.455.5.164 (s-0214m.srv.domain.de/doc-gen.domain.de) gehostet.
 
-Diese Tabelle stellt die Konfigurationsdetails für die Datenbank des Doc-Gen Ver. 1.8 Produktivsystems dar. Sie enthält Informationen über den Zugriff auf die Datenbank, wie Serveradresse, Port, SID und Benutzername.
+Es gibt keine weiteren Informationen in der Tabelle, da nur eine Zeile vorhanden ist.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält die Kategorie oder den Typ der Konfiguration, wie z.B. Datenbank, Server, Port, SID und User.
-* Die zweite Spalte enthält den entsprechenden Wert oder die Details zu jeder Kategorie.
+### Tabelle: Doc-Gen Ver. 1.8 Produktivsystem-Konfiguration
+Die Tabelle stellt die Konfiguration des Doc-Gen Ver. 1.8 Produktivsystems dar und enthält Informationen über die Datenbankverbindung.
 
-Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Datenbank ist auf dem Server mit der Adresse 188.455.6.52 (s-0941.db.domain.de) konfiguriert. 
-Der Port für die Datenbank ist 1521. 
-Der SID für die Datenbank ist doc-gen19. 
-Der User für die Datenbank ist DOC-GEN_PROD.
+### Beschreibung der Spalten
+* Die erste Spalte enthält die Kategorien der Konfiguration, wie z.B. "Datenbank", "Server", "Port", "SID" und "User".
+* Die zweite Spalte enthält die entsprechenden Werte für jede Kategorie.
+
+### Beschreibung der Tabellenzeilen
+Die Datenbank des Doc-Gen Ver. 1.8 Produktivsystems ist konfiguriert mit dem Server 188.455.6.52 (s-0941.db.domain.de). 
+Der Port für die Datenbankverbindung ist 1521. 
+Der SID für die Datenbankverbindung ist doc-gen19. 
+Der User für die Datenbankverbindung ist DOC-GEN_PROD. 
+
+### Zusammenfassung
+Insgesamt enthält die Tabelle die notwendigen Informationen für die Konfiguration der Datenbankverbindung des Doc-Gen Ver. 1.8 Produktivsystems.
 
 ## Produktivsystem Doc-Gen Intergation Server (EIS) 1.8
 
-Die Tabelle stellt eine Sammlung von Informationen über den Doc-Gen Intergation Server (EIS) 1.8 dar, der Teil des Produktivsystems Doc-Gen ist. Diese Informationen sind in einer strukturierten Form präsentiert, um eine einfache Übersicht über die verschiedenen Aspekte des Servers zu ermöglichen.
+### Tabelle: Konfigurationswerte für Doc-Gen Intergation Server (EIS) 1.8
+Die Tabelle stellt Konfigurationswerte für den Doc-Gen Intergation Server (EIS) 1.8 dar und enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.
+
+### Spaltenbeschreibung
+* Bezeichnung: Enthält die Namen oder Beschreibungen von Konfigurationseinstellungen.
+* Wert: Enthält die Werte oder Einstellungen, die den jeweiligen Bezeichnungen zugeordnet sind.
+
+### Tabelleninhalte
+Da die Tabelle leer ist, gibt es keine Zeilen, die beschrieben werden können. Die Tabelle enthält keine Einträge.
+
+### Tabelle: Server-Informationen
+Die Tabelle "Server-Informationen" stellt die Konfiguration des Doc-Gen Intergation Server (EIS) 1.8 dar. Sie enthält Informationen über die Applikation und den Server.
+
+Die Bedeutung jeder Spalte ist wie folgt:
+* Applikation: Die Art der Applikation oder Anwendung, die auf dem Server läuft.
+* Server: Die Adresse oder der Name des Servers, auf dem die Applikation gehostet wird.
+
+Die Tabellenzeile kann wie folgt beschrieben werden:
+Die Applikation wird auf dem Server mit der Adresse 188.455.5.164 (doc-gen.domain.de) gehostet.
+
+Es ist zu beachten, dass die Tabelle nur eine Zeile enthält und daher nicht viel Information bietet. Es fehlen weitere Details über die Applikation und den Server.
+
+### Tabelle: EIS-Verbindungseinstellungen
+Die Tabelle "EIS-Verbindungseinstellungen" stellt die Konfigurationseinstellungen für die Verbindung zum Doc-Gen Intergation Server (EIS) 1.8 dar. Diese Tabelle enthält Informationen über die Datenbankverbindung, die zum Betrieb des EIS erforderlich sind.
 
 Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die Spalte "Bezeichnung" enthält die Namen oder Kategorien, unter denen die verschiedenen Werte oder Einstellungen des Doc-Gen Intergation Servers (EIS) 1.8 aufgelistet sind.
-* Die Spalte "Wert" enthält die spezifischen Werte oder Einstellungen, die zu jeder Bezeichnung gehören.
-
-Leider ist die Tabelle leer, daher kann ich keine spezifischen Tabellenzeilen als beschreibende Sätze formulieren. Wenn die Tabelle gefüllt wäre, würde ich jede Zeile in einen Satz übersetzen, der die Bezeichnung und den entsprechenden Wert beschreibt. Zum Beispiel: "Die Bezeichnung XYZ hat den Wert ABC." Wenn eine Zeile eine leere Bezeichnung enthält, würde ich mich auf die letzte nicht-leere Kategorie beziehen und den Satz entsprechend anpassen.
-
-Diese Tabelle stellt eine Übersicht über die Konfiguration des Produktivsystems Doc-Gen Intergation Server (EIS) 1.8 dar. Sie enthält Informationen über die Applikation und den Server, auf dem sie ausgeführt wird.
-
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält den Namen der Applikation.
-* Die zweite Spalte enthält die Server-Informationen, einschließlich der IP-Adresse und des Domains.
-
-Die Tabellenzeile kann wie folgt beschrieben werden: Die Applikation wird auf dem Server mit der IP-Adresse 188.455.5.164 und dem Domain doc-gen.domain.de ausgeführt. 
-
-Es gibt nur eine Zeile in der Tabelle, daher ist dies auch die einzige Beschreibung.
-
-Diese Tabelle stellt die Konfigurationsdetails für die Datenbankverbindung des Doc-Gen Intergation Server (EIS) 1.8 dar. Sie enthält Informationen über den Server, den Port, die Systemkennung (SID) und die autorisierten Benutzer.
-
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Datenbank: Bezeichnet die Art der Datenbank oder den Kontext, in dem die folgenden Informationen gelten.
-* Server: Gibt den Server an, der für die Datenbankverbindung verwendet wird.
-* Port: Definiert den Port, über den die Verbindung hergestellt wird.
-* SID: Stellt die Systemkennung der Datenbank dar, die für die Verbindung benötigt wird.
-* User: Listet die autorisierten Benutzer auf, die Zugriff auf die Datenbank haben.
+* Die erste Spalte enthält die Kategorie oder den Typ der Einstellung (z.B. Datenbank, Server, Port, SID, User).
+* Die zweite Spalte enthält den entsprechenden Wert oder die Details zu jeder Kategorie.
 
 Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Datenbank verwendet den Server 188.455.6.52, der auch als s-0941.db.domain.de bezeichnet wird.
-Der Port, der für die Datenbankverbindung verwendet wird, ist 1521.
-Die Systemkennung (SID) der Datenbank ist doc-gen19.
-Die autorisierten Benutzer für die Datenbank sind EISKARMA, EISJPAStore, EISLockRegistry, EISTBHStore und EISUserService.
+* Die Datenbank ist auf dem Server 188.455.6.52 (s-0941.db.domain.de) konfiguriert.
+* Der Port für die Datenbankverbindung ist 1521.
+* Der SID (System Identifier) für die Datenbank ist doc-gen19.
+* Der Benutzer für die Datenbankverbindung umfasst mehrere Rollen, darunter EISKARMA, EISJPAStore, EISLockRegistry, EISTBHStore und EISUserService.
+
+Insgesamt bietet diese Tabelle eine Übersicht über die notwendigen Einstellungen, um eine erfolgreiche Verbindung zum EIS herzustellen.
 
 ## Konfigurationseiten Bearbeiten
 
@@ -412,27 +424,25 @@ Password: S0ftw4re Kennwortdatenbank
 
 ## Client Bearbeiten
 
-Der Abschnitt "Client Bearbeiten" im Dokument "Doc-Gen" befasst sich mit den verschiedenen Tools und Anwendungen, die für die Bearbeitung und Verwaltung von Dokumenten verwendet werden können. Die Liste umfasst zwei wichtige Komponenten:
+Der Abschnitt "Client Bearbeiten" im Dokument "Doc-Gen" behandelt die verschiedenen Tools und Anwendungen, die für die Bearbeitung und Verwaltung von Dokumenten verwendet werden können. Hier sind die wichtigsten Punkte zusammengefasst:
 
-Die erste Komponente ist der Webbrowser für Endanwender, der als "doc-gen19" bezeichnet wird. Dieser ermöglicht es Endanwendern, auf eine einfache und benutzerfreundliche Weise mit den Dokumenten zu interagieren.
+Für die Arbeit mit Doc-Gen stehen zwei Hauptkomponenten zur Verfügung: 
+1. Der Webbrowser für Endanwender, der als "doc-gen19" bezeichnet wird, ermöglicht es Benutzern, auf eine einfache Weise mit den Dokumenten zu interagieren.
+2. Der "Doc-Gen_Designer" ist speziell für Administratoren konzipiert und bietet umfassende Funktionen zur Gestaltung und Verwaltung von Dokumenten.
 
-Die zweite Komponente ist der "Doc-Gen_Designer" für Administratoren. Dieser bietet Administratoren eine umfassende Plattform, um Dokumente zu erstellen, zu bearbeiten und zu verwalten.
-
-Zusammengefasst bietet die Liste eine Übersicht über die beiden Hauptkomponenten des Doc-Gen-Systems: den Webbrowser für Endanwender und den Designer für Administratoren. Diese beiden Komponenten ermöglichen es, Dokumente auf verschiedenen Ebenen zu bearbeiten und zu verwalten, um eine effiziente und benutzerfreundliche Dokumentenverwaltung zu gewährleisten. 
-
-Es handelt sich hier nicht um Schritte, sondern um eine Beschreibung der Komponenten, daher ist keine Schrittfolge erforderlich.
+Diese beiden Komponenten ermöglichen es, die Dokumente sowohl für Endanwender als auch für Administratoren auf eine effiziente und benutzerfreundliche Weise zu bearbeiten und zu verwalten.
 
 ## Gruppen in der AD Bearbeiten
 
-Die Liste bezieht sich auf verschiedene Gruppen in der Active Directory (AD) im Zusammenhang mit dem Dokumenttitel "Doc-Gen". Diese Gruppen scheinen in der Verwaltung und Erstellung von Dokumenten und Berichten eine Rolle zu spielen. Hier ist eine zusammenfassende Erklärung der Liste:
+Die Liste bezieht sich auf verschiedene Gruppen in der Active Directory (AD) im Zusammenhang mit dem Dokumenttitel "Doc-Gen". Diese Gruppen scheinen in der Verwaltung von Dokumenten und Berichten eine Rolle zu spielen. Hier ist eine Zusammenfassung der Liste in gut lesbarer Form:
 
-Die Gruppen in der AD umfassen verschiedene Bereiche, die für die Dokumentenerstellung und -verwaltung relevant sind. Dazu gehören:
-- **Doc-Gen_Zwimis_PSM**: Diese Gruppe ist möglicherweise für die Verwaltung von Zwischenmitteln oder Zwischenprodukten im Rahmen der Dokumentenerstellung zuständig.
-- **Doc-Gen_Bescheide_PSM**: Hierbei handelt es sich wahrscheinlich um eine Gruppe, die sich mit der Erstellung oder Verwaltung von Bescheiden beschäftigt, was in einem bestimmten Kontext, wie zum Beispiel in der öffentlichen Verwaltung, relevant sein könnte.
-- **Doc-Gen_Zulassungsberichte_PSM**: Diese Gruppe könnte für die Erstellung oder Verwaltung von Zulassungsberichten verantwortlich sein, was in Bereichen wie der Zulassung von Produkten oder Dienstleistungen eine wichtige Rolle spielt.
-- **WebAuthor_PSM**: Der Name dieser Gruppe deutet darauf hin, dass sie mit der Erstellung oder Verwaltung von Web-Inhalten zu tun hat, möglicherweise im Rahmen der Dokumentenerstellung oder -veröffentlichung.
+Die Gruppen in der AD umfassen verschiedene Bereiche, wie zum Beispiel:
+- Die Verwaltung von Zwischeninformationen (Doc-Gen_Zwimis_PSM)
+- Die Bearbeitung von Bescheiden (Doc-Gen_Bescheide_PSM)
+- Die Erstellung von Zulassungsberichten (Doc-Gen_Zulassungsberichte_PSM)
+- Die Nutzung von WebAuthor (WebAuthor_PSM)
 
-Da es sich hier nicht um eine Schrittfolge handelt, sondern um eine Auflistung von Gruppen, gibt es keine nummerierte Schrittfolge. Stattdessen bietet diese Erklärung einen Überblick über die verschiedenen Gruppen und ihre möglichen Funktionen im Rahmen der Dokumentenerstellung und -verwaltung in der AD.
+Diese Gruppen sind möglicherweise für die Verwaltung und Bearbeitung von Dokumenten und Berichten innerhalb der Organisation verantwortlich. Es handelt sich nicht um eine Schrittfolge, sondern um eine Auflistung von Gruppen, die jeweils für bestimmte Aufgaben zuständig sind.
 
 ## Abhängigkeit von anderen Anwendungen Bearbeiten
 
@@ -514,40 +524,40 @@ Für erledigte Aufgaben ✔ verwenden.
 
 Test:
 
-Die Liste beschreibt eine Reihe von Schritten und Aufgaben, die im Rahmen der Vorbereitung einer Aktualisierung der Produktion durchgeführt wurden. Hier ist eine Zusammenfassung der Liste als gut lesbaren Fließtext:
+Die Liste beschreibt eine Reihe von Schritten und Aufgaben, die im Rahmen der Vorbereitung einer Aktualisierung der Produktion durchgeführt wurden. Hier ist eine Zusammenfassung der Liste als gut lesbarer Fließtext:
 
-Im Rahmen der Vorbereitung der Aktualisierung der Produktion wurden verschiedene Schritte durchgeführt. Die folgenden Aufgaben wurden abgeschlossen:
+Im Rahmen der Vorbereitung der Aktualisierung der Produktion wurden verschiedene Schritte durchgeführt. Die wichtigsten Schritte sind:
 
-1. **Ein Template in der neuen Entwicklung anlegen**: Dieser Schritt wurde von H. Busch durchgeführt.
-2. **Den Domänentransport testen**: H. Busch und Stölzel haben den Domänentransport getestet.
+1. **Ein Template in der neuen Entwicklung anlegen**: Dieser Schritt wurde von H. Busch durchgeführt und erfolgreich abgeschlossen.
+2. **Den Domänentransport testen**: H. Busch und Stölzel haben den Domänentransport mit dem neuen Template getestet und bestätigt, dass es funktioniert.
 3. **Gen-Admin Konfigurationsdatei anpassen**: Die Konfigurationsdatei wurde von H. Stölzel und Busch angepasst, um die beiden Testvorlagenschlüssel zu entfernen.
 4. **Zulassungsbericht erstellen**: H. Stölzel hat einen Zulassungsbericht erstellt.
 5. **Berechtigungen überprüfen**: H. Stölzel hat die Berechtigungen mit Frau Bolten oder Stevens überprüft.
-6. **Bescheiddaten kontrollieren**: H. Busch und Stölzel haben die Bescheiddaten kontrolliert.
-7. **Fehler in Formatierung beheben**: H. Gabel hat einen Fehler in der Formatierung im Testsystem Subs172.old.domain.de untersucht und behoben.
-8. **Einrichtung Apache und Erstellung einer index.html**: H. Gabel hat Apache auf schwubs174.old.domain.de eingerichtet und eine index.html erstellt, die beim Aufruf von http://webauthor.old.domain.de auf schwubs174.old.domain.de:4040/secure/webauthor/ weiterleitet.
+6. **Testaufbau Apache einrichten**: Der Testaufbau Apache sollte auf schwubs172.old.domain.de für die Weiterleitung auf schwubs174.old.domain.de:4040/secure/webauthor/ eingerichtet werden, aber dieser Schritt ist noch nicht abgeschlossen, da auf die Rückkehr von Henrik gewartet wird.
+7. **Untersuchung der Umleitung**: Es wurde festgestellt, dass beim Aufruf von http://webauthor.old.domain.de:4040/secure/webauthor/ auf http://schwubs031.old.domain.de:4040/secure/webauthor/ umgeleitet wird. Dies liegt wahrscheinlich an einer Softwareanpassung.
+8. **Bescheiddaten kontrollieren**: H. Busch und Stölzel haben die Bescheiddaten kontrolliert.
+9. **Fehler in Formatierung beheben**: H. Gabel hat einen Fehler in der Formatierung im Testsystem Subs172.old.domain.de untersucht und behoben.
+10. **Einrichtung Apache auf schwubs174.old.domain.de**: H. Gabel hat die Einrichtung Apache auf schwubs174.old.domain.de durchgeführt und eine index.html erstellt, die beim Aufruf von http://webauthor.old.domain.de auf schwubs174.old.domain.de:4040/secure/webauthor/ weiterleitet.
 
-Es gibt jedoch noch zwei offene Punkte:
-- Der Testaufbau Apache auf schwubs172.old.domain.de für die Weiterleitung auf schwubs174.old.domain.de:4040/secure/webauthor/ ist noch nicht abgeschlossen, da auf die Rückkehr von Henrik gewartet wird.
-- Die Untersuchung, warum beim Aufruf von http://webauthor.old.domain.de:4040/secure/webauthor/ auf http://schwubs031.old.domain.de:4040/secure/webauthor/ umgeleitet wird, hat ergeben, dass die Anwendung den HTTP-Header location:SERVERNAME setzt, was möglicherweise nur durch eine Softwareanpassung geändert werden kann.
+Insgesamt wurden die meisten Schritte erfolgreich abgeschlossen, aber einige Aufgaben wie der Testaufbau Apache auf schwubs172.old.domain.de sind noch nicht abgeschlossen.
 
 Am Tag der Umstellung :
 
-Die Liste beschreibt die Schritte und Aufgaben im Rahmen der Vorbereitung der Aktualisierung der Produktion am 11.01.2017 für das Dokument "Doc-Gen". Hier sind die Schritte und Aufgaben in einer klaren und lesbaren Form dargestellt:
+Die Liste beschreibt die Vorbereitung und Durchführung einer Aktualisierung der Produktion am 11.01.2017. Hier sind die wichtigsten Schritte und Punkte zusammengefasst:
 
-Die Vorbereitung der Aktualisierung der Produktion umfasst mehrere Schritte, die wie folgt auszuführen sind:
+Die Aktualisierung umfasst mehrere Schritte, die wie folgt durchgeführt wurden:
 
-1. **Exportieren und Importieren von TBV**: Zunächst müssen die alten Produktionen von `srvlnx170.old.domain.de` exportiert und in die neue Produktion auf `Subs169.old.domain.de` importiert werden. Dieser Schritt wurde bereits von "amir" durchgeführt.
-2. **Aktualisierung des Jackrabbit Repository**: Als nächstes muss das Jackrabbit Repository von `Subs031.old.domain.de` auf `Subs174.old.domain.de` aktualisiert werden. Dieser Schritt wurde bereits von "H: Gabel" durchgeführt.
-3. **DNS-Umstellung**: Es müssen zwei DNS-Umstellungen durchgeführt werden:
- * Die DNS-Umstellung für `doc-gen.old.domain.de` von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` wurde bereits von "Gabel" und "Lux" durchgeführt.
- * Die DNS-Umstellung für `webauthor.old.domain.de` von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` wurde ebenfalls von "Gabel" und "Lux" durchgeführt.
-4. **Fachliche Freigabe**: Die fachliche Freigabe wurde bereits von "H: Britta Busch" erteilt.
-5. **Abschaltung Altsysteme**: Die Altsysteme `Subs028.old.domain.de` bis `Subs031.old.domain.de` wurden bereits abgeschaltet.
-6. **Beantragung Anpassung Nagios Überwachung**: Die Anpassung der Nagios Überwachung wurde bereits von "H: Gabel" beantragt.
-7. **Aktualisierung Dokumentation**: Die Dokumentation (Wiki, Installation/Betriebshandbuch) muss noch aktualisiert werden. Dieser Schritt ist noch ausstehend und wurde "H: Gabel" zugewiesen.
+1. **Export und Import von TBV**: Zunächst wurde die alte Produktion von `srvlnx170.old.domain.de` exportiert und in die neue Produktion auf `Subs169.old.domain.de` importiert. Dieser Schritt wurde von Amir durchgeführt.
+2. **Aktualisierung des Jackrabbit Repository**: Anschließend wurde das Jackrabbit Repository von `Subs031.old.domain.de` auf `Subs174.old.domain.de` aktualisiert.
+3. **DNS-Umstellung**: Es folgten zwei DNS-Umstellungen: 
+   - Die erste Umstellung betraf `doc-gen.old.domain.de`, die von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` umgestellt wurde. 
+   - Die zweite Umstellung betraf `webauthor.old.domain.de`, die ebenfalls von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` umgestellt wurde. Beide Schritte wurden von Gabel und Lux durchgeführt und mit Dennis per E-Mail abgestimmt.
+4. **Fachliche Freigabe**: Nach den technischen Schritten erfolgte die fachliche Freigabe durch Britta Busch.
+5. **Abschaltung Altsysteme**: Anschließend wurden die Altsysteme `Subs028.old.domain.de` bis `Subs031.old.domain.de` abgeschaltet.
+6. **Anpassung Nagios Überwachung**: Es wurde eine Anpassung der Nagios Überwachung beantragt.
+7. **Aktualisierung der Dokumentation**: Zum Abschluss wurde die Dokumentation (Wiki, Installation/Betriebshandbuch) aktualisiert.
 
-Insgesamt umfasst die Liste eine Reihe von Schritten und Aufgaben, die im Rahmen der Vorbereitung der Aktualisierung der Produktion durchgeführt werden müssen. Die meisten Schritte wurden bereits abgeschlossen, aber einige sind noch ausstehend.
+Insgesamt umfasst die Liste eine Reihe von Schritten, die zur Vorbereitung und Durchführung einer Aktualisierung der Produktion erforderlich waren. Diese Schritte wurden von verschiedenen Personen durchgeführt und umfassen sowohl technische als auch fachliche Aspekte.
 
 ## 2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten
 

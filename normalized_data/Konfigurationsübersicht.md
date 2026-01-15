@@ -13,18 +13,21 @@ Diese Seite ist nicht aktuell und muss überarbeitet werden! Stand: 26.10.2023
 
 Setzt Betriebssystemparameter für den Benutzer. Pfad: /home/s0ftw4re/.profile
 
-Diese Tabelle stellt eine Konfigurationsübersicht für Umgebungsvariablen dar, die in der Datei `.profile` verwendet werden. Sie enthält wichtige Einstellungen für Java und Wildfly.
+### Tabelle: Konfigurationsparameter
+Die Tabelle hat keinen expliziten Titel, daher wird sie als "Konfigurationsparameter" bezeichnet.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält den Namen des Parameters, der konfiguriert wird.
-* Die zweite Spalte enthält den entsprechenden Wert für jeden Parameter.
+Diese Tabelle stellt eine Übersicht über verschiedene Konfigurationsparameter dar, die für die Einrichtung und Konfiguration von Java- und Wildfly-Umgebungen verwendet werden. Die Tabelle enthält Informationen über die Pfadangaben und Umgebungsvariablen für Java und Wildfly.
 
-Die einzelnen Zeilen können wie folgt beschrieben werden:
-Die Variable `JAVA_BINDIR` wird auf `/opt/s0ftw4reweb/java/jdk/bin/` gesetzt. 
-Die Variable `JAVA_HOME` wird auf `/opt/s0ftw4reweb/java/jdk` gesetzt. 
-Die Variable `JAVA_ROOT` wird auf `/opt/s0ftw4reweb/java/jdk` gesetzt. 
-Die Variable `JBOSS_HOME` wird auf `/opt/s0ftw4reweb/wildfly` gesetzt. 
-Die Variable `PATH` wird auf `$JAVA_HOME/bin:$JBOSS_HOME/bin:$PATH2` gesetzt, wobei `$JAVA_HOME/bin` und `$JBOSS_HOME/bin` vor dem bestehenden Pfad `$PATH2` gesetzt werden.
+Die Bedeutung jeder Spalte ist wie folgt:
+* Parameter: Gibt den Namen des Konfigurationsparameters an.
+* Wert: Gibt den Wert des jeweiligen Konfigurationsparameters an.
+
+Die einzelnen Tabellenzeilen können wie folgt beschrieben werden:
+* Der Parameter JAVA_BINDIR hat den Wert /opt/s0ftw4reweb/java/jdk/bin/.
+* Der Parameter JAVA_HOME hat den Wert /opt/s0ftw4reweb/java/jdk.
+* Der Parameter JAVA_ROOT hat den Wert /opt/s0ftw4reweb/java/jdk.
+* Der Parameter JBOSS_HOME hat den Wert /opt/s0ftw4reweb/wildfly.
+* Der Parameter PATH hat den Wert $JAVA_HOME/bin:$JBOSS_HOME/bin:$PATH2.
 
 ## standalone.conf
 
@@ -34,15 +37,16 @@ Pfad: /opt/s0ftw4reweb/wildfly/bin/standalone.conf
 
 Die vorhandenen Java Parameter (JAVA_OPTS) werden um folgende Einträge erweitert.
 
-Diese Tabelle stellt eine Konfigurationsübersicht für die Datei `standalone.conf` dar und enthält verschiedene Parameter mit ihren entsprechenden Werten. Sie bietet einen Überblick über die Einstellungen, die in dieser Konfigurationsdatei vorgenommen wurden.
+### Konfigurationsübersicht: Standalone-Konfiguration
+Die Tabelle stellt eine Übersicht über Konfigurationsparameter für eine Standalone-Konfiguration dar. Sie enthält Informationen über verschiedene Parameter und ihre entsprechenden Werte.
 
 Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Die erste Spalte enthält den Parameter, der konfiguriert wird.
-* Die zweite Spalte enthält den Wert, der dem jeweiligen Parameter zugewiesen wird.
+* Parameter: Diese Spalte enthält die Namen der Konfigurationsparameter.
+* Wert: Diese Spalte enthält die Werte, die den jeweiligen Parametern zugewiesen sind.
 
 Die Tabellenzeilen können wie folgt beschrieben werden:
-Die Konfiguration enthält den Parameter `-Dde.s0ftw4re.logpath` mit dem Wert `/opt/s0ftw4reweb/logs`. 
-Der Parameter `-Dmail.imap.starttls.enable` hat den Wert `True`, was auf die Verwendung von imap oder imaps hinweist.
+Die Konfiguration weist dem Parameter `-Dde.s0ftw4re.logpath` den Wert `/opt/s0ftw4reweb/logs` zu. 
+Die Konfiguration weist dem Parameter `-Dmail.imap.starttls.enable` den Wert `True` zu, was auf die Verwendung von imap oder imaps hinweist.
 
 Bei dem Eintrag -Dhttp.nonProxyHosts sind die \ Zeichen notwendig, um die | zu maskieren. Andernfalls startet der Wildfly nicht.
 
@@ -50,19 +54,20 @@ Der Parameter -Dmail.imap.starttls.enable wird verwendet, damit bei der Funktion
 verbinden" beim Einsatz von IMAP auch eine verschlüsselte Verbindung
 aufgebaut wird.
 
-Diese Tabelle stellt eine Konfigurationsübersicht für verschiedene Instanzen dar, insbesondere im Kontext der Datei "standalone.conf". Sie enthält Informationen über die Konfiguration von Java-Parametern für unterschiedliche Umgebungen.
+### Tabelle: Konfigurationsübersicht für Instanzen
+Die Tabelle stellt die Konfigurationsparameter für verschiedene Instanzen dar, insbesondere im Kontext der Datei `standalone.conf`. Sie bietet einen Überblick über die spezifischen Einstellungen für Produktiv- und Test/Demo-Instanzen.
 
 Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Instanz-Name: Gibt den Namen der Instanz an, für die die Konfiguration gilt.
-* Parameter: Enthält den Namen des spezifischen Parameters, der konfiguriert wird.
-* Wert: Zeigt den Wert an, der dem entsprechenden Parameter zugewiesen wird.
+- Instanz-Name: Gibt den Namen der Instanz an, für die die Konfiguration gilt.
+- Parameter: Listet die spezifischen Parameter auf, die für jede Instanz konfiguriert sind.
+- Wert: Zeigt den Wert an, der jedem Parameter zugewiesen ist.
 
-Die Konfigurationen können wie folgt beschrieben werden:
-Die Produktiv-Instanz verwendet den Parameter -Xms mit einem Wert von 64G. 
-Für die Produktiv-Instanz ist der Parameter -Xmx auf 64G gesetzt. 
-Die Produktiv-Instanz hat außerdem den Parameter ReservedCodeCacheSize mit einem Wert von 1024m konfiguriert. 
-Die Test/Demo-Instanz verwendet den Parameter -Xms mit einem Wert von 16G. 
-Für die Test/Demo-Instanz ist der Parameter -Xmx auf 16G gesetzt.
+Die einzelnen Zeilen der Tabelle können wie folgt beschrieben werden:
+- Die Produktiv-Instanz hat den Parameter -Xms mit einem Wert von 64G.
+- Die Produktiv-Instanz hat den Parameter -Xmx mit einem Wert von 64G.
+- Die Produktiv-Instanz hat den Parameter ReservedCodeCacheSize mit einem Wert von 1024m.
+- Die Test/Demo-Instanz hat den Parameter -Xms mit einem Wert von 16G.
+- Die Test/Demo-Instanz hat den Parameter -Xmx mit einem Wert von 16G.
 
 ## standalone.xml
 
@@ -72,32 +77,35 @@ Pfad: /opt/s0ftw4reweb/wildfly/standalone/configuration/standalone.xml
 
 Bereich datasource gemäß den folgenden Angaben anpassen:
 
-Diese Tabelle stellt eine Übersicht über verschiedene Datenquellen-Konfigurationen dar, die für unterschiedliche Instanzen wie Produktion, Demo und Test verwendet werden. Sie enthält Informationen über die Verbindungseinstellungen zu Datenbanken.
+### Tabelle: Datenquellen-Konfiguration
+Die Tabelle hat keinen expliziten Titel, daher wird sie als "Datenquellen-Konfiguration" bezeichnet.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Instanz-Name: Gibt den Namen der Instanz an, für die die Konfiguration gilt.
-* Parameter: Definiert den spezifischen Parameter, der konfiguriert wird.
-* Wert: Enthält den Wert des jeweiligen Parameters.
+Diese Tabelle stellt eine Übersicht über verschiedene Datenquellen-Konfigurationen dar, einschließlich ihrer Parameter und Werte. Sie enthält Informationen über verschiedene Instanzen, wie Produktion, Demo und Test.
+
+Die Bedeutung jeder Spalte ist wie folgt:
+* Instanz-Name: Die Bezeichnung der Datenquellen-Instanz
+* Parameter: Der Name des Parameters, der konfiguriert wird
+* Wert: Der Wert des Parameters
 
 Die einzelnen Zeilen können wie folgt beschrieben werden:
-Die Produktion verwendet den jndi-name java:/database1. 
-Für die Produktion ist der pool-name S0FTW4RE. 
-Die Produktion verwendet die connection-url jdbc:oracle:thin:@schwubs097.old.domain.de:1521/s0ftw4re. 
-Die Produktion verwendet den driver Oracle. 
-Die Produktion verwendet den user-name S0ftw4re. 
-Die Produktion verwendet das password Xxxx. 
-Die Demo verwendet den jndi-name java:/demo. 
-Für die Demo ist der pool-name Demo. 
-Die Demo verwendet die connection-url jdbc:oracle:thin:@schwubs098.old.domain.de:1521:demo. 
-Die Demo verwendet den driver Oracle. 
-Die Demo verwendet den user-name s0ftw4re. 
-Die Demo verwendet das password Xxxx. 
-Die Test verwendet den jndi-name java:/test. 
-Für die Test ist der pool-name TEST. 
-Die Test verwendet die connection-url jdbc:oracle:thin:@srvlnx97.old.domain.de:1521/test. 
-Die Test verwendet den driver Oracle. 
-Die Test verwendet den user-name S0FTW4RE. 
-Die Test verwendet das password Xxxx.
+* Die Produktion-Instanz hat einen jndi-name mit dem Wert java:/database1.
+* Die Produktion-Instanz hat einen pool-name mit dem Wert S0FTW4RE.
+* Die Produktion-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@schwubs097.old.domain.de:1521/s0ftw4re.
+* Die Produktion-Instanz verwendet den Oracle-Treiber.
+* Die Produktion-Instanz hat einen user-name mit dem Wert S0ftw4re.
+* Die Produktion-Instanz hat ein password mit dem Wert Xxxx.
+* Die Demo-Instanz hat einen jndi-name mit dem Wert java:/demo.
+* Die Demo-Instanz hat einen pool-name mit dem Wert Demo.
+* Die Demo-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@schwubs098.old.domain.de:1521:demo.
+* Die Demo-Instanz verwendet den Oracle-Treiber.
+* Die Demo-Instanz hat einen user-name mit dem Wert s0ftw4re.
+* Die Demo-Instanz hat ein password mit dem Wert Xxxx.
+* Die Test-Instanz hat einen jndi-name mit dem Wert java:/test.
+* Die Test-Instanz hat einen pool-name mit dem Wert TEST.
+* Die Test-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@srvlnx97.old.domain.de:1521/test.
+* Die Test-Instanz verwendet den Oracle-Treiber.
+* Die Test-Instanz hat einen user-name mit dem Wert S0FTW4RE.
+* Die Test-Instanz hat ein password mit dem Wert Xxxx.
 
 Im Bereich datasource wird der folgende Block validation verwendet.
 

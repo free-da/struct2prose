@@ -2,26 +2,26 @@
 
 ## Einleitung
 
-Die Liste beschreibt die Schritte für das Update auf Version 6.0. Hier ist eine Zusammenfassung der Schritte in einem gut lesbaren Fließtext:
+Die Liste beschreibt die Schritte für das Update auf Version 6.0. Hier sind die Schritte im Detail:
 
-Das Update auf Version 6.0 umfasst mehrere Schritte, die sorgfältig durchgeführt werden müssen. Zunächst müssen einige grundlegende Vorbereitungen getroffen werden, wie das Einrichten des Homeverzeichnisses für den s0ftw4re-user und die Bereitstellung von Ressourcen.
+Um das Update auf Version 6.0 durchzuführen, müssen folgende Schritte ausgeführt werden:
 
-Hier sind die Schritte für das Update:
+1. **Vorbereitung des Homeverzeichnisses**: Stellen Sie sicher, dass das Homeverzeichnis für den Benutzer `s0ftw4re-user` eingerichtet ist.
+2. **Ressourcen bereitstellen**: Stellen Sie sicher, dass alle notwendigen Ressourcen für das Update bereitgestellt sind.
+3. **Java-Update**: Führen Sie ein Update von Java durch, um sicherzustellen, dass die neueste Version verwendet wird.
+4. **Update von erp-dbtool**: Führen Sie ein Update von `erp-dbtool` durch, um sicherzustellen, dass die neueste Version verwendet wird.
+5. **Datenbankupdate**: Führen Sie das Datenbankupdate durch, um die Datenbank auf die neueste Version zu bringen.
+6. **ORGA-Views und -Tabellen einspielen**: Spielen Sie die ORGA-Views und -Tabellen ein, um die notwendigen Datenbankstrukturen zu erstellen.
+7. **Applicationserver installieren**: Installieren Sie den Applicationserver auf einem Linux-Betriebssystem und führen Sie die notwendigen Schritte für die Vorbereitung des Betriebssystems durch, einschließlich der Font-Installation für Standard-BI-Berichte. Verlinken Sie JAVA mit dem Benutzerverzeichnis und installieren Sie Wildfly.
+8. **Systemdienst einrichten**: Richten Sie den Systemdienst ein, um den Applicationserver zu starten und zu verwalten.
+9. **Applicationserver konfigurieren**: Konfigurieren Sie den Applicationserver, indem Sie den Oracle-DB-Treiber installieren, den Applicationserver starten und die Treiberinstallation überprüfen. Richten Sie Datenbankverbindungen ein und überprüfen Sie die Datenbankverbindung.
+10. **Weitere Konfigurationen**: Führen Sie weitere Konfigurationen durch, wie z.B. die Konfiguration von Logging, Timeout, SSL-Verschlüsselung und Datenbank-Validation.
+11. **S0FTW4RE-Web-Anwendung installieren**: Installieren Sie die S0FTW4RE-Web-Anwendung.
+12. **DAP 3.0 installieren**: Installieren Sie DAP 3.0.
+13. **Webservices anschalten**: Schalten Sie die Webservices ein.
+14. **Jobrunner + VTindex installieren**: Installieren Sie den Jobrunner und den VTindex.
 
-1. **Vorbereitung**: Stellen Sie sicher, dass das Homeverzeichnis für den s0ftw4re-user eingerichtet ist und die notwendigen Ressourcen bereitgestellt werden.
-2. **Update von Java**: Führen Sie ein Update von Java durch, um sicherzustellen, dass die neueste Version verwendet wird.
-3. **Update von erp-dbtool**: Führen Sie ein Update von erp-dbtool durch, um sicherzustellen, dass die neueste Version verwendet wird.
-4. **Datenbankupdate**: Führen Sie das Datenbankupdate durch, um sicherzustellen, dass die Datenbank auf dem neuesten Stand ist.
-5. **ORGA Views und Tabellen**: Spielen Sie die ORGA Views und Tabellen ein, um sicherzustellen, dass die notwendigen Datenbankstrukturen vorhanden sind.
-6. **Applicationserver installieren**: Installieren Sie den Applicationserver auf einem Linux-Betriebssystem und bereiten Sie es vor. Dazu gehören auch die Font-Installation für Standard-BI-Berichte und die Verlinkung von JAVA mit dem Benutzerverzeichnis. Installieren Sie Wildfly und richten Sie den Systemdienst ein.
-7. **Applicationserver konfigurieren**: Konfigurieren Sie den Applicationserver, indem Sie den Oracle-DB-Treiber installieren, den Applicationserver starten und die Treiberinstallation überprüfen. Richten Sie die Datenbankverbindungen ein und überprüfen Sie die Datenbankverbindung.
-8. **Weitere Konfigurationen**: Führen Sie weitere Konfigurationen durch, wie die Konfiguration des Logging, des Timeouts, der SSL-Verschlüsselung und der Datenbank-Validation.
-9. **S0FTW4RE-Web-Anwendung installieren**: Installieren Sie die S0FTW4RE-Web-Anwendung.
-10. **DAP 3.0 installieren**: Installieren Sie DAP 3.0.
-11. **Webservices anschalten**: Schalten Sie die Webservices ein.
-12. **Jobrunner + VTindex installieren**: Installieren Sie den Jobrunner und den VTindex.
-
-Indem Sie diese Schritte sorgfältig durchführen, können Sie sicherstellen, dass das Update auf Version 6.0 erfolgreich durchgeführt wird.
+Diese Schritte sollten sorgfältig ausgeführt werden, um sicherzustellen, dass das Update auf Version 6.0 erfolgreich durchgeführt wird.
 
 Punkt abgearbeitet DEMO Version
 

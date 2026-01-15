@@ -1,0 +1,955 @@
+{
+  "title": "Polycom-Videokonferenzsysteme-TEST - XWiki",
+  "sections": [
+    {
+      "heading": "Einleitung",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Ansprechpartner",
+            "Poly VK-Infrastruktur IP-Netze Server S-1870: Netzwerkbasisdienste DHCP DNS Software-Deployer Poly Endgeräte aktualisieren S-1872: CMS-Bund-Plattform (BDBOS)",
+            "Poly Clientsysteme",
+            "Poly Standardkonfig (x50/x52/G7500)",
+            "Poly Clariti App",
+            "Szenarien"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Ansprechpartner Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "Poly VK-Infrastruktur Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "IP-Netze Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "IP-Adressbereich",
+              "Beschreibung"
+            ],
+            [
+              "123:213:80a:5800::/64 ::444 (vc.domain.de)",
+              "DFN über BRAIN"
+            ],
+            [
+              "123.23.231.39/32 (vc.domain.de)",
+              "DFN (später an BRAIN announcieren)"
+            ],
+            [
+              "172.[17|19|23].8.0/24 DDW [19] und Standort1 [23] werden durch 188.999.147.160 /28 (DDW) und 188.999.147.128/27 (Standort1) abgelöst",
+              "Interne Videonetze"
+            ],
+            [
+              "188.999.147.0/25",
+              "Standortkopplung Videodienst Hausstraße 49"
+            ],
+            [
+              "188.999.147.128/27",
+              "Standortkopplung  + Adressbereich für Endgeräte Videodienst Bundesallee 51"
+            ],
+            [
+              "188.999.147.160/28",
+              "Standortkopplung + Adressbereich für Endgeräte Videodienst Diedersdorfer Weg 1"
+            ],
+            [
+              "192.168.75.0/29",
+              "Transfer NdB-SBC <-> ORGA-SBC .2. NdB-SBC, .3 ORGA-SBC, .4 ORGA-SBC (für Redundanz geblockt, nicht vorhanden)"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Server Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Name",
+              "Verwendung",
+              "IP",
+              "SN",
+              "OS",
+              "Standort"
+            ],
+            [
+              "server70",
+              "Netzwerkbasisdienste Softwaredeploy, DNS, DHCP",
+              "188.340.8.2",
+              "/",
+              "RHEL 9",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server71",
+              "Clariti Manager",
+              "188.340.8.21",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server72",
+              "Clariti Core",
+              "188.340.8.22",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server73",
+              "RealPresence Collaboration Server",
+              "188.340.8.23",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server74",
+              "Clariti Media-Relay",
+              "188.340.8.24",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server75",
+              "Clariti Edge NdB-ID",
+              "188.340.8.25",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server76",
+              "Clariti Edge Internet",
+              "188.340.8.26",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "server77",
+              "Clariti Edge Client",
+              "188.340.8.27",
+              "/",
+              "OL 8",
+              "VK-Cluster Standort2"
+            ],
+            [
+              "sbc001",
+              "Secunet SBC Internet",
+              "",
+              "",
+              "",
+              "RZ Standort2 aktuell ausgebaut"
+            ],
+            [
+              "sbc002",
+              "Secunet SBC Internet",
+              "",
+              "",
+              "",
+              "RZ Standort2 aktuell ausgebaut"
+            ],
+            [
+              "sbcmgt",
+              "Secunet SBC Manager",
+              "",
+              "",
+              "",
+              "RZ Standort2 aktuell ausgebaut"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "S-1870: Netzwerkbasisdienste Bearbeiten",
+      "blocks": []
+    },
+    {
+      "heading": "DHCP",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Genutzt wird der KEA-DHCP-Server (Nachfolger des ISC-DHCP-Servers)."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Die Konfigdateien liegen unter /etc/kea/."
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Kea-Main-Konfig: keactrl.conf",
+            "Kea-DHCP4-Konfig: kea-dhcp4.conf"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "DHCP6 ist derzeit deaktiviert. Kann in der Kea-Main-Konfig aktiviert und in der kea-dhcp6.conf konfiguriert werden."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Der DHCP ist aktuell nur für die Berliner Endgeräte. Es gibt aktuell kein DHCP-Relay zur BU oder zum DDW."
+        }
+      ]
+    },
+    {
+      "heading": "DNS",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "Der\nBIND (named) DNS-Server wird für die interne DNS-Zone\nvk.segment.domain.de genutzt und sorgt für die DNS-Auflösungen innerhalb\ndes VK-Clusters."
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "Named-Konfig: /etc/named.conf",
+            "Named-Zonen: /etc/named.rfc1912.zones"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Ausschnitt"
+        },
+        {
+          "block_type": "code",
+          "content": "zone \"vk.segment.domain.de\" IN {\ntype master;\nfile \"/etc/named/vk.segment.forward.zone\";\nallow-update { none; };\nallow-query { any; };\n};"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "vk.segment.domain.de Forward-Zone: /etc/named/vk.segment.forward.zone"
+          ]
+        },
+        {
+          "block_type": "code",
+          "content": "$TTL 86400\n@ IN SOA ns1.vk.segment.domain.de. admin.vk.segment.domain.de. (\n2020011800 ;Serial\n3600 ;Refresh\n1800 ;Retry\n604800 ;Expire\n86400 ;Minimum TTL\n)\n;Name Server Information\n@ IN NS ns1.vk.segment.domain.de.\n;IP Address for Name Server\nns1 IN A 188.340.8.2\n;A Record for the following Host name\nserver70  IN   A   188.340.8.2\nserver71  IN   A   188.340.8.21\nserver72  IN   A   188.340.8.22\nserver73  IN   A   188.340.8.23\nserver74  IN   A   188.340.8.24\nserver75  IN   A   188.340.8.25\nserver76  IN   A   188.340.8.26\nserver77  IN   A   188.340.8.27\nvc      IN   A   188.340.8.22\ndeploy  IN   A   188.340.8.2\napp     IN   A   188.340.8.22"
+        },
+        {
+          "block_type": "list",
+          "content": [
+            "vk.segment.domain.de Reverse-Zone: /etc/named/vk.segment.reverse.zone"
+          ]
+        },
+        {
+          "block_type": "code",
+          "content": "$TTL 86400\n@ IN SOA ns1.vk.segment.domain.de. admin.vk.segment.domain.de. (\n2020011800 ;Serial\n3600 ;Refresh\n1800 ;Retry\n604800 ;Expire\n86400 ;Minimum TTL\n)\n;Name Server Information\n@ IN NS ns1.vk.segment.domain.de.de.\n;Reverse lookup for Name Server\n10 IN PTR ns1.vk.segment.orga.domain.de.\n;PTR Record IP address to Hostname\n50      IN      PTR     server70.vk.segment.domain.de."
+        }
+      ]
+    },
+    {
+      "heading": "Software-Deployer",
+      "blocks": [
+        {
+          "block_type": "list",
+          "content": [
+            "Deploy-Adresse: http://deploy.vk.sagmente.domain.de/",
+            "Pfad auf dem Server: /var/www/html"
+          ]
+        },
+        {
+          "block_type": "paragraph",
+          "content": "Als root im root/ Verzeichnis das Skript \"./Poly-Updater.sh\" ausführen."
+        }
+      ]
+    },
+    {
+      "heading": "S-1872: CMS-Bund-Plattform (BDBOS) Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "In\nden DIAL-Plan am Clariti-Core werden alle Rufnummern der\nCMS-Bund-Plattform auf die Rufnummer +49 999999999 geändert. Grund sind\nTests für unser Nutzerhaus."
+        },
+        {
+          "block_type": "paragraph",
+          "content": "https://188.340.8.22:6228/cce/service-config/dial-plan/dial-plans"
+        },
+        {
+          "block_type": "paragraph",
+          "content": "DIAL-Rule: Resolve to external SIP Peer NdB println(\"Original DIAL_STRING: \" + DIAL_STRING); println(\"Modified by us DIAL_STRING: \" + DIAL_STRING); return DIAL_STRING;"
+        }
+      ]
+    },
+    {
+      "heading": "Poly Clientsysteme Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Standort/Raum",
+              "Name",
+              "VKA-IP",
+              "VKA-MAC",
+              "SIP",
+              "Modell",
+              "TC-IP",
+              "TC-MAC",
+              "TC-SN",
+              "VMR-ID"
+            ],
+            [
+              "Garten",
+              "",
+              ""
+            ],
+            [
+              "Standort1 A103",
+              "Standort1-A103",
+              "188.455.8.50",
+              "188.34.:5e:c5:79",
+              "5",
+              "StudioX50, TC8",
+              "188.455.8.51",
+              "188.34.:58:22:fe",
+              "8L21045822FEFD",
+              "44405"
+            ],
+            [
+              "Standort1 A107",
+              "Standort1-A107",
+              "188.455.8.52",
+              "188.34.:5e:be:98",
+              "6",
+              "StudioX50, TC8",
+              "188.455.8.53",
+              "188.34.:58:22:04",
+              "8L2104582204FD",
+              "44406"
+            ],
+            [
+              "Standort1 B001",
+              "Standort1-B001",
+              "188.455.8.54",
+              "188.34.:40:95:fc",
+              "7",
+              "HDX8000HD",
+              "188.455.8.55",
+              "188.34.:20:5d:6d",
+              "8A1331205D6DCU",
+              "44407"
+            ],
+            [
+              "Standort1 B003",
+              "Standort1-B003",
+              "188.455.8.56",
+              "188.34.:91:71:55",
+              "8",
+              "StudioX52, TC10",
+              "188.455.8.57",
+              "188.34.:94:93:0a",
+              "8L21305F676BFD",
+              "44408"
+            ],
+            [
+              "Standort1 B003 Mobil",
+              "Standort1-B003-Mobil",
+              "188.455.8.58",
+              "188.34.:56:5d:6e",
+              "27",
+              "StudioX50, TC8",
+              "188.455.8.59",
+              "188.34.:5f:67:6b",
+              "8L21305F676BFD",
+              "44427"
+            ],
+            [
+              "Standort1 B008 Mobil 2",
+              "Standort1-B008-Mobil",
+              "188.455.8.60",
+              "188.34.:91:6c:45",
+              "28",
+              "StudioX52, TC10",
+              "188.455.8.61",
+              "188.34.:94:4f:1b",
+              "8L2441944F1BFP",
+              "44428"
+            ],
+            [
+              "Standort1 B206",
+              "Standort1-B206",
+              "188.455.8.62",
+              "188.34.:91:73:fe",
+              "29",
+              "StudioX52, TC10",
+              "188.455.8.63",
+              "188.34.:94:3d:ab",
+              "8L2441944B04FP",
+              "44429"
+            ],
+            [
+              "Standort1 C125",
+              "Standort1-C125",
+              "188.455.8.64",
+              "188.34.:91:6e:67",
+              "3",
+              "StudioX52, TC10",
+              "188.455.8.65",
+              "188.34.:94:99:6a",
+              "8L244594996AFP",
+              "44403"
+            ],
+            [
+              "Standort1 C202 Mobil 1",
+              "Standort1-C202-Mobil",
+              "188.455.8.66",
+              "188.34.:91:72:FF",
+              "4",
+              "StudioX52, TC10",
+              "188.455.8.67",
+              "188.34.:94:4B:04",
+              "8L2441944B04FP",
+              "44404"
+            ],
+            [
+              "Hof",
+              "",
+              ""
+            ],
+            [
+              "Standort3 0.19",
+              "Standort3-0.19",
+              "188.888.8.13",
+              "188.34.:60:95:69",
+              "9",
+              "StudioX50, TC8",
+              "188.888.8.12",
+              "188.34.:5f:69:c5",
+              "8L21305F69C5FD",
+              "44409"
+            ],
+            [
+              "Hausstraße",
+              "",
+              ""
+            ],
+            [
+              "Standort2 A.1.1",
+              "Standort2-A.1.1",
+              "188.340.8.92",
+              "188.34.:74:b7:b4",
+              "10",
+              "G7500, TC8",
+              "188.340.8.93",
+              "188.34.:80:ec:17",
+              "8L230980EC17FD",
+              "44410"
+            ],
+            [
+              "Standort2 B.0.2.2",
+              "Standort2-B.0.2.2",
+              "188.340.8.83",
+              "188.34.:6a:b9:5e",
+              "11",
+              "StudioX50, TC8",
+              "188.340.8.91",
+              "188.34.:80:e3:82",
+              "8L230880E382FD",
+              "44411"
+            ],
+            [
+              "Standort2 B.0.2.3",
+              "Standort2-B.0.2.3",
+              "188.340.8.84",
+              "188.34.:6a:bf:c1",
+              "12",
+              "StudioX50, TC8",
+              "188.340.8.85",
+              "188.34.:80:ea:07",
+              "8L230880EA07FD",
+              "44412"
+            ],
+            [
+              "Standort2 B.1.1",
+              "Standort2-B.1.1",
+              "188.340.8.70",
+              "188.34.:74:b1:58",
+              "13",
+              "G7500, TC8",
+              "188.340.8.65",
+              "188.34.:80:e3:76",
+              "8L230880E376FD",
+              "44413"
+            ],
+            [
+              "Standort2 B.2.22",
+              "Standort2-B.2.22",
+              "188.340.8.94",
+              "188.34.:69:1d:52",
+              "14",
+              "StudioX50, TC8",
+              "188.340.8.95",
+              "188.34.:80:f0:63",
+              "8L230980F063FD",
+              "44414"
+            ],
+            [
+              "Standort2 B.4.10",
+              "Standort2-B.4.10",
+              "188.340.8.96",
+              "188.34.:53:c4:14",
+              "15",
+              "StudioX50, TC8",
+              "188.340.8.97",
+              "188.34.:80:e2:05",
+              "8L230880E205FD",
+              "44415"
+            ],
+            [
+              "Standort2 B.5.1",
+              "Standort2-B.5.1",
+              "188.340.8.79",
+              "188.34.:6a:b4:99",
+              "16",
+              "StudioX50, TC8",
+              "188.340.8.60",
+              "188.34.:80:ef:4d",
+              "8L230980EF4DFD",
+              "44416"
+            ],
+            [
+              "Standort2 B.5.20",
+              "Standort2-B.5.20",
+              "188.340.8.80",
+              "188.34.:6a:b6:7f",
+              "17",
+              "StudioX50, TC8",
+              "188.340.8.59",
+              "188.34.:80:e2:bc",
+              "8L230880E2BCFD",
+              "44417"
+            ],
+            [
+              "Standort2 B.6.17",
+              "Standort2-B.6.17",
+              "188.340.8.63",
+              "188.34.:74:b1:14",
+              "18",
+              "G7500, TC8",
+              "188.340.8.58",
+              "188.34.:80:ef:e1",
+              "8L230980EFE1FD",
+              "44418"
+            ],
+            [
+              "Standort2 D.1.2",
+              "Standort2-D.1.2",
+              "188.340.8.71",
+              "188.34.:6a:cf:0c",
+              "19",
+              "StudioX50, TC8",
+              "188.340.8.54",
+              "188.34.:80:e6:b2",
+              "8L230880E6B2FD",
+              "44419"
+            ],
+            [
+              "Standort2 D.1.10",
+              "Standort2-D.1.10",
+              "188.340.8.86",
+              "188.34.:6a:cd:f8",
+              "20",
+              "StudioX50, TC8",
+              "188.340.8.87",
+              "188.34.:80:e6:6d",
+              "8L230880E66DFD",
+              "44420"
+            ],
+            [
+              "Standort2 D.2.2",
+              "Standort2-D.2.2",
+              "188.340.8.57",
+              "188.34.:6a:ba:99",
+              "21",
+              "StudioX50, TC8",
+              "188.340.8.53",
+              "188.34.:80:ef:1b",
+              "8L230980EF1BFD",
+              "44421"
+            ],
+            [
+              "Standort2 D.2.11",
+              "Standort2-D.2.11",
+              "188.340.8.90",
+              "188.34.:60:d0:64",
+              "22",
+              "StudioX50, TC8",
+              "188.340.8.75",
+              "188.34.:5f:bb:75",
+              "8L21425FBB75FD",
+              "44422"
+            ],
+            [
+              "Standort2 D.3.3",
+              "Standort2-D.3.3",
+              "188.340.8.64",
+              "188.34.:6a:c2:d0",
+              "23",
+              "StudioX50, TC8",
+              "188.340.8.52",
+              "188.34.:80:e3:77",
+              "8L230880E377FD",
+              "44423"
+            ],
+            [
+              "Standort2 D.4.3",
+              "Standort2-D.4.3",
+              "188.340.8.62",
+              "188.34.:6a:bd:33",
+              "24",
+              "StudioX50, TC8",
+              "188.340.8.51",
+              "188.34.:80:e3:6f",
+              "8L230880E36FFD",
+              "44424"
+            ],
+            [
+              "Standort2 D.5.2",
+              "Standort2-D.5.2",
+              "188.340.8.55",
+              "188.34.:6a:b6:55",
+              "25",
+              "StudioX50, TC8",
+              "188.340.8.56",
+              "188.34.:80:e3:a7",
+              "8L230880E3A7FD",
+              "44425"
+            ],
+            [
+              "Standort2 E.6.15",
+              "Standort2-E.6.15",
+              "188.340.8.81",
+              "188.34.:6a:b4:2a",
+              "26",
+              "StudioX50, TC8",
+              "188.340.8.77",
+              "188.34.:80:e4:a9",
+              "8L230880E4A9FD",
+              "44426"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Poly Standardkonfig (x50/x52/G7500) Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "table",
+          "content": [
+            [
+              "Menüpunkt",
+              "Thema",
+              "Wert",
+              "Bemerkung"
+            ],
+            [
+              "Allgemeine Einstellungen -> Anbieter",
+              "Anbieter",
+              "Poly",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Startseite",
+              "Hintergrund",
+              "Standort2/BU/DDW (Bilder abgelegt unter Share Z33/VK)",
+              ""
+            ],
+            [
+              "",
+              "Elemente auf der Startseite",
+              "Favoriten, Kontrollkästen nicht ankreuzen",
+              ""
+            ],
+            [
+              "",
+              "Adressleiste",
+              "Primär: H.323, Sekundär: SIP-Adresse",
+              "aktuell H.323 ein"
+            ],
+            [
+              "",
+              "Informationen zu Poly Control",
+              "Kontrollkästen nicht ankreuzen (aus)",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Systemsprache",
+              "Sprache",
+              "Deutsch",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Datum und Uhrzeit",
+              "Adresse des primären Zeit-Servers",
+              "188.340.8.1",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Geräteverwaltung",
+              "Aktualisierungen",
+              "Benutzerdefinierte Server-URL http://deploy.vk.segment.domain.de Kontrollkästen nicht ankreuzen (aus)",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Systemeinstellungen",
+              "Geräte- und Raumname",
+              "[Standort]-[RAUM] z.B. Standort2-D.1.10",
+              ""
+            ],
+            [
+              "",
+              "Schlafmodus",
+              "Kein Signal, 15 Minuten, Kontrollkästen ankreuzen",
+              ""
+            ],
+            [
+              "",
+              "Digitale Beschilderung",
+              "Kontrollkästen nicht ankreuzen (aus)",
+              ""
+            ],
+            [
+              "",
+              "Zeitraum außerhalb Bürozeiten",
+              "Kontrollkästen nicht ankreuzen (aus)",
+              ""
+            ],
+            [
+              "",
+              "System-LED",
+              "100%",
+              ""
+            ],
+            [
+              "",
+              "Zusammenarbeitswerkzeuge",
+              "Kontrollkästen ankreuzen, Timeout 2 Minuten",
+              ""
+            ],
+            [
+              "",
+              "Poly Connect",
+              "Kontrollkästen nicht ankreuzen (aus)",
+              "Aktuell aktiv"
+            ],
+            [
+              "",
+              "Fernbedienung und Zahlentastatur",
+              "Kontrollkästen ankreuzen, Voreinstellung #, dann @ und . dann *",
+              ""
+            ],
+            [
+              "",
+              "Umgebung",
+              "Kontrollkästen nicht ankreuzen (aus)",
+              ""
+            ],
+            [
+              "",
+              "Geplanter automatischer Neustart",
+              "Kontrollkästen ankreuzen, Wöchentlich, Samstag, 12:00 AM",
+              ""
+            ],
+            [
+              "Allgemeine Einstellungen -> Fernbedienung",
+              "Fernbedienung",
+              "Keine",
+              ""
+            ],
+            [
+              "Netzwerk -> LAN-Netzwerk",
+              "IP-Adressen",
+              "2: DHCP (188.340.8.0/24) : Statisch (188.455.19.8.0/24) Kein IPv6",
+              ""
+            ],
+            [
+              "",
+              "LAN-Optionen",
+              "Hostname [Standort]-[RAUM] Domänenname: vk.segment.domain.de Alle Checkboxen aktiv, außer auf Broad/Multicast-Echoanforderungen, EAP, 802.1p/Q",
+              ""
+            ],
+            [
+              "",
+              "Netzwerkqualität",
+              "6144 Brandbreite",
+              ""
+            ],
+            [
+              "Netzwerk -> WLAN",
+              "WLAN",
+              "kein WLAN",
+              ""
+            ],
+            [
+              "Netzwerk -> DNS",
+              "DNS-Server",
+              "188.340.8.2",
+              ""
+            ],
+            [
+              "Anrufkonfigurationen -> Anrufeinstellungen",
+              "Anrufeinstellungen",
+              "8\n Stunden, Alle Checkboxen aktiv, auper Systemnmen statt SIP-Adresse \nanzeigen, Zahlentastatur, AES-Verschlüsselung: wenn verfügbar",
+              ""
+            ],
+            [
+              "Anrufkonfigurationen -> Bevorzugte Anwahlart",
+              "Anwahloptionen",
+              "Alle Checkboxen aktiv Videoanrufreihenfolge: 1. SIP, 2. H323",
+              ""
+            ],
+            [
+              "",
+              "Bevorzugte Anrufgeschwindigkeiten",
+              "abgehende: 3840, eingehende: 6144",
+              ""
+            ],
+            [
+              "Anrufkonfigurationen -> Letzte Anrufe",
+              "Letzte Anrufe",
+              "Alle Checkboxen aktiv, maximal 100",
+              ""
+            ],
+            [
+              "Anrufkonfigurationen -> H.323",
+              "H.323",
+              "Name: <ID>@vc.domain.de Nebenstelle: <ID> Gatekeeper (manuell), IP: 188.340.8.22",
+              ""
+            ],
+            [
+              "",
+              "SIP",
+              "SIP-Server: Manuell Transportprotokoll: TCP BFCP: UDP Anmeldeadresse: <ID>@vc.domain.de Benutzername: <ID>@vc.domain.de Registrar-Server: 188.340.8.22 Proxy-Server: 188.340.8.22 Registrar-Typ: Standard-PIP Kontrollkästen nicht ankreuzen (aus)",
+              "Transportprotokoll, sobald CMS-Bund klappt auf TLS umstellen"
+            ],
+            [
+              "Audio/Video -> Monitore",
+              "Monitore",
+              "Automatisch, Vollbild, Ein Monitor",
+              ""
+            ],
+            [
+              "",
+              "Audio",
+              "Pro Raum anpassen",
+              "Hier bei G7500 ggf. andere Optionen"
+            ],
+            [
+              "",
+              "Video-Eingänge",
+              "Pro Raum anpassen",
+              ""
+            ],
+            [
+              "Sicherheit -> Zugriff",
+              "Zugriff",
+              "Netzwerk-IDS-System aktivieren: (deaktiviert) Web-Zugriff aktivieren: (aktiviert) Telnet-Zugriff aktivieren: (deaktiviert) Lgacy-API über SSH aktivieren: (deaktiviert) SNMP-Zugriff aktivieren: (aktiviert) Port nach fehlerhaften Anmeldeversuchen sperren: 10 Dauer der Portsperre: 1 Minute Portsperrungszäher zurücksetzen nach: Aus Zulassungsliste aktivieren: (deaktiviert) Zeitüberschreitung für inaktive Sitzungen in Minuten: 10 Zulässige Höchstzahl aktiver Sitzungen: 50 Max. Zeitüberschreitung: Aus Alle USB-Anschlüsse deaktivieren: (deaktiviert) Mindestens erforderliche TLS-Version: TLS 1.2",
+              ""
+            ],
+            [
+              "Sicherheit -> Zertifikate",
+              "Zertifikate",
+              "Standard-Einstellungen",
+              "Aktuell keine eigenen Zertifikate = Selbstsigniert"
+            ],
+            [
+              "Sicherheit -> Lokale Konten",
+              "Lokale Konten",
+              "Standard-Einstellungen",
+              "Kennwort ändern nach Einrichtung"
+            ],
+            [
+              "Sicherheit -> Globale Sicherheit",
+              "Globale Sicherheit",
+              "erweitert",
+              ""
+            ],
+            [
+              "Sicherheit -> Kennwortanforderungen",
+              "Kennwortanforderungen",
+              "Standard-Einstellungen",
+              ""
+            ],
+            [
+              "Sicherheit -> Sicherheitscode",
+              "Sicherheitscode",
+              "Aktiviert",
+              ""
+            ],
+            [
+              "Sicherheit -> Sicherheitsbanner",
+              "Sicherheitsbanner",
+              "Deaktiviert",
+              ""
+            ],
+            [
+              "Sicherheit -> Content",
+              "Content",
+              "Benutzer dürfen Content aus primärem Netzwerk speichern: (Aktiviert) Benutzer dürfen Content aus dem WLAN speichern: (Deaktiviert)",
+              ""
+            ],
+            [
+              "Sicherheit -> WLAN und Bildschirmspiegelung",
+              "WLAN und Bildschirmspiegelung",
+              "WLAN-Funktionen aktivieren (Deaktiviert) Bluetooth aktivieren: (Aktiviert) Bildschirmspiegelung: (deaktiviert) Miracast: (deaktiviert)",
+              "Prüfen ob Bluetooth abgeschaltet werden kann"
+            ],
+            [
+              "Server -> Kalenderdienst",
+              "Kalenderdienst",
+              "Kalenderdienst aktivieren: deaktivert",
+              ""
+            ],
+            [
+              "Server -> Verzeichnisserver",
+              "Verzeichnisserver",
+              "Servertyp: Polycom GDS Serveradresse: 188.340.8.21",
+              ""
+            ],
+            [
+              "Server -> Bereitstellungsserver",
+              "Bereitstellungsserver",
+              "Bereitstellung aktivieren: deaktiviert",
+              ""
+            ],
+            [
+              "Server -> SNMP",
+              "SNMP",
+              "SNMP aktivieren: Aktiviert Benachrichtigungen aktivieren: Deaktiviert Version 1: deaktiviert Version 2c: deaktiviert Version 3: aktiviert Community mit Leseberechtigung: deaktiviert Kontaktname: Medientechnik Standortname: Standard Geb Raum (Standort2 Geb_D D.1.10) Systembeschreibung: Videoconferencing Device Benutzername: snmpvideo Authentifizierungsalgorithmus: SHA Authentifizierungskennwort: siehe PW-Datenbank Verschlüsselungsalgorithmus: CFB-AES128 Verschlüsselungskennwort: siehe PW-Datenbank Engine-ID: wird automatisch generiert Listener-Port: 161 Transportprotokoll: UDP Zieladresse 1: Aktiviert Serveradresse: 188.340.5.250 Nachrichtenart: TRAP Protokoll: v3 Port: 162 Zieladresse 2: deaktiviert Zieladresse 3: deaktiviert",
+              ""
+            ],
+            [
+              "Server -> Cloud",
+              "Cloud",
+              "Deaktiviert",
+              ""
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Poly Clariti App Bearbeiten",
+      "blocks": [
+        {
+          "block_type": "paragraph",
+          "content": "aktuell nicht in der produktiven Verwendung ( https://188.340.8.22:6228/client/)"
+        }
+      ]
+    }
+  ],
+  "source_file": "Polycom-Videokonferenzsysteme-TEST - XWiki.htm"
+}

@@ -2,14 +2,11 @@
 
 ## Einleitung
 
-Die Liste aus dem Abschnitt "Einleitung" des Dokuments "Logging" befasst sich mit verschiedenen Aspekten des Loggings. Zusammengefasst kann man sagen, dass diese Liste eine Übersicht über grundlegende Konzepte und Funktionen des Loggings bietet.
+Im Abschnitt "Einleitung" des Dokuments "Logging" werden verschiedene Aspekte des Loggings behandelt. Zusammengefasst geht es dabei um die Anpassung und Konfiguration von Logging-Funktionen. Die Liste kann wie folgt zusammengefasst werden:
 
-Sie umfasst drei wichtige Punkte: 
-1. **Logging-Anpassungen zur Laufzeit vornehmen**: Dieser Punkt deutet darauf hin, dass es möglich ist, die Logging-Einstellungen während des Betriebs anzupassen, ohne dass ein Neustart erforderlich ist.
-2. **server.log**: Hierbei handelt es sich wahrscheinlich um eine Datei, in der Log-Daten gespeichert werden. Die server.log-Datei ist ein wichtiger Bestandteil des Loggings, da sie alle relevanten Ereignisse und Fehler aufzeichnet.
-3. **Logger-Einstellung**: Dieser Punkt bezieht sich auf die Konfiguration der Logger, die für die Erfassung und Speicherung von Log-Daten verantwortlich sind. Die Einstellung der Logger ermöglicht es, die Art und Weise, wie Log-Daten gesammelt und verarbeitet werden, anzupassen.
+Das Logging umfasst mehrere wichtige Aspekte, die für eine effiziente Überwachung und Analyse von Systemvorgängen sorgen. Dazu gehören die Möglichkeit, **Logging-Anpassungen zur Laufzeit vorzunehmen**, was bedeutet, dass Änderungen an den Logging-Einstellungen ohne Neustart des Systems vorgenommen werden können. Ein weiterer wichtiger Punkt ist die **server.log**, die als zentrale Datei für die Aufzeichnung von Systemereignissen dient. Darüber hinaus spielen **Logger-Einstellungen** eine entscheidende Rolle, da sie es ermöglichen, die Art und Weise, wie Logs erstellt und verarbeitet werden, genau zu konfigurieren.
 
-Insgesamt bietet diese Liste einen Überblick über die grundlegenden Komponenten und Funktionen des Loggings, einschließlich der Anpassung von Logging-Einstellungen, der Verwendung der server.log-Datei und der Konfiguration von Loggern.
+Es handelt sich hier nicht um eine Schrittfolge, sondern um eine Sammlung von Konzepten und Funktionen, die im Zusammenhang mit Logging relevant sind. Diese Punkte bieten einen Überblick über die Flexibilität und Anpassungsmöglichkeiten des Logging-Systems, um es an die spezifischen Bedürfnisse eines Systems oder einer Anwendung anzupassen.
 
 Auf allen S0FTW4RE-Instanzen wird das Logging durch die Datei wildfly/standalone/configuration/logback.xml konfiguriert.
 Die Logging-Konfigurationen sind auf allen Instanzen gleich, außer dass
@@ -100,20 +97,23 @@ Anwendung nicht, wo die zu loggenden Daten hingeschickt werden müssen.
 
 Hier eine Erklärung der Einstellungen:
 
-Diese Tabelle stellt die Konfigurationsoptionen für die Log-Datei "server.log" dar und bietet eine Übersicht über die verschiedenen Parameter, die für die Log-Rotation und -speicherung verwendet werden können. Sie ermöglicht es, die Log-Dateien effizient zu verwalten und zu konfigurieren.
+### Logging-Konfiguration
+Die Tabelle hat keinen expliziten Titel, daher kann sie als "Logging-Konfiguration" bezeichnet werden. Diese Tabelle stellt die verschiedenen Parameter und Einstellungen für die Logging-Konfiguration auf einem Server dar. Sie enthält Informationen über die Log-Datei, die Rotation und die Speicherung von Log-Daten.
 
-Die Bedeutung jeder Spalte kann wie folgt beschrieben werden:
-* Element-Name: Gibt den Namen des Konfigurationselements an
-* Erläuterung des Wertes: Beschreibt den Zweck und die Funktion des jeweiligen Konfigurationselements
+### Spaltenbeschreibung
+Die Tabelle hat zwei Spalten:
+* Element-Name: Diese Spalte enthält die Namen der verschiedenen Konfigurationselemente.
+* Erläuterung des Wert: Diese Spalte enthält eine kurze Beschreibung des jeweiligen Konfigurationselements.
 
-Die einzelnen Zeilen der Tabelle können wie folgt beschrieben werden:
+### Tabelleninhalte
+Die Tabelle enthält folgende Einträge:
 Die zu konfigurierende Log-Datei wird durch den Element-Namen "file" identifiziert. 
-Die Log-Rotation wird durch die Regel "SizeAndTimeBasedRollingPolicy" festgelegt, die eine Rotation basierend auf verstreichender Zeit und Größe ermöglicht. 
-Der Ausgabeort der rotierten Log-Datei wird durch den Element-Namen "fileNamePattern" bestimmt, der ein Benennungsschema wie "server.2024-01-04.0.txt" ermöglicht. 
-Die maximale Größe einer Datei, bevor sie rotiert wird, wird durch den Element-Namen "maxFileSize" angegeben. 
-Die maximale Anzahl an aufbewahrten Logging-Dateien wird durch den Element-Namen "maxHistory" festgelegt. 
-Das Gesamtvolumen an aufbewahrten Logging-Dateien wird durch den Element-Namen "totalSizeCap" bestimmt. 
-Das Layout, in dem die Log-Nachrichten in die Logdatei geschrieben werden, wird durch den Element-Namen "pattern" angegeben.
+Die Log-Rotation wird durch die Regel "rollingPolicy" festgelegt, die auf eine Rotation basierend auf verstreichender Zeit und Größe setzt. 
+Der Ausgabeort der rotierten Log-Datei wird durch den "fileNamePattern" bestimmt, der ein Benennungsschema wie "server.2024-01-04.0.txt" erstellt. 
+Die maximale Größe einer Datei, bevor sie rotiert wird, wird durch "maxFileSize" angegeben. 
+Die maximale Anzahl an aufbewahrten Logging-Dateien wird durch "maxHistory" festgelegt. 
+Das Gesamtvolumen an aufbewahrten Logging-Dateien wird durch "totalSizeCap" begrenzt. 
+Das Layout, in dem die Log-Nachrichten in die Logdatei geschrieben werden, wird durch den "pattern" bestimmt.
 
 ## Logger-Einstellung Bearbeiten
 
@@ -228,12 +228,12 @@ den Loglevel zu ändern, muss, sofern in Z.2 (s.o.) der Scanner
 eingeschaltet ist, die Anwendung nicht neugestartet werden. Es reicht,
 folgende Schritte auszuführen:
 
-Die Liste beschreibt die Schritte, um die Logger-Einstellung in einer logback.xml-Datei zu bearbeiten. Hier sind die Schritte im Detail:
+Die Liste beschreibt die Schritte, um die Logger-Einstellung in der Datei `logback.xml` zu bearbeiten. Hier sind die Schritte im Detail:
 
 Um die Logger-Einstellung zu bearbeiten, folgen Sie bitte diesen Schritten:
 1. Öffnen Sie die Datei `logback.xml` mit dem Editor `vim`.
 2. Wechseln Sie in den visuellen Modus, indem Sie die Taste "v" drücken. Dies ermöglicht es Ihnen, die zu bearbeitenden Zeilen auszuwählen.
 3. Führen Sie den Befehl `:s/FIND/REPLACE/` aus, um den gewünschten Text zu ersetzen. Ein Beispiel dafür wäre `:s/INFO/ERROR/`, um alle Vorkommen von "INFO" durch "ERROR" zu ersetzen. Bestätigen Sie den Befehl mit der Enter-Taste.
-4. Nachdem Sie die Änderungen vorgenommen haben, warten Sie bitte 30 Sekunden, bevor die Änderungen in Kraft treten.
+4. Nachdem Sie die Änderungen vorgenommen haben, warten Sie bitte 30 Sekunden, bevor die Änderung in Kraft tritt.
 
-Diese Schritte ermöglichen es Ihnen, die Logger-Einstellung in der logback.xml-Datei zu bearbeiten und die gewünschten Änderungen vorzunehmen.
+Diese Schritte ermöglichen es Ihnen, die Logger-Einstellung in der Datei `logback.xml` zu bearbeiten und die gewünschten Änderungen vorzunehmen.
