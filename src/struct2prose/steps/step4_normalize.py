@@ -126,7 +126,7 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                     try:
                         normalized = _call_groq(client, prompt, model=model)
                     except Exception as e:
-                        normalized = f"[LLM-Fehler bei Tabellen-Normalisierung: {e}]"
+                        normalized = f"[LLM-Fehler bei Tabellen-Kontextualisierung: {e}]"
                     md_lines.append(normalized + "\n")
                     time.sleep(0.2)  # tiny pacing; keeps things calmer in practice
 
@@ -136,7 +136,7 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                     try:
                         normalized = _call_groq(client, prompt, model=model)
                     except Exception as e:
-                        normalized = f"[LLM-Fehler bei Listen-Normalisierung: {e}]"
+                        normalized = f"[LLM-Fehler bei Listen-Kontextualisierung: {e}]"
                     md_lines.append(normalized + "\n")
                     time.sleep(0.2)
 

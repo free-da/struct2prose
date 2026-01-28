@@ -1,6 +1,6 @@
 # struct2prose
 
-**struct2prose** ist eine Python-basierte Vorverarbeitungspipeline zur semantischen Normalisierung strukturierter und semistrukturierter Wiki-Inhalte für den Einsatz in Retrieval-Augmented-Generation-(RAG)-Systemen.
+**struct2prose** ist eine Python-basierte Vorverarbeitungspipeline zur semantischen Kontextualisierung strukturierter und semistrukturierter Wiki-Inhalte für den Einsatz in Retrieval-Augmented-Generation-(RAG)-Systemen.
 
 Das Projekt entstand im Rahmen einer (Mini-)Masterarbeit mit dem Fokus auf der Transformation von HTML-basierten Wiki-Seiten (insbesondere Tabellen und Listen) in prosebasierte Wissenseinheiten, um bekannte Schwächen von RAG-Systemen im Umgang mit strukturierten Daten zu adressieren.
 
@@ -34,8 +34,8 @@ Die Pipeline besteht aus vier logisch getrennten Verarbeitungsschritten:
 3. **Parsing in ein strukturiertes Zwischenformat**  
    Überführung des HTML in eine explizite JSON-Repräsentation bestehend aus Dokumenten, Abschnitten und typisierten Inhaltsblöcken.
 
-4. **LLM-gestützte semantische Normalisierung**  
-   Selektive Normalisierung strukturierter Inhalte (insb. Tabellen) mittels eines Large Language Models und Ausgabe als Markdown.
+4. **LLM-gestützte semantische Kontextualisierung**  
+   Selektive Kontextualisierung strukturierter Inhalte (insb. Tabellen) mittels eines Large Language Models und Ausgabe als Markdown.
 
 ---
 
@@ -60,7 +60,7 @@ Die Pipeline besteht aus vier logisch getrennten Verarbeitungsschritten:
 
 ### Voraussetzungen
 - Python ≥ 3.10
-- Ein gültiger Groq API Key (für die semantische Normalisierung)
+- Ein gültiger Groq API Key (für die semantische Kontextualisierung)
 
 ### Installation im Projektverzeichnis
 
@@ -122,9 +122,9 @@ python -m struct2prose all
 
 Die Verzeichnisse können bei Bedarf über CLI-Parameter überschrieben werden.
 
-## Semantische Normalisierung (LLM)
+## Semantische Kontextualisierung (LLM)
 
-Die Normalisierung strukturierter Inhalte (Tabellen, Listen, Codeblöcke) erfolgt mithilfe eines Large Language Models über das **Groq-Framework**.
+Die Kontextualisierung strukturierter Inhalte (Tabellen, Listen, Codeblöcke) erfolgt mithilfe eines Large Language Models über das **Groq-Framework**.
 
 ### Standardmodell
 - `llama-3.3-70b-versatile`
@@ -141,11 +141,11 @@ Die Ausgabe ist bewusst **prosaorientiert**, um die Nutzbarkeit der Inhalte in R
 ## Projektstatus
 
 Dieses Repository stellt einen **Minimal Viable Prototype (MVP)** dar.  
-Ziel ist es, den methodischen Ansatz der semantischen Normalisierung sichtbar und nachvollziehbar zu machen.
+Ziel ist es, den methodischen Ansatz der semantischen Kontextualisierung sichtbar und nachvollziehbar zu machen.
 
 Geplante Erweiterungen (nicht Teil des MVP):
 - Feinere UI-Bereinigung (Step 2)
-- Strukturierte Tabellen-Normalisierung mit Schema-Erkennung
+- Strukturierte Tabellen-Kontextualisierung mit Schema-Erkennung
 - Chunking-Strategien für RAG
 - Evaluation der Retrieval-Qualität
 
@@ -153,7 +153,7 @@ Geplante Erweiterungen (nicht Teil des MVP):
 
 Das Projekt entsteht im Rahmen einer (Mini-)Masterarbeit mit dem Titel:
 
-**„Semantische Normalisierung für RAG-Systeme“**  
+**„Semantische Kontextualisierung für RAG-Systeme“**  
 *Ein Vorgehensmodell zur LLM-gestützten Vorverarbeitung strukturierter Wiki-Inhalte*
 
 Der Fokus liegt auf **Wissensmanagement** und **praktischer Nutzbarkeit**, nicht auf Modellvergleich oder Benchmarking.
