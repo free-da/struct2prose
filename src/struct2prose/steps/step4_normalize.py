@@ -6,9 +6,10 @@ from typing import Any, List
 
 from groq import Groq
 
+from struct2prose.config import Config
+from struct2prose.services.llm_client import generate_text
 
-MODEL_DEFAULT = "llama-3.3-70b-versatile"
-
+MODEL_DEFAULT = Config.get_model_name()
 
 def _table_to_csv(rows: List[List[str]]) -> str:
     """Very small CSV renderer (good enough for LLM input)."""
@@ -69,17 +70,6 @@ Aufgabe:
 """.strip()
 
 
-def _call_groq(client: Groq, prompt: str, model: str) -> str:
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": "Du bist ein hilfreicher Assistent für technische Dokumentation."},
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0.2,
-    )
-    return response.choices[0].message.content.strip()
-
 
 def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -> None:
     api_key = os.environ.get("GROQ_API_KEY")
@@ -124,7 +114,12 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                     # MVP: normalize tables via LLM
                     prompt = _prompt_for_table(title, heading, content)
                     try:
-                        normalized = _call_groq(client, prompt, model=model)
+                       # normalized = _call_groq(client, prompt, model=model)
+                        normalized = generate_text(
+                            prompt=prompt,
+                            system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
+                            model=model,
+                        )
                     except Exception as e:
                         normalized = f"[LLM-Fehler bei Tabellen-Kontextualisierung: {e}]"
                     md_lines.append(normalized + "\n")
@@ -134,7 +129,13 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                     # optional: also normalize lists via LLM
                     prompt = _prompt_for_list(title, heading, content)
                     try:
-                        normalized = _call_groq(client, prompt, model=model)
+                       # normalized = _call_groq(client, prompt, model=model)
+                       normalized = generate_text(
+                            prompt=prompt,
+                            system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
+                            model=model,
+                        )
+
                     except Exception as e:
                         normalized = f"[LLM-Fehler bei Listen-Kontextualisierung: {e}]"
                     md_lines.append(normalized + "\n")

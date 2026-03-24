@@ -5,9 +5,11 @@ from struct2prose.steps.step1_extract_root import run as run_step1
 from struct2prose.steps.step2_strip_ui import run as run_step2
 from struct2prose.steps.step3_parse import run as run_step3
 from struct2prose.steps.step4_normalize import run as run_step4
+from struct2prose.config import Config
 
 
 def main() -> None:
+    Config.validate()
     parser = argparse.ArgumentParser(prog="struct2prose")
     sub = parser.add_subparsers(dest="cmd", required=True)
 

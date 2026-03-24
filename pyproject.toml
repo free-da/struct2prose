@@ -5,7 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "struct2prose"
 version = "0.1.0"
-dependencies = ["beautifulsoup4"]
+dependencies = [
+	"beautifulsoup4",
+	"requests",
+	"groq",	
+	"lxml",
+	"python-dotenv"
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
