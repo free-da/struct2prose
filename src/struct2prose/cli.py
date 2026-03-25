@@ -1,10 +1,10 @@
 import argparse
 from pathlib import Path
 
-from struct2prose.steps.step1_extract_root import run as run_step1
-from struct2prose.steps.step2_strip_ui import run as run_step2
-from struct2prose.steps.step3_parse import run as run_step3
-from struct2prose.steps.step4_normalize import run as run_step4
+from struct2prose.steps.step1_extract_root import run as run_extract_root
+from struct2prose.steps.step2_strip_ui import run as run_strip_ui
+from struct2prose.steps.step3_parse import run as run_parse
+from struct2prose.steps.step4_contextualize import run as run_contextualize
 from struct2prose.config import Config
 
 
@@ -25,30 +25,30 @@ def main() -> None:
     p_parse.add_argument("--raw-dir", type=Path, default=Path("clean_data"))
     p_parse.add_argument("--out-dir", type=Path, default=Path("processed_data"))
 
-    p_norm = sub.add_parser("normalize", help="Normalize processed JSON into markdown via Groq")
+    p_norm = sub.add_parser("contextualize", help="contextualize processed JSON into markdown via Groq")
     p_norm.add_argument("--in-dir", type=Path, default=Path("processed_data"))
-    p_norm.add_argument("--out-dir", type=Path, default=Path("normalized_data"))
+    p_norm.add_argument("--out-dir", type=Path, default=Path("contextualized_data"))
     p_norm.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
 
-    p_all = sub.add_parser("all", help="Run extract-root, strip-ui, parse, normalize")
+    p_all = sub.add_parser("all", help="Run extract-root, strip-ui, parse, contextualize")
     p_all.add_argument("--raw-dir", type=Path, default=Path("raw_data"))
     p_all.add_argument("--clean-dir", type=Path, default=Path("clean_data"))
     p_all.add_argument("--processed-dir", type=Path, default=Path("processed_data"))
-    p_all.add_argument("--normalized-dir", type=Path, default=Path("normalized_data"))
+    p_all.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
     p_all.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
 
     args = parser.parse_args()
 
     if args.cmd == "extract-root":
-        run_step1(args.raw_dir, args.out_dir)
+        run_extract_root(args.raw_dir, args.out_dir)
     elif args.cmd == "strip-ui":
-        run_step2(args.in_dir, args.out_dir)
+        run_strip_ui(args.in_dir, args.out_dir)
     elif args.cmd == "parse":
-        run_step3(args.raw_dir, args.out_dir)
-    elif args.cmd == "normalize":
-        run_step4(args.in_dir, args.out_dir, model=args.model)
+        run_parse(args.raw_dir, args.out_dir)
+    elif args.cmd == "contextualize":
+        run_contextualize(args.in_dir, args.out_dir, model=args.model)
     elif args.cmd == "all":
-        run_step1(args.raw_dir, args.clean_dir)
-        run_step2(args.clean_dir, args.clean_dir)  # overwrite
-        run_step3(args.clean_dir, args.processed_dir)
-        run_step4(args.processed_dir, args.normalized_dir, model=args.model)
+        run_extract_root(args.raw_dir, args.clean_dir)
+        run_strip_ui(args.clean_dir, args.clean_dir)  # overwrite
+        run_parse(args.clean_dir, args.processed_dir)
+        run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)

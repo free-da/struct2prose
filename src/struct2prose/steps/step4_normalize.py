@@ -71,14 +71,14 @@ Aufgabe:
 
 
 
-def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -> None:
+def run(processed_dir: Path, contextualized_dir: Path, model: str = MODEL_DEFAULT) -> None:
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise RuntimeError("GROQ_API_KEY ist nicht gesetzt (PyCharm Run Configuration -> Environment).")
 
     client = Groq(api_key=api_key)
 
-    normalized_dir.mkdir(parents=True, exist_ok=True)
+    contextualized_dir.mkdir(parents=True, exist_ok=True)
 
     for file in sorted(processed_dir.glob("*.json")):
         data: dict[str, Any] = json.loads(file.read_text(encoding="utf-8"))
@@ -111,34 +111,34 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                         md_lines.append("```\n")
 
                 elif btype == "table":
-                    # MVP: normalize tables via LLM
+                    # MVP: contextualize tables via LLM
                     prompt = _prompt_for_table(title, heading, content)
                     try:
-                       # normalized = _call_groq(client, prompt, model=model)
-                        normalized = generate_text(
+                       # contextualized = _call_groq(client, prompt, model=model)
+                        contextualized = generate_text(
                             prompt=prompt,
                             system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
                             model=model,
                         )
                     except Exception as e:
-                        normalized = f"[LLM-Fehler bei Tabellen-Kontextualisierung: {e}]"
-                    md_lines.append(normalized + "\n")
+                        contextualized = f"[LLM-Fehler bei Tabellen-Kontextualisierung: {e}]"
+                    md_lines.append(contextualized + "\n")
                     time.sleep(0.2)  # tiny pacing; keeps things calmer in practice
 
                 elif btype == "list":
-                    # optional: also normalize lists via LLM
+                    # optional: also contextualize lists via LLM
                     prompt = _prompt_for_list(title, heading, content)
                     try:
-                       # normalized = _call_groq(client, prompt, model=model)
-                       normalized = generate_text(
+                       # contextualized = _call_groq(client, prompt, model=model)
+                       contextualized = generate_text(
                             prompt=prompt,
                             system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
                             model=model,
                         )
 
                     except Exception as e:
-                        normalized = f"[LLM-Fehler bei Listen-Kontextualisierung: {e}]"
-                    md_lines.append(normalized + "\n")
+                        contextualized = f"[LLM-Fehler bei Listen-Kontextualisierung: {e}]"
+                    md_lines.append(contextualized + "\n")
                     time.sleep(0.2)
 
                 else:
@@ -146,6 +146,6 @@ def run(processed_dir: Path, normalized_dir: Path, model: str = MODEL_DEFAULT) -
                     if content:
                         md_lines.append(str(content).strip() + "\n")
 
-        out_path = normalized_dir / f"{file.stem}.md"
+        out_path = contextualized_dir / f"{file.stem}.md"
         out_path.write_text("\n".join(md_lines).strip() + "\n", encoding="utf-8")
         print(f"[step4] wrote {out_path}")

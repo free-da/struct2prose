@@ -18,7 +18,7 @@ def extract_text_with_breaks(tag: Tag) -> str:
 
     text = tag.get_text(separator=" ", strip=True)
 
-    # Normalize excessive whitespace but keep line breaks
+    # Contextualize excessive whitespace but keep line breaks
     lines = [line.strip() for line in text.splitlines()]
     return "\n".join(line for line in lines if line)
 
