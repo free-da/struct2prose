@@ -37,7 +37,7 @@ def _load_source_document_from_file(file_path: Path) -> SourceDocument:
 
 
 def _extract_root(source_doc: SourceDocument, root_class: str = "xcontent") -> CleanDocument:
-    cleaned_content = extract_content_root(source_doc.raw_content, root_class=root_class)
+    cleaned_content = extract_content_root(source_doc.raw_content)
 
     return CleanDocument(
         metadata=source_doc.metadata,
