@@ -3,6 +3,8 @@ from __future__ import annotations
 from datetime import datetime
 import hashlib
 from pathlib import Path
+import json
+from dataclasses import asdict
 
 from struct2prose.models.documents import (
     CleanDocument,
@@ -49,7 +51,10 @@ def _extract_root(source_doc: SourceDocument, root_class: str = "xcontent") -> C
 
 def _export_clean_document(clean_doc: CleanDocument, out_path: Path) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(clean_doc.cleaned_content, encoding="utf-8")
+    out_path.write_text(
+        json.dumps(asdict(clean_doc), ensure_ascii=False, indent=2, default=str),
+        encoding="utf-8",
+    )
 
 
 def run(raw_dir: Path, clean_dir: Path, root_class: str = "xcontent") -> None:
@@ -59,7 +64,7 @@ def run(raw_dir: Path, clean_dir: Path, root_class: str = "xcontent") -> None:
         source_doc = _load_source_document_from_file(file_path)
         clean_doc = _extract_root(source_doc, root_class=root_class)
 
-        out_path = clean_dir / file_path.name
+        out_path = clean_dir / f"{file_path.stem}.json"
         _export_clean_document(clean_doc, out_path)
 
         print(f"[step1] wrote {out_path}")

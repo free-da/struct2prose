@@ -19,7 +19,7 @@ def main() -> None:
 
     p_ui = sub.add_parser("strip-ui", help="Remove remaining UI elements inside extracted content")
     p_ui.add_argument("--in-dir", type=Path, default=Path("clean_data"))
-    p_ui.add_argument("--out-dir", type=Path, default=Path("clean_data"))  # MVP: overwrite by default
+    p_ui.add_argument("--out-dir", type=Path, default=Path("stripped_data"))  # MVP: overwrite by default
 
     p_parse = sub.add_parser("parse", help="Parse clean HTML to processed JSON")
     p_parse.add_argument("--raw-dir", type=Path, default=Path("clean_data"))

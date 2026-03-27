@@ -29,6 +29,13 @@ class CleanDocument:
     cleaned_content: str
     content_root_hint: str | None = None
 
+@dataclass
+class StrippedDocument:
+    metadata: DocumentMetadata
+    raw_content: str
+    cleaned_content: str
+    stripped_content: str
+    content_root_hint: str | None = None
 
 @dataclass
 class ContextualizedBlock:
