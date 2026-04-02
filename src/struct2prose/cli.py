@@ -19,7 +19,7 @@ def main() -> None:
 
     p_ui = sub.add_parser("strip-ui", help="Remove remaining UI elements inside extracted content")
     p_ui.add_argument("--in-dir", type=Path, default=Path("clean_data"))
-    p_ui.add_argument("--out-dir", type=Path, default=Path("stripped_data"))  # MVP: overwrite by default
+    p_ui.add_argument("--out-dir", type=Path, default=Path("stripped_data"))
 
     p_parse = sub.add_parser("parse", help="Parse clean HTML to processed JSON")
     p_parse.add_argument("--raw-dir", type=Path, default=Path("clean_data"))
@@ -33,6 +33,7 @@ def main() -> None:
     p_all = sub.add_parser("all", help="Run extract-root, strip-ui, parse, contextualize")
     p_all.add_argument("--raw-dir", type=Path, default=Path("raw_data"))
     p_all.add_argument("--clean-dir", type=Path, default=Path("clean_data"))
+    p_all.add_argument("--stripped-dir", type=Path, default=Path("stripped_data"))
     p_all.add_argument("--processed-dir", type=Path, default=Path("processed_data"))
     p_all.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
     p_all.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
@@ -40,15 +41,15 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.cmd == "extract-root":
-        run_extract_root(args.raw_dir, args.out_dir)
+        run_extract_root(args.raw_dir, args.clean_dir)
     elif args.cmd == "strip-ui":
-        run_strip_ui(args.in_dir, args.out_dir)
+        run_strip_ui(args.clean_dir, args.stripped_dir)
     elif args.cmd == "parse":
-        run_parse(args.raw_dir, args.out_dir)
+        run_parse(args.stripped_dir, args.processed_dir)
     elif args.cmd == "contextualize":
-        run_contextualize(args.in_dir, args.out_dir, model=args.model)
+        run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
     elif args.cmd == "all":
         run_extract_root(args.raw_dir, args.clean_dir)
-        run_strip_ui(args.clean_dir, args.clean_dir)  # overwrite
-        run_parse(args.clean_dir, args.processed_dir)
+        run_strip_ui(args.clean_dir, args.stripped_dir)
+        run_parse(args.stripped_dir, args.processed_dir)
         run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)

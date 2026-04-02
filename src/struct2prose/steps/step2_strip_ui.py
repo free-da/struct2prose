@@ -32,8 +32,8 @@ def _save_stripped_document(doc: StrippedDocument, path: Path) -> None:
     )
 
 
-def run(clean_dir: Path, out_dir: Path) -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
+def run(clean_dir: Path, stripped_dir: Path) -> None:
+    stripped_dir.mkdir(parents=True, exist_ok=True)
 
     for file in sorted(clean_dir.glob("*.json")):
         clean_doc = _load_clean_document(file)
@@ -48,6 +48,6 @@ def run(clean_dir: Path, out_dir: Path) -> None:
             content_root_hint=clean_doc.content_root_hint,
         )
 
-        out_path = out_dir / file.name
+        out_path = stripped_dir / file.name
         _save_stripped_document(stripped_doc, out_path)
         print(f"[step2] wrote {out_path}")
