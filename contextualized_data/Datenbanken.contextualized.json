@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "source_id": "Datenbanken",
+    "title": "Datenbanken",
+    "xwiki_url": null,
+    "xwiki_page_reference": null,
+    "source_hash": "unknown",
+    "retrieved_at": null,
+    "last_modified": null,
+    "pipeline_run_id": null,
+    "pipeline_version": null
+  },
+  "contextualized_blocks": [],
+  "skipped_blocks": [
+    {
+      "source_block_id": "sec-1-blk-1",
+      "section_id": "sec-1",
+      "section_heading": "S0FTW4RE",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-2-blk-1",
+      "section_id": "sec-2",
+      "section_heading": "S0FTW4RE BI",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-3-blk-1",
+      "section_id": "sec-3",
+      "section_heading": "DOC-GEN",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-3-blk-2",
+      "section_id": "sec-3",
+      "section_heading": "DOC-GEN",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    }
+  ],
+  "failed_blocks": []
+}

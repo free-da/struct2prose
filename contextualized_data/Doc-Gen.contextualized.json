@@ -1,0 +1,804 @@
+{
+  "metadata": {
+    "source_id": "Doc-Gen",
+    "title": "Doc-Gen",
+    "xwiki_url": null,
+    "xwiki_page_reference": null,
+    "source_hash": "unknown",
+    "retrieved_at": null,
+    "last_modified": null,
+    "pipeline_run_id": null,
+    "pipeline_version": null
+  },
+  "contextualized_blocks": [
+    {
+      "block_id": "ctx-sec-1-blk-1",
+      "source_block_id": "sec-1-blk-1",
+      "section_id": "sec-1",
+      "section_heading": "Einleitung",
+      "block_type": "list",
+      "text": "Die Liste aus der technischen Wiki-Seite für Doc-Gen umfasst verschiedene Aspekte und Schritte im Zusammenhang mit der Anwendung Doc-Gen. Hier ist eine Zusammenfassung der Liste in gut lesbarer Form:\n\nDie Dokumentation von Doc-Gen beginnt mit einem **Vorwort**, gefolgt von Informationen über den **Ansprechpartner Fachlich IT Extern**. Es gibt auch Hinweise auf die **Dokumentenablage**, die in verschiedenen Systemen wie ORGA Dateisystem, Doc-Gen Wiki und GIT Anleitungen zu finden ist.\n\nEin wichtiger Teil der Dokumentation ist die Beschreibung der **Systemarchitektur von Doc-Gen Ver. 1.8**, die die verschiedenen Bestandteile der Anwendung wie das Testsystem, den Operator/Converter und den Integration Server (EIS) umfasst. Es gibt auch Informationen über die **Verarbeiteten Daten**, die in fachliche Daten und personenbezogene Daten unterteilt sind.\n\nDie Liste enthält auch eine **Schrittfolge** für die Installation und Konfiguration von Doc-Gen:\n1. **Installation von JBoss** am 01.12.2022\n2. **Installation von Doc-Gen Operator, Converter und teilweise EIS** auf schwubs374 am 07.12.2022\n3. **Plan-B-Migration in RZ Bundesallee** am 09.10.2023\n\nWeitere wichtige Punkte sind die **Abhängigkeit von anderen Anwendungen** und die **Termine**, die einen zeitlichen Verlauf der Aktivitäten um Doc-Gen darstellen. Einige wichtige Termine sind:\n- **21.09.2022**: Start für das Update auf Version 1.8\n- **08.12.2022**: Installation von Doc-Gen auf schwubs374\n- **09.10.2023**: Plan-B-Migration in RZ Bundesallee\n\nInsgesamt bietet die Liste eine umfassende Übersicht über die Anwendung Doc-Gen, ihre Systemarchitektur, die verarbeiteten Daten und die wichtigsten Schritte und Termine im Zusammenhang mit der Anwendung.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:39.265294"
+    },
+    {
+      "block_id": "ctx-sec-5-blk-1",
+      "source_block_id": "sec-5-blk-1",
+      "section_id": "sec-5",
+      "section_heading": "IT Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste aus dem Abschnitt \"IT\" des Dokuments \"Doc-Gen\" enthält eine Aufzählung von Personen, die offensichtlich mit IT-bezogenen Aufgaben oder Projekten in Verbindung stehen. Die Liste umfasst folgende Personen:\n\nDie Liste enthält eine Reihe von Namen von Personen, die anscheinend für IT-bezogene Aufgaben oder Projekte verantwortlich sind. Diese Personen sind:\n- @Diana Stölzel\n- @Vladislav Konov\n- @Hans Labod\n- @Alexandra Freytag\n- @Andreas Stengl\n\nZusammengefasst handelt es sich um eine Liste von fünf Personen, die möglicherweise an IT-Projekten oder -Aufgaben beteiligt sind. Es gibt keine spezifischen Schritte oder Anweisungen, sondern lediglich eine Auflistung der Namen.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:40.722728"
+    },
+    {
+      "block_id": "ctx-sec-6-blk-1",
+      "source_block_id": "sec-6-blk-1",
+      "section_id": "sec-6",
+      "section_heading": "Extern Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste enthält Kontaktdaten und Ressourcen für die externe Bearbeitung von Doc-Gen. Zusammengefasst bietet sie Informationen über die Ansprechpartner und Unterstützungsangebote, die für die Arbeit mit Doc-Gen zur Verfügung stehen.\n\nFür Fragen oder Anliegen können Sie sich an folgende Personen oder Ressourcen wenden:\n- Der Account Manager Claudia Theobald ist unter Claudia.Theobald@doc-gen.de erreichbar.\n- Für technische Koordination steht Lars Decker unter Lars.Decker@doc-gen.de zur Verfügung.\n- Bei Bedarf können Sie sich auch an Frederik Zimmer (Frederik.Zimmer@doc-gen.de) für Doc-Gen EIS wenden.\n- Für weitere Unterstützung oder technische Probleme können Sie das Support-Portal unter https://service.doc-gen-software.de besuchen.\n\nEs handelt sich hier nicht um eine Schrittfolge, sondern um eine Sammlung von Kontaktdaten und Ressourcen, die für die externe Bearbeitung von Doc-Gen nützlich sein können.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:42.234164"
+    },
+    {
+      "block_id": "ctx-sec-8-blk-1",
+      "source_block_id": "sec-8-blk-1",
+      "section_id": "sec-8",
+      "section_heading": "ORGA Dateisystem Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste enthält Informationen über den Speicherort von Dateien im Zusammenhang mit dem Dokumenttitel \"Doc-Gen\" im Abschnitt \"ORGA Dateisystem Bearbeiten\". Zusammengefasst handelt es sich um zwei verschiedene Pfade, an denen relevante Dateien oder Dokumente abgelegt sind.\n\nDie beiden Speicherorte sind:\n1. **\\\\dateiablage1-bs\\Projekte\\DokGen**: Dieser Pfad bezieht sich auf den allgemeinen Speicherort für Projekte im Zusammenhang mit \"DokGen\".\n2. **\\\\dateiablage1-bs\\Projekte\\IT-Anwendungen-Abt2\\04_DOC-GEN\\04_Dokumentation\\DOC-GEN**: Dieser Pfad ist spezifischer und führt zu einem bestimmten Unterordner innerhalb des Projekts, der sich auf die Dokumentation von \"DOC-GEN\" konzentriert.\n\nDiese Informationen können helfen, Dateien und Dokumente im ORGA-Dateisystem effizient zu finden und zu bearbeiten.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:43.844554"
+    },
+    {
+      "block_id": "ctx-sec-9-blk-1",
+      "source_block_id": "sec-9-blk-1",
+      "section_id": "sec-9",
+      "section_heading": "Doc-Gen Wiki Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf den Zugriff auf die DOC-GEN Wiki-Seite. Hier finden Sie eine Zusammenfassung der Informationen:\n\nDie DOC-GEN Wiki-Seite ist ein zentrales Informationsportal, auf dem Sie Handbücher und Hilfestellung zur Installation und Wartung finden können. Um auf diese Ressourcen zuzugreifen, müssen Sie die folgenden Schritte befolgen:\n\n1. Öffnen Sie den Webbrowser und navigieren Sie zu der URL: www.doc-gen-wiki.de\n2. Melden Sie sich an, indem Sie den Benutzernamen \"doc-gen-help\" und das entsprechende Passwort verwenden. \n3. Um das Passwort zu finden, öffnen Sie die Datei \"S0FTW4RE-Kennwoerter.kdbx\" mit dem Tool Keepass.\n\nNachdem Sie diese Schritte befolgt haben, sollten Sie Zugriff auf die DOC-GEN Wiki-Seite haben und können die verfügbaren Ressourcen nutzen, um Ihre Fragen zu beantworten oder Probleme zu lösen.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:45.292690"
+    },
+    {
+      "block_id": "ctx-sec-11-blk-1",
+      "source_block_id": "sec-11-blk-1",
+      "section_id": "sec-11",
+      "section_heading": "Anleitungen Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste aus der technischen Wiki-Seite enthält eine Zusammenstellung von Dokumenten und Schritten, die für die Implementierung und den Betrieb eines Systems relevant sind. Hier ist eine Zusammenfassung der Liste in gut lesbarer Form:\n\nDie Dokumentation umfasst verschiedene Handbücher und Schritte, die für die erfolgreiche Implementierung und den Betrieb eines Systems erforderlich sind. Dazu gehören:\n\n1. **Installationshandbuch**: Dieses Handbuch befindet sich im Verzeichnis `\\\\dateiablage1-bs\\Abteilung_Z\\Grp_A4_Allgemein\\Dokumentation\\Installationshandbücher` und enthält Anleitungen für die Installation des Systems.\n2. **Betriebshandbuch**: Dieses Handbuch befindet sich im Verzeichnis `\\\\dateiablage1-bs\\Abteilung_Z\\Grp_A4_Allgemein\\Dokumentation\\Betriebshandbücher` und enthält Anleitungen für den Betrieb des Systems.\n3. **Übernahme von Änderungen**: Um Änderungen aus dem Entwicklungssystem in das Produktivsystem zu übernehmen, müssen die Domänen transportiert werden. Dieser Schritt ist wichtig, um sicherzustellen, dass die Änderungen korrekt implementiert werden.\n\nInsgesamt bietet die Liste eine Übersicht über die wichtigsten Dokumente und Schritte, die für die Implementierung und den Betrieb eines Systems erforderlich sind. Durch die Verwendung dieser Dokumente und Schritte kann ein erfolgreiches System aufgebaut und betrieben werden.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:47.066101"
+    },
+    {
+      "block_id": "ctx-sec-15-blk-1",
+      "source_block_id": "sec-15-blk-1",
+      "section_id": "sec-15",
+      "section_heading": "Nützliche Server Befehle Bearbeiten",
+      "block_type": "list",
+      "text": "Der Abschnitt \"Nützliche Server Befehle\" im Dokument \"Doc-Gen\" beschreibt wichtige Schritte für die Verwaltung eines Servers. Eine der wichtigsten Aktionen ist das Starten des Servers. Hier sind die Schritte, um den Server erfolgreich zu starten:\n\n1. **Server starten (als root)**: Um den Server zu starten, muss man als root-Benutzer agieren. Dieser Schritt ist entscheidend, da er sicherstellt, dass der Server mit den notwendigen Rechten und Zugriffsberechtigungen gestartet wird.\n\nZusammenfassend lässt sich sagen, dass die Liste derzeit nur einen Punkt enthält, nämlich das Starten des Servers als root-Benutzer. Dieser Schritt ist jedoch von entscheidender Bedeutung für die erfolgreiche Inbetriebnahme des Servers. Durch die Ausführung dieses Schritts kann man sicherstellen, dass der Server ordnungsgemäß gestartet wird und alle notwendigen Funktionen und Dienste verfügbar sind.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:48.544611"
+    },
+    {
+      "block_id": "ctx-sec-15-blk-3",
+      "source_block_id": "sec-15-blk-3",
+      "section_id": "sec-15",
+      "section_heading": "Nützliche Server Befehle Bearbeiten",
+      "block_type": "list",
+      "text": "Der Abschnitt \"Nützliche Server Befehle\" im Dokument \"Doc-Gen\" behandelt verschiedene Befehle, die für die Verwaltung eines Servers nützlich sein können. Eine der wichtigsten Aktionen, die in diesem Kontext erwähnt wird, ist das Stoppen des Servers.\n\nUm den Server zu stoppen, müssen Sie folgende Schritte ausführen:\n1. Stellen Sie sicher, dass Sie als root-Benutzer angemeldet sind, da dieser Vorgang administrative Rechte erfordert.\n2. Führen Sie den entsprechenden Befehl aus, um den Server zu stoppen. Der genaue Befehl kann je nach Server-Software und Betriebssystem variieren, daher ist es wichtig, die spezifischen Anweisungen für Ihren Server zu konsultieren.\n\nEs ist wichtig zu beachten, dass das Stoppen eines Servers Auswirkungen auf die Verfügbarkeit von Diensten und Anwendungen haben kann, die auf diesem Server gehostet werden. Daher sollten Sie diesen Schritt sorgfältig planen und nur dann ausführen, wenn es unbedingt notwendig ist.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:50.323780"
+    },
+    {
+      "block_id": "ctx-sec-21-blk-2",
+      "source_block_id": "sec-21-blk-2",
+      "section_id": "sec-21",
+      "section_heading": "Doc-Gen Ver. 1.8 Testsystem Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste scheint eine URL-Adresse zu enthalten, die zum Zugriff auf ein bestimmtes System oder eine bestimmte Funktion innerhalb des Doc-Gen-Testsystems dient. Zusammengefasst handelt es sich um eine spezifische Adresse, die für den Zugriff auf eine Vorlagenliste innerhalb des Systems erforderlich ist.\n\nDie Adresse lautet:\nhttps://doc-gen-test.domain.de:6228/generator-launcher/ui/orga/template-list?antragsnummer=00Z001-00/00&vorgang=27596\n\nUm diese Adresse zu verwenden, können Sie folgende Schritte befolgen:\n1. Öffnen Sie Ihren Webbrowser.\n2. Geben Sie die oben genannte URL-Adresse in die Adresszeile ein.\n3. Drücken Sie die Enter-Taste, um zur angegebenen Seite zu gelangen.\n\nEs ist wichtig zu beachten, dass die Adresse spezifische Parameter enthält, wie die Antragsnummer (00Z001-00/00) und den Vorgang (27596), die möglicherweise für den Zugriff auf bestimmte Funktionen oder Daten innerhalb des Systems erforderlich sind.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:52.064733"
+    },
+    {
+      "block_id": "ctx-sec-21-blk-4",
+      "source_block_id": "sec-21-blk-4",
+      "section_id": "sec-21",
+      "section_heading": "Doc-Gen Ver. 1.8 Testsystem Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste enthält zwei URLs, die auf verschiedene Testsysteme für Doc-Gen Ver. 1.8 verweisen. Zusammengefasst bieten diese URLs Zugriff auf die Operator-Oberfläche des Doc-Gen-Testsystems.\n\nUm auf diese Systeme zuzugreifen, können Sie folgende Schritte befolgen:\n\n1. Öffnen Sie einen Webbrowser und geben Sie die erste URL ein: http://doc-gen-test.domain.de:6260/doc-gen-web/operator/\n2. Alternativ können Sie auch die zweite URL verwenden: https://doc-gen-test.domain.de:6428/doc-gen-web/operator/\n\nBeide URLs ermöglichen den Zugriff auf die Operator-Oberfläche des Doc-Gen-Testsystems, wobei die erste URL über HTTP und die zweite URL über HTTPS verfügbar ist.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:52.958768"
+    },
+    {
+      "block_id": "ctx-sec-22-blk-1",
+      "source_block_id": "sec-22-blk-1",
+      "section_id": "sec-22",
+      "section_heading": "Testsystem Operator/Converter 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Eigenschaften von Doc-Gen\nDie Tabelle stellt die Eigenschaften von Doc-Gen im Abschnitt \"Testsystem Operator/Converter 1.8\" dar. Sie enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.\n\n### Spaltenbeschreibung\n* Bezeichnung: Diese Spalte enthält die Namen oder Beschreibungen von Eigenschaften oder Parametern.\n* Wert: Diese Spalte enthält die Werte oder Einstellungen, die den jeweiligen Bezeichnungen zugeordnet sind.\n\n### Tabelleninhalte\nDa die Tabelle leer ist, gibt es keine Zeilen, die beschrieben werden können. Die Tabelle enthält keine Einträge, daher kann keine weitere Information bereitgestellt werden.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:54.070423"
+    },
+    {
+      "block_id": "ctx-sec-22-blk-2",
+      "source_block_id": "sec-22-blk-2",
+      "section_id": "sec-22",
+      "section_heading": "Testsystem Operator/Converter 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Applikationseinstellungen\nDie Tabelle stellt die Einstellungen für eine bestimmte Applikation dar, insbesondere in Bezug auf den Server und die verwendete Software.\n\nDie Bedeutung jeder Spalte kann wie folgt beschrieben werden:\n* Die erste Spalte enthält den Namen der Applikation oder eine Kategorie, zu der die folgenden Informationen gehören.\n* Die zweite Spalte enthält Informationen über den Server, einschließlich der IP-Adresse und des Servernamens.\n* Die dritte Spalte enthält Informationen über die verwendete Software oder den Betriebssystem.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\n* Die erste Zeile beschreibt die Applikation, ohne weitere Details anzugeben.\n* Die zweite Zeile beschreibt den Server, der für die Applikation verwendet wird, mit der IP-Adresse 188.455.5.174 und dem Servernamen s-0224m.srv.domain.de.\n* Die dritte Zeile beschreibt die verwendete Software, in diesem Fall JBoss 7.4, die in Verbindung mit der Applikation und dem Server aus der vorherigen Zeile verwendet wird.\n\nEs ist zu beachten, dass die Tabelle nur drei Zeilen enthält und die erste Spalte in den zweiten und dritten Zeilen leer ist, was bedeutet, dass die Informationen in diesen Zeilen in Verbindung mit der Applikation aus der ersten Zeile stehen.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:55.624917"
+    },
+    {
+      "block_id": "ctx-sec-22-blk-3",
+      "source_block_id": "sec-22-blk-3",
+      "section_id": "sec-22",
+      "section_heading": "Testsystem Operator/Converter 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Datenbankverbindungsinformationen\nDie Tabelle stellt die Verbindungsinformationen zu einer Datenbank dar, die für den Testsystem Operator/Converter 1.8 verwendet wird.\n\nDie Tabelle enthält folgende Spalten:\n* Datenbank: Enthält den Namen oder die Beschreibung der Datenbank\n* Server: Enthält die Adresse des Datenbankservers\n* Port: Enthält den Port, der für die Verbindung verwendet wird\n* SID: Enthält die System-ID der Datenbank\n* User: Enthält den Benutzernamen für die Verbindung\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\n* Die Datenbank ist mit dem Server 188.455.6.52 (s-0941.db.domain.de) verbunden.\n* Die Datenbank verwendet den Port 1521 für die Verbindung.\n* Die Datenbank hat die System-ID tbv19.\n* Die Datenbank verwendet den Benutzernamen doc-gentest18 für die Verbindung.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:56.687912"
+    },
+    {
+      "block_id": "ctx-sec-23-blk-1",
+      "source_block_id": "sec-23-blk-1",
+      "section_id": "sec-23",
+      "section_heading": "Testsystem Doc-Gen Integration Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Konfigurationswerte\nDie Tabelle \"Konfigurationswerte\" stellt eine Sammlung von Bezeichnungen und ihren entsprechenden Werten im Rahmen des Doc-Gen Integration Servers (EIS) 1.8 dar. Diese Tabelle bietet einen Überblick über die verschiedenen Konfigurationseinstellungen und ihre jeweiligen Werte.\n\nDie Spalten haben folgende Bedeutung:\n* Bezeichnung: Hier werden die Namen oder Identifikatoren der Konfigurationswerte aufgeführt.\n* Wert: In dieser Spalte sind die entsprechenden Werte zu den jeweiligen Bezeichnungen angegeben.\n\nDa die Tabelle leer ist, gibt es keine Zeilen, die beschrieben werden können. Die Tabelle bleibt somit ohne Inhalt.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:57.810826"
+    },
+    {
+      "block_id": "ctx-sec-23-blk-2",
+      "source_block_id": "sec-23-blk-2",
+      "section_id": "sec-23",
+      "section_heading": "Testsystem Doc-Gen Integration Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Server-Konfiguration\nDie Tabelle \"Server-Konfiguration\" stellt die Konfiguration eines Servers im Zusammenhang mit der Doc-Gen Integration Server (EIS) 1.8 dar. Sie enthält Informationen über die verwendete Applikation und den Server.\n\nDie Bedeutung jeder Spalte ist wie folgt:\n* Die erste Spalte enthält den Namen der Applikation.\n* Die zweite Spalte enthält die Server-Adresse und den Server-Namen.\n* Die dritte Spalte enthält die verwendete Tomcat-Version.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\n* Die erste Zeile beschreibt die Applikation, aber da keine weitere Information vorhanden ist, kann nicht genau gesagt werden, was diese Applikation ist.\n* Die zweite Zeile beschreibt den Server mit der Adresse 188.455.5.174 und dem Namen s-0224m.srv.domain.de, der in Verbindung mit der vorherigen Applikation steht.\n* Die dritte Zeile beschreibt die Verwendung von Tomcat 9, ebenfalls in Verbindung mit der vorherigen Applikation und dem Server.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:42:59.288242"
+    },
+    {
+      "block_id": "ctx-sec-23-blk-3",
+      "source_block_id": "sec-23-blk-3",
+      "section_id": "sec-23",
+      "section_heading": "Testsystem Doc-Gen Integration Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: EIS-Server-Konfiguration\nDie Tabelle hat keinen expliziten Titel, daher wird sie als \"EIS-Server-Konfiguration\" bezeichnet.\n\nDiese Tabelle stellt die Konfigurationseinstellungen für den EIS-Server (Enterprise Integration Server) dar. Sie enthält Informationen über die Datenbankverbindung und die verwendeten Benutzer.\n\nDie Bedeutung jeder Spalte ist wie folgt:\n* Die erste Spalte enthält die Kategorie oder den Typ der Konfigurationseinstellung.\n* Die zweite Spalte enthält den entsprechenden Wert oder die Details zu dieser Einstellung.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\n* Der Server für die Datenbank ist 188.455.6.52 (s-0941.db.domain.de).\n* Der Port für die Datenbankverbindung ist 1521.\n* Der SID (System Identifier) für die Datenbank ist tbv19.\n* Die Benutzer für die Datenbank sind EISKARMA_dev, EISJPAStore_dev, EISLockRegistry_dev, EISTBHStore_dev und EISUserService_dev.\n\nEs gibt keine weiteren Informationen oder leeren Felder in der Tabelle, die beschrieben werden müssten.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:00.671397"
+    },
+    {
+      "block_id": "ctx-sec-25-blk-2",
+      "source_block_id": "sec-25-blk-2",
+      "section_id": "sec-25",
+      "section_heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf den Abschnitt \"Doc-Gen Ver. 1.8 Produktivsystem\" und enthält Informationen über die Verwendung des Doc-Gen-Systems. Zusammengefasst handelt es sich um Hinweise und Links zur Nutzung des Systems.\n\nDie Liste kann wie folgt zusammengefasst werden:\n\nEs gibt zwei Links zum Doc-Gen-System, die für die Erstellung von Dokumenten verwendet werden können. Der erste Link enthält spezifische Parameter wie eine Antragsnummer und einen Vorgang, während der zweite Link ohne diese Parameter ist. Es ist jedoch wichtig zu beachten, dass Bescheide nicht erstellt werden sollten, da sie sonst im Infozupf landen.\n\nEs gibt keine spezifischen Schritte, die in einer bestimmten Reihenfolge ausgeführt werden müssen. Die Liste dient eher als Informationsquelle und Hinweis auf die Verwendung des Doc-Gen-Systems. Wenn Sie jedoch die Links verwenden möchten, können Sie folgende Schritte befolgen:\n\n1. Öffnen Sie den ersten Link, wenn Sie eine Antragsnummer und einen Vorgang haben, die Sie in die URL einfügen möchten.\n2. Öffnen Sie den zweiten Link, wenn Sie keine spezifischen Parameter haben.\n3. Beachten Sie, dass Sie keine Bescheide erstellen sollten, um eine ungewollte Weiterleitung im Infozupf zu vermeiden.\n\nEs ist wichtig, diese Hinweise zu beachten, um eine korrekte und effiziente Verwendung des Doc-Gen-Systems zu gewährleisten.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:02.247679"
+    },
+    {
+      "block_id": "ctx-sec-25-blk-3",
+      "source_block_id": "sec-25-blk-3",
+      "section_id": "sec-25",
+      "section_heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "block_type": "table",
+      "text": "### Tabelle: Doc-Gen Ver. 1.8 Produktivsystem\nDie Tabelle stellt die Konfiguration oder Eigenschaften des Doc-Gen Ver. 1.8 Produktivsystems dar. Sie enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.\n\n### Spaltenbeschreibung\n* Bezeichnung: Diese Spalte enthält die Namen oder Identifikatoren für verschiedene Eigenschaften oder Konfigurationen.\n* Wert: Diese Spalte enthält die Werte oder Einstellungen, die zu den jeweiligen Bezeichnungen gehören.\n\n### Tabelleninhalte\nDa die Tabelle leer ist, gibt es keine Zeilen, die beschrieben werden können. Die Tabelle besteht nur aus den Spaltenüberschriften \"Bezeichnung\" und \"Wert\", ohne weitere Einträge.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:03.645984"
+    },
+    {
+      "block_id": "ctx-sec-25-blk-4",
+      "source_block_id": "sec-25-blk-4",
+      "section_id": "sec-25",
+      "section_heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "block_type": "table",
+      "text": "### Tabelle: Applikationsserver\nDie Tabelle stellt die Konfiguration von Applikationsservern dar. Sie enthält Informationen über die Server, die für die Applikation \"Doc-Gen\" verwendet werden.\n\nDie Bedeutung jeder Spalte ist wie folgt:\n* Die erste Spalte enthält den Namen der Applikation.\n* Die zweite Spalte enthält die Server-Adresse, einschließlich der IP-Adresse und des Domain-Namens.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\nDie Applikation \"Applikation\" wird auf dem Server mit der Adresse \"188.455.5.164 (s-0214m.srv.domain.de/doc-gen.domain.de)\" gehostet.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:04.908946"
+    },
+    {
+      "block_id": "ctx-sec-25-blk-5",
+      "source_block_id": "sec-25-blk-5",
+      "section_id": "sec-25",
+      "section_heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "block_type": "table",
+      "text": "### Tabelle: Doc-Gen Verbindungseinstellungen\nDie Tabelle \"Doc-Gen Verbindungseinstellungen\" stellt die Konfiguration für die Verbindung zu einer Datenbank im Doc-Gen System dar. Sie enthält Informationen über den Server, den Port, die Systemkennung (SID) und den Benutzernamen für die Produktionsumgebung.\n\n### Spaltenbeschreibung\n* Datenbank: Bezeichnung der Datenbank\n* Server: Adresse des Servers\n* Port: Kommunikationsport für die Verbindung\n* SID: Systemkennung der Datenbank\n* User: Benutzername für die Verbindung\n\n### Tabelleninhalte\nDie Datenbank verwendet den Server mit der Adresse 188.455.6.52 (s-0941.db.domain.de). \nDie Datenbank verwendet den Port 1521. \nDie Datenbank verwendet die Systemkennung doc-gen19. \nDie Datenbank verwendet den Benutzernamen DOC-GEN_PROD.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:05.977662"
+    },
+    {
+      "block_id": "ctx-sec-26-blk-1",
+      "source_block_id": "sec-26-blk-1",
+      "section_id": "sec-26",
+      "section_heading": "Produktivsystem Doc-Gen Intergation Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Konfigurationswerte für Doc-Gen Intergation Server (EIS) 1.8\nDie Tabelle stellt Konfigurationswerte für den Doc-Gen Intergation Server (EIS) 1.8 dar. Sie enthält Informationen über verschiedene Bezeichnungen und ihre entsprechenden Werte.\n\n### Spaltenbeschreibung\n* Bezeichnung: Diese Spalte enthält die Namen oder Beschreibungen von Konfigurationswerten.\n* Wert: Diese Spalte enthält die entsprechenden Werte für die jeweiligen Bezeichnungen.\n\n### Tabelleninhalte\nLeider ist die Tabelle leer, daher gibt es keine Zeilen, die beschrieben werden können. Die Tabelle besteht nur aus den Spaltenüberschriften \"Bezeichnung\" und \"Wert\", ohne weitere Einträge.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:07.026711"
+    },
+    {
+      "block_id": "ctx-sec-26-blk-2",
+      "source_block_id": "sec-26-blk-2",
+      "section_id": "sec-26",
+      "section_heading": "Produktivsystem Doc-Gen Intergation Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: Server-Informationen\nDie Tabelle stellt Server-Informationen für die Applikation dar. Sie enthält Informationen über den Server, auf dem die Applikation gehostet wird.\n\nDie Bedeutung jeder Spalte ist wie folgt:\n* Applikation: Die Name der Applikation, die auf dem Server gehostet wird.\n* Server: Die Adresse des Servers, auf dem die Applikation gehostet wird.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\nDie Applikation wird auf dem Server mit der Adresse 188.455.5.164 (doc-gen.domain.de) gehostet.\n\nEs gibt nur eine Zeile in der Tabelle, daher gibt es keine Fortsetzungen oder leeren Kategorien. Die Tabelle ist sehr einfach und enthält nur eine einzige Information über den Server, auf dem die Applikation gehostet wird.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:08.427355"
+    },
+    {
+      "block_id": "ctx-sec-26-blk-3",
+      "source_block_id": "sec-26-blk-3",
+      "section_id": "sec-26",
+      "section_heading": "Produktivsystem Doc-Gen Intergation Server (EIS) 1.8",
+      "block_type": "table",
+      "text": "### Tabelle: EIS-Verbindungsdetails\nDie Tabelle \"EIS-Verbindungsdetails\" stellt die Verbindungseinstellungen für den Doc-Gen Intergation Server (EIS) 1.8 dar. Sie enthält Informationen über die Datenbankverbindung, die zum Betrieb des Servers erforderlich sind.\n\nDie Bedeutung jeder Spalte ist wie folgt:\n* Die erste Spalte enthält die Kategorie oder den Typ der Verbindungseinstellung.\n* Die zweite Spalte enthält den entsprechenden Wert oder die Details zu dieser Einstellung.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\n* Die Datenbankverbindung erfolgt über den Server mit der Adresse 188.455.6.52 (s-0941.db.domain.de).\n* Der Port für die Datenbankverbindung ist 1521.\n* Die System-ID (SID) für die Datenbankverbindung ist doc-gen19.\n* Der Benutzer für die Datenbankverbindung umfasst mehrere Rollen, darunter EISKARMA, EISJPAStore, EISLockRegistry, EISTBHStore und EISUserService.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:09.820855"
+    },
+    {
+      "block_id": "ctx-sec-28-blk-1",
+      "source_block_id": "sec-28-blk-1",
+      "section_id": "sec-28",
+      "section_heading": "Client Bearbeiten",
+      "block_type": "list",
+      "text": "Der Abschnitt \"Client Bearbeiten\" im Dokument \"Doc-Gen\" behandelt verschiedene Aspekte der Client-Konfiguration und -Verwaltung. Die Liste gibt einen Überblick über die wichtigsten Komponenten, die für die Arbeit mit Doc-Gen relevant sind.\n\nZusammengefasst umfasst die Liste zwei wichtige Elemente:\n- Der Webbrowser für Endanwender ist ein wichtiger Bestandteil von Doc-Gen, da er es Endanwendern ermöglicht, auf die Plattform zuzugreifen und Dokumente zu generieren.\n- Der Doc-Gen-Designer ist speziell für Administratoren konzipiert und bietet ihnen die Möglichkeit, die Plattform anzupassen und zu verwalten.\n\nEs handelt sich hier nicht um eine Schrittfolge, sondern um eine Auflistung der wichtigsten Komponenten, die für die Arbeit mit Doc-Gen relevant sind. Durch die Kombination aus Webbrowser für Endanwender und Doc-Gen-Designer für Administratoren bietet Doc-Gen eine umfassende Lösung für die Dokumentenerstellung und -verwaltung.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:11.432476"
+    },
+    {
+      "block_id": "ctx-sec-29-blk-1",
+      "source_block_id": "sec-29-blk-1",
+      "section_id": "sec-29",
+      "section_heading": "Gruppen in der AD Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf Gruppen in der Active Directory (AD) im Kontext des Dokumenttitels \"Doc-Gen\". Sie enthält verschiedene Gruppen, die offensichtlich mit der Verwaltung von Dokumenten und Berichten in Zusammenhang stehen. Hier ist eine Zusammenfassung der Liste in gut lesbarer Form:\n\nDie Gruppen in der AD umfassen verschiedene Bereiche der Dokumentengenerierung und -verwaltung. Dazu gehören:\n- Gruppen, die für die Verwaltung von Zwischeninformationen (Doc-Gen_Zwimis_PSM) zuständig sind,\n- solche, die sich mit der Bearbeitung von Bescheiden (Doc-Gen_Bescheide_PSM) beschäftigen,\n- Gruppen, die für die Erstellung und Verwaltung von Zulassungsberichten (Doc-Gen_Zulassungsberichte_PSM) verantwortlich sind,\n- sowie die Gruppe WebAuthor_PSM, die möglicherweise für die Autoren von Webinhalten oder die Verwaltung von Webinhalten im Rahmen von Doc-Gen zuständig ist.\n\nEs handelt sich hier nicht um eine Schrittfolge, sondern um eine Auflistung von Gruppen, die jeweils unterschiedliche Aufgabenbereiche innerhalb der Dokumentengenerierung und -verwaltung abdecken.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:13.901464"
+    },
+    {
+      "block_id": "ctx-sec-40-blk-4",
+      "source_block_id": "sec-40-blk-4",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste beschreibt eine Reihe von Schritten und Aufgaben, die im Rahmen der Vorbereitung der Aktualisierung der Produktion durchgeführt wurden. Hier ist eine Zusammenfassung der Liste als gut lesbarer Fließtext:\n\nDie Vorbereitung der Aktualisierung der Produktion umfasste mehrere Schritte. Zunächst wurde ein Template in der neuen Entwicklung angelegt und getestet. Anschließend wurde die Gen-Admin-Konfigurationsdatei angepasst, um bestimmte Testvorlagenschlüssel zu entfernen. Ein Zulassungsbericht wurde erstellt und die Berechtigungen wurden überprüft.\n\nDie folgenden Schritte wurden durchgeführt:\n\n1. Ein Template in der neuen Entwicklung anlegen und testen.\n2. Die Gen-Admin-Konfigurationsdatei anpassen, um bestimmte Testvorlagenschlüssel zu entfernen.\n3. Ein Zulassungsbericht erstellen.\n4. Die Berechtigungen überprüfen.\n5. Die Bescheiddaten kontrollieren.\n6. Fehler in der Formatierung im Testsystem untersuchen und beheben.\n\nEs gab auch einige spezifische Aufgaben, wie die Einrichtung von Apache auf bestimmten Servern und die Erstellung von Weiterleitungen. Einige dieser Aufgaben konnten abgeschlossen werden, wie die Einrichtung von Apache auf schwubs174.old.domain.de und die Erstellung einer index.html, die auf schwubs174.old.domain.de:4040/secure/webauthor/ weiterleitet. Andere Aufgaben, wie die Untersuchung, warum bestimmte Umleitungen erfolgen, konnten ebenfalls abgeschlossen werden.\n\nEs gibt jedoch noch einige offene Aufgaben, wie die Überprüfung des Testaufbaus Apache auf schwubs172.old.domain.de, die aufgrund von technischen Problemen noch nicht abgeschlossen werden konnte. Insgesamt zeigt die Liste, dass eine Vielzahl von Schritten und Aufgaben durchgeführt wurden, um die Aktualisierung der Produktion vorzubereiten.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:15.870187"
+    },
+    {
+      "block_id": "ctx-sec-40-blk-6",
+      "source_block_id": "sec-40-blk-6",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "list",
+      "text": "Die Liste beschreibt die Schritte und Aufgaben, die im Rahmen der Vorbereitung der Aktualisierung der Produktion am 11.01.2017 durchgeführt wurden. Hier sind die wichtigsten Punkte in einer klaren und lesbaren Form zusammengefasst:\n\nDie Vorbereitung der Aktualisierung der Produktion umfasste mehrere Schritte, die wie folgt aussehen:\n1. **Export und Import von TBV**: Zunächst wurde die alte Produktion von `srvlnx170.old.domain.de` exportiert und in die neue Produktion auf `Subs169.old.domain.de` importiert. Dieser Schritt wurde von Amir durchgeführt.\n2. **Aktualisierung des Jackrabbit Repository**: Anschließend wurde das Jackrabbit Repository von `Subs031.old.domain.de` auf `Subs174.old.domain.de` aktualisiert.\n3. **DNS-Umstellung**: Es folgten zwei DNS-Umstellungen: \n   - Die erste Umstellung betraf `doc-gen.old.domain.de`, die von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` umgestellt wurde. \n   - Die zweite Umstellung betraf `webauthor.old.domain.de`, die ebenfalls von `schwubs031.old.domain.de` auf `schwubs174.old.domain.de` umgestellt wurde. Beide Schritte wurden von Gabel und Lux durchgeführt und mit Dennis per E-Mail abgestimmt.\n4. **Fachliche Freigabe**: Nach den technischen Schritten wurde die fachliche Freigabe durch Britta Busch erteilt.\n5. **Abschaltung Altsysteme**: Anschließend wurden die Altsysteme `Subs028.old.domain.de` bis `Subs031.old.domain.de` abgeschaltet.\n6. **Anpassung Nagios Überwachung**: Es wurde eine Anpassung der Nagios Überwachung beantragt.\n7. **Aktualisierung der Dokumentation**: Zum Abschluss wurde die Dokumentation (Wiki, Installation/Betriebshandbuch) aktualisiert.\n\nDiese Schritte zusammenfassen die Vorbereitung und Durchführung der Aktualisierung der Produktion am 11.01.2017.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-02 12:43:17.669414"
+    }
+  ],
+  "skipped_blocks": [
+    {
+      "source_block_id": "sec-2-blk-1",
+      "section_id": "sec-2",
+      "section_heading": "Vorwort Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-1",
+      "section_id": "sec-4",
+      "section_heading": "Fachlich Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-1",
+      "section_id": "sec-10",
+      "section_heading": "GIT Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-2",
+      "section_id": "sec-10",
+      "section_heading": "GIT Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-13-blk-1",
+      "section_id": "sec-13",
+      "section_heading": "Anwendungsserver Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-13-blk-2",
+      "section_id": "sec-13",
+      "section_heading": "Anwendungsserver Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-14-blk-1",
+      "section_id": "sec-14",
+      "section_heading": "Datenbank Server Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-14-blk-2",
+      "section_id": "sec-14",
+      "section_heading": "Datenbank Server Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-15-blk-2",
+      "section_id": "sec-15",
+      "section_heading": "Nützliche Server Befehle Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-15-blk-4",
+      "section_id": "sec-15",
+      "section_heading": "Nützliche Server Befehle Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-17-blk-1",
+      "section_id": "sec-17",
+      "section_heading": "Fachliche Daten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-18-blk-1",
+      "section_id": "sec-18",
+      "section_heading": "Personenbezogene Daten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-19-blk-1",
+      "section_id": "sec-19",
+      "section_heading": "Systemarchitektur Doc-Gen Ver. 1.8 Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-21-blk-1",
+      "section_id": "sec-21",
+      "section_heading": "Doc-Gen Ver. 1.8 Testsystem Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-21-blk-3",
+      "section_id": "sec-21",
+      "section_heading": "Doc-Gen Ver. 1.8 Testsystem Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-1",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-2",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-3",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-4",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-5",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-6",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-7",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-8",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-9",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-10",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-11",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-12",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-24-blk-13",
+      "section_id": "sec-24",
+      "section_heading": "Konfigurationseiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-25-blk-1",
+      "section_id": "sec-25",
+      "section_heading": "Doc-Gen Ver. 1.8 Produktivsystem Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-1",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-2",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-3",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-4",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-5",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-6",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-7",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-8",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-9",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-10",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-11",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-12",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-27-blk-13",
+      "section_id": "sec-27",
+      "section_heading": "Konfigurationseiten Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-30-blk-1",
+      "section_id": "sec-30",
+      "section_heading": "Abhängigkeit von anderen Anwendungen Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-33-blk-1",
+      "section_id": "sec-33",
+      "section_heading": "09.10.2023 Plan-B-Migration in RZ Bundesallee Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-36-blk-1",
+      "section_id": "sec-36",
+      "section_heading": "01.12.2022 neuer Doc-Gen Server schwubs374 Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-1",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-2",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-3",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-4",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-5",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-6",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-7",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-8",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-9",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-10",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-11",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-12",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-39-blk-13",
+      "section_id": "sec-39",
+      "section_heading": "27.10.2016 (Aktualisierung Testdatenbank) Bearbeiten",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-40-blk-1",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-40-blk-2",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-40-blk-3",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-40-blk-5",
+      "section_id": "sec-40",
+      "section_heading": "11.01.2017 (Vorbereitung Aktualisierung Produktion) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-41-blk-1",
+      "section_id": "sec-41",
+      "section_heading": "2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-41-blk-2",
+      "section_id": "sec-41",
+      "section_heading": "2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-41-blk-3",
+      "section_id": "sec-41",
+      "section_heading": "2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-41-blk-4",
+      "section_id": "sec-41",
+      "section_heading": "2018-08-27 (Untersuchung Ghostscript Schwachstelle) Bearbeiten",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    }
+  ],
+  "failed_blocks": []
+}

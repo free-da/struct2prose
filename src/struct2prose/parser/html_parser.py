@@ -28,7 +28,23 @@ def extract_text_with_breaks(tag: Tag) -> str:
     return "\n".join(line for line in lines if line)
 
 
-def _parse_container(container: Tag, sections: list[Section], current: Section) -> Section:
+def _new_section(section_index: int, heading: str) -> Section:
+    return Section(
+        section_id=f"sec-{section_index}",
+        heading=heading,
+    )
+
+
+def _next_block_id(section: Section) -> str:
+    return f"{section.section_id}-blk-{len(section.blocks) + 1}"
+
+
+def _parse_container(
+    container: Tag,
+    sections: list[Section],
+    current: Section,
+    section_index: int,
+) -> tuple[Section, int]:
     for child in container.find_all(recursive=False):
         if not isinstance(child, Tag):
             continue
@@ -40,12 +56,19 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
                 sections.append(current)
 
             heading = child.get_text(" ", strip=True) or "Abschnitt"
-            current = Section(heading=heading)
+            section_index += 1
+            current = _new_section(section_index, heading)
 
         elif name == "p":
             text = extract_text_with_breaks(child)
             if text:
-                current.blocks.append(ContentBlock("paragraph", text))
+                current.blocks.append(
+                    ContentBlock(
+                        block_id=_next_block_id(current),
+                        block_type="paragraph",
+                        content=text,
+                    )
+                )
 
         elif name in {"ul", "ol"}:
             items = [
@@ -54,7 +77,13 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
             ]
             items = [it for it in items if it]
             if items:
-                current.blocks.append(ContentBlock("list", items))
+                current.blocks.append(
+                    ContentBlock(
+                        block_id=_next_block_id(current),
+                        block_type="list",
+                        content=items,
+                    )
+                )
 
         elif name == "table":
             rows: list[list[str]] = []
@@ -67,12 +96,24 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
                     rows.append(cells)
 
             if rows:
-                current.blocks.append(ContentBlock("table", rows))
+                current.blocks.append(
+                    ContentBlock(
+                        block_id=_next_block_id(current),
+                        block_type="table",
+                        content=rows,
+                    )
+                )
 
         elif name in {"pre", "code"}:
             code = extract_text_with_breaks(child)
             if code:
-                current.blocks.append(ContentBlock("code", code))
+                current.blocks.append(
+                    ContentBlock(
+                        block_id=_next_block_id(current),
+                        block_type="code",
+                        content=code,
+                    )
+                )
 
         elif name == "div":
             classes = set(child.get("class", []) or [])
@@ -81,22 +122,34 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
             if "code" in classes:
                 code = child.get_text("\n", strip=True)
                 if code:
-                    current.blocks.append(ContentBlock("code", code))
+                    current.blocks.append(
+                        ContentBlock(
+                            block_id=_next_block_id(current),
+                            block_type="code",
+                            content=code,
+                        )
+                    )
                 continue
 
             # div as container; if it contains block children, recurse
             has_block_children = child.find(list(BLOCK_TAGS), recursive=False) is not None
 
             if has_block_children:
-                current = _parse_container(child, sections, current)
+                current, section_index = _parse_container(child, sections, current, section_index)
             else:
                 text = extract_text_with_breaks(child)
                 if text:
-                    current.blocks.append(ContentBlock("div_text", text))
+                    current.blocks.append(
+                        ContentBlock(
+                            block_id=_next_block_id(current),
+                            block_type="div_text",
+                            content=text,
+                        )
+                    )
 
         # everything else is ignored
 
-    return current
+    return current, section_index
 
 
 def parse_html(html: str, metadata: DocumentMetadata) -> WikiDocument:
@@ -109,18 +162,18 @@ def parse_html(html: str, metadata: DocumentMetadata) -> WikiDocument:
     )
 
     sections: list[Section] = []
-    current = Section(heading="Einleitung")
+    section_index = 1
+    current = _new_section(section_index, "Einleitung")
 
     root = soup.body if soup.body else soup
-    current = _parse_container(root, sections, current)
+    current, section_index = _parse_container(root, sections, current, section_index)
 
     if current.blocks or not sections:
         sections.append(current)
 
     return WikiDocument(
-        title=title,
+        metadata=metadata,
         sections=sections,
-        source_file=metadata.source_id,
     )
 
 
