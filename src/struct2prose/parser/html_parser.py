@@ -3,24 +3,30 @@ from __future__ import annotations
 from bs4 import BeautifulSoup, Tag
 from pathlib import Path
 
+from struct2prose.models.documents import DocumentMetadata
 from struct2prose.parser.models import WikiDocument, Section, ContentBlock
 
 
 BLOCK_TAGS = {"p", "ul", "ol", "table", "pre", "code", "div"}
 
+
 def extract_text_with_breaks(tag: Tag) -> str:
     """
     Extract text from a tag, converting <br> to line breaks and
-    normalizing whitespace.
+    normalizing whitespace while preserving meaningful line breaks.
     """
+    tag = tag.__copy__() if hasattr(tag, "__copy__") else BeautifulSoup(str(tag), "html.parser").find()
+    if tag is None:
+        return ""
+
     for br in tag.find_all("br"):
         br.replace_with("\n")
 
     text = tag.get_text(separator=" ", strip=True)
 
-    # Contextualize excessive whitespace but keep line breaks
     lines = [line.strip() for line in text.splitlines()]
     return "\n".join(line for line in lines if line)
+
 
 def _parse_container(container: Tag, sections: list[Section], current: Section) -> Section:
     for child in container.find_all(recursive=False):
@@ -32,6 +38,7 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
         if name in {"h1", "h2", "h3"}:
             if current.blocks or current.heading != "Einleitung":
                 sections.append(current)
+
             heading = child.get_text(" ", strip=True) or "Abschnitt"
             current = Section(heading=heading)
 
@@ -41,7 +48,10 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
                 current.blocks.append(ContentBlock("paragraph", text))
 
         elif name in {"ul", "ol"}:
-            items = [li.get_text(" ", strip=True) for li in child.find_all("li", recursive=False)]
+            items = [
+                li.get_text(" ", strip=True)
+                for li in child.find_all("li", recursive=False)
+            ]
             items = [it for it in items if it]
             if items:
                 current.blocks.append(ContentBlock("list", items))
@@ -49,64 +59,82 @@ def _parse_container(container: Tag, sections: list[Section], current: Section) 
         elif name == "table":
             rows: list[list[str]] = []
             for row in child.find_all("tr"):
-                cells = [cell.get_text(" ", strip=True) for cell in row.find_all(["td", "th"])]
-                rows.append(cells)
-            current.blocks.append(ContentBlock("table", rows))
+                cells = [
+                    cell.get_text(" ", strip=True)
+                    for cell in row.find_all(["td", "th"])
+                ]
+                if cells:
+                    rows.append(cells)
+
+            if rows:
+                current.blocks.append(ContentBlock("table", rows))
 
         elif name in {"pre", "code"}:
             code = extract_text_with_breaks(child)
             if code:
                 current.blocks.append(ContentBlock("code", code))
 
-
         elif name == "div":
-
-            # XWiki: code blocks are often rendered as <div class="code">...</div>
-
             classes = set(child.get("class", []) or [])
 
+            # XWiki: code blocks are often rendered as <div class="code">...</div>
             if "code" in classes:
-
                 code = child.get_text("\n", strip=True)
-
                 if code:
                     current.blocks.append(ContentBlock("code", code))
-
                 continue
 
-            # div als Container; wenn keine Block-Kinder: als Textblock
-
+            # div as container; if it contains block children, recurse
             has_block_children = child.find(list(BLOCK_TAGS), recursive=False) is not None
 
             if has_block_children:
-
                 current = _parse_container(child, sections, current)
-
             else:
-
                 text = extract_text_with_breaks(child)
-
                 if text:
                     current.blocks.append(ContentBlock("div_text", text))
 
-        # alles andere ignorieren
+        # everything else is ignored
 
     return current
 
 
-def parse_html_file(path: Path) -> WikiDocument:
-    with open(path, encoding="utf-8") as f:
-        soup = BeautifulSoup(f, "html.parser")
+def parse_html(html: str, metadata: DocumentMetadata) -> WikiDocument:
+    soup = BeautifulSoup(html, "html.parser")
 
-    title = soup.title.string.strip() if soup.title and soup.title.string else path.stem
+    title = (
+        soup.title.string.strip()
+        if soup.title and soup.title.string
+        else metadata.title
+    )
 
     sections: list[Section] = []
     current = Section(heading="Einleitung")
 
-    if soup.body:
-        current = _parse_container(soup.body, sections, current)
+    root = soup.body if soup.body else soup
+    current = _parse_container(root, sections, current)
 
     if current.blocks or not sections:
         sections.append(current)
 
-    return WikiDocument(title=title, sections=sections, source_file=path.name)
+    return WikiDocument(
+        title=title,
+        sections=sections,
+        source_file=metadata.source_id,
+    )
+
+
+def parse_html_file(path: Path) -> WikiDocument:
+    html = path.read_text(encoding="utf-8")
+
+    metadata = DocumentMetadata(
+        source_id=f"file:{path.stem}",
+        title=path.stem,
+        xwiki_url=None,
+        xwiki_page_reference=None,
+        source_hash="",
+        retrieved_at=None,
+        pipeline_version="legacy",
+    )
+
+    return parse_html(html, metadata)

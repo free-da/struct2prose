@@ -9,7 +9,7 @@ class DocumentMetadata:
     xwiki_url: str | None
     xwiki_page_reference: str | None
     source_hash: str
-    retrieved_at: datetime
+    retrieved_at: datetime | None
     last_modified: str | None = None
     pipeline_run_id: str | None = None
     pipeline_version: str | None = None
