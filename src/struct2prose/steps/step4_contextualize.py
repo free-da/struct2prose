@@ -15,7 +15,7 @@ from struct2prose.models.documents import (
     ContextualizedBlock,
     ContextualizedDocument,
     FailedBlock,
-    SkippedBlock,
+    SkippedBlock, DocumentMetadata,
 )
 from struct2prose.parser.models import (
     ContentBlock,
@@ -231,75 +231,6 @@ def _markdown_for_passthrough_block(block: ContentBlock) -> str:
     text = str(content).strip()
     return text + "\n" if text else ""
 
-
-def _wiki_document_from_json(data: dict[str, Any], source_file: str) -> WikiDocument:
-    """
-    Adapter for current parser output JSON -> WikiDocument.
-    Keeps step 4 compatible while step 3 is still being migrated.
-    """
-    from struct2prose.models.documents import DocumentMetadata
-
-    metadata_dict = data.get("metadata")
-    if metadata_dict:
-        metadata = DocumentMetadata(
-            source_id=metadata_dict["source_id"],
-            title=metadata_dict["title"],
-            xwiki_url=metadata_dict.get("xwiki_url"),
-            xwiki_page_reference=metadata_dict.get("xwiki_page_reference"),
-            source_hash=metadata_dict["source_hash"],
-            retrieved_at=(
-                datetime.fromisoformat(metadata_dict["retrieved_at"])
-                if metadata_dict.get("retrieved_at")
-                else None
-            ),
-            last_modified=metadata_dict.get("last_modified"),
-            pipeline_run_id=metadata_dict.get("pipeline_run_id"),
-            pipeline_version=metadata_dict.get("pipeline_version"),
-        )
-    else:
-        metadata = DocumentMetadata(
-            source_id=Path(source_file).stem,
-            title=data.get("title", Path(source_file).stem),
-            xwiki_url=None,
-            xwiki_page_reference=None,
-            source_hash="unknown",
-            retrieved_at=None,
-            last_modified=None,
-            pipeline_run_id=None,
-            pipeline_version=None,
-        )
-
-    sections: list[Section] = []
-
-    for sec_index, sec in enumerate(data.get("sections", []), start=1):
-        section_id = sec.get("section_id") or f"sec-{sec_index}"
-        heading = sec.get("heading", "Abschnitt")
-
-        blocks: list[ContentBlock] = []
-        for block_index, block in enumerate(sec.get("blocks", []), start=1):
-            block_id = block.get("block_id") or f"{section_id}-blk-{block_index}"
-            blocks.append(
-                ContentBlock(
-                    block_id=block_id,
-                    block_type=block.get("block_type", "unknown"),
-                    content=block.get("content"),
-                )
-            )
-
-        sections.append(
-            Section(
-                section_id=section_id,
-                heading=heading,
-                blocks=blocks,
-            )
-        )
-
-    return WikiDocument(
-        metadata=metadata,
-        sections=sections,
-    )
-
-
 def _contextualize_document(doc: WikiDocument, model: str) -> tuple[ContextualizedDocument, str]:
     contextualized_doc = ContextualizedDocument(metadata=doc.metadata)
 
@@ -381,9 +312,26 @@ def run(processed_dir: Path, contextualized_dir: Path, model: str = MODEL_DEFAUL
     contextualized_dir.mkdir(parents=True, exist_ok=True)
 
     for file in sorted(processed_dir.glob("*.json")):
-        data: dict[str, Any] = json.loads(file.read_text(encoding="utf-8"))
+        data = json.loads(file.read_text(encoding="utf-8"))
 
-        doc = _wiki_document_from_json(data=data, source_file=file.name)
+        doc = WikiDocument(
+            metadata=DocumentMetadata(**data["metadata"]),
+            sections=[
+                Section(
+                    section_id=sec["section_id"],
+                    heading=sec["heading"],
+                    blocks=[
+                        ContentBlock(
+                            block_id=blk["block_id"],
+                            block_type=blk["block_type"],
+                            content=blk["content"],
+                        )
+                        for blk in sec["blocks"]
+                    ],
+                )
+                for sec in data["sections"]
+            ],
+        )
         contextualized_doc, markdown = _contextualize_document(doc=doc, model=model)
 
         out_md_path = contextualized_dir / f"{file.stem}.md"
