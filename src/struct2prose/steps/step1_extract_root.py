@@ -28,7 +28,8 @@ def _load_source_document_from_file(file_path: Path) -> SourceDocument:
         xwiki_page_reference=None,
         source_hash=_compute_sha256(raw_content),
         retrieved_at=datetime.now(),
-        pipeline_version="v1",
+        pipeline_version=None,
+        pipeline_run_id=None,
     )
 
     return SourceDocument(
@@ -57,11 +58,13 @@ def _export_clean_document(clean_doc: CleanDocument, out_path: Path) -> None:
     )
 
 
-def run(raw_dir: Path, clean_dir: Path, root_class: str = "xcontent") -> None:
+def run(raw_dir: Path, clean_dir: Path, root_class: str = "xcontent", pipeline_version: str | None = None, run_id: str | None = None, db_path: Path | None = None) -> None:
     clean_dir.mkdir(parents=True, exist_ok=True)
 
     for file_path in sorted(raw_dir.glob("*.htm")):
         source_doc = _load_source_document_from_file(file_path)
+        source_doc.metadata.pipeline_version=pipeline_version
+        source_doc.metadata.pipeline_run_id=run_id
         clean_doc = _extract_root(source_doc, root_class=root_class)
 
         out_path = clean_dir / f"{file_path.stem}.json"
