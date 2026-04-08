@@ -1,6 +1,9 @@
 import argparse
 from pathlib import Path
+import uuid
 
+from struct2prose.persistence.db import connect, init_db
+from struct2prose.persistence.store import create_pipeline_run, finish_pipeline_run
 from struct2prose.steps.step1_extract_root import run as run_extract_root
 from struct2prose.steps.step2_strip_ui import run as run_strip_ui
 from struct2prose.steps.step3_parse import run as run_parse
@@ -37,8 +40,16 @@ def main() -> None:
     p_all.add_argument("--processed-dir", type=Path, default=Path("processed_data"))
     p_all.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
     p_all.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
+    p_all.add_argument("--db-path", type=Path, default=Path("state/struct2prose.db"))
 
     args = parser.parse_args()
+
+    # state directory / DB file vorbereiten
+    args.db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # DB immer initialisieren, damit Schema sicher vorhanden ist
+    with connect(args.db_path) as conn:
+        init_db(conn)
 
     if args.cmd == "extract-root":
         run_extract_root(args.raw_dir, args.clean_dir)
@@ -49,7 +60,27 @@ def main() -> None:
     elif args.cmd == "contextualize":
         run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
     elif args.cmd == "all":
-        run_extract_root(args.raw_dir, args.clean_dir)
-        run_strip_ui(args.clean_dir, args.stripped_dir)
-        run_parse(args.stripped_dir, args.processed_dir)
-        run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
+        run_id = str(uuid.uuid4())
+
+        with connect(args.db_path) as conn:
+            create_pipeline_run(
+                conn,
+                run_id=run_id,
+                pipeline_version="v1",
+                llm_provider=Config.LLM_PROVIDER,
+                model_name=args.model,
+            )
+
+        try:
+            run_extract_root(args.raw_dir, args.clean_dir)
+            run_strip_ui(args.clean_dir, args.stripped_dir)
+            run_parse(args.stripped_dir, args.processed_dir)
+            run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
+
+            with connect(args.db_path) as conn:
+                finish_pipeline_run(conn, run_id, "completed")
+
+        except Exception:
+            with connect(args.db_path) as conn:
+                finish_pipeline_run(conn, run_id, "failed")
+            raise
