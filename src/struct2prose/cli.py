@@ -73,11 +73,30 @@ def main() -> None:
             db_path=args.db_path,
         )
     elif args.cmd == "strip-ui":
-        run_strip_ui(args.clean_dir, args.stripped_dir)
+        run_strip_ui(
+            args.clean_dir,
+            args.stripped_dir,
+            pipeline_version=args.pipeline_version,
+            run_id=None,
+            db_path=args.db_path,
+        )
     elif args.cmd == "parse":
-        run_parse(args.stripped_dir, args.processed_dir)
+        run_parse(
+            args.stripped_dir,
+            args.processed_dir,
+            pipeline_version=args.pipeline_version,
+            run_id=None,
+            db_path=args.db_path,
+        )
     elif args.cmd == "contextualize":
-        run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
+        run_contextualize(
+            args.processed_dir,
+            args.contextualized_dir,
+            model=args.model,
+            pipeline_version=args.pipeline_version,
+            run_id=None,
+            db_path=args.db_path,
+        )
     elif args.cmd == "all":
         run_id = str(uuid.uuid4())
 
@@ -99,10 +118,28 @@ def main() -> None:
                 run_id=run_id,
                 db_path=args.db_path,
             )
-            run_strip_ui(args.clean_dir, args.stripped_dir)
-            run_parse(args.stripped_dir, args.processed_dir)
-            run_contextualize(args.processed_dir, args.contextualized_dir, model=args.model)
-
+            run_strip_ui(
+                args.clean_dir,
+                args.stripped_dir,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_parse(
+                args.stripped_dir,
+                args.processed_dir,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_contextualize(
+                args.processed_dir,
+                args.contextualized_dir,
+                model=args.model,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")
 

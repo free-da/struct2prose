@@ -1,12 +1,9 @@
 import json
-import os
 import time
 from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any
-
-from groq import Groq
 
 from struct2prose.config import Config
 from struct2prose.models.documents import (
@@ -15,16 +12,40 @@ from struct2prose.models.documents import (
     ContextualizedBlock,
     ContextualizedDocument,
     FailedBlock,
-    SkippedBlock, DocumentMetadata,
+    SkippedBlock,
 )
 from struct2prose.parser.models import (
     ContentBlock,
     Section,
     WikiDocument,
 )
+from struct2prose.persistence.db import connect
+from struct2prose.persistence.store import (
+    create_contextualization_task,
+    create_document_version,
+    create_step_run,
+    finish_contextualization_task,
+    finish_step_run,
+)
 from struct2prose.services.llm_client import generate_text
 
 MODEL_DEFAULT = Config.get_model_name()
+STEP_NAME = "contextualize"
+
+
+def _make_step_run_id(run_id: str, source_id: str) -> str:
+    safe_source_id = source_id.replace(":", "_")
+    return f"{run_id}:{STEP_NAME}:{safe_source_id}"
+
+
+def _make_input_version_id(run_id: str, source_id: str) -> str:
+    safe_source_id = source_id.replace(":", "_")
+    return f"{run_id}:processed_data:{safe_source_id}"
+
+
+def _make_output_version_id(run_id: str, source_id: str) -> str:
+    safe_source_id = source_id.replace(":", "_")
+    return f"{run_id}:contextualized_data:{safe_source_id}"
 
 
 def _table_to_csv(rows: list[list[str]]) -> str:
@@ -124,11 +145,6 @@ def _validate_contextualized_text(text: str | None) -> bool:
         return False
     return True
 
-
-def _make_task_id(doc: WikiDocument, section: Section, block: ContentBlock) -> str:
-    return f"{doc.metadata.source_id}:{section.section_id}:{block.block_id}:contextualize"
-
-
 def _make_contextualized_block_id(task: ContextualizationTask) -> str:
     return f"ctx-{task.source_block_id}"
 
@@ -138,11 +154,19 @@ def _create_task(
     section: Section,
     block: ContentBlock,
     model: str,
+    *,
+    step_run_id: str | None = None,
     prompt_name: str = "contextualization",
     prompt_version: str = "v1",
 ) -> ContextualizationTask:
+    if step_run_id is not None:
+        safe_step_run_id = step_run_id.replace(":", "_")
+        task_id = f"{safe_step_run_id}:{block.block_id}"
+    else:
+        # Fallback (z. B. bei Einzelaufruf ohne run_id)
+        task_id = f"{doc.metadata.source_id}:{section.section_id}:{block.block_id}:contextualize"
     return ContextualizationTask(
-        task_id=_make_task_id(doc, section, block),
+        task_id=task_id,
         source_id=doc.metadata.source_id,
         pipeline_run_id=doc.metadata.pipeline_run_id,
         source_block_id=block.block_id,
@@ -231,7 +255,78 @@ def _markdown_for_passthrough_block(block: ContentBlock) -> str:
     text = str(content).strip()
     return text + "\n" if text else ""
 
-def _contextualize_document(doc: WikiDocument, model: str) -> tuple[ContextualizedDocument, str]:
+
+def _wiki_document_from_json(data: dict[str, Any], source_file: str) -> WikiDocument:
+    from struct2prose.models.documents import DocumentMetadata
+
+    metadata_dict = data.get("metadata")
+    if metadata_dict:
+        metadata = DocumentMetadata(
+            source_id=metadata_dict["source_id"],
+            title=metadata_dict["title"],
+            xwiki_url=metadata_dict.get("xwiki_url"),
+            xwiki_page_reference=metadata_dict.get("xwiki_page_reference"),
+            source_hash=metadata_dict["source_hash"],
+            retrieved_at=(
+                datetime.fromisoformat(metadata_dict["retrieved_at"])
+                if metadata_dict.get("retrieved_at")
+                else None
+            ),
+            last_modified=metadata_dict.get("last_modified"),
+            pipeline_run_id=metadata_dict.get("pipeline_run_id"),
+            pipeline_version=metadata_dict.get("pipeline_version"),
+        )
+    else:
+        metadata = DocumentMetadata(
+            source_id=Path(source_file).stem,
+            title=data.get("title", Path(source_file).stem),
+            xwiki_url=None,
+            xwiki_page_reference=None,
+            source_hash="unknown",
+            retrieved_at=None,
+            last_modified=None,
+            pipeline_run_id=None,
+            pipeline_version=None,
+        )
+
+    sections: list[Section] = []
+
+    for sec_index, sec in enumerate(data.get("sections", []), start=1):
+        section_id = sec.get("section_id") or f"sec-{sec_index}"
+        heading = sec.get("heading", "Abschnitt")
+
+        blocks: list[ContentBlock] = []
+        for block_index, block in enumerate(sec.get("blocks", []), start=1):
+            block_id = block.get("block_id") or f"{section_id}-blk-{block_index}"
+            blocks.append(
+                ContentBlock(
+                    block_id=block_id,
+                    block_type=block.get("block_type", "unknown"),
+                    content=block.get("content"),
+                )
+            )
+
+        sections.append(
+            Section(
+                section_id=section_id,
+                heading=heading,
+                blocks=blocks,
+            )
+        )
+
+    return WikiDocument(
+        metadata=metadata,
+        sections=sections,
+    )
+
+
+def _contextualize_document(
+    doc: WikiDocument,
+    model: str,
+    *,
+    step_run_id: str | None = None,
+    db_path: Path | None = None,
+) -> tuple[ContextualizedDocument, str]:
     contextualized_doc = ContextualizedDocument(metadata=doc.metadata)
 
     md_lines: list[str] = [f"# {doc.metadata.title}\n"]
@@ -256,7 +351,32 @@ def _contextualize_document(doc: WikiDocument, model: str) -> tuple[Contextualiz
                 )
                 continue
 
-            task = _create_task(doc=doc, section=section, block=block, model=model)
+            task = _create_task(
+                doc=doc,
+                section=section,
+                block=block,
+                model=model,
+                step_run_id=step_run_id,
+            )
+            if step_run_id is not None and db_path is not None:
+                with connect(db_path) as conn:
+                    create_contextualization_task(
+                        conn,
+                        task_id=task.task_id,
+                        step_run_id=step_run_id,
+                        source_id=task.source_id,
+                        source_block_id=task.source_block_id,
+                        section_id=task.section_id,
+                        section_heading=task.section_heading,
+                        block_type=task.block_type,
+                        strategy=task.strategy,
+                        prompt_name=task.prompt_name,
+                        prompt_version=task.prompt_version,
+                        model_name=task.model_name,
+                        status="running",
+                        created_at=task.created_at.isoformat() if task.created_at else None,
+                    )
+
             result = _execute_task(
                 doc=doc,
                 section=section,
@@ -280,6 +400,16 @@ def _contextualize_document(doc: WikiDocument, model: str) -> tuple[Contextualiz
                 )
                 contextualized_doc.contextualized_blocks.append(contextualized_block)
                 md_lines.append(result.contextualized_text + "\n")
+
+                if step_run_id is not None and db_path is not None:
+                    with connect(db_path) as conn:
+                        finish_contextualization_task(
+                            conn,
+                            task_id=task.task_id,
+                            status="completed",
+                            contextualized_block_id=contextualized_block.block_id,
+                            error_message=None,
+                        )
             else:
                 contextualized_doc.failed_blocks.append(
                     FailedBlock(
@@ -295,58 +425,108 @@ def _contextualize_document(doc: WikiDocument, model: str) -> tuple[Contextualiz
                     f"{result.error_message or 'Unbekannter Fehler'}]\n"
                 )
 
+                if step_run_id is not None and db_path is not None:
+                    with connect(db_path) as conn:
+                        finish_contextualization_task(
+                            conn,
+                            task_id=task.task_id,
+                            status="failed",
+                            contextualized_block_id=None,
+                            error_message=result.error_message or "Unbekannter Fehler",
+                        )
+
             time.sleep(0.2)
 
     markdown = "\n".join(md_lines).strip() + "\n"
     return contextualized_doc, markdown
 
 
-def run(processed_dir: Path, contextualized_dir: Path, model: str = MODEL_DEFAULT) -> None:
-    api_key = os.environ.get("GROQ_API_KEY")
-    if not api_key:
-        raise RuntimeError("GROQ_API_KEY ist nicht gesetzt (PyCharm Run Configuration -> Environment).")
-
-    client = Groq(api_key=api_key)
-    _ = client  # kept intentionally so the existing dependency/init remains in place
-
+def run(
+    processed_dir: Path,
+    contextualized_dir: Path,
+    *,
+    model: str = MODEL_DEFAULT,
+    pipeline_version: str | None = None,
+    run_id: str | None = None,
+    db_path: Path | None = None,
+) -> None:
     contextualized_dir.mkdir(parents=True, exist_ok=True)
 
     for file in sorted(processed_dir.glob("*.json")):
-        data = json.loads(file.read_text(encoding="utf-8"))
+        data: dict[str, Any] = json.loads(file.read_text(encoding="utf-8"))
+        doc = _wiki_document_from_json(data=data, source_file=file.name)
 
-        doc = WikiDocument(
-            metadata=DocumentMetadata(**data["metadata"]),
-            sections=[
-                Section(
-                    section_id=sec["section_id"],
-                    heading=sec["heading"],
-                    blocks=[
-                        ContentBlock(
-                            block_id=blk["block_id"],
-                            block_type=blk["block_type"],
-                            content=blk["content"],
-                        )
-                        for blk in sec["blocks"]
-                    ],
-                )
-                for sec in data["sections"]
-            ],
-        )
-        contextualized_doc, markdown = _contextualize_document(doc=doc, model=model)
+        doc.metadata.pipeline_version = pipeline_version or doc.metadata.pipeline_version
+        doc.metadata.pipeline_run_id = run_id or doc.metadata.pipeline_run_id
 
-        out_md_path = contextualized_dir / f"{file.stem}.md"
-        out_md_path.write_text(markdown, encoding="utf-8")
+        step_run_id = None
+        output_version_id = None
 
-        out_json_path = contextualized_dir / f"{file.stem}.contextualized.json"
-        out_json_path.write_text(
-            json.dumps(
-                asdict(contextualized_doc),
-                ensure_ascii=False,
-                indent=2,
-                default=str,
-            ),
-            encoding="utf-8",
-        )
+        try:
+            if run_id is not None and db_path is not None:
+                step_run_id = _make_step_run_id(run_id, doc.metadata.source_id)
+                input_version_id = _make_input_version_id(run_id, doc.metadata.source_id)
 
-        print(f"[step4] wrote {out_md_path}")
-        print(f"[step4] wrote {out_json_path}")
+                with connect(db_path) as conn:
+                    create_step_run(
+                        conn,
+                        step_run_id=step_run_id,
+                        run_id=run_id,
+                        source_id=doc.metadata.source_id,
+                        step_name=STEP_NAME,
+                        input_version_id=input_version_id,
+                    )
+
+            contextualized_doc, markdown = _contextualize_document(
+                doc=doc,
+                model=model,
+                step_run_id=step_run_id,
+                db_path=db_path,
+            )
+
+            out_md_path = contextualized_dir / f"{file.stem}.md"
+            out_md_path.write_text(markdown, encoding="utf-8")
+
+            out_json_path = contextualized_dir / f"{file.stem}.contextualized.json"
+            out_json_path.write_text(
+                json.dumps(
+                    asdict(contextualized_doc),
+                    ensure_ascii=False,
+                    indent=2,
+                    default=str,
+                ),
+                encoding="utf-8",
+            )
+
+            if run_id is not None and db_path is not None:
+                output_version_id = _make_output_version_id(run_id, doc.metadata.source_id)
+
+                with connect(db_path) as conn:
+                    create_document_version(
+                        conn,
+                        version_id=output_version_id,
+                        source_id=doc.metadata.source_id,
+                        run_id=run_id,
+                        stage_name="contextualized_data",
+                        artifact_path=out_json_path,
+                    )
+                    finish_step_run(
+                        conn,
+                        step_run_id=step_run_id,
+                        status="completed",
+                        output_version_id=output_version_id,
+                    )
+
+            print(f"[step4] wrote {out_md_path}")
+            print(f"[step4] wrote {out_json_path}")
+
+        except Exception as e:
+            if run_id is not None and db_path is not None and step_run_id is not None:
+                with connect(db_path) as conn:
+                    finish_step_run(
+                        conn,
+                        step_run_id=step_run_id,
+                        status="failed",
+                        error_message=str(e),
+                    )
+            raise
