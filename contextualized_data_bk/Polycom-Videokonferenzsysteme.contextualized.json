@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "source_id": "file:Polycom-Videokonferenzsysteme",
+    "title": "Polycom-Videokonferenzsysteme",
+    "xwiki_url": null,
+    "xwiki_page_reference": null,
+    "source_hash": "b436b6b571e215e9650a6ccf25655113dd7bf568af90ed10957bb2f45e78bab6",
+    "retrieved_at": "2026-04-09 11:31:40.948272",
+    "last_modified": null,
+    "pipeline_run_id": null,
+    "pipeline_version": "v1"
+  },
+  "contextualized_blocks": [
+    {
+      "block_id": "ctx-sec-1-blk-1",
+      "source_block_id": "sec-1-blk-1",
+      "section_id": "sec-1",
+      "section_heading": "Einleitung",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf die Konfiguration und Verwaltung von Polycom-Videokonferenzsystemen. Sie umfasst verschiedene Aspekte, die für die Einrichtung und den Betrieb dieser Systeme wichtig sind.\n\nZusammengefasst handelt es sich um folgende Punkte:\n\nDie Konfiguration von Polycom-Videokonferenzsystemen umfasst mehrere Schritte und Komponenten. Zunächst ist es wichtig, einen Ansprechpartner zu haben, der für die Koordination und den Support verantwortlich ist.\n\nDie Polycom-Infrastruktur basiert auf IP-Netzen und Servern, wie dem S-1870, der für Netzwerkbasisdienste wie DHCP und DNS sowie für die Software-Deployer-Verwaltung zuständig ist. Darüber hinaus gibt es die CMS-Bund-Plattform (BDBOS), die auf dem S-1872-Server läuft.\n\nFür die Endgeräte-Aktualisierung und -Verwaltung gibt es spezielle Poly-Endgeräte, die regelmäßig aktualisiert werden sollten. Es gibt auch verschiedene Clientsysteme, die für die Videokonferenzsysteme verwendet werden können.\n\nDie Standardkonfiguration für Polycom-Systeme umfasst Modelle wie x50, x52 und G7500. Darüber hinaus gibt es die Poly Clariti-App, die für die Videokonferenz-Verwaltung verwendet werden kann.\n\nSchließlich gibt es verschiedene Szenarien, in denen die Polycom-Videokonferenzsysteme eingesetzt werden können. Diese reichen von einfachen Videokonferenzen bis hin zu komplexen Konferenzszenarien mit mehreren Teilnehmern und Standorten.\n\nInsgesamt bietet die Liste eine Übersicht über die verschiedenen Komponenten und Schritte, die für die Einrichtung und den Betrieb von Polycom-Videokonferenzsystemen erforderlich sind.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:37.851270"
+    },
+    {
+      "block_id": "ctx-sec-4-blk-1",
+      "source_block_id": "sec-4-blk-1",
+      "section_id": "sec-4",
+      "section_heading": "IP-Netze",
+      "block_type": "table",
+      "text": "### Tabelle: IP-Adressbereiche für Polycom-Videokonferenzsysteme\nDie Tabelle stellt die verschiedenen IP-Adressbereiche und ihre Beschreibungen für Polycom-Videokonferenzsysteme dar. Sie enthält Informationen über die IP-Adressen, die für bestimmte Netzwerke und Standorte verwendet werden.\n\n### Spaltenbeschreibung\n* Die erste Spalte enthält die IP-Adressbereiche.\n* Die zweite Spalte enthält die Beschreibungen der IP-Adressbereiche.\n\n### Tabelleninhalte\nDie IP-Adresse 123:213:80a:5800::/64 ::444 (vc.domain.de) wird für die DFN über BRAIN verwendet. \nDie IP-Adresse 123.23.231.39/32 (vc.domain.de) wird für die DFN verwendet und soll später an BRAIN annonciert werden. \nDie IP-Adressen 172.[17|19|23].8.0/24 werden durch 188.999.147.160 /28 (DDW) und 188.999.147.128/27 (Standort1) abgelöst und dienen den internen Videonetzen von DDW und Standort1. \nDie IP-Adresse 188.999.147.0/25 wird für die Standortkopplung des Videodienstes in der Hausstraße 49 verwendet. \nDie IP-Adresse 188.999.147.128/27 wird für die Standortkopplung und den Adressbereich für Endgeräte des Videodienstes in der Bundesallee 51 verwendet. \nDie IP-Adresse 188.999.147.160/28 wird für die Standortkopplung und den Adressbereich für Endgeräte des Videodienstes in der Diedersdorfer Weg 1 verwendet. \nDie IP-Adresse 192.168.75.0/29 wird für den Transfer zwischen NdB-SBC und ORGA-SBC verwendet, wobei .2. NdB-SBC, .3 ORGA-SBC und .4 ORGA-SBC (für Redundanz geblockt, nicht vorhanden) genutzt werden.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:41.628680"
+    },
+    {
+      "block_id": "ctx-sec-5-blk-1",
+      "source_block_id": "sec-5-blk-1",
+      "section_id": "sec-5",
+      "section_heading": "Server",
+      "block_type": "table",
+      "text": "### Tabelle: Polycom-Videokonferenzsysteme - Server\nDie Tabelle stellt eine Übersicht über verschiedene Server im Kontext von Polycom-Videokonferenzsystemen dar. Sie enthält Informationen über die Namen, Verwendungszwecke, IP-Adressen, Seriennummern, Betriebssysteme und Standorte dieser Server.\n\n### Spaltenbeschreibung\n- **Name**: Der Name des Servers.\n- **Verwendung**: Der Verwendungszweck oder die Funktion des Servers.\n- **IP**: Die IP-Adresse des Servers.\n- **SN**: Die Seriennummer des Servers.\n- **OS**: Das Betriebssystem des Servers.\n- **Standort**: Der physische Standort des Servers.\n\n### Beschreibung der Tabellenzeilen\n- Der Server `server70` wird für Netzwerkbasisdienste, Software-Deploy, DNS, DHCP verwendet und hat die IP-Adresse `188.340.8.2`, läuft unter `RHEL 9` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server71` dient als Clariti Manager, hat die IP-Adresse `188.340.8.21`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server72` fungiert als Clariti Core, hat die IP-Adresse `188.340.8.22`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server73` ist ein RealPresence Collaboration Server, hat die IP-Adresse `188.340.8.23`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server74` dient als Clariti Media-Relay, hat die IP-Adresse `188.340.8.24`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server75` ist ein Clariti Edge NdB-ID, hat die IP-Adresse `188.340.8.25`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server76` fungiert als Clariti Edge Internet, hat die IP-Adresse `188.340.8.26`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `server77` dient als Clariti Edge Client, hat die IP-Adresse `188.340.8.27`, läuft unter `OL 8` und befindet sich im `VK-Cluster Standort2`.\n- Der Server `sbc001` ist ein Secunet SBC Internet und befindet sich im `RZ Standort2`, derzeit ausgebaut.\n- Der Server `sbc002` ist ebenfalls ein Secunet SBC Internet und befindet sich im `RZ Standort2`, derzeit ausgebaut.\n- Der Server `sbcmgt` ist ein Secunet SBC Manager und befindet sich im `RZ Standort2`, derzeit ausgebaut.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:46.634796"
+    },
+    {
+      "block_id": "ctx-sec-7-blk-3",
+      "source_block_id": "sec-7-blk-3",
+      "section_id": "sec-7",
+      "section_heading": "DHCP",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf die Konfiguration von Polycom-Videokonferenzsystemen im Zusammenhang mit DHCP (Dynamic Host Configuration Protocol). Sie enthält zwei wichtige Konfigurationsdateien, die für die Einrichtung und Verwaltung von DHCP-Diensten unter Verwendung des Kea-DHCP-Servers erforderlich sind.\n\nZusammengefasst umfasst die Liste die folgenden Konfigurationsdateien:\n- Die Kea-Main-Konfiguration, die in der Datei `keactrl.conf` gespeichert ist. Diese Datei enthält die Hauptkonfiguration für den Kea-Server und steuert die allgemeine Funktionalität des Servers.\n- Die Kea-DHCP4-Konfiguration, die in der Datei `kea-dhcp4.conf` gespeichert ist. Diese Datei enthält spezifische Einstellungen für den DHCPv4-Dienst, der für die Zuweisung von IPv4-Adressen an Geräte im Netzwerk verantwortlich ist.\n\nUm diese Konfigurationen zu nutzen, sollten Sie folgende Schritte befolgen:\n1. Öffnen Sie die Datei `keactrl.conf`, um die Hauptkonfiguration des Kea-Servers zu überprüfen und gegebenenfalls anzupassen.\n2. Öffnen Sie die Datei `kea-dhcp4.conf`, um die spezifischen Einstellungen für den DHCPv4-Dienst zu konfigurieren und anzupassen.\n\nDurch die Bearbeitung und Konfiguration dieser Dateien können Sie den Kea-DHCP-Server für Ihre Polycom-Videokonferenzsysteme einrichten und verwalten.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:50.810568"
+    },
+    {
+      "block_id": "ctx-sec-8-blk-2",
+      "source_block_id": "sec-8-blk-2",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "list",
+      "text": "Die Liste bezieht sich auf die Konfiguration von DNS (Domain Name System) im Rahmen von Polycom-Videokonferenzsystemen. Sie enthält wichtige Informationen über die Dateien, die für die Konfiguration des Namensdienstes verwendet werden.\n\nZusammengefasst umfasst die Liste die folgenden Punkte:\n\nDie Konfiguration des Namensdienstes wird durch zwei wichtige Dateien gesteuert:\n- Die **Named-Konfiguration** befindet sich in der Datei `/etc/named.conf`. Diese Datei enthält die grundlegende Konfiguration des Namensdienstes und legt die allgemeinen Einstellungen für den Betrieb des DNS-Servers fest.\n- Die **Named-Zonen** sind in der Datei `/etc/named.rfc1912.zones` definiert. Diese Datei enthält die spezifischen Zoneneinstellungen, die für die Auflösung von Domain-Namen innerhalb des Netzwerks erforderlich sind.\n\nEs handelt sich hier nicht um eine Schrittfolge, sondern um eine Beschreibung der relevanten Konfigurationsdateien für den DNS-Server im Kontext von Polycom-Videokonferenzsystemen. Diese Informationen sind wichtig für die Einrichtung und Verwaltung des DNS-Servers, um sicherzustellen, dass die Namensauflösung innerhalb des Netzwerks korrekt funktioniert.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:54.193810"
+    },
+    {
+      "block_id": "ctx-sec-8-blk-5",
+      "source_block_id": "sec-8-blk-5",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "list",
+      "text": "Der Abschnitt \"DNS\" im Dokument über Polycom-Videokonferenzsysteme behandelt die Konfiguration der DNS-Einstellungen. Hierbei wird auf die Forward-Zone eingegangen. Die Liste kann wie folgt zusammengefasst werden:\n\nDie Konfiguration der DNS-Einstellungen für Polycom-Videokonferenzsysteme umfasst die Einrichtung der Forward-Zone. Hierbei ist insbesondere die Datei `/etc/named/vk.segment.forward.zone` zu beachten, die für die Domäne `vk.segment.domain.de` zuständig ist.\n\nEs gibt keine spezifischen Schritte, die in einer bestimmten Reihenfolge ausgeführt werden müssen, da die Liste lediglich auf die Existenz und den Zweck dieser Datei hinweist. Wenn jedoch die Konfiguration der Forward-Zone durchgeführt werden soll, könnten die allgemeinen Schritte wie folgt aussehen:\n\n1. Öffnen Sie die Datei `/etc/named/vk.segment.forward.zone` in einem Texteditor.\n2. Überprüfen Sie die Einträge in der Datei, um sicherzustellen, dass die Domäne `vk.segment.domain.de` korrekt konfiguriert ist.\n3. Führen Sie gegebenenfalls Änderungen an den Einträgen durch, um die gewünschte Konfiguration zu erreichen.\n4. Speichern Sie die Änderungen und schließen Sie die Datei.\n\nEs ist jedoch wichtig zu beachten, dass diese Schritte nur eine allgemeine Anleitung darstellen und je nach spezifischer Konfiguration und Umgebung variieren können.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:56.365842"
+    },
+    {
+      "block_id": "ctx-sec-8-blk-7",
+      "source_block_id": "sec-8-blk-7",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "list",
+      "text": "Der Abschnitt \"DNS\" im Dokument \"Polycom-Videokonferenzsysteme\" befasst sich mit der Konfiguration der DNS-Einstellungen für das Videokonferenzsystem. Eine wichtige Information in diesem Kontext ist die Konfiguration der Reverse-Zone für die Domäne \"vk.segment.domain.de\". \n\nDiese Konfiguration wird in der Datei \"/etc/named/vk.segment.reverse.zone\" durchgeführt. \n\nZusammengefasst kann man sagen, dass die Liste lediglich einen Punkt anspricht, nämlich die Konfiguration der Reverse-Zone für die angegebene Domäne. \n\nEs gibt keine Schrittfolge, da es sich hier um eine einzelne Information handelt. \n\nUm diese Konfiguration vorzunehmen, müsste man jedoch folgende Schritte ausführen:\n1. Öffnen Sie die Datei \"/etc/named/vk.segment.reverse.zone\" in einem Texteditor.\n2. Fügen Sie die erforderlichen Einträge für die Reverse-Zone \"vk.segment.domain.de\" hinzu.\n3. Speichern und schließen Sie die Datei.\n4. Überprüfen Sie, ob die Konfiguration erfolgreich war, indem Sie die DNS-Auflösung testen. \n\nBitte beachten Sie, dass diese Schritte nur eine allgemeine Anleitung darstellen und je nach spezifischem System und Konfiguration variieren können.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:58.899358"
+    },
+    {
+      "block_id": "ctx-sec-9-blk-1",
+      "source_block_id": "sec-9-blk-1",
+      "section_id": "sec-9",
+      "section_heading": "Software-Deployer",
+      "block_type": "list",
+      "text": "Der Abschnitt \"Software-Deployer\" im Dokument über Polycom-Videokonferenzsysteme enthält wichtige Informationen über den Zugriff und die Konfiguration des Deployers. Zusammengefasst handelt es sich um die folgenden Punkte:\n\nUm auf den Software-Deployer zuzugreifen, benötigen Sie die Deploy-Adresse, die unter `http://deploy.vk.sagmente.domain.de/` zu finden ist. Diese Adresse ermöglicht es Ihnen, auf die Plattform zuzugreifen, um Software-Updates oder Konfigurationen durchzuführen.\n\nDer Pfad auf dem Server, der für den Deployer relevant ist, lautet `/var/www/html`. Dieser Pfad ist wichtig, um die Dateien und Konfigurationen des Deployers zu finden und zu bearbeiten.\n\nEs gibt keine spezifischen Schritte, die in einer bestimmten Reihenfolge ausgeführt werden müssen, da die Liste hauptsächlich informativ ist und die notwendigen Informationen für den Zugriff und die Konfiguration des Software-Deployers bereitstellt. Wenn Sie jedoch auf den Deployer zugreifen möchten, können Sie folgende Schritte befolgen:\n\n1. Öffnen Sie einen Webbrowser und geben Sie die Deploy-Adresse `http://deploy.vk.sagmente.domain.de/` ein.\n2. Nachdem Sie auf die Plattform zugegriffen haben, können Sie die notwendigen Konfigurationen oder Updates durchführen.\n3. Wenn Sie Dateien oder Konfigurationen auf dem Server bearbeiten müssen, navigieren Sie zum Pfad `/var/www/html`, um die entsprechenden Dateien zu finden und zu bearbeiten.\n\nEs ist wichtig, diese Schritte sorgfältig durchzuführen und sicherzustellen, dass Sie die notwendigen Berechtigungen und Kenntnisse haben, um den Software-Deployer korrekt zu konfigurieren und zu verwenden.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:33:01.338518"
+    },
+    {
+      "block_id": "ctx-sec-11-blk-1",
+      "source_block_id": "sec-11-blk-1",
+      "section_id": "sec-11",
+      "section_heading": "Poly Clientsysteme",
+      "block_type": "table",
+      "text": "### Tabelle: Polycom-Videokonferenzsysteme\nDie Tabelle trägt keinen expliziten Titel, daher wird sie basierend auf ihrem Inhalt als \"Polycom-Videokonferenzsysteme\" bezeichnet.\n\n### Überblick\nDiese Tabelle stellt eine Übersicht über verschiedene Polycom-Videokonferenzsysteme an verschiedenen Standorten dar. Die Tabelle enthält Informationen über die Standorte, die Namen der Systeme, IP-Adressen, MAC-Adressen, SIP-Nummern, Modelle und weitere technische Details.\n\n### Spaltenbeschreibung\n- **Standort/Raum**: Der Standort oder Raum, in dem das Videokonferenzsystem installiert ist.\n- **Name**: Der Name des Videokonferenzsystems.\n- **VKA-IP**: Die IP-Adresse des Videokonferenzsystems.\n- **VKA-MAC**: Die MAC-Adresse des Videokonferenzsystems.\n- **SIP**: Die SIP-Nummer des Videokonferenzsystems.\n- **Modell**: Das Modell des Videokonferenzsystems.\n- **TC-IP**: Die IP-Adresse des TC-Systems (wahrscheinlich Teil des Videokonferenzsystems).\n- **TC-MAC**: Die MAC-Adresse des TC-Systems.\n- **TC-SN**: Die Seriennummer des TC-Systems.\n- **VMR-ID**: Die VMR-ID des Videokonferenzsystems.\n\n### Beschreibung der Tabellenzeilen\n- Im Garten gibt es keine Videokonferenzsysteme.\n- Im Raum Standort1 A103 befindet sich ein Videokonferenzsystem namens Standort1-A103 mit der IP-Adresse 188.455.8.50 und der MAC-Adresse 188.34.:5e:c5:79.\n- Im Raum Standort1 A107 befindet sich ein Videokonferenzsystem namens Standort1-A107 mit der IP-Adresse 188.455.8.52 und der MAC-Adresse 188.34.:5e:be:98.\n- Im Raum Standort1 B001 befindet sich ein Videokonferenzsystem namens Standort1-B001 mit der IP-Adresse 188.455.8.54 und der MAC-Adresse 188.34.:40:95:fc.\n- Im Raum Standort1 B003 befindet sich ein Videokonferenzsystem namens Standort1-B003 mit der IP-Adresse 188.455.8.56 und der MAC-Adresse 188.34.:91:71:55.\n- Im Raum Standort1 B003 Mobil befindet sich ein Videokonferenzsystem namens Standort1-B003-Mobil mit der IP-Adresse 188.455.8.58 und der MAC-Adresse 188.34.:56:5d:6e.\n- Im Raum Standort1 B008 Mobil 2 befindet sich ein Videokonferenzsystem namens Standort1-B008-Mobil mit der IP-Adresse 188.455.8.60 und der MAC-Adresse 188.34.:91:6c:45.\n- Im Raum Standort1 B206 befindet sich ein Videokonferenzsystem namens Standort1-B206 mit der IP-Adresse 188.455.8.62 und der MAC-Adresse 188.34.:91:73:fe.\n- Im Raum Standort1 C125 befindet sich ein Videokonferenzsystem namens Standort1-C125 mit der IP-Adresse 188.455.8.64 und der MAC-Adresse 188.34.:91:6e:67.\n- Im Raum Standort1 C202 Mobil 1 befindet sich ein Videokonferenzsystem namens Standort1-C202-Mobil mit der IP-Adresse 188.455.8.66 und der MAC-Adresse 188.34.:91:72:FF.\n- Im Hof gibt es keine Videokonferenzsysteme.\n- Im Raum Standort3 0.19 befindet sich ein Videokonferenzsystem namens Standort3-0.19 mit der IP-Adresse 188.888.8.13 und der MAC-Adresse 188.34.:60:95:69.\n- In der Hausstraße gibt es keine Videokonferenzsysteme.\n- Im Raum Standort2 A.1.1 befindet sich ein Videokonferenzsystem namens Standort2-A.1.1 mit der IP-Adresse 188.340.8.92 und der MAC-Adresse 188.34.:74:b7:b4.\n- Im Raum Standort2 B.0.2.2 befindet sich ein Videokonferenzsystem namens Standort2-B.0.2.2 mit der IP-Adresse 188.340.8.83 und der MAC-Adresse 188.34.:6a:b9:5e.\n- Im Raum Standort2 B.0.2.3 befindet sich ein Videokonferenzsystem namens Standort2-B.0.2.3 mit der IP-Adresse 188.340.8.84 und der MAC-Adresse 188.34.:6a:bf:c1.\n- Im Raum Standort2 B.1.1 befindet sich ein Videokonferenzsystem namens Standort2-B.1.1 mit der IP-Adresse 188.340.8.70 und der MAC-Adresse 188.34.:74:b1:58.\n- Im Raum Standort2 B.2.22 befindet sich ein Videokonferenzsystem namens Standort2-B.2.22 mit der IP-Adresse 188.340.8.94 und der MAC-Adresse 188.34.:69:1d:52.\n- Im Raum Standort2 B.4.10 befindet sich ein Videokonferenzsystem namens Standort2-B.4.10 mit der IP-Adresse 188.340.8.96 und der MAC-Adresse 188.34.:53:c4:14.\n- Im Raum Standort2 B.5.1 befindet sich ein Videokonferenzsystem namens Standort2-B.5.1 mit der IP-Adresse 188.340.8.79 und der MAC-Adresse 188.34.:6a:b4:99.\n- Im Raum Standort2 B.5.20 befindet sich ein Videokonferenzsystem namens Standort2-B.5.20 mit der IP-Adresse 188.340.8.80 und der MAC-Adresse 188.34.:6a:b6:7f.\n- Im Raum Standort2 B.6.17 befindet sich ein Videokonferenzsystem namens Standort2-B.6.17 mit der IP-Adresse 188.340.8.63 und der MAC-Adresse 188.34.:74:b1:14.\n- Im Raum Standort2 D.1.2 befindet sich ein Videokonferenzsystem namens Standort2-D.1.2 mit der IP-Adresse 188.340.8.71 und der MAC-Adresse 188.34.:6a:cf:0c.\n- Im Raum Standort2 D.1.10 befindet sich ein Videokonferenzsystem namens Standort2-D.1.10 mit der IP-Adresse 188.340.8.86 und der MAC-Adresse 188.34.:6a:cd:f8.\n- Im Raum Standort2 D.2.2 befindet sich ein Videokonferenzsystem namens Standort2-D.2.2 mit der IP-Adresse 188.340.8.57 und der MAC-Adresse 188.34.:6a:ba:99.\n- Im Raum Standort2 D.2.11 befindet sich ein Videokonferenzsystem namens Standort2-D.2.11 mit der IP-Adresse 188.340.8.90 und der MAC-Adresse 188.34.:60:d0:64.\n- Im Raum Standort2 D.3.3 befindet sich ein Videokonferenzsystem namens Standort2-D.3.3 mit der IP-Adresse 188.340.8.64 und der MAC-Adresse 188.34.:6a:c2:d0.\n- Im Raum Standort2 D.4.3 befindet sich ein Videokonferenzsystem namens Standort2-D.4.3 mit der IP-Adresse 188.340.8.62 und der MAC-Adresse 188.34.:6a:bd:33.\n- Im Raum Standort2 D.5.2 befindet sich ein Videokonferenzsystem namens Standort2-D.5.2 mit der IP-Adresse 188.340.8.55 und der MAC-Adresse 188.34.:6a:b6:55.\n- Im Raum Standort2 E.6.15 befindet sich ein Videokonferenzsystem namens Standort2-E.6.15 mit der IP-Adresse 188.340.8.81 und der MAC-Adresse 188.34.:6a:b4:2a.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:33:18.620797"
+    }
+  ],
+  "skipped_blocks": [
+    {
+      "source_block_id": "sec-7-blk-1",
+      "section_id": "sec-7",
+      "section_heading": "DHCP",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-2",
+      "section_id": "sec-7",
+      "section_heading": "DHCP",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-4",
+      "section_id": "sec-7",
+      "section_heading": "DHCP",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-5",
+      "section_id": "sec-7",
+      "section_heading": "DHCP",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-1",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-3",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-4",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-6",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-8",
+      "section_id": "sec-8",
+      "section_heading": "DNS",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-2",
+      "section_id": "sec-9",
+      "section_heading": "Software-Deployer",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-1",
+      "section_id": "sec-10",
+      "section_heading": "S-1872: CMS-Bund-Plattform (BDBOS)",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-2",
+      "section_id": "sec-10",
+      "section_heading": "S-1872: CMS-Bund-Plattform (BDBOS)",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-3",
+      "section_id": "sec-10",
+      "section_heading": "S-1872: CMS-Bund-Plattform (BDBOS)",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-13-blk-1",
+      "section_id": "sec-13",
+      "section_heading": "Poly Clariti App",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    }
+  ],
+  "failed_blocks": [
+    {
+      "source_block_id": "sec-12-blk-1",
+      "section_id": "sec-12",
+      "section_heading": "Poly Standardkonfig (x50/x52/G7500)",
+      "block_type": "table",
+      "error_message": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kaxq4681ezq9f53vp3xgqdn8` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 8934, Requested 4159. Please try again in 5.465s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ]
+}

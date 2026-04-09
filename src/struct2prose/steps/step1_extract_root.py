@@ -94,7 +94,7 @@ def run(
         output_version_id = None
 
         try:
-            if run_id and db_path:
+            if run_id is not None and db_path is not None:
                 step_run_id = _make_step_run_id(run_id, source_doc.metadata.source_id)
 
                 with connect(db_path) as conn:

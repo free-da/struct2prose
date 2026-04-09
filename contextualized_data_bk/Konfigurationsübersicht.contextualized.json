@@ -1,0 +1,325 @@
+{
+  "metadata": {
+    "source_id": "file:Konfigurationsübersicht",
+    "title": "Konfigurationsübersicht",
+    "xwiki_url": null,
+    "xwiki_page_reference": null,
+    "source_hash": "12267751c004948ebbd7e2c35893843a020e479f0b2ea5a4ecd68dbf55eac303",
+    "retrieved_at": "2026-04-09 11:31:40.780216",
+    "last_modified": null,
+    "pipeline_run_id": null,
+    "pipeline_version": "v1"
+  },
+  "contextualized_blocks": [
+    {
+      "block_id": "ctx-sec-3-blk-2",
+      "source_block_id": "sec-3-blk-2",
+      "section_id": "sec-3",
+      "section_heading": ".profile",
+      "block_type": "table",
+      "text": "### Tabelle: Konfigurationsparameter\nDie Tabelle \"Konfigurationsparameter\" stellt eine Übersicht über verschiedene Konfigurationsparameter dar, die für die Einrichtung und Konfiguration von Java- und Wildfly- Umgebungen verwendet werden.\n\nDie Tabelle besteht aus zwei Spalten:\n* Parameter: Diese Spalte enthält die Namen der Konfigurationsparameter.\n* Wert: Diese Spalte enthält die Werte, die den jeweiligen Parametern zugewiesen sind.\n\nDie einzelnen Zeilen der Tabelle können wie folgt beschrieben werden:\n* Der Parameter JAVA_BINDIR hat den Wert /opt/s0ftw4reweb/java/jdk/bin/.\n* Der Parameter JAVA_HOME hat den Wert /opt/s0ftw4reweb/java/jdk.\n* Der Parameter JAVA_ROOT hat den Wert /opt/s0ftw4reweb/java/jdk.\n* Der Parameter JBOSS_HOME hat den Wert /opt/s0ftw4reweb/wildfly.\n* Der Parameter PATH hat den Wert $JAVA_HOME/bin:$JBOSS_HOME/bin:$PATH2.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:20.982388"
+    },
+    {
+      "block_id": "ctx-sec-4-blk-4",
+      "source_block_id": "sec-4-blk-4",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "table",
+      "text": "### Konfigurationsübersicht: Standalone-Konfiguration\nDie Tabelle stellt eine Übersicht über Konfigurationsparameter für eine Standalone-Konfiguration dar. Sie enthält Informationen über verschiedene Parameter und ihre entsprechenden Werte.\n\nDie Bedeutung jeder Spalte kann wie folgt beschrieben werden:\n* Parameter: Diese Spalte enthält die Namen der Konfigurationsparameter.\n* Wert: Diese Spalte enthält die Werte, die den jeweiligen Parametern zugewiesen sind.\n\nDie Tabellenzeilen können wie folgt beschrieben werden:\nDie Konfiguration weist dem Parameter -Dde.s0ftw4re.logpath den Wert /opt/s0ftw4reweb/logs zu. \nDie Konfiguration weist dem Parameter -Dmail.imap.starttls.enable den Wert True zu, was auf die Verwendung von imap oder imaps hinweist.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:22.274711"
+    },
+    {
+      "block_id": "ctx-sec-4-blk-7",
+      "source_block_id": "sec-4-blk-7",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "table",
+      "text": "### Tabelle: Konfigurationsübersicht für Instanzen\nDie Tabelle stellt die Konfigurationseinstellungen für verschiedene Instanzen dar, insbesondere im Kontext der Datei `standalone.conf`. Sie enthält Informationen über die Speicherzuweisung und andere Parameter für Produktions- und Test/Demo-Instanzen.\n\n### Spaltenbeschreibung\n- **Instanz-Name**: Gibt den Namen der Instanz an, für die die Konfigurationseinstellungen gelten.\n- **Parameter**: Enthält den Namen des Parameters, der konfiguriert wird.\n- **Wert**: Zeigt den Wert an, der dem entsprechenden Parameter zugewiesen ist.\n\n### Tabelleninhaltsbeschreibung\nDie erste Zeile beschreibt, dass für die Produktiv-Instanz der Parameter `-Xms` auf `64G` gesetzt ist. \nDie zweite Zeile ergänzt die Konfiguration für die Produktiv-Instanz, indem sie angibt, dass der Parameter `-Xmx` ebenfalls auf `64G` gesetzt ist. \nDie dritte Zeile vervollständigt die Konfiguration für die Produktiv-Instanz, indem sie den `ReservedCodeCacheSize` auf `1024m` setzt. \nDie vierte Zeile wechselt zur Test/Demo-Instanz und setzt dort den Parameter `-Xms` auf `16G`. \nDie fünfte Zeile bezieht sich weiterhin auf die Test/Demo-Instanz und setzt dort den Parameter `-Xmx` auf `16G`.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:23.693228"
+    },
+    {
+      "block_id": "ctx-sec-6-blk-2",
+      "source_block_id": "sec-6-blk-2",
+      "section_id": "sec-6",
+      "section_heading": "datasource",
+      "block_type": "table",
+      "text": "### Tabelle: Datenquellen-Konfiguration\nDie Tabelle stellt die Konfigurationen verschiedener Datenquellen dar, einschließlich ihrer Parameter und Werte.\n\n### Beschreibung der Spalten\n* Instanz-Name: Der Name der Datenquellen-Instanz\n* Parameter: Der Name des Parameters, der für die Datenquellen-Instanz konfiguriert wird\n* Wert: Der Wert des Parameters\n\n### Beschreibung der Tabellenzeilen\nDie Produktion-Datenquellen-Instanz hat einen jndi-name mit dem Wert java:/database1. \nDie Produktion-Datenquellen-Instanz hat einen pool-name mit dem Wert S0FTW4RE. \nDie Produktion-Datenquellen-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@schwubs097.old.domain.de:1521/s0ftw4re. \nDie Produktion-Datenquellen-Instanz hat einen driver mit dem Wert Oracle. \nDie Produktion-Datenquellen-Instanz hat einen user-name mit dem Wert S0ftw4re. \nDie Produktion-Datenquellen-Instanz hat ein password mit dem Wert Xxxx. \nDie Demo-Datenquellen-Instanz hat einen jndi-name mit dem Wert java:/demo. \nDie Demo-Datenquellen-Instanz hat einen pool-name mit dem Wert Demo. \nDie Demo-Datenquellen-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@schwubs098.old.domain.de:1521:demo. \nDie Demo-Datenquellen-Instanz hat einen driver mit dem Wert Oracle. \nDie Demo-Datenquellen-Instanz hat einen user-name mit dem Wert s0ftw4re. \nDie Demo-Datenquellen-Instanz hat ein password mit dem Wert Xxxx. \nDie Test-Datenquellen-Instanz hat einen jndi-name mit dem Wert java:/test. \nDie Test-Datenquellen-Instanz hat einen pool-name mit dem Wert TEST. \nDie Test-Datenquellen-Instanz hat einen connection-url mit dem Wert jdbc:oracle:thin:@srvlnx97.old.domain.de:1521/test. \nDie Test-Datenquellen-Instanz hat einen driver mit dem Wert Oracle. \nDie Test-Datenquellen-Instanz hat einen user-name mit dem Wert S0FTW4RE. \nDie Test-Datenquellen-Instanz hat ein password mit dem Wert Xxxx.",
+      "prompt_name": "contextualization",
+      "prompt_version": "v1",
+      "model_name": "llama-3.3-70b-versatile",
+      "created_at": "2026-04-09 11:32:25.256355"
+    }
+  ],
+  "skipped_blocks": [
+    {
+      "source_block_id": "sec-2-blk-1",
+      "section_id": "sec-2",
+      "section_heading": "Konfigurationen",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-2-blk-2",
+      "section_id": "sec-2",
+      "section_heading": "Konfigurationen",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-3-blk-1",
+      "section_id": "sec-3",
+      "section_heading": ".profile",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-1",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-2",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-3",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-5",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-4-blk-6",
+      "section_id": "sec-4",
+      "section_heading": "standalone.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-5-blk-1",
+      "section_id": "sec-5",
+      "section_heading": "standalone.xml",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-6-blk-1",
+      "section_id": "sec-6",
+      "section_heading": "datasource",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-6-blk-3",
+      "section_id": "sec-6",
+      "section_heading": "datasource",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-6-blk-4",
+      "section_id": "sec-6",
+      "section_heading": "datasource",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-1",
+      "section_id": "sec-7",
+      "section_heading": "HTTP-Listener",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-2",
+      "section_id": "sec-7",
+      "section_heading": "HTTP-Listener",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-3",
+      "section_id": "sec-7",
+      "section_heading": "HTTP-Listener",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-7-blk-4",
+      "section_id": "sec-7",
+      "section_heading": "HTTP-Listener",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-1",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-2",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-3",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-4",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-5",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-6",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-7",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-8-blk-8",
+      "section_id": "sec-8",
+      "section_heading": "Logdateien",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-1",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-2",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-3",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-4",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-5",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-9-blk-6",
+      "section_id": "sec-9",
+      "section_heading": "logback.xml",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-1",
+      "section_id": "sec-10",
+      "section_heading": "module.xml (Oracle)",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-2",
+      "section_id": "sec-10",
+      "section_heading": "module.xml (Oracle)",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-10-blk-3",
+      "section_id": "sec-10",
+      "section_heading": "module.xml (Oracle)",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-11-blk-1",
+      "section_id": "sec-11",
+      "section_heading": "limits.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-11-blk-2",
+      "section_id": "sec-11",
+      "section_heading": "limits.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-11-blk-3",
+      "section_id": "sec-11",
+      "section_heading": "limits.conf",
+      "block_type": "paragraph",
+      "reason": "block_type_not_contextualized"
+    },
+    {
+      "source_block_id": "sec-11-blk-4",
+      "section_id": "sec-11",
+      "section_heading": "limits.conf",
+      "block_type": "code",
+      "reason": "block_type_not_contextualized"
+    }
+  ],
+  "failed_blocks": []
+}
