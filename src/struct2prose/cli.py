@@ -8,6 +8,7 @@ from struct2prose.steps.step1_extract_root import run as run_extract_root
 from struct2prose.steps.step2_strip_ui import run as run_strip_ui
 from struct2prose.steps.step3_parse import run as run_parse
 from struct2prose.steps.step4_contextualize import run as run_contextualize
+from struct2prose.steps.step5_ingest_qdrant import run as run_ingest_qdrant
 from struct2prose.config import Config
 
 PIPELINE_VERSION = "v1"
@@ -54,6 +55,10 @@ def main() -> None:
     p_all.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
     p_all.add_argument("--pipeline-version", type=str, default=PIPELINE_VERSION)
 
+    p_ingest = sub.add_parser("ingest-qdrant", help="Ingest contextualized documents into Qdrant")
+    p_ingest.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
+    p_ingest.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
+
     args = parser.parse_args()
 
     # state directory / DB file vorbereiten
@@ -97,6 +102,10 @@ def main() -> None:
             run_id=None,
             db_path=args.db_path,
         )
+    elif args.cmd == "ingest-qdrant":
+        run_ingest_qdrant(
+            args.contextualized_dir
+        )
     elif args.cmd == "all":
         run_id = str(uuid.uuid4())
 
@@ -139,6 +148,9 @@ def main() -> None:
                 pipeline_version=args.pipeline_version,
                 run_id=run_id,
                 db_path=args.db_path,
+            )
+            run_ingest_qdrant(
+                args.contextualized_dir
             )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")

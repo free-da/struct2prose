@@ -13,6 +13,7 @@ from struct2prose.models.documents import (
     ContextualizedDocument,
     FailedBlock,
     SkippedBlock,
+    RagBlock
 )
 from struct2prose.parser.models import (
     ContentBlock,
@@ -340,6 +341,18 @@ def _contextualize_document(
                 if passthrough_md:
                     md_lines.append(passthrough_md)
 
+                    contextualized_doc.rag_blocks.append(
+                        RagBlock(
+                            block_id=f"rag-{block.block_id}",
+                            source_block_id=block.block_id,
+                            section_id=section.section_id,
+                            section_heading=section.heading,
+                            block_type=block.block_type,
+                            text=passthrough_md.strip(),
+                            transformation="passthrough",
+                        )
+                    )
+
                 contextualized_doc.skipped_blocks.append(
                     SkippedBlock(
                         source_block_id=block.block_id,
@@ -399,6 +412,23 @@ def _contextualize_document(
                     created_at=result.generated_at,
                 )
                 contextualized_doc.contextualized_blocks.append(contextualized_block)
+
+                contextualized_doc.rag_blocks.append(
+                    RagBlock(
+                        block_id=f"rag-{contextualized_block.block_id}",
+                        source_block_id=block.block_id,
+                        section_id=section.section_id,
+                        section_heading=section.heading,
+                        block_type=block.block_type,
+                        text=result.contextualized_text,
+                        transformation="contextualized",
+                        prompt_name=result.prompt_name,
+                        prompt_version=result.prompt_version,
+                        model_name=result.model_name,
+                        created_at=result.generated_at,
+                    )
+                )
+
                 md_lines.append(result.contextualized_text + "\n")
 
                 if step_run_id is not None and db_path is not None:

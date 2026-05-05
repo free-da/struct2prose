@@ -79,6 +79,20 @@ class ContextualizedBlock:
     model_name: str | None = None
     created_at: datetime | None = None
 
+@dataclass
+class RagBlock:
+    block_id: str
+    source_block_id: str
+    section_id: str
+    section_heading: str | None
+    block_type: str
+    text: str
+    transformation: str  # "passthrough" | "contextualized"
+    prompt_name: str | None = None
+    prompt_version: str | None = None
+    model_name: str | None = None
+    created_at: datetime | None = None
+
 
 @dataclass
 class SkippedBlock:
@@ -104,3 +118,4 @@ class ContextualizedDocument:
     contextualized_blocks: list[ContextualizedBlock] = field(default_factory=list)
     skipped_blocks: list[SkippedBlock] = field(default_factory=list)
     failed_blocks: list[FailedBlock] = field(default_factory=list)
+    rag_blocks: list[RagBlock] = field(default_factory=list)
