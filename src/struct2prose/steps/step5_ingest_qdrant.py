@@ -113,7 +113,7 @@ def run(
     contextualized_dir: Path,
 ) -> None:
     client = QdrantClient(url=QDRANT_URL)
-    embedder = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+    embedder = SentenceTransformer(os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"))
 
     ensure_collection(client)
 
