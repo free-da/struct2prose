@@ -5,9 +5,9 @@ from typing import Any
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 
-COLLECTION_NAME = os.getenv("COLLECTION_NAME", "struct2prose")
-QDRANT_URL = os.getenv("QDRANT_URL")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME", "struct2prose_knowledge")
+QDRANT_URL = os.getenv("QDRANT_URL", "http://10.200.200.33:6333")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL","sentence-transformers/all-MiniLM-L6-v2")
 
 
 @dataclass
@@ -20,16 +20,16 @@ class RetrievedChunk:
 class RagRetriever:
     def __init__(self) -> None:
         self.client = QdrantClient(url=QDRANT_URL)
-        self.embedder = EMBEDDING_MODEL
+        self.embedder = SentenceTransformer(EMBEDDING_MODEL)
 
     def search(self, query: str, top_k: int = 5) -> list[RetrievedChunk]:
         query_vector = self.embedder.encode(query).tolist()
 
-        hits = self.client.search(
+        hits = self.client.query_points(
             collection_name=COLLECTION_NAME,
-            query_vector=query_vector,
+            query=query_vector,
             limit=top_k,
-        )
+        ).points
 
         results: list[RetrievedChunk] = []
 

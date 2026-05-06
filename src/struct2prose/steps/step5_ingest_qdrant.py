@@ -69,7 +69,10 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
 
         chunks = split_text(text)
         for i, chunk_text in enumerate(chunks):
-            vector = embedder.encode(chunk_text).tolist()
+            vector = embedder.encode(
+                sentences=chunk_text,
+                convert_to_numpy=True,
+            ).tolist()
 
             point = PointStruct(
                 id=stable_chunk_id(
