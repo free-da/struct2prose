@@ -7,15 +7,16 @@
 from pathlib import Path
 import json
 import uuid
+import os
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from sentence_transformers import SentenceTransformer
 
 
-COLLECTION_NAME = "struct2prose_knowledge"
+COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "struct2prose_knowledge")
 VECTOR_SIZE = 384  # all-MiniLM-L6-v2
-QDRANT_URL = "http://10.20.200.33:6333"
+QDRANT_URL = os.getenv("QDRANT_URL", "http://10.200.200.33:6333")
 
 
 def stable_chunk_id(source_id: str, block_id: str) -> str:
@@ -73,11 +74,11 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
             point = PointStruct(
                 id=stable_chunk_id(
                     metadata["source_id"],
-                    block["block_id"],
+                    f"{block['block_id']}:{i}",
                 ),
                 vector=vector,
                 payload={
-                    "text": text,
+                    "text": chunk_text,
                     "source_id": metadata["source_id"],
                     "title": metadata["title"],
                     "xwiki_url": metadata.get("xwiki_url"),
@@ -102,14 +103,14 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
 
             points.append(point)
 
-        return points
+    return points
 
 
 def run(
     contextualized_dir: Path,
 ) -> None:
     client = QdrantClient(url=QDRANT_URL)
-    embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    embedder = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 
     ensure_collection(client)
 
