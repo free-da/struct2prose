@@ -28,10 +28,12 @@ def _view_url(base_url: str, page_ref: str) -> str:
     return f"{base_url}/bin/view/{path}/"
 
 
-def _export_url(base_url: str, page_ref: str) -> str:
+def _html_url(base_url: str, page_ref: str) -> str:
     parts = page_ref.split(".")
+    if parts[-1] == "WebHome":
+        parts = parts[:-1]
     path = "/".join(quote(p) for p in parts)
-    return f"{base_url}/bin/export/{path}?format=html"
+    return f"{base_url}/bin/view/{path}/?xpage=plain"
 
 def _is_allowed_page(
     page_ref: str,
@@ -104,11 +106,17 @@ def fetch_xwiki_pages(
             print(f"[fetch-xwiki] skipped {page_ref}")
             continue
 
-        html_url = _export_url(wiki_base_url, page_ref)
+        html_url = _html_url(wiki_base_url, page_ref)
         wiki_url = _view_url(wiki_base_url, page_ref)
 
         html_response = session.get(html_url, timeout=60)
         html_response.raise_for_status()
+
+        content_type = html_response.headers.get("Content-Type", "")
+
+        if "text/html" not in content_type:
+            print(f"[fetch-xwiki] skipped non-html response for {page_ref}: {content_type}")
+            continue
 
         html = html_response.text
 

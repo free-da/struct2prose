@@ -68,7 +68,7 @@ def main() -> None:
     p_all.add_argument("--model", type=str, default=Config.get_model_name())
     p_all.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
     p_all.add_argument("--pipeline-version", type=str, default=PIPELINE_VERSION)
-    p_all.add_argument("--include-space", action="append", default=None, help="Only fetch pages from this top-level XWiki space. Can be used multiple times.")
+    p_all.add_argument("--include-space", action="append", default=["Dummy-Content"], help="Only fetch pages from this top-level XWiki space. Can be used multiple times.")
 
     p_ingest = sub.add_parser("ingest-qdrant", help="Ingest contextualized documents into Qdrant")
     p_ingest.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
