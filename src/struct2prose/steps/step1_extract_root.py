@@ -33,17 +33,24 @@ def _make_output_version_id(run_id: str, source_id: str) -> str:
     safe_source_id = source_id.replace(":", "_")
     return f"{run_id}:clean_data:{safe_source_id}"
 
-def _load_source_document_from_file(file_path: Path) -> SourceDocument:
+def _load_source_document_from_file(
+    file_path: Path,
+    metadata_entry: dict,
+) -> SourceDocument:
     raw_content = file_path.read_text(encoding="utf-8")
 
     metadata = DocumentMetadata(
-        source_id=f"file:{file_path.stem}",
-        title=file_path.stem,
-        xwiki_url=None,
-        xwiki_page_reference=None,
-        source_hash=_compute_sha256(raw_content),
-        retrieved_at=datetime.utcnow(),
-        last_modified=None,
+        source_id=metadata_entry["source_id"],
+        title=metadata_entry["title"],
+        xwiki_url=metadata_entry.get("xwiki_url"),
+        xwiki_page_reference=metadata_entry.get("xwiki_page_reference"),
+        source_hash=metadata_entry["source_hash"],
+        retrieved_at=(
+            datetime.fromisoformat(metadata_entry["retrieved_at"])
+            if metadata_entry.get("retrieved_at")
+            else None
+        ),
+        last_modified=metadata_entry.get("last_modified"),
         pipeline_version=None,
         pipeline_run_id=None,
     )
@@ -53,7 +60,6 @@ def _load_source_document_from_file(file_path: Path) -> SourceDocument:
         raw_content=raw_content,
         content_type="text/html",
     )
-
 
 def _extract_root(source_doc: SourceDocument, root_class: str = "xcontent") -> CleanDocument:
     cleaned_content = extract_content_root(source_doc.raw_content)
@@ -85,8 +91,28 @@ def run(
 ) -> None:
     clean_dir.mkdir(parents=True, exist_ok=True)
 
+    manifest_path = raw_dir / "manifest.json"
+    if not manifest_path.exists():
+        raise FileNotFoundError(
+            f"Missing manifest.json in {raw_dir}. Run fetch-xwiki first."
+        )
+
+    manifest = json.loads((raw_dir / "manifest.json").read_text(encoding="utf-8"))
+    metadata_by_file = {entry["file"]: entry for entry in manifest}
+
     for file_path in sorted(raw_dir.glob("*.htm")):
-        source_doc = _load_source_document_from_file(file_path)
+        metadata_entry = metadata_by_file.get(file_path.name)
+
+        if metadata_entry is None:
+            raise ValueError(
+                f"No metadata entry found in manifest.json for raw file: {file_path.name}"
+            )
+
+        source_doc = _load_source_document_from_file(
+            file_path=file_path,
+            metadata_entry=metadata_entry,
+        )
+
         source_doc.metadata.pipeline_version = pipeline_version
         source_doc.metadata.pipeline_run_id = run_id
 
