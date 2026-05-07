@@ -62,11 +62,13 @@ def _last_user_message(messages) -> str:
 
 @app.post("/v1/chat/completions")
 def chat_completions(request: ChatCompletionRequest) -> dict:
-    if request.stream:
-        raise HTTPException(
-            status_code=400,
-            detail="Streaming is not supported yet.",
-        )
+    # if request.stream:
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail="Streaming is not supported yet.",
+    #     )
+    # Streaming wird aktuell ignoriert.
+    # Die Antwort wird non-streaming zurückgegeben.
 
     question = _last_user_message(request.messages)
 
