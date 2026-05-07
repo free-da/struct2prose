@@ -12,7 +12,12 @@ dependencies = [
 	"lxml",
 	"python-dotenv",
 	"qdrant-client",
-    "sentence-transformers"
+    "sentence-transformers",
+	"fastapi",
+	"uvicorn",
+	"qdrant-client",
+	"sentence-transformers",
+	"pydantic"
 ]
 
 [tool.setuptools]

@@ -207,3 +207,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# struct2prose
+clean_data
+contextualized_data
+contextualized_data_bk
+processed_data
+stripped_data
