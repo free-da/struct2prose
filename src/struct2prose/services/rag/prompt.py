@@ -46,6 +46,8 @@ Regeln:
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 - Wenn möglich, nenne das relevante Dokument oder den Abschnitt.
+- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL).
+- Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
 
 Kontext:
 {context}
