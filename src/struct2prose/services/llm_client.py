@@ -31,16 +31,29 @@ def generate_text(
 
     if Config.LLM_PROVIDER == "local":
         response = requests.post(
-            f"{Config.LOCAL_LLM_BASE_URL}/api/generate",
+            f"{Config.LOCAL_LLM_BASE_URL}/v1/chat/completions",
             json={
                 "model": selected_model,
-                "prompt": f"{system_prompt}\n\n{prompt}",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": system_prompt,
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    },
+                ],
+                "temperature": 0.2,
                 "stream": False,
             },
             timeout=120,
         )
-        response.raise_for_status()
-        data = response.json()
-        return str(data.get("response", "")).strip()
 
-    raise ValueError(f"Unsupported provider: {Config.LLM_PROVIDER}")
+        response.raise_for_status()
+
+        data = response.json()
+
+        return (
+            data["choices"][0]["message"]["content"].strip()
+        )
