@@ -9,6 +9,7 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
         section = chunk.payload.get("section_heading", "Unbekannter Abschnitt")
         block_type = chunk.payload.get("block_type", "unknown")
         transformation = chunk.payload.get("transformation", "unknown")
+
         url = chunk.payload.get("xwiki_url")
 
         source_url_line = f"URL: {url}\n" if url else ""
@@ -38,6 +39,8 @@ Regeln:
 - Der Kontext kann bereits semantisch transformierte Informationen enthalten.
 - Tabellen, Listen oder strukturierte Inhalte wurden möglicherweise bereits in Fließtext umgewandelt.
 - Betrachte alle Aussagen im Kontext als nutzbare Wissensrepräsentationen, auch wenn die ursprüngliche Tabellenstruktur nicht mehr sichtbar ist.
+- Informationen können verteilt über mehrere Quellen oder Aussagen vorliegen.
+- Kombiniere zusammengehörige Informationen aus mehreren Kontextstellen.
 - Fasse relevante Informationen aus mehreren Quellen oder Aussagen zusammen, wenn dies zur Beantwortung der Frage erforderlich ist.
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Erfinde keine Details.
