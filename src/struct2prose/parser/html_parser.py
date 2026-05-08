@@ -6,9 +6,7 @@ from pathlib import Path
 from struct2prose.models.documents import DocumentMetadata
 from struct2prose.parser.models import WikiDocument, Section, ContentBlock
 
-
-BLOCK_TAGS = {"p", "ul", "ol", "table", "pre", "code", "div"}
-
+CONTAINER_TAGS = {"div", "section", "article", "main", "blockquote"}
 
 def extract_text_with_breaks(tag: Tag) -> str:
     """
@@ -51,7 +49,7 @@ def _parse_container(
 
         name = (child.name or "").lower()
 
-        if name in {"h1", "h2", "h3"}:
+        if name in {"h1", "h2", "h3", "h4", "h5", "h6"}:
             if current.blocks or current.heading != "Einleitung":
                 sections.append(current)
 
@@ -115,10 +113,9 @@ def _parse_container(
                     )
                 )
 
-        elif name == "div":
+        elif name in CONTAINER_TAGS:
             classes = set(child.get("class", []) or [])
-
-            # XWiki: code blocks are often rendered as <div class="code">...</div>
+            # Spezialfall: Code-Container
             if "code" in classes:
                 code = child.get_text("\n", strip=True)
                 if code:
@@ -130,27 +127,14 @@ def _parse_container(
                         )
                     )
                 continue
-
-            # div as container; if it contains block children, recurse
-            has_block_children = child.find(list(BLOCK_TAGS), recursive=False) is not None
-
-            if has_block_children:
-                current, section_index = _parse_container(child, sections, current, section_index)
-            else:
-                text = extract_text_with_breaks(child)
-                if text:
-                    current.blocks.append(
-                        ContentBlock(
-                            block_id=_next_block_id(current),
-                            block_type="div_text",
-                            content=text,
-                        )
-                    )
-
-        # everything else is ignored
-
+            # Rekursiv weiter traversieren
+            current, section_index = _parse_container(
+                child,
+                sections,
+                current,
+                section_index,
+            )
     return current, section_index
-
 
 def parse_html(html: str, metadata: DocumentMetadata) -> WikiDocument:
     soup = BeautifulSoup(html, "html.parser")

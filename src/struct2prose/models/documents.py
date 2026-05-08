@@ -119,3 +119,4 @@ class ContextualizedDocument:
     skipped_blocks: list[SkippedBlock] = field(default_factory=list)
     failed_blocks: list[FailedBlock] = field(default_factory=list)
     rag_blocks: list[RagBlock] = field(default_factory=list)
+

@@ -9,10 +9,14 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
         section = chunk.payload.get("section_heading", "Unbekannter Abschnitt")
         block_type = chunk.payload.get("block_type", "unknown")
         transformation = chunk.payload.get("transformation", "unknown")
+        url = chunk.payload.get("xwiki_url")
+
+        source_url_line = f"URL: {url}\n" if url else ""
 
         parts.append(
             f"[Quelle {index}]\n"
             f"Dokument: {title}\n"
+            f"{source_url_line}"
             f"Abschnitt: {section}\n"
             f"Blocktyp: {block_type}\n"
             f"Transformation: {transformation}\n"
@@ -35,6 +39,8 @@ Regeln:
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 - Wenn möglich, nenne das relevante Dokument oder den Abschnitt.
+- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL).
+- Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
 
 Kontext:
 {context}
