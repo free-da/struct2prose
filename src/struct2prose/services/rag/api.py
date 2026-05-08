@@ -59,6 +59,30 @@ def _last_user_message(messages) -> str:
 
     raise HTTPException(status_code=400, detail="No user message found.")
 
+def _format_sources(chunks) -> str:
+    seen = set()
+    lines = []
+
+    for chunk in chunks:
+        title = chunk.payload.get("title", "Unbekanntes Dokument")
+        url = chunk.payload.get("xwiki_url")
+        section = chunk.payload.get("section_heading")
+
+        if not url or url in seen:
+            continue
+
+        seen.add(url)
+
+        label = title
+        if section:
+            label += f" – {section}"
+
+        lines.append(f"- [{label}]({url})")
+
+    if not lines:
+        return ""
+
+    return "\n\n## Quellen\n" + "\n".join(lines)
 
 @app.post("/v1/chat/completions")
 def chat_completions(request: ChatCompletionRequest) -> dict:
@@ -82,6 +106,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
             "Antworte nur auf Basis des bereitgestellten Kontextes."
         ),
     )
+    answer = answer.strip() + _format_sources(chunks)
 
     now = int(time.time())
 
