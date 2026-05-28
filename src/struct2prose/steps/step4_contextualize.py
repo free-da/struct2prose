@@ -104,6 +104,27 @@ Schreibe:
 "Die GPU verfügt über 12 GB GDDR6-Speicher."
 """.strip()
 
+
+def _prompt_for_list(doc_title: str, section_heading: str, items: list[str]) -> str:
+    bullets = "\n".join(f"- {it}" for it in items)
+    return f"""
+Du erhältst eine Liste aus einer technischen Wiki-Seite.
+
+Dokumenttitel: {doc_title}
+Abschnitt: {section_heading}
+
+Liste:
+{bullets}
+
+Aufgabe:
+- Formuliere die Liste als gut lesbaren Fließtext.
+- Wenn es sich um Schritte handelt, gib eine klare Schrittfolge aus (nummeriert).
+- Erfinde keine Erklärungen zu Begriffen.
+- Nutze ausschließlich die Listeneinträge.
+- Wenn die Liste nur aus Einzelnachweisen, Links oder Begriffen besteht, fasse sie neutral als Verweisliste zusammen.
+""".strip()
+
+
 def _is_contextualizable(block: ContentBlock, section: Section | None = None) -> bool:
     if section and section.heading.strip().lower() in {"einzelnachweise", "referenzen", "quellen"}:
         return False
