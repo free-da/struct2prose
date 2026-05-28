@@ -45,16 +45,16 @@ def generate_text(
                     },
                 ],
                 "temperature": 0.2,
+                "max_tokens": 1024,
                 "stream": False,
             },
             timeout=300,
         )
 
         if not response.ok:
-            print("LLM request failed")
-            print("Status:", response.status_code)
-            print("Response:", response.text)
-            response.raise_for_status()
+            raise RuntimeError(
+                f"LLM request failed with status {response.status_code}: {response.text}"
+            )
 
         response.raise_for_status()
 
