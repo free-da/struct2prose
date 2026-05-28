@@ -64,7 +64,11 @@ def _table_to_csv(rows: list[list[str]]) -> str:
     return "\n".join(lines)
 
 
-def _prompt_for_table(doc_title: str, section_heading: str, table_rows: list[list[str]]) -> str:
+def _prompt_for_table(
+    doc_title: str,
+    section_heading: str,
+    table_rows: list[list[str]],
+) -> str:
     table_csv = _table_to_csv(table_rows)
 
     return f"""
@@ -77,40 +81,28 @@ Tabelleninhalt (CSV):
 {table_csv}
 
 Aufgabe:
-1) Gib den Titel der Tabelle an, wenn es einen gibt. Nutze dafür entweder die Über- oder Unterschrift der Tabelle. Wenn es keinen Titel gibt, gib der Tabelle eine inhaltlich passende Bezeichnung.
-2) Beschreibe kurz, was diese Tabelle insgesamt darstellt (1-2 Sätze).
-3) Erkläre die Bedeutung jeder Spalte (stichpunktartig oder kurze Sätze).
-4) Formuliere jede Tabellenzeile als beschreibenden Satz (pro Zeile ein Satz).
-   - Wenn eine Zeile eine Art "Fortsetzung" ist (z.B. erste Spalte leer), beziehe dich auf die letzte nicht-leere Kategorie/Instanz aus der ersten Spalte.
-   - Nutze keine stilistischen Mittel, um Wiederholungen zu vermeiden, sondern gib die Informationen genau so wieder, wie sie in der Tabelle erscheinen, auch wenn sich etwas doppelt.
-5) Gib KEINEN CSV/Tabellen-Output zurück, sondern gut lesbaren Fließtext.
-6) Erfinde keine Inhalte oder Angaben darüber, was in der Tabelle enthalten sein könnte. Wenn eine Tabelle oder einzelne Felder leer sind, dann gib das einfach so wieder.
+- Formuliere jede Tabellenzeile als klaren beschreibenden Satz in natürlicher Sprache.
+- Verbinde dabei die Spaltenüberschriften sinnvoll mit den jeweiligen Zellenwerten.
+- Nutze die Informationen der Tabelle möglichst explizit.
+- Wenn eine erste Spalte eine Kategorie oder Entität beschreibt, nutze sie als Subjekt des Satzes.
+- Wenn Tabellenzeilen Fortsetzungen vorheriger Zeilen darstellen (z. B. leere erste Spalte), beziehe dich auf die letzte passende Entität.
+- Verzichte auf sprachliche Mittel zur Wiederholungsvermeidung.
+- Nutze klare und explizite Formulierungen.
+- Verwende wichtige Entitäten oder Bezeichnungen lieber erneut, statt Pronomen wie „er“, „sie“, „dieses“ oder „diese“ zu verwenden.
+- Erfinde keine zusätzlichen Informationen.
+- Erkläre keine allgemeinen Fachbegriffe.
+- Beschreibe nicht die Tabelle selbst.
+- Gib keine Spaltenbeschreibung aus.
+- Gib keine Aufzählungen oder Markdown-Strukturen aus.
+- Gib ausschließlich die formulierten Sätze zurück.
 
-Format:
-- Wenn möglich Überschriften auf Markdown-Ebene auf sinnvoller Strukturebene.
-- Nutze, wenn sinnvoll, kurze Absätze und Aufzählungen.
+Beispiel:
+Statt:
+"GPU, 12 GB, GDDR6"
+
+Schreibe:
+"Die GPU verfügt über 12 GB GDDR6-Speicher."
 """.strip()
-
-
-def _prompt_for_list(doc_title: str, section_heading: str, items: list[str]) -> str:
-    bullets = "\n".join(f"- {it}" for it in items)
-    return f"""
-Du erhältst eine Liste aus einer technischen Wiki-Seite.
-
-Dokumenttitel: {doc_title}
-Abschnitt: {section_heading}
-
-Liste:
-{bullets}
-
-Aufgabe:
-- Formuliere die Liste als gut lesbaren Fließtext.
-- Wenn es sich um Schritte handelt, gib eine klare Schrittfolge aus (nummeriert).
-- Erfinde keine Erklärungen zu Begriffen.
-- Nutze ausschließlich die Listeneinträge.
-- Wenn die Liste nur aus Einzelnachweisen, Links oder Begriffen besteht, fasse sie neutral als Verweisliste zusammen.
-""".strip()
-
 
 def _is_contextualizable(block: ContentBlock, section: Section | None = None) -> bool:
     if section and section.heading.strip().lower() in {"einzelnachweise", "referenzen", "quellen"}:
