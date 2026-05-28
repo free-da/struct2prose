@@ -1,5 +1,6 @@
 import json
 import time
+import re
 from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
@@ -81,6 +82,7 @@ Aufgabe:
 3) Erkläre die Bedeutung jeder Spalte (stichpunktartig oder kurze Sätze).
 4) Formuliere jede Tabellenzeile als beschreibenden Satz (pro Zeile ein Satz).
    - Wenn eine Zeile eine Art "Fortsetzung" ist (z.B. erste Spalte leer), beziehe dich auf die letzte nicht-leere Kategorie/Instanz aus der ersten Spalte.
+   - Nutze keine stilistischen Mittel, um Wiederholungen zu vermeiden, sondern gib die Informationen genau so wieder, wie sie in der Tabelle erscheinen, auch wenn sich etwas doppelt.
 5) Gib KEINEN CSV/Tabellen-Output zurück, sondern gut lesbaren Fließtext.
 6) Erfinde keine Inhalte oder Angaben darüber, was in der Tabelle enthalten sein könnte. Wenn eine Tabelle oder einzelne Felder leer sind, dann gib das einfach so wieder.
 
@@ -104,13 +106,21 @@ Liste:
 Aufgabe:
 - Formuliere die Liste als gut lesbaren Fließtext.
 - Wenn es sich um Schritte handelt, gib eine klare Schrittfolge aus (nummeriert).
-- Ansonsten erkläre kurz, was die Liste zusammenfasst, und fasse die Punkte verständlich zusammen.
+- Erfinde keine Erklärungen zu Begriffen.
+- Nutze ausschließlich die Listeneinträge.
+- Wenn die Liste nur aus Einzelnachweisen, Links oder Begriffen besteht, fasse sie neutral als Verweisliste zusammen.
 """.strip()
 
 
-def _is_contextualizable(block: ContentBlock) -> bool:
+def _is_contextualizable(block: ContentBlock, section: Section | None = None) -> bool:
+    if section and section.heading.strip().lower() in {"einzelnachweise", "referenzen", "quellen"}:
+        return False
+
     return block.block_type in {"table", "list"}
 
+def _looks_language_corrupted(text: str) -> bool:
+    cjk_chars = re.findall(r"[\u4e00-\u9fff]", text)
+    return len(cjk_chars) > 20
 
 def _strategy_for_block(block: ContentBlock) -> str:
     if block.block_type == "table":
@@ -139,11 +149,18 @@ def _prompt_for_block(doc: WikiDocument, section: Section, block: ContentBlock) 
 def _validate_contextualized_text(text: str | None) -> bool:
     if text is None:
         return False
+
     stripped = text.strip()
+
     if not stripped:
         return False
+
     if len(stripped) < 20:
         return False
+
+    if _looks_language_corrupted(stripped):
+        return False
+
     return True
 
 def _make_contextualized_block_id(task: ContextualizationTask) -> str:
@@ -336,7 +353,7 @@ def _contextualize_document(
         md_lines.append(f"## {section.heading}\n")
 
         for block in section.blocks:
-            if not _is_contextualizable(block):
+            if not _is_contextualizable(block, section):
                 passthrough_md = _markdown_for_passthrough_block(block)
                 if passthrough_md:
                     md_lines.append(passthrough_md)
