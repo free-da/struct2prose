@@ -149,7 +149,7 @@ def main() -> None:
             Config.QDRANT_CONTEXTUALIZED_COLLECTION,
         )
         run_ingest_qdrant(
-            args.contextualized_dir,
+            args.baseline_dir,
             Config.QDRANT_BASELINE_COLLECTION,
         )
     elif args.cmd == "all":
@@ -204,7 +204,8 @@ def main() -> None:
                 db_path=args.db_path,
             )
             run_ingest_qdrant(
-                args.contextualized_dir
+                args.contextualized_dir,
+                Config.QDRANT_CONTEXTUALIZED_COLLECTION
             )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")

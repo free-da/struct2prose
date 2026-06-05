@@ -58,10 +58,6 @@ class Config:
             return None
         raise ValueError("Invalid LLM_PROVIDER")
 
-    QDRANT_CONTEXTUALIZED_COLLECTION: str | None = os.getenv(
-        "QDRANT_CONTEXTUALIZED_COLLECTION"
-    )
+    QDRANT_CONTEXTUALIZED_COLLECTION: str | None = os.getenv("QDRANT_CONTEXTUALIZED_COLLECTION")
 
-    QDRANT_BASELINE_COLLECTION: str | None = os.getenv(
-        "QDRANT_BASELINE_COLLECTION"
-    )
+    QDRANT_BASELINE_COLLECTION: str | None = os.getenv("QDRANT_BASELINE_COLLECTION")
