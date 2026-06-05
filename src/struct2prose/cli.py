@@ -260,9 +260,9 @@ def main() -> None:
                 run_id=run_id,
                 db_path=args.db_path,
             )
-            run_contextualize(
+            run_baseline(
                 args.processed_dir,
-                args.baselin_dir,
+                args.baseline_dir,
                 pipeline_version=args.pipeline_version,
                 run_id=run_id,
                 db_path=args.db_path,

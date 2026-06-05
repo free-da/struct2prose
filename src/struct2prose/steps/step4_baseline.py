@@ -3,33 +3,85 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from struct2prose.parser import ContentBlock
+from struct2prose.models.documents import ContextualizedDocument, RagBlock
+from struct2prose.parser.models import ContentBlock
 from struct2prose.persistence.db import connect
-from struct2prose.persistence.store import create_step_run, create_document_version, finish_step_run
-from struct2prose.steps.step4_contextualize import MODEL_DEFAULT, _wiki_document_from_json, _make_step_run_id, \
-    _make_input_version_id
+from struct2prose.persistence.store import (
+    create_step_run,
+    create_document_version,
+    finish_step_run,
+)
+from struct2prose.steps.step4_contextualize import _wiki_document_from_json
 
 STEP_NAME = "baseline"
+
+
+def _make_step_run_id(run_id: str, source_id: str) -> str:
+    safe_source_id = source_id.replace(":", "_")
+    return f"{run_id}:{STEP_NAME}:{safe_source_id}"
+
+
+def _make_input_version_id(run_id: str, source_id: str) -> str:
+    safe_source_id = source_id.replace(":", "_")
+    return f"{run_id}:processed_data:{safe_source_id}"
+
 
 def _make_output_version_id(run_id: str, source_id: str) -> str:
     safe_source_id = source_id.replace(":", "_")
     return f"{run_id}:baseline_data:{safe_source_id}"
+
 
 def _text_for_baseline_block(block: ContentBlock) -> str:
     if block.block_type == "paragraph":
         return str(block.content).strip()
 
     if block.block_type == "code":
-        return "```\n" + str(block.content).strip() + "\n```"
+        code = str(block.content).strip()
+        return f"```\n{code}\n```" if code else ""
 
     if block.block_type == "list":
         return "\n".join(f"- {item}" for item in block.content)
 
     if block.block_type == "table":
         rows = block.content
-        return "\n".join(" | ".join(str(cell) for cell in row) for row in rows)
+        return "\n".join(
+            " | ".join(str(cell) for cell in row)
+            for row in rows
+        )
 
     return str(block.content).strip()
+
+
+def _build_baseline_document(doc) -> tuple[ContextualizedDocument, str]:
+    baseline_doc = ContextualizedDocument(metadata=doc.metadata)
+    md_lines: list[str] = [f"# {doc.metadata.title}\n"]
+
+    for section in doc.sections:
+        md_lines.append(f"## {section.heading}\n")
+
+        for block in section.blocks:
+            text = _text_for_baseline_block(block)
+
+            if not text.strip():
+                continue
+
+            baseline_doc.rag_blocks.append(
+                RagBlock(
+                    block_id=f"rag-{block.block_id}",
+                    source_block_id=block.block_id,
+                    section_id=section.section_id,
+                    section_heading=section.heading,
+                    block_type=block.block_type,
+                    text=text.strip(),
+                    transformation="passthrough",
+                )
+            )
+
+            md_lines.append(text.strip() + "\n")
+
+    markdown = "\n".join(md_lines).strip() + "\n"
+    return baseline_doc, markdown
+
 
 def run(
     processed_dir: Path,
@@ -38,7 +90,7 @@ def run(
     pipeline_version: str | None = None,
     run_id: str | None = None,
     db_path: Path | None = None,
-markdown=None) -> None:
+) -> None:
     baseline_dir.mkdir(parents=True, exist_ok=True)
 
     for file in sorted(processed_dir.glob("*.json")):
@@ -49,7 +101,6 @@ markdown=None) -> None:
         doc.metadata.pipeline_run_id = run_id or doc.metadata.pipeline_run_id
 
         step_run_id = None
-        output_version_id = None
 
         try:
             if run_id is not None and db_path is not None:
@@ -66,13 +117,15 @@ markdown=None) -> None:
                         input_version_id=input_version_id,
                     )
 
+            baseline_doc, markdown = _build_baseline_document(doc)
+
             out_md_path = baseline_dir / f"{file.stem}.md"
             out_md_path.write_text(markdown, encoding="utf-8")
 
-            out_json_path = baseline_dir / f"{file.stem}.baseline.json"
+            out_json_path = baseline_dir / f"{file.stem}.contextualized.json"
             out_json_path.write_text(
                 json.dumps(
-                    asdict(baseline_dir),
+                    asdict(baseline_doc),
                     ensure_ascii=False,
                     indent=2,
                     default=str,
@@ -81,7 +134,10 @@ markdown=None) -> None:
             )
 
             if run_id is not None and db_path is not None:
-                output_version_id = _make_output_version_id(run_id, doc.metadata.source_id)
+                output_version_id = _make_output_version_id(
+                    run_id,
+                    doc.metadata.source_id,
+                )
 
                 with connect(db_path) as conn:
                     create_document_version(
@@ -89,7 +145,7 @@ markdown=None) -> None:
                         version_id=output_version_id,
                         source_id=doc.metadata.source_id,
                         run_id=run_id,
-                        stage_name="contextualized_data",
+                        stage_name="baseline_data",
                         artifact_path=out_json_path,
                     )
                     finish_step_run(
@@ -99,8 +155,8 @@ markdown=None) -> None:
                         output_version_id=output_version_id,
                     )
 
-            print(f"[step4] wrote {out_md_path}")
-            print(f"[step4] wrote {out_json_path}")
+            print(f"[step4-baseline] wrote {out_md_path}")
+            print(f"[step4-baseline] wrote {out_json_path}")
 
         except Exception as e:
             if run_id is not None and db_path is not None and step_run_id is not None:
