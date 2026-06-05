@@ -73,6 +73,7 @@ def main() -> None:
 
     p_ingest = sub.add_parser("ingest-qdrant", help="Ingest contextualized documents into Qdrant")
     p_ingest.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
+    p_ingest.add_argument("--baseline-dir", type=Path, default=Path("baseline_data"))
     p_ingest.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
 
     p_all_eval = sub.add_parser("all-eval", help="Run evaluation pipeline with contextualized and baseline collections")
