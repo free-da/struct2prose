@@ -1,8 +1,3 @@
-# .contextualized.json laden
-# → ContextualizedBlock lesen
-# → Text chunkweise vorbereiten
-# → Embedding erzeugen
-# → Qdrant upsert
 
 from pathlib import Path
 import json
@@ -14,7 +9,6 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 from sentence_transformers import SentenceTransformer
 
 
-COLLECTION_NAME = os.getenv("QDRANT_COLLECTION", "struct2prose_knowledge")
 VECTOR_SIZE = 384  # all-MiniLM-L6-v2
 QDRANT_URL = os.getenv("QDRANT_URL", "http://10.200.200.33:6333")
 
@@ -23,13 +17,13 @@ def stable_chunk_id(source_id: str, block_id: str) -> str:
     return str(uuid.uuid5(uuid.NAMESPACE_URL, f"{source_id}:{block_id}"))
 
 
-def ensure_collection(client: QdrantClient) -> None:
+def ensure_collection(client: QdrantClient, collection_name: str) -> None:
     collections = client.get_collections().collections
     names = [c.name for c in collections]
 
-    if COLLECTION_NAME not in names:
+    if collection_name not in names:
         client.create_collection(
-            collection_name=COLLECTION_NAME,
+            collection_name=collection_name,
             vectors_config=VectorParams(
                 size=VECTOR_SIZE,
                 distance=Distance.COSINE,
@@ -78,6 +72,7 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
                 id=stable_chunk_id(
                     metadata["source_id"],
                     f"{block['block_id']}:{i}",
+
                 ),
                 vector=vector,
                 payload={
@@ -111,11 +106,12 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
 
 def run(
     contextualized_dir: Path,
+    collection_name: str
 ) -> None:
     client = QdrantClient(url=QDRANT_URL)
     embedder = SentenceTransformer(os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"))
 
-    ensure_collection(client)
+    ensure_collection(client, collection_name)
 
     for path, doc in load_contextualized_documents(contextualized_dir):
         points = make_points(doc, embedder)
@@ -125,7 +121,7 @@ def run(
             continue
 
         client.upsert(
-            collection_name=COLLECTION_NAME,
+            collection_name=collection_name,
             points=points,
         )
 

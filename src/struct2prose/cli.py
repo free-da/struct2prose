@@ -12,6 +12,7 @@ from struct2prose.steps.step3_parse import run as run_parse
 from struct2prose.steps.step4_contextualize import run as run_contextualize
 from struct2prose.steps.step5_ingest_qdrant import run as run_ingest_qdrant
 from struct2prose.config import Config
+from struct2prose.steps.step4_baseline import run as run_baseline
 
 PIPELINE_VERSION = "v1"
 DB_PATH_DEFAULT= Path("state/struct2prose.db")
@@ -73,6 +74,22 @@ def main() -> None:
     p_ingest = sub.add_parser("ingest-qdrant", help="Ingest contextualized documents into Qdrant")
     p_ingest.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
     p_ingest.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
+
+    p_all_eval = sub.add_parser("all-eval", help="Run evaluation pipeline with contextualized and baseline collections")
+    p_all_eval.add_argument("--base-url", type=str, default=os.getenv("XWIKI_BASE_URL"))
+    p_all_eval.add_argument("--wiki-id", type=str, default="xwiki")
+    p_all_eval.add_argument("--username", type=str, default=None)
+    p_all_eval.add_argument("--password", type=str, default=None)
+    p_all_eval.add_argument("--raw-dir", type=Path, default=Path("raw_data"))
+    p_all_eval.add_argument("--clean-dir", type=Path, default=Path("clean_data"))
+    p_all_eval.add_argument("--stripped-dir", type=Path, default=Path("stripped_data"))
+    p_all_eval.add_argument("--processed-dir", type=Path, default=Path("processed_data"))
+    p_all_eval.add_argument("--contextualized-dir", type=Path, default=Path("contextualized_data"))
+    p_all_eval.add_argument("--baseline-dir", type=Path, default=Path("baseline_data"))
+    p_all_eval.add_argument("--model", type=str, default=Config.get_model_name())
+    p_all_eval.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
+    p_all_eval.add_argument("--pipeline-version", type=str, default=PIPELINE_VERSION)
+    p_all_eval.add_argument("--include-space", action="append", default=["Dummy-Content"])
 
     args = parser.parse_args()
 
@@ -183,6 +200,81 @@ def main() -> None:
             )
             run_ingest_qdrant(
                 args.contextualized_dir
+            )
+            with connect(args.db_path) as conn:
+                finish_pipeline_run(conn, run_id, "completed")
+
+        except Exception:
+            with connect(args.db_path) as conn:
+                finish_pipeline_run(conn, run_id, "failed")
+            raise
+
+    elif args.cmd == "all-eval":
+        run_id = str(uuid.uuid4())
+
+        with connect(args.db_path) as conn:
+            create_pipeline_run(
+                conn,
+                run_id=run_id,
+                pipeline_version=args.pipeline_version,
+                llm_provider=Config.LLM_PROVIDER,
+                model_name=args.model,
+            )
+
+        try:
+            fetch_xwiki_pages(
+                wiki_base_url=args.base_url,
+                wiki_id=args.wiki_id,
+                raw_dir=args.raw_dir,
+                username=args.username,
+                password=args.password,
+                include_spaces=set(args.include_space) if args.include_space else None
+            )
+            run_extract_root(
+                args.raw_dir,
+                args.clean_dir,
+                "xcontent",
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_strip_ui(
+                args.clean_dir,
+                args.stripped_dir,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_parse(
+                args.stripped_dir,
+                args.processed_dir,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_contextualize(
+                args.processed_dir,
+                args.contextualized_dir,
+                model=args.model,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_contextualize(
+                args.processed_dir,
+                args.baselin_dir,
+                pipeline_version=args.pipeline_version,
+                run_id=run_id,
+                db_path=args.db_path,
+            )
+            run_ingest_qdrant(
+                args.contextualized_dir,
+                Config.QDRANT_CONTEXTUALIZED_COLLECTION,
+            )
+
+            run_ingest_qdrant(
+                args.baseline_dir,
+                Config.QDRANT_BASELINE_COLLECTION,
             )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")
