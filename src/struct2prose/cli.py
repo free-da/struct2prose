@@ -145,7 +145,12 @@ def main() -> None:
         )
     elif args.cmd == "ingest-qdrant":
         run_ingest_qdrant(
-            args.contextualized_dir
+            args.contextualized_dir,
+            Config.QDRANT_CONTEXTUALIZED_COLLECTION,
+        )
+        run_ingest_qdrant(
+            args.contextualized_dir,
+            Config.QDRANT_BASELINE_COLLECTION,
         )
     elif args.cmd == "all":
         run_id = str(uuid.uuid4())
