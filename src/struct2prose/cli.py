@@ -146,11 +146,11 @@ def main() -> None:
     elif args.cmd == "ingest-qdrant":
         run_ingest_qdrant(
             args.contextualized_dir,
-            Config.QDRANT_CONTEXTUALIZED_COLLECTION,
+            collection_name=Config.QDRANT_CONTEXTUALIZED_COLLECTION,
         )
         run_ingest_qdrant(
             args.baseline_dir,
-            Config.QDRANT_BASELINE_COLLECTION,
+            collection_name=Config.QDRANT_BASELINE_COLLECTION,
         )
     elif args.cmd == "all":
         run_id = str(uuid.uuid4())
@@ -205,7 +205,7 @@ def main() -> None:
             )
             run_ingest_qdrant(
                 args.contextualized_dir,
-                Config.QDRANT_CONTEXTUALIZED_COLLECTION
+                collection_name=Config.QDRANT_CONTEXTUALIZED_COLLECTION
             )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")
@@ -275,12 +275,12 @@ def main() -> None:
             )
             run_ingest_qdrant(
                 args.contextualized_dir,
-                Config.QDRANT_CONTEXTUALIZED_COLLECTION,
+                collection_name=Config.QDRANT_CONTEXTUALIZED_COLLECTION,
             )
 
             run_ingest_qdrant(
                 args.baseline_dir,
-                Config.QDRANT_BASELINE_COLLECTION,
+                collection_name=Config.QDRANT_BASELINE_COLLECTION,
             )
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "completed")

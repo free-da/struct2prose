@@ -20,7 +20,7 @@ def stable_chunk_id(source_id: str, block_id: str) -> str:
 def ensure_collection(client: QdrantClient, collection_name: str) -> None:
     collections = client.get_collections().collections
     names = [c.name for c in collections]
-
+    print("Collection Name: "+collection_name)
     if collection_name not in names:
         client.create_collection(
             collection_name=collection_name,
