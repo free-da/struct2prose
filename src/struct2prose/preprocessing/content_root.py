@@ -18,6 +18,4 @@ def extract_content_root(html: str) -> str:
     for bad in root.find_all(["script", "style", "noscript"]):
         bad.decompose()
 
-    out = BeautifulSoup("<html><body></body></html>", "html.parser")
-    out.body.append(BeautifulSoup(str(root), "html.parser"))
-    return str(out)
+    return f"<html><body>{root.decode_contents()}</body></html>"
