@@ -3,13 +3,16 @@ import uuid
 
 from fastapi import FastAPI, HTTPException
 
+from struct2prose import config
 from struct2prose.services.rag.prompt import build_rag_prompt
 from struct2prose.services.rag.retriever import RagRetriever
 from struct2prose.services.rag.schemas import ChatCompletionRequest, SearchRequest
 from struct2prose.services.llm_client import generate_text
 
-MODEL_ID = "struct2prose-rag"
-
+MODEL_COLLECTIONS = {
+    "struct2prose-rag": config.QDRANT_CONTEXTUALIZED_COLLECTION,
+    "baseline-rag": config.QDRANT_BASELINE_COLLECTION,
+}
 app = FastAPI(title="struct2prose RAG Service")
 
 retriever = RagRetriever()
@@ -26,18 +29,23 @@ def list_models() -> dict:
         "object": "list",
         "data": [
             {
-                "id": MODEL_ID,
+                "id": model_id,
                 "object": "model",
                 "created": 0,
                 "owned_by": "struct2prose",
             }
-        ],
+            for model_id in MODEL_COLLECTIONS
+        ]
     }
-
 
 @app.post("/search")
 def search(request: SearchRequest) -> dict:
-    chunks = retriever.search(request.query, top_k=request.top_k)
+    collection_name = MODEL_COLLECTIONS.get(request.model)
+    chunks = retriever.search(
+        request.query,
+        collection_name=collection_name,
+        top_k=request.top_k,
+    )
 
     return {
         "query": request.query,
@@ -95,8 +103,19 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
     # Die Antwort wird non-streaming zurückgegeben.
 
     question = _last_user_message(request.messages)
+    collection_name = MODEL_COLLECTIONS.get(request.model)
 
-    chunks = retriever.search(question, top_k=5)
+    if collection_name is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Unknown model: {request.model}",
+        )
+
+    chunks = retriever.search(
+        question,
+        collection_name=collection_name,
+        top_k=5,
+    )
     prompt = build_rag_prompt(question, chunks)
 
     answer = generate_text(

@@ -22,11 +22,17 @@ class RagRetriever:
         self.client = QdrantClient(url=QDRANT_URL)
         self.embedder = SentenceTransformer(EMBEDDING_MODEL)
 
-    def search(self, query: str, top_k: int = 5) -> list[RetrievedChunk]:
+    def search(
+            self,
+            query: str,
+            *,
+            collection_name: str,
+            top_k: int = 5,
+    ) -> list[RetrievedChunk]:
         query_vector = self.embedder.encode(query).tolist()
 
         hits = self.client.query_points(
-            collection_name=COLLECTION_NAME,
+            collection_name=collection_name,
             query=query_vector,
             limit=top_k,
         ).points

@@ -15,4 +15,5 @@ class ChatCompletionRequest(BaseModel):
 
 class SearchRequest(BaseModel):
     query: str
+    model: str = "struct2prose-rag"
     top_k: int = Field(default=5, ge=1, le=20)
