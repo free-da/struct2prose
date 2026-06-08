@@ -19,5 +19,5 @@ def extract_content_root(html: str) -> str:
         bad.decompose()
 
     out = BeautifulSoup("<html><body></body></html>", "html.parser")
-    out.body.append(root)
+    out.body.append(BeautifulSoup(str(root), "html.parser"))
     return str(out)
