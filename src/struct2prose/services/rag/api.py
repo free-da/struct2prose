@@ -3,15 +3,15 @@ import uuid
 
 from fastapi import FastAPI, HTTPException
 
-from struct2prose import config
+from struct2prose.config import Config
 from struct2prose.services.rag.prompt import build_rag_prompt
 from struct2prose.services.rag.retriever import RagRetriever
 from struct2prose.services.rag.schemas import ChatCompletionRequest, SearchRequest
 from struct2prose.services.llm_client import generate_text
 
 MODEL_COLLECTIONS = {
-    "struct2prose-rag": config.QDRANT_CONTEXTUALIZED_COLLECTION,
-    "baseline-rag": config.QDRANT_BASELINE_COLLECTION,
+    "struct2prose-rag": Config.QDRANT_CONTEXTUALIZED_COLLECTION,
+    "baseline-rag": Config.QDRANT_BASELINE_COLLECTION,
 }
 app = FastAPI(title="struct2prose RAG Service")
 
