@@ -133,7 +133,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
         "id": f"chatcmpl-{uuid.uuid4()}",
         "object": "chat.completion",
         "created": now,
-        "model": MODEL_ID,
+        "model": request.model,
         "choices": [
             {
                 "index": 0,
