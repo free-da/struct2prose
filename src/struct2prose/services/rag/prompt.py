@@ -47,7 +47,7 @@ Regeln:
 - Antworte präzise und sachlich.
 - Gib ausschließlich die Seiten, aus denen du Informationen zitierst als Quellen an.
 - Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
-- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL). 
+- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel - Abschnitt](URL). 
 - Verwende für jede Quelle einen direkten Link auf den relevanten Abschnitt.
 
     Das URL-Schema lautet:
