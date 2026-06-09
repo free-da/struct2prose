@@ -83,12 +83,13 @@ Tabelleninhalt (CSV):
 Aufgabe:
 - Formuliere jede Tabellenzeile als klaren beschreibenden Satz in natürlicher Sprache.
 - Verbinde dabei die Spaltenüberschriften sinnvoll mit den jeweiligen Zellenwerten.
+- Verzichte auf sprachliche Mittel zur Wiederholungsvermeidung. 
+- Nutze klare und explizite Formulierungen.
+- Verwende Entitäten oder Bezeichnungen aus der Spaltenüberschrift lieber erneut, statt Pronomen wie „er“, „sie“, „dieses“ oder „diese“ zu verwenden.
 - Nutze die Informationen der Tabelle möglichst explizit.
 - Wenn eine erste Spalte eine Kategorie oder Entität beschreibt, nutze sie als Subjekt des Satzes.
 - Wenn Tabellenzeilen Fortsetzungen vorheriger Zeilen darstellen (z. B. leere erste Spalte), beziehe dich auf die letzte passende Entität.
-- Verzichte auf sprachliche Mittel zur Wiederholungsvermeidung.
-- Nutze klare und explizite Formulierungen.
-- Verwende wichtige Entitäten oder Bezeichnungen lieber erneut, statt Pronomen wie „er“, „sie“, „dieses“ oder „diese“ zu verwenden.
+- Wenn es in einer Zelle mehrere Werte gibt, verkette sie mit und oder oder, aber benenne jede explizit.
 - Erfinde keine zusätzlichen Informationen.
 - Erkläre keine allgemeinen Fachbegriffe.
 - Beschreibe nicht die Tabelle selbst.

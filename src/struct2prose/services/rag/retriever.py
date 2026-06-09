@@ -5,7 +5,6 @@ from typing import Any
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 
-COLLECTION_NAME = os.getenv("COLLECTION_NAME", "struct2prose_knowledge")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://10.200.200.33:6333")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL","sentence-transformers/all-MiniLM-L6-v2")
 

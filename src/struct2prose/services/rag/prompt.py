@@ -32,7 +32,7 @@ def build_rag_prompt(question: str, chunks: list[RetrievedChunk]) -> str:
     context = build_context(chunks)
 
     return f"""
-Du beantwortest Fragen auf Basis einer technischen Wissensbasis.
+Du beantwortest Fragen auf Basis einer Wissensbasis.
 
 Regeln:
 - Nutze ausschließlich den bereitgestellten Kontext.
@@ -45,7 +45,7 @@ Regeln:
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
-- Wenn möglich, nenne das relevante Dokument oder den Abschnitt.
+- Nenne ausschließlich das relevante Dokument oder den Abschnitt als Quelle.
 - Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL).
 - Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
 
