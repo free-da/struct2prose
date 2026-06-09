@@ -46,8 +46,18 @@ Regeln:
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 - Gib ausschließlich die Seiten, aus denen du Informationen zitierst als Quellen an.
-- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL).
 - Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
+- Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL). 
+- Verwende für jede Quelle einen direkten Link auf den relevanten Abschnitt.
+
+    Das URL-Schema lautet:
+    URL/#H<Abschnittsüberschrift>
+    Entferne dabei Leerzeichen und Sonderzeichen aus der Abschnittsüberschrift.
+    
+    Beispiel:
+    Abschnitt "DNS Konfiguration"
+→ https://wiki.example.com/bin/view/Space/Page/#HDNSKonfiguration
+
 
 Kontext:
 {context}
