@@ -45,7 +45,7 @@ Regeln:
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
-- Nenne ausschließlich das relevante Dokument oder den Abschnitt als Quelle.
+- Gib ausschließlich die Seiten, aus denen du Informationen zitierst als Quellen an.
 - Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel](URL).
 - Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
 
