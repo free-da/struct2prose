@@ -125,7 +125,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
             "Antworte nur auf Basis des bereitgestellten Kontextes."
         ),
     )
-    answer = answer.strip() + _format_sources(chunks)
+    #answer = answer.strip() + _format_sources(chunks)
 
     now = int(time.time())
 
