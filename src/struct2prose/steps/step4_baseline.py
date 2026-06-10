@@ -71,6 +71,7 @@ def _build_baseline_document(doc) -> tuple[ContextualizedDocument, str]:
                     source_block_id=block.block_id,
                     section_id=section.section_id,
                     section_heading=section.heading,
+                    section_anchor=section.anchor,
                     block_type=block.block_type,
                     text=text.strip(),
                     transformation="passthrough",
