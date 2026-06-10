@@ -17,7 +17,7 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
         else:
             source_url = url
 
-        source_url_line = f"URL: {url}\n" if url else ""
+        source_url_line = f"URL: {source_url}\n" if source_url else ""
 
         parts.append(
             f"[Quelle {index}]\n"
