@@ -342,6 +342,7 @@ def _wiki_document_from_json(data: dict[str, Any], source_file: str) -> WikiDocu
             Section(
                 section_id=section_id,
                 heading=heading,
+                anchor=sec.get("anchor"),
                 blocks=blocks,
             )
         )

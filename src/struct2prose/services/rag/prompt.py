@@ -7,10 +7,15 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
     for index, chunk in enumerate(chunks, start=1):
         title = chunk.payload.get("title", "Unbekanntes Dokument")
         section = chunk.payload.get("section_heading", "Unbekannter Abschnitt")
+        section_anchor = chunk.payload.get("section_anchor")
         block_type = chunk.payload.get("block_type", "unknown")
         transformation = chunk.payload.get("transformation", "unknown")
-
         url = chunk.payload.get("xwiki_url")
+
+        if url and section_anchor:
+            source_url = f"{url}#{section_anchor}"
+        else:
+            source_url = url
 
         source_url_line = f"URL: {url}\n" if url else ""
 
@@ -19,6 +24,7 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
             f"Dokument: {title}\n"
             f"{source_url_line}"
             f"Abschnitt: {section}\n"
+            f"Abschnittsanker: {section_anchor or 'Nicht vorhanden'}\n"
             f"Blocktyp: {block_type}\n"
             f"Transformation: {transformation}\n"
             f"Score: {chunk.score:.4f}\n\n"
@@ -48,15 +54,9 @@ Regeln:
 - Gib ausschließlich die Seiten, aus denen du Informationen zitierst als Quellen an.
 - Verwende nur URLs, die im Kontext ausdrücklich als URL angegeben sind.
 - Wenn du Quellen nennst, verwende klickbare Markdown-Links im Format [Dokumenttitel - Abschnitt](URL). 
-- Verwende für jede Quelle einen direkten Link auf den relevanten Abschnitt.
-
-    Das URL-Schema lautet:
-    URL/#H<Abschnittsüberschrift>
-    Entferne dabei Leerzeichen und Sonderzeichen aus der Abschnittsüberschrift.
-    
-    Beispiel:
-    Abschnitt "DNS Konfiguration"
-→ https://wiki.example.com/bin/view/Space/Page/#HDNSKonfiguration
+- Nutze ausschließlich die im Kontext angegebene URL. Erfinde oder rekonstruiere keine Abschnittsanker.
+- Wenn eine Quelle eine Abschnitts-URL enthält, verwende genau diese URL unverändert.
+- Wenn keine Abschnitts-URL vorhanden ist, verwende die Dokument-URL.
 
 
 Kontext:
