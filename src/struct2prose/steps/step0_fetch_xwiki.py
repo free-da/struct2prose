@@ -5,7 +5,7 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 import requests
 
@@ -19,6 +19,17 @@ def _slug(text: str) -> str:
 def _sha256(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
+def _view_url_from_rest_page_link(base_url: str, href: str) -> str:
+    # .../spaces/A/spaces/B/pages/WebHome
+    parts = re.findall(r"/spaces/([^/]+)", href)
+    parts = [unquote(p) for p in parts]
+
+    path = "/".join(quote(p) for p in parts)
+    return f"{base_url}/bin/view/{path}/"
+
+
+def _html_url_from_rest_page_link(base_url: str, href: str) -> str:
+    return _view_url_from_rest_page_link(base_url, href) + "?xpage=plain"
 
 def _view_url(base_url: str, page_ref: str) -> str:
     parts = page_ref.split(".")
@@ -105,9 +116,21 @@ def fetch_xwiki_pages(
         if not _is_allowed_page(page_ref, include_spaces=include_spaces):
             print(f"[fetch-xwiki] skipped {page_ref}")
             continue
+        page_link = next(
+            (
+                link["href"]
+                for link in item.get("links", [])
+                if link.get("rel") == "http://www.xwiki.org/rel/page"
+            ),
+            None,
+        )
 
-        html_url = _html_url(wiki_base_url, page_ref)
-        wiki_url = _view_url(wiki_base_url, page_ref)
+        if page_link:
+            wiki_url = _view_url_from_rest_page_link(wiki_base_url, page_link)
+            html_url = _html_url_from_rest_page_link(wiki_base_url, page_link)
+        else:
+            html_url = _html_url(wiki_base_url, page_ref)
+            wiki_url = _view_url(wiki_base_url, page_ref)
 
         html_response = session.get(html_url, timeout=60)
         html_response.raise_for_status()
@@ -119,6 +142,10 @@ def fetch_xwiki_pages(
             continue
 
         html = html_response.text
+
+        if not html.strip():
+            print(f"[fetch-xwiki] WARNING empty html for {page_ref}: {html_url}")
+            continue
 
         file_name = f"{_slug(page_ref)}.htm"
         out_path = raw_dir / file_name
@@ -137,7 +164,7 @@ def fetch_xwiki_pages(
             }
         )
 
-        print(f"[fetch-xwiki] wrote {out_path}")
+        print(f"[fetch-xwiki] wrote {out_path} ({len(html)} chars) from {html_url}")
 
     (raw_dir / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2),
