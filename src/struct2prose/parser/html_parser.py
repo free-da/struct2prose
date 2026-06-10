@@ -58,7 +58,7 @@ def _parse_container(
             anchor = child.get("id")
 
             section_index += 1
-            current = _new_section(section_index, heading)
+            current = _new_section(section_index, heading, anchor)
 
         elif name == "p":
             text = extract_text_with_breaks(child)
@@ -141,12 +141,6 @@ def _parse_container(
 
 def parse_html(html: str, metadata: DocumentMetadata) -> WikiDocument:
     soup = BeautifulSoup(html, "html.parser")
-
-    title = (
-        soup.title.string.strip()
-        if soup.title and soup.title.string
-        else metadata.title
-    )
 
     sections: list[Section] = []
     section_index = 1
