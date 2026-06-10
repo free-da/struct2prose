@@ -56,12 +56,21 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
     metadata = doc["metadata"]
     points = []
 
+
     for block in doc.get("rag_blocks", []):
         text = block["text"].strip()
         if not text:
             continue
 
         chunks = split_text(text)
+        section_anchor = block.get("section_anchor")
+        xwiki_url = metadata.get("xwiki_url")
+
+        section_url = (
+            f"{xwiki_url}#{section_anchor}"
+            if xwiki_url and section_anchor
+            else xwiki_url
+        )
         for i, chunk_text in enumerate(chunks):
             vector = embedder.encode(
                 sentences=chunk_text,
@@ -80,6 +89,8 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
                     "source_id": metadata["source_id"],
                     "title": metadata["title"],
                     "xwiki_url": metadata.get("xwiki_url"),
+                    "section_anchor": section_anchor,
+                    "section_url": section_url,
                     "xwiki_page_reference": metadata.get("xwiki_page_reference"),
                     "source_hash": metadata.get("source_hash"),
                     "pipeline_run_id": metadata.get("pipeline_run_id"),

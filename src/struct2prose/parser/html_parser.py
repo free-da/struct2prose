@@ -26,10 +26,11 @@ def extract_text_with_breaks(tag: Tag) -> str:
     return "\n".join(line for line in lines if line)
 
 
-def _new_section(section_index: int, heading: str) -> Section:
+def _new_section(section_index: int, heading: str, anchor: str | None = None) -> Section:
     return Section(
         section_id=f"sec-{section_index}",
         heading=heading,
+        anchor=anchor,
     )
 
 
@@ -54,6 +55,8 @@ def _parse_container(
                 sections.append(current)
 
             heading = child.get_text(" ", strip=True) or "Abschnitt"
+            anchor = child.get("id")
+
             section_index += 1
             current = _new_section(section_index, heading)
 

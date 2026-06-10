@@ -15,6 +15,7 @@ class ContentBlock:
 class Section:
     section_id: str
     heading: str
+    anchor: str | None = None
     blocks: List[ContentBlock] = field(default_factory=list)
 
 

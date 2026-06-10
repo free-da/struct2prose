@@ -85,6 +85,7 @@ class RagBlock:
     source_block_id: str
     section_id: str
     section_heading: str | None
+    section_anchor: str | None
     block_type: str
     text: str
     transformation: str  # "passthrough" | "contextualized"
