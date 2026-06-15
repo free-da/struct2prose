@@ -87,19 +87,15 @@ Aufgabe:
 - Wenn es einen Tabellenkopf gibt, verwende Spaltenüberschriften explizit im Satz.
 - Wenn es keinen Tabellenkopf gibt, nutze die erste Spalte als Entität.
 - Wenn eine Spalte leer ist, verwende die letzte nicht-leere Entität erneut.
-- Verwende keine Pronomen.
-- Verwende keine Synonyme.
-- Erfinde keine Informationen.
-- Erkläre keine Fachbegriffe.
+- Wenn in einer Zeile nur eine Spalte befüllt ist, verwende diese als eine Zwischenüberschrift für die danach folgenden Zeilen.
 - Gib ausschließlich die erzeugten Sätze zurück.
 
 Beispiel:
 
-Host | Rolle | Standort
-server70 | DNS-Server | Berlin
+Host | Rolle | Standort | IP-Adresse
+server70 | DNS-Server | Berlin | 123.xx.xx.xx
 
-server70 hat die Rolle DNS-Server.
-server70 hat den Standort Berlin.
+Der Host server70 hat die Rolle DNS-Server, den Standort Berlin und die IP-Adresse 123.xx.xx.xx.
 """.strip()
 
 
