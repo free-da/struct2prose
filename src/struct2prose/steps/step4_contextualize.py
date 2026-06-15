@@ -84,13 +84,13 @@ Aufgabe:
 
 - Verwende ausschließlich Informationen aus der Tabelle.
 - Verarbeite jede Tabellenzeile einzeln.
-- Verwende die erste Spalte als Entität, sofern vorhanden.
-- Verwende Spaltenüberschriften explizit im Satz.
+- Wenn es einen Tabellenkopf gibt, verwende Spaltenüberschriften explizit im Satz.
+- Wenn es keinen Tabellenkopf gibt, nutze die erste Spalte als Entität.
+- Wenn eine Spalte leer ist, verwende die letzte nicht-leere Entität erneut.
 - Verwende keine Pronomen.
 - Verwende keine Synonyme.
 - Erfinde keine Informationen.
 - Erkläre keine Fachbegriffe.
-- Wenn die erste Spalte leer ist, verwende die letzte nicht-leere Entität erneut.
 - Gib ausschließlich die erzeugten Sätze zurück.
 
 Beispiel:
