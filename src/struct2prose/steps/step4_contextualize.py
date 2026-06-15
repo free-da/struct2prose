@@ -82,22 +82,27 @@ Tabelleninhalt (CSV):
 
 Aufgabe:
 
-- Verwende ausschließlich Informationen aus der Tabelle.
-- Verarbeite jede Tabellenzeile einzeln.
-- Formuliere vollständige, grammatikalisch korrekte Sätze, in denen die Spaltenüberschriften als Bezeichnungen der jeweiligen Werte verwendet werden.- Wenn es keinen Tabellenkopf gibt, nutze die erste Spalte als Entität.
+- Verwende ausschließlich Informationen aus der Tabelle sowie bereitgestellte Dokumenttitel und Abschnittsüberschriften.
+- Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
+- Formuliere vollständige, grammatikalisch korrekte Sätze.
+- Verwende Spaltenüberschriften und bereitgestellten Kontext zur Beschreibung der jeweiligen Werte und ihrer Beziehungen.
 - Wenn die Tabelle eine Schlüssel-Wert-Struktur besitzt, beschreibe die Eigenschaften als Merkmale derselben Entität statt als unabhängige Entitäten.
+- Wenn kein Tabellenkopf vorhanden ist, behandle den Wert der ersten Spalte als primäre Entität der Zeile.
 - Leere Zellen übernehmen den zuletzt gültigen Wert derselben Spalte aus den vorherigen Zeilen.
-- Besteht eine Zeile nur aus einer einzelnen befüllten Zelle, interpretiere sie als Abschnittsüberschrift. Die Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der Tabelle.
+- Besteht eine Zeile nur aus einer einzelnen befüllten Zelle, interpretiere sie als tabelleninterne Abschnittsüberschrift. Die Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der Tabelle.
+- Tabelleninterne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
 - Wenn eine Zelle mit mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
-- Gib für jede Datenzeile genau einen Satz oder Absatz zurück. Gib keine Einleitung, Zusammenfassung, Aufzählungen oder Erklärungen aus.
+- Gib für jede Datenzeile genau einen Satz zurück. Gib keine Einleitung, Zusammenfassung, Aufzählungen oder Erklärungen aus.
 - Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
 
 Beispiel:
+Dokumenttitel: Poly-VK
+Abschnitt: Standorte
 
-Host | Rolle | Standort | IP-Adresse
-server70 | DNS-Server | Berlin | 123.xx.xx.xx
+Standort | Konfiguration
+A.1.1 | Standard
 
-Der Host server70 hat die Rolle DNS-Server, den Standort Berlin und die IP-Adresse 123.xx.xx.xx.
+Die Poly-VK verwendet am Standort A.1.1 die Konfiguration Standard.
 """.strip()
 
 
