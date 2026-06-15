@@ -81,28 +81,25 @@ Tabelleninhalt (CSV):
 {table_csv}
 
 Aufgabe:
-- Formuliere jede Tabellenzeile als klaren beschreibenden Satz in natürlicher Sprache.
-- Verbinde dabei die Spaltenüberschriften sinnvoll mit den jeweiligen Zellenwerten.
-- Verzichte auf sprachliche Mittel zur Wiederholungsvermeidung. 
-- Nutze klare und explizite Formulierungen.
-- Verwende Entitäten oder Bezeichnungen aus der Spaltenüberschrift lieber erneut, statt Pronomen wie „er“, „sie“, „dieses“ oder „diese“ zu verwenden.
-- Nutze die Informationen der Tabelle möglichst explizit.
-- Wenn eine erste Spalte eine Kategorie oder Entität beschreibt, nutze sie als Subjekt des Satzes.
-- Wenn Tabellenzeilen Fortsetzungen vorheriger Zeilen darstellen (z. B. leere erste Spalte), beziehe dich auf die letzte passende Entität.
-- Wenn es in einer Zelle mehrere Werte gibt, verkette sie mit und oder oder, aber benenne jede explizit.
-- Erfinde keine zusätzlichen Informationen.
-- Erkläre keine allgemeinen Fachbegriffe.
-- Beschreibe nicht die Tabelle selbst.
-- Gib keine Spaltenbeschreibung aus.
-- Gib keine Aufzählungen oder Markdown-Strukturen aus.
-- Gib ausschließlich die formulierten Sätze zurück.
+
+- Verwende ausschließlich Informationen aus der Tabelle.
+- Verarbeite jede Tabellenzeile einzeln.
+- Verwende die erste Spalte als Entität, sofern vorhanden.
+- Verwende Spaltenüberschriften explizit im Satz.
+- Verwende keine Pronomen.
+- Verwende keine Synonyme.
+- Erfinde keine Informationen.
+- Erkläre keine Fachbegriffe.
+- Wenn die erste Spalte leer ist, verwende die letzte nicht-leere Entität erneut.
+- Gib ausschließlich die erzeugten Sätze zurück.
 
 Beispiel:
-Statt:
-"GPU, 12 GB, GDDR6"
 
-Schreibe:
-"Die GPU verfügt über 12 GB GDDR6-Speicher."
+Host | Rolle | Standort
+server70 | DNS-Server | Berlin
+
+server70 hat die Rolle DNS-Server.
+server70 hat den Standort Berlin.
 """.strip()
 
 
