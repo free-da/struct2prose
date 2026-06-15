@@ -45,7 +45,7 @@ def generate_text(
                     },
                 ],
                 "temperature": 0.2,
-                "max_tokens": 1024,
+                "max_tokens": 512,
                 "stream": False,
             },
             timeout=300,
