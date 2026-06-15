@@ -8,8 +8,8 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
         title = chunk.payload.get("title", "Unbekanntes Dokument")
         section = chunk.payload.get("section_heading", "Unbekannter Abschnitt")
         section_anchor = chunk.payload.get("section_anchor")
-        block_type = chunk.payload.get("block_type", "unknown")
-        transformation = chunk.payload.get("transformation", "unknown")
+        #block_type = chunk.payload.get("block_type", "unknown")
+        #transformation = chunk.payload.get("transformation", "unknown")
         url = chunk.payload.get("xwiki_url")
 
         if url and section_anchor:
@@ -21,13 +21,13 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
 
         parts.append(
             f"[Quelle {index}]\n"
-            f"Dokument: {title}\n"
+            #f"Dokument: {title}\n"
             f"{source_url_line}"
             f"Abschnitt: {section}\n"
             f"Abschnittsanker: {section_anchor or 'Nicht vorhanden'}\n"
-            f"Blocktyp: {block_type}\n"
-            f"Transformation: {transformation}\n"
-            f"Score: {chunk.score:.4f}\n\n"
+            #f"Blocktyp: {block_type}\n"
+            #f"Transformation: {transformation}\n"
+            #f"Score: {chunk.score:.4f}\n\n"
             f"{chunk.text}"
         )
 
