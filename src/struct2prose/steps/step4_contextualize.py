@@ -84,11 +84,13 @@ Aufgabe:
 
 - Verwende ausschließlich Informationen aus der Tabelle.
 - Verarbeite jede Tabellenzeile einzeln.
-- Wenn es einen Tabellenkopf gibt, verwende Spaltenüberschriften explizit im Satz.
-- Wenn es keinen Tabellenkopf gibt, nutze die erste Spalte als Entität.
-- Wenn eine Spalte leer ist, verwende die letzte nicht-leere Entität erneut.
-- Wenn in einer Zeile nur eine Spalte befüllt ist, verwende diese als eine Zwischenüberschrift für die danach folgenden Zeilen.
-- Gib ausschließlich die erzeugten Sätze zurück.
+- Formuliere vollständige, grammatikalisch korrekte Sätze, in denen die Spaltenüberschriften als Bezeichnungen der jeweiligen Werte verwendet werden.- Wenn es keinen Tabellenkopf gibt, nutze die erste Spalte als Entität.
+- Wenn die Tabelle eine Schlüssel-Wert-Struktur besitzt, beschreibe die Eigenschaften als Merkmale derselben Entität statt als unabhängige Entitäten.
+- Leere Zellen übernehmen den zuletzt gültigen Wert derselben Spalte aus den vorherigen Zeilen.
+- Besteht eine Zeile nur aus einer einzelnen befüllten Zelle, interpretiere sie als Abschnittsüberschrift. Die Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der Tabelle.
+- Wenn eine Zelle mit mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
+- Gib für jede Datenzeile genau einen Satz oder Absatz zurück. Gib keine Einleitung, Zusammenfassung, Aufzählungen oder Erklärungen aus.
+- Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
 
 Beispiel:
 
