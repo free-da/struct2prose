@@ -39,6 +39,8 @@ class RagRetriever:
         results: list[RetrievedChunk] = []
 
         for hit in hits:
+            payload = hit.payload or {}
+
             print(
                 f"score={hit.score:.4f} "
                 f"section={hit.payload.get('section_heading')} "
@@ -53,7 +55,6 @@ class RagRetriever:
             print(payload.get("text", "")[:500])
             print("-" * 80)
 
-            payload = hit.payload or {}
             text = str(payload.get("text", "")).strip()
 
             if not text:
