@@ -104,12 +104,13 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    # state directory / DB file vorbereiten
-    args.db_path.parent.mkdir(parents=True, exist_ok=True)
+    db_path = getattr(args, "db_path", None)
 
-    # DB immer initialisieren, damit Schema sicher vorhanden ist
-    with connect(args.db_path) as conn:
-        init_db(conn)
+    if db_path is not None:
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with connect(db_path) as conn:
+            init_db(conn)
 
     if args.cmd == "fetch-xwiki":
         fetch_xwiki_pages(
