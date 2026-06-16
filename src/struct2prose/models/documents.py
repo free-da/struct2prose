@@ -64,7 +64,7 @@ class ContextualizationResult:
     prompt_version: str | None = None
     model_name: str | None = None
     generated_at: datetime | None = None
-
+    finish_reason: str | None = None
 
 @dataclass
 class ContextualizedBlock:
@@ -111,7 +111,7 @@ class FailedBlock:
     section_heading: str | None
     block_type: str
     error_message: str
-
+    finish_reason: str | None = None
 
 @dataclass
 class ContextualizedDocument:

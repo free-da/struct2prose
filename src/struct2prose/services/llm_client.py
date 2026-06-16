@@ -8,6 +8,12 @@ from struct2prose.config import Config
 
 DEFAULT_SYSTEM_PROMPT = "Du bist ein hilfreicher Assistent für technische Dokumentation."
 
+class LLMResponseTruncatedError(RuntimeError):
+    def __init__(self, finish_reason: str, message: str | None = None) -> None:
+        self.finish_reason = finish_reason
+        super().__init__(
+            message or f"LLM response was truncated. finish_reason={finish_reason}"
+        )
 
 def generate_text(
     prompt: str,
@@ -73,7 +79,12 @@ def generate_text(
 
         choice = data["choices"][0]
 
-        print("finish_reason =", choice.get("finish_reason"))
+        finish_reason = choice.get("finish_reason")
+        if finish_reason == "length":
+            raise LLMResponseTruncatedError(
+                finish_reason=finish_reason,
+                message="LLM response was truncated because the maximum output length was reached.",
+            )
 
         content = choice["message"]["content"]
 

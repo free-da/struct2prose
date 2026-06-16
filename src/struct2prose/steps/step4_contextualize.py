@@ -29,7 +29,7 @@ from struct2prose.persistence.store import (
     finish_contextualization_task,
     finish_step_run,
 )
-from struct2prose.services.llm_client import generate_text
+from struct2prose.services.llm_client import generate_text, LLMResponseTruncatedError
 
 MODEL_DEFAULT = Config.get_model_name()
 STEP_NAME = "contextualize"
@@ -65,6 +65,24 @@ def _table_to_labelled_rows(rows: list[list[str]]) -> str:
         lines.append("")
 
     return "\n".join(lines).strip()
+
+def _split_table_rows(
+    rows: list[list[str]],
+    *,
+    max_data_rows: int = 5,
+) -> list[list[list[str]]]:
+    if len(rows) <= max_data_rows + 1:
+        return [rows]
+
+    header = rows[0]
+    body = rows[1:]
+
+    chunks = []
+    for start in range(0, len(body), max_data_rows):
+        chunk_body = body[start:start + max_data_rows]
+        chunks.append([header] + chunk_body)
+
+    return chunks
 
 def _prompt_for_table(
     doc_title: str,
@@ -223,14 +241,49 @@ def _execute_task(
     task: ContextualizationTask,
     model: str,
 ) -> ContextualizationResult:
-    prompt = _prompt_for_block(doc, section, block)
-
     try:
-        contextualized = generate_text(
-            prompt=prompt,
-            system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
-            model=model,
-        )
+        if block.block_type == "table":
+            table_chunks = _split_table_rows(block.content, max_data_rows=5)
+            outputs: list[str] = []
+
+            for index, table_chunk in enumerate(table_chunks, start=1):
+                chunk_block = ContentBlock(
+                    block_id=f"{block.block_id}-part-{index}",
+                    block_type=block.block_type,
+                    content=table_chunk,
+                )
+
+                contextualized_part = generate_text(
+                    prompt=_prompt_for_block(doc, section, chunk_block),
+                    system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
+                    model=model,
+                )
+
+                if not _validate_contextualized_text(contextualized_part):
+                    return ContextualizationResult(
+                        task_id=task.task_id,
+                        source_block_id=task.source_block_id,
+                        status="failed",
+                        contextualized_text=None,
+                        error_message=f"LLM-Antwort für Tabellen-Teil {index} war leer oder nicht ausreichend verwertbar.",
+                        prompt_name=task.prompt_name,
+                        prompt_version=task.prompt_version,
+                        model_name=task.model_name,
+                        generated_at=datetime.utcnow(),
+                    )
+
+                outputs.append(contextualized_part.strip())
+
+            contextualized = "\n".join(outputs)
+
+        else:
+            prompt = _prompt_for_block(doc, section, block)
+
+            contextualized = generate_text(
+                prompt=prompt,
+                system_prompt="Du bist ein hilfreicher Assistent für technische Dokumentation.",
+                model=model,
+            )
 
         if not _validate_contextualized_text(contextualized):
             return ContextualizationResult(
@@ -255,6 +308,20 @@ def _execute_task(
             prompt_version=task.prompt_version,
             model_name=task.model_name,
             generated_at=datetime.utcnow(),
+        )
+
+    except LLMResponseTruncatedError as e:
+        return ContextualizationResult(
+            task_id=task.task_id,
+            source_block_id=task.source_block_id,
+            status="failed",
+            contextualized_text=None,
+            error_message=str(e),
+            prompt_name=task.prompt_name,
+            prompt_version=task.prompt_version,
+            model_name=task.model_name,
+            generated_at=datetime.utcnow(),
+            finish_reason=e.finish_reason,
         )
 
     except Exception as e:
@@ -485,6 +552,7 @@ def _contextualize_document(
                         section_heading=section.heading,
                         block_type=block.block_type,
                         error_message=result.error_message or "Unbekannter Fehler",
+                        finish_reason=result.finish_reason,
                     )
                 )
                 md_lines.append(
