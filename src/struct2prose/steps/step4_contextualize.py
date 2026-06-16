@@ -233,6 +233,14 @@ def _create_task(
         created_at=datetime.utcnow(),
     )
 
+def _max_rows_for_table(rows: list[list[str]]) -> int:
+    max_cells = max((len(row) for row in rows), default=0)
+
+    if max_cells >= 8:
+        return 1
+    if max_cells >= 5:
+        return 2
+    return 5
 
 def _execute_task(
     doc: WikiDocument,
@@ -243,7 +251,9 @@ def _execute_task(
 ) -> ContextualizationResult:
     try:
         if block.block_type == "table":
-            table_chunks = _split_table_rows(block.content, max_data_rows=2)
+            max_rows = _max_rows_for_table(block.content)
+            table_chunks = _split_table_rows(block.content, max_data_rows=max_rows)
+
             outputs: list[str] = []
 
             for index, table_chunk in enumerate(table_chunks, start=1):
