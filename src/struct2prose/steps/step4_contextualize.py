@@ -95,13 +95,14 @@ Aufgabe:
 - Gib für jede Datenzeile genau einen Satz zurück. Gib keine Einleitung, Zusammenfassung, Aufzählungen oder Erklärungen aus.
 - Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
 
-Beispiel:
+Beispiel Eingabe:
 Dokumenttitel: Poly-VK
 Abschnitt: Standorte
 
 Standort | Konfiguration
 A.1.1 | Standard
 
+Beispiel Ausgabe:
 Die Poly-VK verwendet am Standort A.1.1 die Konfiguration Standard.
 """.strip()
 
