@@ -39,6 +39,11 @@ class RagRetriever:
         results: list[RetrievedChunk] = []
 
         for hit in hits:
+            print(
+                f"score={hit.score:.4f} "
+                f"section={hit.payload.get('section_heading')} "
+                f"block={hit.payload.get('source_block_id')}"
+            )
             payload = hit.payload or {}
             text = str(payload.get("text", "")).strip()
 
