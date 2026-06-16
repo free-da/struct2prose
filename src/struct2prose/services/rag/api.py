@@ -103,6 +103,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
     # Die Antwort wird non-streaming zurückgegeben.
 
     question = _last_user_message(request.messages)
+    print(f"[RAG] question={question!r}")
     collection_name = MODEL_COLLECTIONS.get(request.model)
 
     if collection_name is None:
