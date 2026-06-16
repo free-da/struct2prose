@@ -52,7 +52,7 @@ class RagRetriever:
             )
             print(payload.get("text", "")[:500])
             print("-" * 80)
-            )
+
             payload = hit.payload or {}
             text = str(payload.get("text", "")).strip()
 
