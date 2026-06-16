@@ -73,7 +73,6 @@ def generate_text(
 
         choice = data["choices"][0]
 
-        print(json.dumps(choice, indent=2, ensure_ascii=False))
         print("finish_reason =", choice.get("finish_reason"))
 
         content = choice["message"]["content"]
