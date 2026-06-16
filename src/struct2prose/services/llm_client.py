@@ -1,3 +1,5 @@
+import json
+
 import requests
 from groq import Groq
 
@@ -26,7 +28,16 @@ def generate_text(
             ],
             temperature=0.2,
         )
-        content = response.choices[0].message.content
+        choice = response.choices[0]
+
+        finish_reason = choice.finish_reason
+        content = choice.message.content
+
+        if finish_reason == "length":
+            raise RuntimeError(
+                "LLM response was truncated because the maximum output length was reached."
+            )
+
         return content.strip() if content else ""
 
     if Config.LLM_PROVIDER == "local":
@@ -60,6 +71,11 @@ def generate_text(
 
         data = response.json()
 
-        return (
-            data["choices"][0]["message"]["content"].strip()
-        )
+        choice = data["choices"][0]
+
+        print(json.dumps(choice, indent=2, ensure_ascii=False))
+        print("finish_reason =", choice.get("finish_reason"))
+
+        content = choice["message"]["content"]
+
+        return content.strip()
