@@ -49,27 +49,29 @@ def _make_output_version_id(run_id: str, source_id: str) -> str:
     safe_source_id = source_id.replace(":", "_")
     return f"{run_id}:contextualized_data:{safe_source_id}"
 
+def _table_to_labelled_rows(rows: list[list[str]]) -> str:
+    if not rows:
+        return ""
 
-def _table_to_csv(rows: list[list[str]]) -> str:
-    """Very small CSV renderer (good enough for LLM input)."""
-    def esc(cell: str) -> str:
-        cell = "" if cell is None else str(cell)
-        needs_quotes = any(ch in cell for ch in [",", "\n", '"'])
-        cell = cell.replace('"', '""')
-        return f'"{cell}"' if needs_quotes else cell
+    headers = rows[0]
+    body = rows[1:]
 
     lines = []
-    for row in rows:
-        lines.append(",".join(esc(c) for c in row))
-    return "\n".join(lines)
+    for idx, row in enumerate(body, start=1):
+        lines.append(f"Zeile {idx}:")
+        for col_idx, value in enumerate(row):
+            header = headers[col_idx] if col_idx < len(headers) else f"Spalte {col_idx + 1}"
+            lines.append(f"- {header}: {value}")
+        lines.append("")
 
+    return "\n".join(lines).strip()
 
 def _prompt_for_table(
     doc_title: str,
     section_heading: str,
     table_rows: list[list[str]],
 ) -> str:
-    table_csv = _table_to_csv(table_rows)
+    table_csv = _table_to_labelled_rows(table_rows)
 
     return f"""
 Du erhältst eine Tabelle aus einer technischen Wiki-Seite.

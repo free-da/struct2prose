@@ -13,6 +13,7 @@ from struct2prose.steps.step4_contextualize import run as run_contextualize
 from struct2prose.steps.step5_ingest_qdrant import run as run_ingest_qdrant
 from struct2prose.config import Config
 from struct2prose.steps.step4_baseline import run as run_baseline
+from struct2prose.debug.debug_contextualize import Step4ContextualizeDebugger
 
 PIPELINE_VERSION = "v1"
 DB_PATH_DEFAULT= Path("state/struct2prose.db")
@@ -91,6 +92,15 @@ def main() -> None:
     p_all_eval.add_argument("--db-path", type=Path, default=DB_PATH_DEFAULT)
     p_all_eval.add_argument("--pipeline-version", type=str, default=PIPELINE_VERSION)
     p_all_eval.add_argument("--include-space", action="append", default=["Dummy-Content"])
+
+    p_debug_ctx = sub.add_parser(
+        "debug-contextualize",
+        help="Debug step4 contextualization for a single processed JSON file",
+    )
+    p_debug_ctx.add_argument("file", type=Path)
+    p_debug_ctx.add_argument("--block", type=str, default=None)
+    p_debug_ctx.add_argument("--list-blocks", action="store_true")
+    p_debug_ctx.add_argument("--model", type=str, default=Config.get_model_name())
 
     args = parser.parse_args()
 
@@ -290,3 +300,11 @@ def main() -> None:
             with connect(args.db_path) as conn:
                 finish_pipeline_run(conn, run_id, "failed")
             raise
+
+    elif args.cmd == "debug-contextualize":
+        debugger = Step4ContextualizeDebugger(model=args.model)
+        debugger.debug_file(
+            args.file,
+            block_id=args.block,
+            show_all_blocks=args.list_blocks,
+        )
