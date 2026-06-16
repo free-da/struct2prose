@@ -243,7 +243,7 @@ def _execute_task(
 ) -> ContextualizationResult:
     try:
         if block.block_type == "table":
-            table_chunks = _split_table_rows(block.content, max_data_rows=5)
+            table_chunks = _split_table_rows(block.content, max_data_rows=2)
             outputs: list[str] = []
 
             for index, table_chunk in enumerate(table_chunks, start=1):
