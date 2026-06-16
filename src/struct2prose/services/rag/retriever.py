@@ -44,6 +44,15 @@ class RagRetriever:
                 f"section={hit.payload.get('section_heading')} "
                 f"block={hit.payload.get('source_block_id')}"
             )
+            print(
+                f"score={hit.score:.4f} "
+                f"section={payload.get('section_heading')} "
+                f"block={payload.get('source_block_id')} "
+                f"chunk={payload.get('chunk_index')}/{payload.get('chunk_total')}"
+            )
+            print(payload.get("text", "")[:500])
+            print("-" * 80)
+            )
             payload = hit.payload or {}
             text = str(payload.get("text", "")).strip()
 
