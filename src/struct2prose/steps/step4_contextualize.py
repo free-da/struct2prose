@@ -89,38 +89,44 @@ def _prompt_for_table(
     section_heading: str,
     table_rows: list[list[str]],
 ) -> str:
-    table_csv = _table_to_labelled_rows(table_rows)
+    labelled_rows = _table_to_labelled_rows(table_rows)
 
     return f"""
-Du erhältst eine Tabelle aus einer technischen Wiki-Seite.
+Du erhältst strukturierte technische Daten aus einer Wiki-Seite.
 
 Dokumenttitel: {doc_title}
 Abschnitt: {section_heading}
 
-Tabelleninhalt (CSV):
-{table_csv}
+Die Daten sind zeilenweise dargestellt.
+Jede Datenzeile beschreibt ein technisches Objekt, System, einen Standort, eine Konfiguration oder eine andere fachliche Einheit.
+Die Attribute einer Entität werden als Schlüssel-Wert-Paare angegeben.
+
+Daten:
+{labelled_rows}
 
 Aufgabe:
 
-- Verwende ausschließlich Informationen aus der Tabelle sowie bereitgestellte Dokumenttitel und Abschnittsüberschriften.
+- Verwende ausschließlich Informationen aus den gegebenen Daten sowie bereitgestellte Dokumenttitel und Abschnittsüberschriften.
 - Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
 - Formuliere vollständige, grammatikalisch korrekte Sätze.
-- Verwende Spaltenüberschriften und bereitgestellten Kontext zur Beschreibung der jeweiligen Werte und ihrer Beziehungen.
-- Wenn die Tabelle eine Schlüssel-Wert-Struktur besitzt, beschreibe die Eigenschaften als Merkmale derselben Entität statt als unabhängige Entitäten.
-- Wenn kein Tabellenkopf vorhanden ist, behandle den Wert der ersten Spalte als primäre Entität der Zeile.
-- Leere Zellen übernehmen den zuletzt gültigen Wert derselben Spalte aus den vorherigen Zeilen.
-- Besteht eine Zeile nur aus einer einzelnen befüllten Zelle, interpretiere sie als tabelleninterne Abschnittsüberschrift. Die Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der Tabelle.
-- Tabelleninterne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
+- Verwende die Attributnamen zur Interpretation der Werte und ihrer Beziehungen.
+- Beschreibe die Werte nicht isoliert, sondern als Eigenschaften derselben fachlichen Einheit.
+- Nutze Dokumenttitel und Abschnittsüberschrift zur Interpretation fachlich unklarer Attribute oder Abkürzungen.
+- Versuche nicht, Abkürzungen auszuschreiben oder zu interpretieren, sondern behalte sie so bei, wie sie gegeben sind.
+- Für jede Datenzeile muss mindestens eine vollständige Beschreibung der beschriebenen Entität erzeugt werden.
+- Mehrere Sätze sind zulässig, wenn dies die Lesbarkeit verbessert.
+- Besteht eine Zeile nur aus einem einzelnen befüllten Wert, interpretiere sie als interne Abschnittsüberschrift. 
+- Die interne Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der strukturierten Datensammlung.
+- Interne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
 - Wenn eine Zelle mit mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
-- Gib für jede Datenzeile genau einen Satz zurück. Gib keine Einleitung, Zusammenfassung, Aufzählungen oder Erklärungen aus.
 - Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
 
 Beispiel Eingabe:
 Dokumenttitel: Poly-VK
 Abschnitt: Standorte
 
-Standort | Konfiguration
-A.1.1 | Standard
+Standort: A.1.1
+Konfiguration: Standard
 
 Beispiel Ausgabe:
 Die Poly-VK verwendet am Standort A.1.1 die Konfiguration Standard.
@@ -130,20 +136,26 @@ Die Poly-VK verwendet am Standort A.1.1 die Konfiguration Standard.
 def _prompt_for_list(doc_title: str, section_heading: str, items: list[str]) -> str:
     bullets = "\n".join(f"- {it}" for it in items)
     return f"""
-Du erhältst eine Liste aus einer technischen Wiki-Seite.
+Du erhältst strukturierte Listeninformationen aus einer technischen Wiki-Seite.
 
 Dokumenttitel: {doc_title}
 Abschnitt: {section_heading}
 
-Liste:
+Listeneinträge:
 {bullets}
 
 Aufgabe:
-- Formuliere die Liste als gut lesbaren Fließtext.
-- Wenn es sich um Schritte handelt, gib eine klare Schrittfolge aus (nummeriert).
-- Erfinde keine Erklärungen zu Begriffen.
-- Nutze ausschließlich die Listeneinträge.
-- Wenn die Liste nur aus Einzelnachweisen, Links oder Begriffen besteht, fasse sie neutral als Verweisliste zusammen.
+
+- Verwende ausschließlich Informationen aus den Listeneinträgen sowie dem bereitgestellten Dokumenttitel und der Abschnittsüberschrift.
+- Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
+- Nutze Dokumenttitel und Abschnittsüberschrift zur fachlichen Einordnung der Listeneinträge.
+- Formuliere die Informationen als vollständige, grammatikalisch korrekte Sätze.
+- Wenn die Liste eine Aufzählung von Objekten, Systemen, Komponenten, Rollen oder Begriffen enthält, beschreibe sie als zusammengehörige Menge.
+- Wenn die Liste eine Reihenfolge von Arbeitsschritten beschreibt, formuliere eine geordnete Ablaufbeschreibung.
+- Wenn die Liste lediglich aus Verweisen, Links oder Quellen besteht, beschreibe sie neutral als Verweisliste.
+- Erhalte alle fachlichen Bezeichnungen, Kennungen und Abkürzungen unverändert.
+- Kein Listeneintrag darf ausgelassen werden.
+- Gib ausschließlich den erzeugten Text zurück.
 """.strip()
 
 
