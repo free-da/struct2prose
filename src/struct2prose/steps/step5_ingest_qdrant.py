@@ -36,18 +36,42 @@ def load_contextualized_documents(contextualized_dir: Path):
         data = json.loads(path.read_text(encoding="utf-8"))
         yield path, data
 
-def split_text(text: str, max_chars: int = 800) -> list[str]:
-    chunks = []
+def split_text(
+    text: str,
+    *,
+    max_chars: int = 1000,
+    min_chars: int = 120,
+) -> list[str]:
+    text = text.strip()
+    if not text:
+        return []
+
+    if len(text) <= max_chars:
+        return [text] if len(text) >= min_chars else []
+
+    # Absätze bevorzugen
+    paragraphs = [p.strip() for p in text.splitlines() if p.strip()]
+
+    chunks: list[str] = []
     current = ""
 
-    for sentence in text.split(". "):
-        if len(current) + len(sentence) < max_chars:
-            current += sentence + ". "
-        else:
-            chunks.append(current.strip())
-            current = sentence + ". "
+    for paragraph in paragraphs:
+        # Sehr kurze Fragmente nicht allein als Chunk speichern
+        if len(paragraph) < min_chars:
+            if current:
+                current = f"{current} {paragraph}".strip()
+            else:
+                current = paragraph
+            continue
 
-    if current:
+        if len(current) + len(paragraph) + 1 <= max_chars:
+            current = f"{current} {paragraph}".strip()
+        else:
+            if len(current) >= min_chars:
+                chunks.append(current.strip())
+            current = paragraph
+
+    if current and len(current) >= min_chars:
         chunks.append(current.strip())
 
     return chunks
@@ -63,6 +87,11 @@ def make_points(doc: dict, embedder: SentenceTransformer) -> list[PointStruct]:
             continue
 
         chunks = split_text(text)
+
+        for i, chunk_text in enumerate(chunks):
+            if len(chunk_text.strip()) < 120:
+                continue
+
         section_anchor = block.get("section_anchor")
         xwiki_url = metadata.get("xwiki_url")
 
