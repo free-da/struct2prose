@@ -7,7 +7,7 @@ from struct2prose.config import Config
 from struct2prose.services.rag.prompt import build_rag_prompt
 from struct2prose.services.rag.retriever import RagRetriever
 from struct2prose.services.rag.schemas import ChatCompletionRequest, SearchRequest
-from struct2prose.services.llm_client import generate_text
+from struct2prose.services.llm_client import generate_text, LLMResponseTruncatedError
 
 MODEL_COLLECTIONS = {
     "struct2prose-rag": Config.QDRANT_CONTEXTUALIZED_COLLECTION,
@@ -119,14 +119,22 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
     )
     prompt = build_rag_prompt(question, chunks)
 
-    answer = generate_text(
-        prompt=prompt,
-        system_prompt=(
-            "Du bist ein RAG-Assistent für technische Dokumentation. "
-            "Antworte nur auf Basis des bereitgestellten Kontextes."
-        ),
-    )
-    #answer = answer.strip() + _format_sources(chunks)
+    try:
+        answer = generate_text(
+            prompt=prompt,
+            system_prompt=(
+                "Du bist ein RAG-Assistent für technische Dokumentation. "
+                "Antworte nur auf Basis des bereitgestellten Kontextes."
+            ),
+        )
+    except LLMResponseTruncatedError:
+        answer = (
+            "Die Antwort konnte nicht vollständig erzeugt werden, weil das verwendete "
+            "Sprachmodell seine maximale Ausgabelänge erreicht hat. "
+            "Die Frage erfordert vermutlich eine umfangreiche Auflistung oder Aggregation "
+            "mehrerer Wissenseinheiten. Bitte stelle die Frage enger, z. B. nach einem "
+            "bestimmten Standort, Abschnitt oder System."
+        )
 
     now = int(time.time())
 
