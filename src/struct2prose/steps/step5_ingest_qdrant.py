@@ -8,8 +8,6 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from sentence_transformers import SentenceTransformer
 
-
-VECTOR_SIZE = 384  # all-MiniLM-L6-v2
 QDRANT_URL = os.getenv("QDRANT_URL", "http://10.200.200.33:6333")
 
 
@@ -17,7 +15,11 @@ def stable_chunk_id(source_id: str, block_id: str) -> str:
     return str(uuid.uuid5(uuid.NAMESPACE_URL, f"{source_id}:{block_id}"))
 
 
-def ensure_collection(client: QdrantClient, collection_name: str) -> None:
+def ensure_collection(
+        client: QdrantClient,
+        collection_name: str,
+        vector_size: int
+) -> None:
     collections = client.get_collections().collections
     names = [c.name for c in collections]
     print(f"Collection Name: {collection_name}")
@@ -25,7 +27,7 @@ def ensure_collection(client: QdrantClient, collection_name: str) -> None:
         client.create_collection(
             collection_name=collection_name,
             vectors_config=VectorParams(
-                size=VECTOR_SIZE,
+                size=vector_size,
                 distance=Distance.COSINE,
             ),
         )
@@ -150,8 +152,8 @@ def run(
 ) -> None:
     client = QdrantClient(url=QDRANT_URL)
     embedder = SentenceTransformer(os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"))
-
-    ensure_collection(client, collection_name)
+    vector_size = embedder.get_sentence_embedding_dimension()
+    ensure_collection(client, collection_name, vector_size)
 
     for path, doc in load_contextualized_documents(contextualized_dir):
         points = make_points(doc, embedder)
