@@ -118,7 +118,7 @@ Aufgabe:
 - Besteht eine Zeile nur aus einem einzelnen befüllten Wert, interpretiere sie als interne Abschnittsüberschrift. 
 - Die interne Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der strukturierten Datensammlung.
 - Interne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
-- Wenn eine Zelle mit mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
+- Wenn eine Zelle aus mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
 - Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
 
 Beispiel Eingabe:
