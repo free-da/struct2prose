@@ -38,7 +38,7 @@ def build_rag_prompt(question: str, chunks: list[RetrievedChunk]) -> str:
     context = build_context(chunks)
 
     return f"""
-Du beantwortest Fragen auf Basis einer Wissensbasis.
+Du beantwortest auf Deutsch Fragen auf Basis einer Wissensbasis.
 
 Regeln:
 - Nutze ausschließlich den bereitgestellten Kontext für die Antwortgenerierung.
