@@ -109,17 +109,14 @@ Aufgabe:
 - Verwende ausschließlich Informationen aus den gegebenen Daten sowie bereitgestellte Dokumenttitel und Abschnittsüberschriften.
 - Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
 - Formuliere vollständige, grammatikalisch korrekte Sätze.
-- Verwende die Attributnamen zur Interpretation der Werte und ihrer Beziehungen.
-- Beschreibe die Werte nicht isoliert, sondern als Eigenschaften derselben fachlichen Einheit.
-- Nutze Dokumenttitel und Abschnittsüberschrift zur Interpretation fachlich unklarer Attribute oder Abkürzungen.
-- Versuche nicht, Abkürzungen auszuschreiben oder zu interpretieren, sondern behalte sie so bei, wie sie gegeben sind.
-- Für jede Datenzeile muss mindestens eine vollständige Beschreibung der beschriebenen Entität erzeugt werden.
-- Mehrere Sätze sind zulässig, wenn dies die Lesbarkeit verbessert.
 - Besteht eine Zeile nur aus einem einzelnen befüllten Wert, interpretiere sie als interne Abschnittsüberschrift. 
 - Die interne Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der strukturierten Datensammlung.
 - Interne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
-- Wenn eine Zelle aus mehreren, mit Komma getrennten, Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
-- Jede Tabellenzeile mit Daten muss verarbeitet und zurückgegeben werden. Kein Wert darf ausgelassen werden. 
+- Verwende die Attributnamen und vorausgehende Abschnittsüberschriften sowie Dokumenttitel zur Interpretation der Werte und ihrer Beziehungen.
+- Versuche nicht, Abkürzungen auszuschreiben oder zu interpretieren, sondern behalte sie so bei, wie sie gegeben sind.
+- Für jede Datenzeile muss mindestens eine vollständige Beschreibung der beschriebenen Entität erzeugt werden. Kein Wert darf ausgelassen werden. 
+- Die Beschreibungen sollen so kurz und prägnant wie möglich, aber so ausführlich wie nötig sein. Nutze keine ausschmückenden Formulierungen.
+- Wenn eine Zelle aus mehreren Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
 
 Beispiel Eingabe:
 Dokumenttitel: Poly-VK
