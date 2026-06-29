@@ -46,7 +46,7 @@ Regeln:
 - Betrachte alle Aussagen im Kontext als nutzbare Wissensrepräsentationen, auch wenn die ursprüngliche Tabellenstruktur nicht mehr sichtbar ist.
 - Informationen können verteilt über mehrere Quellen oder Aussagen vorliegen.
 - Kombiniere zusammengehörige Informationen aus mehreren Kontextstellen.
-- Gib eine Übersicht aus allen vorliegenden Informationen zum abgefragten Thema zurück.
+- Gib eine Übersicht aus allen im Kontext vorliegenden Informationen zum abgefragten Thema zurück.
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
