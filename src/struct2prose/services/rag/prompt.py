@@ -22,7 +22,7 @@ def build_context(chunks: list[RetrievedChunk]) -> str:
         parts.append(
             f"[Quelle {index}]\n"
             f"Dokument: {title}\n"
-            f"{source_url_line}"
+            f"URL: {source_url_line}"
             f"Abschnitt: {section}\n"
             f"Abschnittsanker: {section_anchor or 'Nicht vorhanden'}\n"
             #f"Blocktyp: {block_type}\n"
