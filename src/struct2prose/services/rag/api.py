@@ -115,7 +115,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
     chunks = retriever.search(
         question,
         collection_name=collection_name,
-        top_k=3,
+        top_k=5,
     )
     prompt = build_rag_prompt(question, chunks)
 
