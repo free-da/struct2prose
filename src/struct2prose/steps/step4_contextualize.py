@@ -147,12 +147,21 @@ Aufgabe:
 - Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
 - Nutze Dokumenttitel und Abschnittsüberschrift zur fachlichen Einordnung der Listeneinträge.
 - Formuliere die Informationen als vollständige, grammatikalisch korrekte Sätze.
-- Wenn die Liste eine Aufzählung von Objekten, Systemen, Komponenten, Rollen oder Begriffen enthält, beschreibe sie als zusammengehörige Menge.
 - Wenn die Liste eine Reihenfolge von Arbeitsschritten beschreibt, formuliere eine geordnete Ablaufbeschreibung.
-- Wenn die Liste lediglich aus Verweisen, Links oder Quellen besteht, beschreibe sie neutral als Verweisliste.
 - Erhalte alle fachlichen Bezeichnungen, Kennungen und Abkürzungen unverändert.
 - Kein Listeneintrag darf ausgelassen werden.
 - Gib ausschließlich den erzeugten Text zurück.
+
+Beispiel:
+Eingabe: 
+Dokumenttitel: Softwarename
+Abschnitt: Ansprechpartner
+Listeneinträge:
+- Herbert Grönemeyer
+- Peter Maffay
+
+Ausgabe:
+Ansprechpartner für Softwarename sind Herbert Grönemeyer und Peter Maffay.
 """.strip()
 
 
