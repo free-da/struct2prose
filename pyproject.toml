@@ -10,7 +10,14 @@ dependencies = [
 	"requests",
 	"groq",	
 	"lxml",
-	"python-dotenv"
+	"python-dotenv",
+	"qdrant-client",
+    "sentence-transformers",
+	"fastapi",
+	"uvicorn",
+	"qdrant-client",
+	"sentence-transformers",
+	"pydantic"
 ]
 
 [tool.setuptools]

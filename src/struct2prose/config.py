@@ -57,3 +57,7 @@ class Config:
         if cls.LLM_PROVIDER == "groq":
             return None
         raise ValueError("Invalid LLM_PROVIDER")
+
+    QDRANT_CONTEXTUALIZED_COLLECTION: str | None = os.getenv("QDRANT_CONTEXTUALIZED_COLLECTION")
+
+    QDRANT_BASELINE_COLLECTION: str | None = os.getenv("QDRANT_BASELINE_COLLECTION")

@@ -20,6 +20,7 @@ def strip_ui_elements(html: str) -> str:
         "#autosaveControl",
         "#contentmenu",
         "#exportModal",
+        ".sr-only"
     ]:
         for el in root.select(sel):
             el.decompose()

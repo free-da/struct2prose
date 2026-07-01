@@ -1,3 +1,5 @@
+import json
+
 import requests
 from groq import Groq
 
@@ -6,6 +8,12 @@ from struct2prose.config import Config
 
 DEFAULT_SYSTEM_PROMPT = "Du bist ein hilfreicher Assistent für technische Dokumentation."
 
+class LLMResponseTruncatedError(RuntimeError):
+    def __init__(self, finish_reason: str, message: str | None = None) -> None:
+        self.finish_reason = finish_reason
+        super().__init__(
+            message or f"LLM response was truncated. finish_reason={finish_reason}"
+        )
 
 def generate_text(
     prompt: str,
@@ -26,21 +34,58 @@ def generate_text(
             ],
             temperature=0.2,
         )
-        content = response.choices[0].message.content
+        choice = response.choices[0]
+
+        finish_reason = choice.finish_reason
+        content = choice.message.content
+
+        if finish_reason == "length":
+            raise RuntimeError(
+                "LLM response was truncated because the maximum output length was reached."
+            )
+
         return content.strip() if content else ""
 
     if Config.LLM_PROVIDER == "local":
         response = requests.post(
-            f"{Config.LOCAL_LLM_BASE_URL}/api/generate",
+            f"{Config.LOCAL_LLM_BASE_URL}/v1/chat/completions",
             json={
                 "model": selected_model,
-                "prompt": f"{system_prompt}\n\n{prompt}",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": system_prompt,
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    },
+                ],
+                "temperature": 0.2,
+                "max_tokens": 512,
                 "stream": False,
             },
-            timeout=120,
+            timeout=300,
         )
-        response.raise_for_status()
-        data = response.json()
-        return str(data.get("response", "")).strip()
 
-    raise ValueError(f"Unsupported provider: {Config.LLM_PROVIDER}")
+        if not response.ok:
+            raise RuntimeError(
+                f"LLM request failed with status {response.status_code}: {response.text}"
+            )
+
+        response.raise_for_status()
+
+        data = response.json()
+
+        choice = data["choices"][0]
+
+        finish_reason = choice.get("finish_reason")
+        if finish_reason == "length":
+            raise LLMResponseTruncatedError(
+                finish_reason=finish_reason,
+                message="LLM response was truncated because the maximum output length was reached.",
+            )
+
+        content = choice["message"]["content"]
+
+        return content.strip()
