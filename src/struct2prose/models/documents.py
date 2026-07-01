@@ -31,6 +31,20 @@ class CleanDocument:
 
 
 @dataclass
+class StrippedDocument:
+    metadata: DocumentMetadata
+    # ursprünglicher Content-Root (aus Step 1)
+    raw_content: str
+    # nach extract_content_root
+    cleaned_content: str
+    # nach ui_strip (entscheidender Output dieses Schritts)
+    stripped_content: str
+    # optional: Hinweis, wie der Root bestimmt wurde
+    content_root_hint: str | None = None
+    # optional: Debug/Transparenz
+    removed_elements: list[str] | None = None
+
+@dataclass
 class ContextualizedBlock:
     block_id: str
     source_block_id: str
