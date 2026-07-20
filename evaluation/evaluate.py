@@ -156,26 +156,31 @@ def ask_model(
 def chunk_to_latex(chunk: ChunkResult) -> str:
     title = latex_escape(chunk.title or "Unbekanntes Dokument")
     section = latex_escape(chunk.section_heading or "Unbekannter Abschnitt")
-    text = latex_escape(chunk.text)
     source_id = latex_escape(chunk.source_id or "")
     block_id = latex_escape(chunk.source_block_id or "")
     transformation = latex_escape(chunk.transformation or "")
     url = chunk.section_url
 
     source_line = f"{title} -- {section}"
+
     if url:
         source_line = rf"\href{{{url}}}{{{source_line}}}"
 
-    return rf"""
-\begin{{EvaluationChunk}}{{{chunk.rank}}}{{{chunk.score:.4f}}}
-\textbf{{Quelle:}} {source_line}\\
-\textbf{{Source-ID:}} \texttt{{{source_id}}}\\
-\textbf{{Block-ID:}} \texttt{{{block_id}}}\\
-\textbf{{Transformation:}} \texttt{{{transformation}}}
+    return (rf"""
+\begin{{lstlisting}}[style=EvaluationChunk]
+Chunk:          {chunk.rank}
+Score:          {chunk.score:.4f}
+Quelle:         {title} -- {section}
+Source-ID:      {source_id}
+Block-ID:       {block_id}
+Transformation: {transformation}
 
-{text}
-\end{{EvaluationChunk}}
-""".strip()
+------------------------------------------------------------
+
+{chunk.text}
+\end{{lstlisting}}
+\textbf{{Quelle:}} {source_line}
+""".strip())
 
 
 def model_result_to_latex(result: ModelResult) -> str:
@@ -226,20 +231,40 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \usepackage{{geometry}}
 \usepackage{{parskip}}
 \usepackage{{tcolorbox}}
+\tcbuselibrary{{breakable}}
 \usepackage{{hyperref}}
 \usepackage{{xurl}}
-\usepackage{{microtype}}
+\usepackage{{microtype}}\
+\usepackage{{listings}}
 
 \geometry{{margin=18mm}}
 \hypersetup{{hidelinks}}
-\setlength{{\emergencystretch}}{{3em}}
+\setlength{{\emergencystretch}}{{3em}}\
+
+\lstdefinestyle{{EvaluationChunk}}{{
+  basicstyle=\ttfamily\small,
+  frame=single,
+
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+
+  xleftmargin=1em,
+  xrightmargin=1em,
+
+  framexleftmargin=1em,
+  framexrightmargin=1em,
+
+  aboveskip=1.5em,
+  belowskip=1.5em,
+
+  framesep=8pt
+}}
 
 \newenvironment{{EvaluationAnswer}}
   {{\begin{{tcolorbox}}[title=Antwort,breakable,colback=white]}}
-  {{\end{{tcolorbox}}}}
-
-\newenvironment{{EvaluationChunk}}[2]
-  {{\begin{{tcolorbox}}[title={{Chunk #1 (Score: #2)}},breakable,colback=white]}}
   {{\end{{tcolorbox}}}}
 
 \newcommand{{\EvaluationError}}[1]{{%

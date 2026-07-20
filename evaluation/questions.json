@@ -6,27 +6,27 @@
     },
     {
       "id": "F02",
-      "question": "Welche Videokonferenzanlage gibt es am Standort Hof?"
+      "question": "Welches VKA-Modell gibt es am Standort Hof?"
     },
     {
       "id": "F03",
-      "question": "Wie ist die VKA am Standort Hof konfiguriert?"
+      "question": "Welche Schritte sind notwendig zum Einrichten des Servers docgen-server.dummy-domain.de?"
     },
     {
       "id": "F04",
-      "question": "Wie ist das Touch-Control am Standort Hof konfiguriert?"
+      "question": "Wofür steht 245.24.254.169?"
     },
     {
       "id": "F05",
-      "question": "Was ist server70?"
+      "question": "Welche Geräte gibt es am Standort1-A103?"
     },
     {
       "id": "F06",
-      "question": "Wie ist server70 konfiguriert?"
+      "question": "Welche Informationen gibt es zum RealPresence Collaboration Server?"
     },
     {
       "id": "F07",
-      "question": "Welchen Verwendungszweck hat server70?"
+      "question": "Wie kann man die Datenbank zum Produktivsystem von Rechnungsanwendung finden?"
     },
     {
       "id": "F08",
@@ -38,7 +38,7 @@
     },
     {
       "id": "F10",
-      "question": "Wer ist technischer Ansprechpartner für das BRAIN?"
+      "question": "Wofür steht rechnungs-server.netz-segment.dummy-domain.de?"
     }
   ]
 }
