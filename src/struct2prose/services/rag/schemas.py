@@ -11,6 +11,7 @@ class ChatCompletionRequest(BaseModel):
     messages: list[ChatMessage]
     temperature: float | None = None
     stream: bool = False
+    top_k: int = Field(default=3, ge=1, le=20)
 
 
 class SearchRequest(BaseModel):

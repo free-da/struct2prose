@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "id": "F01",
+      "question": "Welche Clientsysteme gibt es am Standort Hof?"
+    },
+    {
+      "id": "F02",
+      "question": "Welche Videokonferenzanlage gibt es am Standort Hof?"
+    },
+    {
+      "id": "F03",
+      "question": "Wie ist die VKA am Standort Hof konfiguriert?"
+    },
+    {
+      "id": "F04",
+      "question": "Wie ist das Touch-Control am Standort Hof konfiguriert?"
+    },
+    {
+      "id": "F05",
+      "question": "Was ist server70?"
+    },
+    {
+      "id": "F06",
+      "question": "Wie ist server70 konfiguriert?"
+    },
+    {
+      "id": "F07",
+      "question": "Welchen Verwendungszweck hat server70?"
+    },
+    {
+      "id": "F08",
+      "question": "Wer ist Roger Craig Smith?"
+    },
+    {
+      "id": "F09",
+      "question": "Wer spricht die Kraang?"
+    },
+    {
+      "id": "F10",
+      "question": "Wer ist technischer Ansprechpartner für das BRAIN?"
+    }
+  ]
+}

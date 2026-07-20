@@ -115,7 +115,7 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
     chunks = retriever.search(
         question,
         collection_name=collection_name,
-        top_k=4,
+        top_k=request.top_k,
     )
     prompt = build_rag_prompt(question, chunks)
 
@@ -153,6 +153,17 @@ def chat_completions(request: ChatCompletionRequest) -> dict:
                 "finish_reason": "stop",
             }
         ],
+        "retrieval": {
+            "chunks": [
+                {
+                    "rank": rank,
+                    "score": chunk.score,
+                    "text": chunk.text,
+                    "payload": chunk.payload,
+                }
+                for rank, chunk in enumerate(chunks, start=1)
+            ]
+        },
         "usage": {
             "prompt_tokens": 0,
             "completion_tokens": 0,
