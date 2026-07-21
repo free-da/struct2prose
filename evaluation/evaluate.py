@@ -179,7 +179,6 @@ Transformation: {transformation}
 
 {chunk.text}
 \end{{lstlisting}}
-\textbf{{Quelle:}} {source_line}
 """.strip())
 
 MARKDOWN_LINK_PATTERN = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
@@ -253,7 +252,13 @@ def answer_to_latex(answer: str) -> str:
 
 def model_result_to_latex(result: ModelResult) -> str:
     if result.error:
-        body = rf"\EvaluationError{{{latex_escape(result.error)}}}"
+        body = rf"""
+        \textbf{{Fehler}}
+
+        \begin{{lstlisting}}[style=EvaluationChunk]
+        {result.error}
+        \end{{lstlisting}}
+        """.strip()
     else:
         chunks = "\n\n".join(
             chunk_to_latex(chunk)
@@ -397,7 +402,6 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \usepackage[ngerman]{{babel}}
 \usepackage{{geometry}}
 \usepackage{{parskip}}
-\tcbuselibrary{{breakable}}
 \usepackage{{hyperref}}
 \usepackage{{xurl}}
 \usepackage{{microtype}}
