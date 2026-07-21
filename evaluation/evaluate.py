@@ -268,7 +268,7 @@ def model_result_to_latex(result: ModelResult) -> str:
         answer_latex = answer_to_latex(result.answer)
 
         body = rf"""
-\paragraph{{Antwort}}
+\textbf{{Antwort}}
 {answer_latex}
 
 \textbf{{Laufzeit:}} {result.duration_seconds:.3f}\,s \qquad
