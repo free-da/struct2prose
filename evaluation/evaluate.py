@@ -220,10 +220,6 @@ Relevanz Chunk {rank} (0--2) &
     return rf"""
 \subsection*{{Bewertungsmatrix}}
 
-\noindent
-Die Spalte \glqq Differenz\grqq{} wird als Wert des Untersuchungssystems
-abzüglich des Wertes des Referenzsystems berechnet.
-
 \begin{{center}}
 \renewcommand{{\arraystretch}}{{1.5}}
 \begin{{tabular}}{{%
@@ -337,7 +333,7 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \usepackage{{microtype}}
 \usepackage{{listings}}
 \usepackage{{array}}
-\usepackage{{booktabs}}\
+\usepackage{{booktabs}}
 
 \geometry{{margin=18mm}}
 \hypersetup{{hidelinks}}
