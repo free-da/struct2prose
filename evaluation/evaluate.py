@@ -202,6 +202,104 @@ def model_result_to_latex(result: ModelResult) -> str:
 
     return body
 
+def evaluation_matrix_to_latex(top_k: int) -> str:
+    retrieval_rows = "\n".join(
+        rf"""
+Relevanz Chunk {rank} (0--2) &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+""".strip()
+        for rank in range(1, top_k + 1)
+    )
+
+    max_retrieval_score = top_k * 2
+    max_answer_score = 8
+    max_total_score = max_retrieval_score + max_answer_score
+
+    return rf"""
+\subsection*{{Bewertungsmatrix}}
+
+\noindent
+Die Spalte \glqq Differenz\grqq{} wird als Wert des Untersuchungssystems
+abzüglich des Wertes des Referenzsystems berechnet.
+
+\begin{{center}}
+\renewcommand{{\arraystretch}}{{1.5}}
+\begin{{tabular}}{{%
+  >{{\raggedright\arraybackslash}}p{{6.0cm}}
+  >{{\centering\arraybackslash}}p{{3.0cm}}
+  >{{\centering\arraybackslash}}p{{3.0cm}}
+  >{{\centering\arraybackslash}}p{{1.8cm}}
+}}
+\toprule
+\textbf{{Bewertungskriterium}} &
+\textbf{{Referenzsystem}} &
+\textbf{{Untersuchungssystem}} &
+\textbf{{$\Delta$}}
+\\
+&
+\texttt{{baseline-rag}} &
+\texttt{{struct2prose-rag}} &
+\\
+\midrule
+
+\multicolumn{{4}}{{l}}{{\textbf{{Retrievalbewertung}}}}
+\\
+
+{retrieval_rows}
+
+\textbf{{Retrievalscore (0--{max_retrieval_score})}} &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+\midrule
+
+\multicolumn{{4}}{{l}}{{\textbf{{Bewertung der Antwortqualität}}}}
+\\
+
+Fachliche Korrektheit (0--2) &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+Vollständigkeit (0--2) &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+Fragebezug (0--2) &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+Quellennachvollziehbarkeit (0--2) &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+\textbf{{Antwortscore (0--{max_answer_score})}} &
+\rule{{0pt}}{{3.2ex}} &
+&
+\\
+
+\midrule
+
+\textbf{{Gesamtscore (0--{max_total_score})}} &
+\rule{{0pt}}{{3.5ex}} &
+&
+\\
+
+\bottomrule
+\end{{tabular}}
+\end{{center}}
+
+\noindent
+\textbf{{Bemerkungen zur Bewertung:}}
+
+\vspace{{3.5cm}}
+""".strip()
 
 def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -> str:
     blocks = []
@@ -212,13 +310,15 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
         blocks.append(rf"""
         \section{{{latex_escape(item.question_id)}: {latex_escape(item.question)}}}
 
-        \subsection*{{struct2prose-rag}}
+        \subsection*{{Untersuchungssystem: struct2prose-rag}}
 
         {model_result_to_latex(struct_result)}
 
-        \subsection*{{baseline-rag}}
+        \subsection*{{Referenzsystem: baseline-rag}}
 
         {model_result_to_latex(baseline_result)}
+
+        {evaluation_matrix_to_latex(top_k)}
         """.strip())
 
     content = "\n\n\\clearpage\n\n".join(blocks)
@@ -234,32 +334,29 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \tcbuselibrary{{breakable}}
 \usepackage{{hyperref}}
 \usepackage{{xurl}}
-\usepackage{{microtype}}\
+\usepackage{{microtype}}
 \usepackage{{listings}}
+\usepackage{{array}}
+\usepackage{{booktabs}}\
 
 \geometry{{margin=18mm}}
 \hypersetup{{hidelinks}}
-\setlength{{\emergencystretch}}{{3em}}\
+\setlength{{\emergencystretch}}{{3em}}
 
 \lstdefinestyle{{EvaluationChunk}}{{
   basicstyle=\ttfamily\small,
   frame=single,
-
   breaklines=true,
   breakatwhitespace=false,
   columns=flexible,
   keepspaces=true,
   showstringspaces=false,
-
   xleftmargin=1em,
   xrightmargin=1em,
-
   framexleftmargin=1em,
   framexrightmargin=1em,
-
   aboveskip=1.5em,
   belowskip=1.5em,
-
   framesep=8pt
 }}
 
