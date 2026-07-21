@@ -8,7 +8,7 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-
+import re
 import requests
 
 
@@ -182,16 +182,89 @@ Transformation: {transformation}
 \textbf{{Quelle:}} {source_line}
 """.strip())
 
+MARKDOWN_LINK_PATTERN = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+
+
+def split_answer_and_sources(answer: str) -> tuple[str, list[tuple[str, str]]]:
+    """
+    Trennt den eigentlichen Antworttext von einem Markdown-Quellenblock.
+
+    Erwartetes Format:
+
+    Antworttext
+
+    ## Quellen
+    - [Titel](URL)
+    """
+    parts = re.split(
+        r"(?im)^\s*#{1,6}\s*Quellen\s*$",
+        answer,
+        maxsplit=1,
+    )
+
+    answer_text = parts[0].strip()
+    sources: list[tuple[str, str]] = []
+
+    if len(parts) == 2:
+        source_block = parts[1]
+
+        for label, url in MARKDOWN_LINK_PATTERN.findall(source_block):
+            sources.append((label.strip(), url.strip()))
+
+    return answer_text, sources
+
+def answer_sources_to_latex(sources: list[tuple[str, str]]) -> str:
+    if not sources:
+        return r"\textbf{Angegebene Quellen:} Keine auswertbare Quellenangabe."
+
+    source_lines = []
+
+    for label, url in sources:
+        escaped_label = latex_escape(label)
+
+        # Prozentzeichen in URLs dürfen in LaTeX nicht als Kommentar beginnen.
+        escaped_url = url.replace("%", r"\%")
+
+        source_lines.append(
+            rf"\item \href{{{escaped_url}}}{{{escaped_label}}}"
+        )
+
+    items = "\n".join(source_lines)
+
+    return rf"""
+\textbf{{Angegebene Quellen:}}
+\begin{{itemize}}
+{items}
+\end{{itemize}}
+""".strip()
+
+def answer_to_latex(answer: str) -> str:
+    answer_text, sources = split_answer_and_sources(answer)
+
+    sources_latex = answer_sources_to_latex(sources)
+
+    return rf"""
+\begin{{lstlisting}}[style=EvaluationAnswer]
+{answer_text}
+\end{{lstlisting}}
+
+{sources_latex}
+""".strip()
 
 def model_result_to_latex(result: ModelResult) -> str:
     if result.error:
         body = rf"\EvaluationError{{{latex_escape(result.error)}}}"
     else:
-        chunks = "\n\n".join(chunk_to_latex(chunk) for chunk in result.chunks)
+        chunks = "\n\n".join(
+            chunk_to_latex(chunk)
+            for chunk in result.chunks
+        )
+
+        answer_latex = answer_to_latex(result.answer)
+
         body = rf"""
-\begin{{EvaluationAnswer}}
-{latex_escape(result.answer)}
-\end{{EvaluationAnswer}}
+\paragraph{{Antwort}}
+{answer_latex}
 
 \textbf{{Laufzeit:}} {result.duration_seconds:.3f}\,s \qquad
 \textbf{{Finish reason:}} \texttt{{{latex_escape(result.finish_reason or "")}}}
@@ -321,12 +394,9 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 
     return rf"""\documentclass[a4paper,10pt]{{article}}
 
-\usepackage[utf8]{{inputenc}}
-\usepackage[T1]{{fontenc}}
 \usepackage[ngerman]{{babel}}
 \usepackage{{geometry}}
 \usepackage{{parskip}}
-\usepackage{{tcolorbox}}
 \tcbuselibrary{{breakable}}
 \usepackage{{hyperref}}
 \usepackage{{xurl}}
@@ -334,6 +404,7 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \usepackage{{listings}}
 \usepackage{{array}}
 \usepackage{{booktabs}}
+\usepackage{{xcolor}}
 
 \geometry{{margin=18mm}}
 \hypersetup{{hidelinks}}
@@ -356,9 +427,30 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
   framesep=8pt
 }}
 
-\newenvironment{{EvaluationAnswer}}
-  {{\begin{{tcolorbox}}[title=Antwort,breakable,colback=white]}}
-  {{\end{{tcolorbox}}}}
+\lstdefinestyle{{EvaluationAnswer}}{{
+  basicstyle=\ttfamily\small,
+  frame=single,
+
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+
+  xleftmargin=1em,
+  xrightmargin=1em,
+
+  framexleftmargin=1em,
+  framexrightmargin=1em,
+
+  aboveskip=0.8em,
+  belowskip=0.8em,
+
+  framesep=10pt,
+
+  rulecolor=\color{{black}},
+  backgroundcolor=\color{{black!4}}
+}}
 
 \newcommand{{\EvaluationError}}[1]{{%
   \begin{{tcolorbox}}[title=Fehler,breakable,colback=white]
