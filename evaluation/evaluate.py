@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 import time
@@ -8,11 +9,12 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-
+import re
 import requests
 
 
 MODELS = ("struct2prose-rag", "baseline-rag")
+TOP_K = 3
 
 
 @dataclass
@@ -179,117 +181,97 @@ Transformation: {transformation}
 
 {chunk.text}
 \end{{lstlisting}}
-\textbf{{Quelle:}} {source_line}
 """.strip())
 
-def evaluation_matrix_to_latex(top_k: int) -> str:
-    retrieval_rows = "\n".join(
-        rf"""
-Relevanz Chunk {rank} (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-""".strip()
-        for rank in range(1, top_k + 1)
+MARKDOWN_LINK_PATTERN = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+
+
+def split_answer_and_sources(answer: str) -> tuple[str, list[tuple[str, str]]]:
+    """
+    Trennt den eigentlichen Antworttext von einem Markdown-Quellenblock.
+
+    Erwartetes Format:
+
+    Antworttext
+
+    ## Quellen
+    - [Titel](URL)
+    """
+    parts = re.split(
+        r"(?im)^\s*#{1,6}\s*Quellen\s*$",
+        answer,
+        maxsplit=1,
     )
 
-    max_retrieval_score = top_k * 2
-    max_answer_score = 8
-    max_total_score = max_retrieval_score + max_answer_score
+    answer_text = parts[0].strip()
+    sources: list[tuple[str, str]] = []
+
+    if len(parts) == 2:
+        source_block = parts[1]
+
+        for label, url in MARKDOWN_LINK_PATTERN.findall(source_block):
+            sources.append((label.strip(), url.strip()))
+
+    return answer_text, sources
+
+def answer_sources_to_latex(sources: list[tuple[str, str]]) -> str:
+    if not sources:
+        return r"\textbf{Angegebene Quellen:} Keine auswertbare Quellenangabe."
+
+    source_lines = []
+
+    for label, url in sources:
+        escaped_label = latex_escape(label)
+
+        # Prozentzeichen in URLs dürfen in LaTeX nicht als Kommentar beginnen.
+        escaped_url = url.replace("%", r"\%")
+
+        source_lines.append(
+            rf"\item \href{{{escaped_url}}}{{{escaped_label}}}"
+        )
+
+    items = "\n".join(source_lines)
 
     return rf"""
-\subsection*{{Bewertungsmatrix}}
+\textbf{{Angegebene Quellen:}}
+\begin{{itemize}}
+{items}
+\end{{itemize}}
+""".strip()
 
-\noindent
-Die Spalte \glqq Differenz\grqq{} wird als Wert des Untersuchungssystems
-abzüglich des Wertes des Referenzsystems berechnet.
+def answer_to_latex(answer: str) -> str:
+    answer_text, sources = split_answer_and_sources(answer)
 
-\begin{{center}}
-\renewcommand{{\arraystretch}}{{1.5}}
-\begin{{tabular}}{{%
-  >{{\raggedright\arraybackslash}}p{{6.0cm}}
-  >{{\centering\arraybackslash}}p{{3.0cm}}
-  >{{\centering\arraybackslash}}p{{3.0cm}}
-  >{{\centering\arraybackslash}}p{{1.8cm}}
-}}
-\toprule
-\textbf{{Bewertungskriterium}} &
-\textbf{{Referenzsystem}} &
-\textbf{{Untersuchungssystem}} &
-\textbf{{$\Delta$}}
-\\
-&
-\texttt{{baseline-rag}} &
-\texttt{{struct2prose-rag}} &
-\\
-\midrule
+    sources_latex = answer_sources_to_latex(sources)
 
-\multicolumn{{4}}{{l}}{{\textbf{{Retrievalbewertung}}}}
-\\
+    return rf"""
+\begin{{lstlisting}}[style=EvaluationAnswer]
+{answer_text}
+\end{{lstlisting}}
 
-{retrieval_rows}
-
-\textbf{{Retrievalscore (0--{max_retrieval_score})}} &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\midrule
-
-\multicolumn{{4}}{{l}}{{\textbf{{Bewertung der Antwortqualität}}}}
-\\
-
-Fachliche Korrektheit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Vollständigkeit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Fragebezug (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Quellennachvollziehbarkeit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\textbf{{Antwortscore (0--{max_answer_score})}} &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\midrule
-
-\textbf{{Gesamtscore (0--{max_total_score})}} &
-\rule{{0pt}}{{3.5ex}} &
-&
-\\
-
-\bottomrule
-\end{{tabular}}
-\end{{center}}
-
-\noindent
-\textbf{{Bemerkungen zur Bewertung:}}
-
-\vspace{{3.5cm}}
+{sources_latex}
 """.strip()
 
 def model_result_to_latex(result: ModelResult) -> str:
     if result.error:
-        body = rf"\EvaluationError{{{latex_escape(result.error)}}}"
-    else:
-        chunks = "\n\n".join(chunk_to_latex(chunk) for chunk in result.chunks)
         body = rf"""
-\begin{{EvaluationAnswer}}
-{latex_escape(result.answer)}
-\end{{EvaluationAnswer}}
+        \textbf{{Fehler}}
+
+        \begin{{lstlisting}}[style=EvaluationChunk]
+        {result.error}
+        \end{{lstlisting}}
+        """.strip()
+    else:
+        chunks = "\n\n".join(
+            chunk_to_latex(chunk)
+            for chunk in result.chunks
+        )
+
+        answer_latex = answer_to_latex(result.answer)
+
+        body = rf"""
+\paragraph{{Antwort}}
+{answer_latex}
 
 \textbf{{Laufzeit:}} {result.duration_seconds:.3f}\,s \qquad
 \textbf{{Finish reason:}} \texttt{{{latex_escape(result.finish_reason or "")}}}
@@ -299,7 +281,6 @@ def model_result_to_latex(result: ModelResult) -> str:
 """.strip()
 
     return body
-
 
 def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -> str:
     blocks = []
@@ -318,30 +299,26 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 
         {model_result_to_latex(baseline_result)}
 
-        {evaluation_matrix_to_latex(top_k)}
         """.strip())
 
     content = "\n\n\\clearpage\n\n".join(blocks)
 
     return rf"""\documentclass[a4paper,10pt]{{article}}
 
-\usepackage[utf8]{{inputenc}}
-\usepackage[T1]{{fontenc}}
 \usepackage[ngerman]{{babel}}
 \usepackage{{geometry}}
 \usepackage{{parskip}}
-\usepackage{{tcolorbox}}
-\tcbuselibrary{{breakable}}
 \usepackage{{hyperref}}
 \usepackage{{xurl}}
-\usepackage{{microtype}}\
-\usepackage{{listings}}\
+\usepackage{{microtype}}
+\usepackage{{listings}}
 \usepackage{{array}}
 \usepackage{{booktabs}}
+\usepackage{{xcolor}}
 
 \geometry{{margin=18mm}}
 \hypersetup{{hidelinks}}
-\setlength{{\emergencystretch}}{{3em}}\
+\setlength{{\emergencystretch}}{{3em}}
 
 \lstdefinestyle{{EvaluationChunk}}{{
   basicstyle=\ttfamily\small,
@@ -365,9 +342,30 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
   framesep=8pt
 }}
 
-\newenvironment{{EvaluationAnswer}}
-  {{\begin{{tcolorbox}}[title=Antwort,breakable,colback=white]}}
-  {{\end{{tcolorbox}}}}
+\lstdefinestyle{{EvaluationAnswer}}{{
+  basicstyle=\ttfamily\small,
+  frame=single,
+
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+
+  xleftmargin=1em,
+  xrightmargin=1em,
+
+  framexleftmargin=1em,
+  framexrightmargin=1em,
+
+  aboveskip=0.8em,
+  belowskip=0.8em,
+
+  framesep=10pt,
+
+  rulecolor=\color{{black}},
+  backgroundcolor=\color{{black!4}}
+}}
 
 \newcommand{{\EvaluationError}}[1]{{%
   \begin{{tcolorbox}}[title=Fehler,breakable,colback=white]
@@ -396,19 +394,58 @@ für Retrieval und Generierung verwendet.
 """
 
 
+
+def write_ratings_csv(path: Path, questions: list[dict[str, str]]) -> None:
+    fieldnames = [
+        "Frage-ID",
+        "Frage",
+        "System",
+        "Modell",
+        "Relevanz Chunk 1 (0-2)",
+        "Relevanz Chunk 2 (0-2)",
+        "Relevanz Chunk 3 (0-2)",
+        "Fachliche Korrektheit (0-2)",
+        "Vollständigkeit (0-2)",
+        "Fragebezug (0-2)",
+        "Quellennachvollziehbarkeit (0-2)",
+        "Bemerkungen",
+    ]
+
+    with path.open("w", encoding="utf-8-sig", newline="") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=";")
+        writer.writeheader()
+
+        system_names = {
+            "struct2prose-rag": "Untersuchungssystem",
+            "baseline-rag": "Referenzsystem",
+        }
+
+        for entry in questions:
+            for model in MODELS:
+                writer.writerow({
+                    "Frage-ID": entry["id"],
+                    "Frage": entry["question"],
+                    "System": system_names[model],
+                    "Modell": model,
+                    "Relevanz Chunk 1 (0-2)": "",
+                    "Relevanz Chunk 2 (0-2)": "",
+                    "Relevanz Chunk 3 (0-2)": "",
+                    "Fachliche Korrektheit (0-2)": "",
+                    "Vollständigkeit (0-2)": "",
+                    "Fragebezug (0-2)": "",
+                    "Quellennachvollziehbarkeit (0-2)": "",
+                    "Bemerkungen": "",
+                })
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Compare struct2prose-rag and baseline-rag and export LaTeX."
+        description="Compare struct2prose-rag and baseline-rag and export LaTeX and a ratings CSV."
     )
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--questions", type=Path, default=Path("questions.json"))
     parser.add_argument("--output-dir", type=Path, default=Path("evaluation_results"))
-    parser.add_argument("--top-k", type=int, default=3)
     parser.add_argument("--timeout", type=int, default=300)
     args = parser.parse_args()
-
-    if args.top_k < 1:
-        parser.error("--top-k must be at least 1")
 
     questions = load_questions(args.questions)
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -426,7 +463,7 @@ def main() -> int:
                 base_url=args.base_url,
                 model=model,
                 question=entry["question"],
-                top_k=args.top_k,
+                top_k=TOP_K,
                 timeout=args.timeout,
             )
         all_results.append(
@@ -441,22 +478,24 @@ def main() -> int:
     raw_data = {
         "generated_at": generated_at,
         "base_url": args.base_url,
-        "top_k": args.top_k,
+        "top_k": TOP_K,
         "models": list(MODELS),
         "questions": [asdict(item) for item in all_results],
     }
 
     json_path = args.output_dir / "evaluation_results.json"
     tex_path = args.output_dir / "evaluation_results.tex"
+    ratings_csv_path = args.output_dir / "ratings.csv"
 
     json_path.write_text(
         json.dumps(raw_data, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     tex_path.write_text(
-        render_latex(all_results, generated_at, args.top_k),
+        render_latex(all_results, generated_at, TOP_K),
         encoding="utf-8",
     )
+    write_ratings_csv(ratings_csv_path, questions)
 
     errors = [
         result.error
@@ -467,6 +506,7 @@ def main() -> int:
 
     print(f"Wrote {json_path}")
     print(f"Wrote {tex_path}")
+    print(f"Wrote {ratings_csv_path}")
 
     if errors:
         print(f"Completed with {len(errors)} failed model calls.", file=sys.stderr)
