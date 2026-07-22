@@ -1,3 +1,4 @@
+# Version: 2026-07-22-corrected-order
 from __future__ import annotations
 
 import argparse
@@ -339,8 +340,8 @@ def write_totals_summary(path: Path, totals: dict[str, SystemTotals]) -> None:
     reference = totals["Referenzsystem"]
     fieldnames = [
         "Bewertung", "Maximum je Frage",
-        "Referenz Summe", "Referenz Maximum", "Referenz Durchschnitt", "Referenz Prozent",
         "Untersuchung Summe", "Untersuchung Maximum", "Untersuchung Durchschnitt", "Untersuchung Prozent",
+        "Referenz Summe", "Referenz Maximum", "Referenz Durchschnitt", "Referenz Prozent",
         "Delta Durchschnitt", "Delta Prozentpunkte",
     ]
     metrics = [
@@ -392,8 +393,8 @@ def write_latex_summary(path: Path, totals: dict[str, SystemTotals]) -> None:
         _, _, inv_avg, inv_pct = metric_values(investigation, prefix)
         rows.append(
             f"{label} & {maximum} & "
-            f"{latex_number(ref_avg)} ({latex_number(ref_pct)}\\,\\%) & "
             f"{latex_number(inv_avg)} ({latex_number(inv_pct)}\\,\\%) & "
+            f"{latex_number(ref_avg)} ({latex_number(ref_pct)}\\,\\%) & "
             f"{latex_number(inv_avg - ref_avg, signed=True)} & "
             f"{latex_number(inv_pct - ref_pct, signed=True)} \\\\"
         )
@@ -406,8 +407,8 @@ def write_latex_summary(path: Path, totals: dict[str, SystemTotals]) -> None:
 \\toprule
 \\textbf{Bewertung} &
 \\textbf{Max.} &
-\\textbf{Referenzsystem} &
 \\textbf{Untersuchungssystem} &
+\\textbf{Referenzsystem} &
 \\textbf{$\\Delta$ Punkte} &
 \\textbf{$\\Delta$ Prozentpunkte} \\\\
 \\midrule
