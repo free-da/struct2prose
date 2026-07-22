@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 import time
@@ -13,6 +14,7 @@ import requests
 
 
 MODELS = ("struct2prose-rag", "baseline-rag")
+TOP_K = 3
 
 
 @dataclass
@@ -280,101 +282,6 @@ def model_result_to_latex(result: ModelResult) -> str:
 
     return body
 
-def evaluation_matrix_to_latex(top_k: int) -> str:
-    retrieval_rows = "\n".join(
-        rf"""
-Relevanz Chunk {rank} (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-""".strip()
-        for rank in range(1, top_k + 1)
-    )
-
-    max_retrieval_score = top_k * 2
-    max_answer_score = 8
-    max_total_score = max_retrieval_score + max_answer_score
-
-    return rf"""
-\subsection*{{Bewertungsmatrix}}
-
-\begin{{center}}
-\renewcommand{{\arraystretch}}{{1.5}}
-\begin{{tabular}}{{%
-  >{{\raggedright\arraybackslash}}p{{6.0cm}}
-  >{{\centering\arraybackslash}}p{{3.0cm}}
-  >{{\centering\arraybackslash}}p{{3.0cm}}
-  >{{\centering\arraybackslash}}p{{1.8cm}}
-}}
-\toprule
-\textbf{{Bewertungskriterium}} &
-\textbf{{Referenzsystem}} &
-\textbf{{Untersuchungssystem}} &
-\textbf{{$\Delta$}}
-\\
-&
-\texttt{{baseline-rag}} &
-\texttt{{struct2prose-rag}} &
-\\
-\midrule
-
-\multicolumn{{4}}{{l}}{{\textbf{{Retrievalbewertung}}}}
-\\
-
-{retrieval_rows}
-
-\textbf{{Retrievalscore (0--{max_retrieval_score})}} &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\midrule
-
-\multicolumn{{4}}{{l}}{{\textbf{{Bewertung der Antwortqualität}}}}
-\\
-
-Fachliche Korrektheit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Vollständigkeit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Fragebezug (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-Quellennachvollziehbarkeit (0--2) &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\textbf{{Antwortscore (0--{max_answer_score})}} &
-\rule{{0pt}}{{3.2ex}} &
-&
-\\
-
-\midrule
-
-\textbf{{Gesamtscore (0--{max_total_score})}} &
-\rule{{0pt}}{{3.5ex}} &
-&
-\\
-
-\bottomrule
-\end{{tabular}}
-\end{{center}}
-
-\noindent
-\textbf{{Bemerkungen zur Bewertung:}}
-
-\vspace{{3.5cm}}
-""".strip()
-
 def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -> str:
     blocks = []
     for item in results:
@@ -392,7 +299,6 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 
         {model_result_to_latex(baseline_result)}
 
-        {evaluation_matrix_to_latex(top_k)}
         """.strip())
 
     content = "\n\n\\clearpage\n\n".join(blocks)
@@ -417,17 +323,22 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \lstdefinestyle{{EvaluationChunk}}{{
   basicstyle=\ttfamily\small,
   frame=single,
+
   breaklines=true,
   breakatwhitespace=false,
   columns=flexible,
   keepspaces=true,
   showstringspaces=false,
+
   xleftmargin=1em,
   xrightmargin=1em,
+
   framexleftmargin=1em,
   framexrightmargin=1em,
+
   aboveskip=1.5em,
   belowskip=1.5em,
+
   framesep=8pt
 }}
 
@@ -477,19 +388,58 @@ für Retrieval und Generierung verwendet.
 """
 
 
+
+def write_ratings_csv(path: Path, questions: list[dict[str, str]]) -> None:
+    fieldnames = [
+        "Frage-ID",
+        "Frage",
+        "System",
+        "Modell",
+        "Relevanz Chunk 1 (0-2)",
+        "Relevanz Chunk 2 (0-2)",
+        "Relevanz Chunk 3 (0-2)",
+        "Fachliche Korrektheit (0-2)",
+        "Vollständigkeit (0-2)",
+        "Fragebezug (0-2)",
+        "Quellennachvollziehbarkeit (0-2)",
+        "Bemerkungen",
+    ]
+
+    with path.open("w", encoding="utf-8-sig", newline="") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=";")
+        writer.writeheader()
+
+        system_names = {
+            "struct2prose-rag": "Untersuchungssystem",
+            "baseline-rag": "Referenzsystem",
+        }
+
+        for entry in questions:
+            for model in MODELS:
+                writer.writerow({
+                    "Frage-ID": entry["id"],
+                    "Frage": entry["question"],
+                    "System": system_names[model],
+                    "Modell": model,
+                    "Relevanz Chunk 1 (0-2)": "",
+                    "Relevanz Chunk 2 (0-2)": "",
+                    "Relevanz Chunk 3 (0-2)": "",
+                    "Fachliche Korrektheit (0-2)": "",
+                    "Vollständigkeit (0-2)": "",
+                    "Fragebezug (0-2)": "",
+                    "Quellennachvollziehbarkeit (0-2)": "",
+                    "Bemerkungen": "",
+                })
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Compare struct2prose-rag and baseline-rag and export LaTeX."
+        description="Compare struct2prose-rag and baseline-rag and export LaTeX and a ratings CSV."
     )
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--questions", type=Path, default=Path("questions.json"))
     parser.add_argument("--output-dir", type=Path, default=Path("evaluation_results"))
-    parser.add_argument("--top-k", type=int, default=3)
     parser.add_argument("--timeout", type=int, default=300)
     args = parser.parse_args()
-
-    if args.top_k < 1:
-        parser.error("--top-k must be at least 1")
 
     questions = load_questions(args.questions)
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -507,7 +457,7 @@ def main() -> int:
                 base_url=args.base_url,
                 model=model,
                 question=entry["question"],
-                top_k=args.top_k,
+                top_k=TOP_K,
                 timeout=args.timeout,
             )
         all_results.append(
@@ -522,22 +472,24 @@ def main() -> int:
     raw_data = {
         "generated_at": generated_at,
         "base_url": args.base_url,
-        "top_k": args.top_k,
+        "top_k": TOP_K,
         "models": list(MODELS),
         "questions": [asdict(item) for item in all_results],
     }
 
     json_path = args.output_dir / "evaluation_results.json"
     tex_path = args.output_dir / "evaluation_results.tex"
+    ratings_csv_path = args.output_dir / "ratings.csv"
 
     json_path.write_text(
         json.dumps(raw_data, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     tex_path.write_text(
-        render_latex(all_results, generated_at, args.top_k),
+        render_latex(all_results, generated_at, TOP_K),
         encoding="utf-8",
     )
+    write_ratings_csv(ratings_csv_path, questions)
 
     errors = [
         result.error
@@ -548,6 +500,7 @@ def main() -> int:
 
     print(f"Wrote {json_path}")
     print(f"Wrote {tex_path}")
+    print(f"Wrote {ratings_csv_path}")
 
     if errors:
         print(f"Completed with {len(errors)} failed model calls.", file=sys.stderr)
