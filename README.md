@@ -170,7 +170,7 @@ QDRANT_BASELINE_COLLECTION=baseline
 
 # Verwendung
 
-##Standardpipeline ausführen
+## Standardpipeline ausführen
 
 ```bash
 python -m struct2prose all
@@ -178,7 +178,7 @@ python -m struct2prose all
 
 Erzeugt die kontextualisierte Wissensbasis.
 
-##Evaluationspipeline ausführen
+## Evaluationspipeline ausführen
 
 ```bash
 python -m struct2prose all-eval
@@ -188,13 +188,13 @@ Erzeugt sowohl die kontextualisierte Wissensbasis als auch die Baseline-Wissensb
 
 Für einzelne Verarbeitungsschritte stehen zusätzliche CLI-Befehle zur Verfügung. Diese dienen primär Entwicklungs- und Debuggingzwecken und werden nicht durchgängig gepflegt oder getestet.
 
-##RAG-Service starten
+## RAG-Service starten
 
 Startet den REST-Service für das Retrieval-Augmented-Generation-System.
 ```bash
 python -m struct2prose.services.rag.api
 ```
-##Evaluation ausführen
+## Evaluation ausführen
 
 Evaluationsfragen definieren in: `evaluation/questions.json`
 Führt die definierten Evaluationsfragen gegen beide Wissensbasen aus und speichert die Ergebnisse im Verzeichnis evaluation/results/.
@@ -204,7 +204,7 @@ python evaluation/evaluate.py
 ```
 Die Ergebnisse werden in einem Übersichtsdokument `evaluation/results/evaluation_results.tex` ausgegeben. Dies wird manuell überprüft und nach einem Punkteschema in `evaluation/auswertung/summary.csv` (Wird ebenfalls durch die Evaluation erzeugt) bewertet.
 
-##Auswertung erzeugen
+## Auswertung erzeugen
 
 Erzeugt die aggregierten Auswertungen und Grafiken der Evaluation.
 
