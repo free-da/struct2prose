@@ -202,15 +202,19 @@ Führt die definierten Evaluationsfragen gegen beide Wissensbasen aus und speich
 ```bash
 python evaluation/evaluate.py
 ```
-Die Ergebnisse werden in einem Übersichtsdokument `evaluation/results/evaluation_results.tex` ausgegeben. Dies wird manuell überprüft und nach einem Punkteschema in `evaluation/auswertung/summary.csv` (Wird ebenfalls durch die Evaluation erzeugt) bewertet.
+Die Ergebnisse werden in einem Übersichtsdokument `evaluation/results/evaluation_results.tex` ausgegeben. 
+Dies wird manuell überprüft und nach einem Punkteschema in `evaluation/results/ratings.csv` (Wird ebenfalls durch die Evaluation erzeugt) bewertet.
+Die ausgefüllte `ratings.csv` wird manuell in den Ordner `evaluation/auswertung` verschoben.
 
 ## Auswertung erzeugen
 
 Erzeugt die aggregierten Auswertungen und Grafiken der Evaluation.
 
 ```bash
-python evaluation/auswertung.py
+python evaluation/evaluate.py   --questions evaluation/questions.json   --output-dir evaluation/results   --base-url http://localhost:8000
 ```
+
+Ergebnis: `summary.csv`
 
 Für einzelne Verarbeitungsschritte stehen zusätzliche CLI-Befehle zur Verfügung. Diese dienen primär Entwicklungs- und Debuggingzwecken und werden nicht durchgängig gepflegt oder getestet.
 
