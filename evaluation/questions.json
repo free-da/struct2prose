@@ -2,43 +2,83 @@
   "questions": [
     {
       "id": "F01",
-      "question": "Welche Clientsysteme gibt es am Standort Hof?"
+      "question": "Wofür steht die Abkürzung SMP?"
     },
     {
       "id": "F02",
-      "question": "Welches VKA-Modell gibt es am Standort Hof?"
+      "question": "Welche interne IP-Adresse hat der SMP-Server?"
     },
     {
       "id": "F03",
-      "question": "Welche Schritte sind notwendig zum Einrichten des Servers docgen-server.dummy-domain.de?"
+      "question": "Auf welchem Betriebssystem läuft der ISCAS-Server?"
     },
     {
       "id": "F04",
-      "question": "Wofür steht 245.24.254.169?"
+      "question": "Welche Version ist auf SDS-GW1 installiert?"
     },
     {
       "id": "F05",
-      "question": "Welche Geräte gibt es am Standort1-A103?"
+      "question": "Welche interne Hardware-IP-Adresse besitzt SDS-GW2?"
     },
     {
       "id": "F06",
-      "question": "Welche Informationen gibt es zum RealPresence Collaboration Server?"
+      "question": "Welches Netzwerk gehört zur DNS-Zone securepim.intern.example?"
     },
     {
       "id": "F07",
-      "question": "Wie kann man die Datenbank zum Produktivsystem von Rechnungsanwendung finden?"
+      "question": "Wofür wird die DNS-Zone pki.intern.example verwendet?"
     },
     {
       "id": "F08",
-      "question": "Wer ist Roger Craig Smith?"
+      "question": "Welche DNS-Zone ist für Mobile Device Management vorgesehen?"
     },
-    {
+        {
       "id": "F09",
-      "question": "Wer spricht die Kraang?"
+      "question": "Wie lange dauert ein kompletter Neustart der Mediensteuerung und Peripherie?"
     },
     {
       "id": "F10",
-      "question": "Wofür steht rechnungs-server.netz-segment.dummy-domain.de?"
-    }
+      "question": "Wie lässt sich der Schwarz-Weiß-Modus einer Kamera deaktivieren?"
+    },
+    {
+      "id": "F11",
+      "question": "Welche Maßnahme wird empfohlen, wenn eine Kamera nur ein blaues Bild anzeigt?"
+    },
+       {
+      "id": "F12",
+      "question": "Welche eGovernment-Dienste sind für ORGA relevant?"
+    },
+    {
+      "id": "F13",
+      "question": "Wer ist für den Dienst EGVP verantwortlich?"
+    },
+    {
+      "id": "F14",
+      "question": "Welche Infrastrukturdienste haben den Status \"?\" bei der Relevanz für ORGA?"
+    },
+    {
+      "id": "F15",
+      "question": "Welcher Dienst ist im ganzen ORGA im Einsatz?"
+    },
+        {
+      "id": "F16",
+      "question": "Welches Betriebssystem ist auf dem Server server73 installiert?"
+    },
+    {
+      "id": "F17",
+      "question": "Welches Modell wird im Konferenzraum Standort2 A.1.1 eingesetzt?"
+    },
+    {
+      "id": "F18",
+      "question": "Welche IP-Adresse hat der DNS-Server für die interne DNS-Zone vk.segment.domain.de?"
+    },
+     {
+    "id": "F19",
+    "question": "Welche VLAN-ID wird für den Standort Adressenweg 19, Port 2 verwendet?"
+  },
+  {
+    "id": "F20",
+    "question": "Welcher Router-Standort ist dem Standort Adressenstraße 222, Port 1 zugeordnet?"
+  }
   ]
 }
