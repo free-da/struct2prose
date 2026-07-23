@@ -1,224 +1,211 @@
 # struct2prose
 
-**struct2prose** ist eine Python-basierte Vorverarbeitungspipeline zur semantischen Kontextualisierung strukturierter und semistrukturierter Wiki-Inhalte für den Einsatz in Retrieval-Augmented-Generation-(RAG)-Systemen.
+**struct2prose** ist eine modulare Vorverarbeitungspipeline zur Transformation semi-strukturierter XWiki-Inhalte in eine für Retrieval-Augmented Generation (RAG) optimierte Wissensbasis.
 
-Das Projekt entstand im Rahmen einer Masterarbeit mit dem Ziel, die Nutzbarkeit strukturierter technischer Dokumentationen für Large Language Models systematisch zu verbessern.
-
----
-
-## Zielsetzung
-
-Technische Wiki-Systeme enthalten häufig einen hohen Anteil an strukturierten und semistrukturierten Inhalten, insbesondere Tabellen, Listen und Konfigurationsfragmente. Diese sind für RAG-Systeme nur eingeschränkt nutzbar, da ihre Bedeutung stark vom Kontext abhängt und in fragmentierter Form vorliegt.
-
-**struct2prose** verfolgt daher das Ziel, solche Inhalte in eine **semantisch explizite, prosebasierte Wissensrepräsentation** zu überführen.
-
-Dabei stehen folgende Prinzipien im Vordergrund:
-
-* **Explizite Strukturierung** statt impliziter HTML-Repräsentation
-* **Semantische Kontextualisierung** statt rein syntaktischer Transformation
-* **Nachvollziehbarkeit und Reproduzierbarkeit** der Verarbeitungsschritte
-* **Trennung deterministischer und LLM-basierter Verarbeitung**
+Das Projekt entstand im Rahmen einer Masterarbeit und untersucht den Einfluss einer LLM-basierten semantischen Kontextualisierung strukturierter Wiki-Inhalte auf die Antwortqualität eines RAG-Systems.
 
 ---
 
-## Architekturüberblick
+# Pipeline
 
-Die Pipeline ist als **mehrstufiges Transformationsmodell** konzipiert, bei dem ein Dokument schrittweise in unterschiedliche semantische Zustände überführt wird.
+Die Verarbeitung erfolgt in sechs aufeinander aufbauenden Schritten.
 
-### Dokumentzustände
+| Schritt | Beschreibung |
+|---------|--------------|
+| **0** | Abruf der XWiki-Dokumente über die REST-Schnittstelle |
+| **1** | Extraktion des eigentlichen Dokumentinhalts |
+| **2** | Entfernung von UI- und Layout-Elementen |
+| **3** | Parsing in semantische Dokumentblöcke (Absätze, Listen, Tabellen, Codeblöcke usw.) |
+| **4** | Erzeugung der RAG-Repräsentation (LLM-Kontextualisierung oder Baseline) |
+| **5** | Chunking, Embedding und Speicherung der Chunks in einer Qdrant-Vektordatenbank |
 
-Ein Dokument durchläuft folgende logisch getrennte Zustände:
-
-1. **SourceDocument** – Rohdaten (HTML)
-2. **CleanDocument** – extrahierter Inhaltsbereich
-3. **StrippedDocument** – bereinigter Content ohne UI-/Navigationsanteile
-4. **ParsedDocument** – strukturierte Repräsentation (Abschnitte, Blöcke)
-5. **ContextualizedDocument** – semantisch angereicherte Inhalte in Prosaform
-
-Diese Zustände werden durch explizite Datenstrukturen modelliert und bilden die Grundlage für alle Transformationen innerhalb der Pipeline.
-
+![pipeline-implementierung.png](images/pipeline-implementierung.png)
 ---
 
-## Verarbeitungsschritte
+# Evaluation
 
-Die Transformation erfolgt in vier logisch getrennten Schritten:
+Zur Evaluation werden zwei getrennte Wissensbasen erzeugt.
 
-1. **Extraktion des Inhaltsbereichs**
-   Identifikation und Isolation des fachlich relevanten HTML-Bereichs.
+- **Untersuchungssystem:** Tabellen und Listen werden mittels eines Large Language Models semantisch kontextualisiert.
+- **Referenzsystem:** Tabellen und Listen werden ohne semantische Transformation übernommen.
 
-2. **Entfernung von UI-Elementen**
-   Regelbasierte Bereinigung von Navigations- und Präsentationsartefakten.
+Beide Systeme verwenden identische
 
-3. **Strukturelles Parsing**
-   Überführung des bereinigten HTML in ein explizites Objektmodell bestehend aus:
+- Quelldokumente,
+- Vorverarbeitungsschritte,
+- Chunkingstrategie,
+- Embedding-Modell,
+- Retrieval-Konfiguration,
+- Sprachmodell und
+- Chat-Prompt.
 
-   * Dokumenten
-   * Abschnitten
-   * typisierten Inhaltsblöcken (z. B. Paragraphen, Listen, Tabellen, Code)
+Die semantische Kontextualisierung in Schritt 4 stellt somit die einzige unabhängige Variable der Evaluation dar.
 
-4. **Semantische Kontextualisierung (LLM)**
-   Selektive Transformation strukturierter Inhalte (insbesondere Tabellen und Listen) in beschreibenden Fließtext.
+Die beiden Wissensbasen werden in getrennten Qdrant-Collections gespeichert und anschließend mit identischen Evaluationsfragen verglichen.
 
+![evaluation-workflow4.png](images/evaluation-workflow4.png)
 ---
+## Projektstruktur
 
-## Verarbeitungsprinzip
-
-Die Pipeline folgt einem **hybriden Ansatz**:
-
-### Deterministische Verarbeitung
-
-* DOM-Extraktion
-* UI-Bereinigung
-* strukturelles Parsing
-
-Diese Schritte sind vollständig regelbasiert und reproduzierbar.
-
-### Probabilistische Verarbeitung
-
-* semantische Kontextualisierung mittels LLM
-
-Dieser Schritt erzeugt kontextabhängige, sprachliche Repräsentationen strukturierter Inhalte.
-
----
-
-## Datenmodell
-
-Die Pipeline basiert auf einem expliziten internen Datenmodell, das die Transformation strukturiert unterstützt.
-
-Zentrale Konzepte sind:
-
-* **DocumentMetadata** – Kontext- und Herkunftsinformationen
-* **ContentBlock** – kleinste semantische Einheit (z. B. Tabelle, Liste)
-* **Section** – hierarchische Gliederung des Dokuments
-* **ContextualizedBlock** – durch LLM erzeugte Prosaeinheiten
-
-Das Datenmodell dient als zentrale Schnittstelle zwischen den Verarbeitungsschritten und ermöglicht eine gezielte, blockweise Transformation.
-
----
-
-## Persistenz und Nachvollziehbarkeit
-
-Zur Sicherstellung von Reproduzierbarkeit und Nachvollziehbarkeit werden Pipeline-Ausführungen und Artefakte persistiert.
-
-Hierfür wird eine relationale Datenbank verwendet, in der u. a. folgende Aspekte gespeichert werden:
-
-* Pipeline-Ausführungen (Runs)
-* Verarbeitungsschritte (Step Runs)
-* Dokumentversionen je Verarbeitungsstufe
-* Kontextualisierungsaufgaben und deren Ergebnisse
-
-Diese Persistenzschicht ermöglicht eine detaillierte Analyse und Wiederholbarkeit der Verarbeitung.
-
----
-
-## Aktueller Implementierungsstand
-
-Die Pipeline ist konzeptionell als **objektbasierte Verarbeitungskette** ausgelegt.
-Die Transformation erfolgt intern auf expliziten Dokumentobjekten.
-
-Im aktuellen Entwicklungsstand werden Zwischenzustände zusätzlich als **serialisierte JSON-Artefakte** gespeichert und zwischen den Schritten übergeben.
-
-Diese Dateibasierung dient derzeit:
-
-* der **Debugbarkeit**
-* der **schrittweisen Entwicklung**
-* der **Reproduzierbarkeit von Zwischenergebnissen**
-
-Langfristig ist vorgesehen, die Orchestrierung so umzubauen, dass die Übergabe zwischen den Schritten **direkt über Objekte** erfolgt und die Persistierung ausschließlich eine unterstützende Rolle einnimmt.
-
----
-
-## Nutzung
-
-Die Pipeline wird über eine modulbasierte CLI gesteuert:
-
-```bash
-python -m struct2prose <command>
+```text
+struct2prose/
+├── src/
+│   └── struct2prose/
+│       ├── cli.py
+│       ├── config.py
+│       │
+│       ├── debug/
+│       │   └── debug_contextualize.py
+│       │
+│       ├── models/
+│       │   └── documents.py
+│       │
+│       ├── parser/
+│       │   ├── html_parser.py
+│       │   └── models.py
+│       │
+│       ├── persistence/
+│       │   ├── db.py
+│       │   └── store.py
+│       │
+│       ├── preprocessing/
+│       │   ├── content_root.py
+│       │   └── ui_strip.py
+│       │
+│       ├── scripts/
+│       │   └── init_db.py
+│       │
+│       ├── services/
+│       │   ├── llm_client.py
+│       │   └── rag/
+│       │       ├── api.py
+│       │       ├── prompt.py
+│       │       ├── retriever.py
+│       │       └── schemas.py
+│       │
+│       └── steps/
+│           ├── step0_fetch_xwiki.py
+│           ├── step1_extract_root.py
+│           ├── step2_strip_ui.py
+│           ├── step3_parse.py
+│           ├── step4_baseline.py
+│           ├── step4_contextualize.py
+│           ├── step5_ingest_qdrant.py
+│           └── step5_ingest_qdrant_maxmin.py
+│
+├── evaluation/
+│   ├── results/
+│   └── auswertung/
+│
+├── state/
+│   └── struct2prose.db
+│
+├── .env
+├── .gitignore
+├── LICENSE
+├── pyproject.toml
+├── README.md
+└── venv/
 ```
 
-### Einzelne Schritte
+---
+
+# Installation
+
+Repository klonen
 
 ```bash
-python -m struct2prose extract-root
-python -m struct2prose strip-ui
-python -m struct2prose parse
-python -m struct2prose contextualize
+git clone https://github.com/free-da/struct2prose.git
+cd struct2prose
 ```
 
-### End-to-End-Ausführung
+Virtuelle Umgebung erstellen
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Abhängigkeiten installieren
+
+```bash
+pip install -e .
+```
+
+---
+
+# Konfiguration
+
+Die Anwendung wird über eine `.env`-Datei konfiguriert.
+
+Beispiel:
+
+```dotenv
+# XWiki
+XWIKI_BASE_URL=https://wiki.example.org
+XWIKI_WIKI_ID=xwiki
+XWIKI_USERNAME=admin
+XWIKI_PASSWORD=password
+RAW_DATA_DIR=raw_data
+
+# LLM
+LLM_PROVIDER=local
+LOCAL_LLM_BASE_URL=http://localhost:8000
+LOCAL_MODEL_NAME=Qwen/Qwen2.5-7B-Instruct
+
+# alternativ: Groq
+GROQ_API_KEY=
+GROQ_MODEL_NAME=
+
+# Embeddings
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+
+# Qdrant
+QDRANT_URL=http://localhost:6333
+QDRANT_CONTEXTUALIZED_COLLECTION=contextualized
+QDRANT_BASELINE_COLLECTION=baseline
+```
+
+---
+
+# Verwendung
+
+Standardpipeline ausführen
 
 ```bash
 python -m struct2prose all
 ```
 
----
-## Konfiguration (.env)
+Erzeugt die kontextualisierte Wissensbasis.
 
-Die Pipeline wird über Environment-Variablen konfiguriert, die typischerweise in einer `.env`-Datei im Projektverzeichnis definiert werden. Diese Konfiguration steuert insbesondere die Anbindung des verwendeten Large Language Models sowie grundlegende Systemparameter.
+Evaluationspipeline ausführen
 
-Ein Beispiel für eine `.env`-Datei ist:
-
-```
-LLM_PROVIDER=groq
-
-LOCAL_MODEL_NAME="qwen-2.5"
-LOCAL_LLM_BASE_URL=http://10.200.200.11:8000
-
-GROQ_API_KEY="..."
-GROQ_MODEL_NAME="llama-3.3-70b-versatile"
-
-DATA_PATH=./data
+```bash
+python -m struct2prose all-eval
 ```
 
-### LLM-Anbindung
+Erzeugt sowohl die kontextualisierte Wissensbasis als auch die Baseline-Wissensbasis für die Evaluation.
 
-Die Pipeline unterstützt unterschiedliche LLM-Provider, die über die Variable `LLM_PROVIDER` ausgewählt werden.
-
-#### Groq (Cloud-basiert)
-
-Bei Verwendung von `LLM_PROVIDER=groq` wird ein extern gehostetes Modell über die Groq-API angesprochen.
-
-Erforderliche Parameter:
-
-* `GROQ_API_KEY` – API-Schlüssel für den Zugriff auf den Dienst
-* `GROQ_MODEL_NAME` – Name des verwendeten Modells
-
-#### Lokales LLM
-
-Bei Verwendung von `LLM_PROVIDER=local` erfolgt die Anbindung an ein lokal betriebenes Modell über eine HTTP-Schnittstelle.
-
-Erforderliche Parameter:
-
-* `LOCAL_MODEL_NAME` – Name des lokal bereitgestellten Modells
-* `LOCAL_LLM_BASE_URL` – Basis-URL des lokalen Inferenzservers
-
-Dieses Setup ermöglicht insbesondere den Einsatz der Pipeline in abgeschotteten oder datenschutzsensiblen Umgebungen.
+Für einzelne Verarbeitungsschritte stehen zusätzliche CLI-Befehle zur Verfügung. Diese dienen primär Entwicklungs- und Debuggingzwecken und werden nicht durchgängig gepflegt oder getestet.
 
 ---
 
-### Datenpfad
+# Debugging
 
-* `DATA_PATH` definiert ein optionales Basisverzeichnis für Datenablagen innerhalb der Pipeline.
-
----
-
-### Designprinzip
-
-Die Konfiguration ist bewusst so gestaltet, dass die LLM-Anbindung **von der eigentlichen Pipeline-Logik entkoppelt** ist. Dadurch kann zwischen unterschiedlichen Modellen und Anbietern gewechselt werden, ohne die Verarbeitungsschritte selbst anzupassen.
-
-Dies unterstützt insbesondere:
-
-* flexible Experimente mit verschiedenen Modellen
-* Migration von Cloud- zu lokalen LLMs
-* reproduzierbare Pipeline-Ausführungen mit definierter Modellkonfiguration
+Für sämtliche Verarbeitungsschritte können Zwischenergebnisse als JSON-Artefakte erzeugt werden. Diese dienen der Nachvollziehbarkeit einzelner Transformationen sowie der Fehlersuche während der Entwicklung.
 
 ---
 
-## Kontext
+# Lizenz
 
-Das Projekt entsteht im Rahmen einer Masterarbeit mit dem Titel:
+Dieses Projekt wird unter der **GNU General Public License v3.0 (GPL-3.0)** veröffentlicht.
 
-**„Semantische Kontextualisierung für RAG-Systeme“**
-*Ein Vorgehensmodell zur LLM-gestützten Vorverarbeitung strukturierter Wiki-Inhalte*
+Weitere Informationen enthält die Datei `LICENSE`.
 
-Der Fokus liegt auf der **Verbesserung der Wissensrepräsentation** für RAG-Systeme, nicht auf dem Vergleich unterschiedlicher Sprachmodelle.
+---
+
+# Reproduzierbarkeit
+
+Dieses Repository enthält die Implementierung der in der zugehörigen Masterarbeit beschriebenen Vorverarbeitungspipeline. Die Software wird unter der GNU General Public License v3.0 veröffentlicht und kann zur Reproduktion, Überprüfung und Weiterentwicklung der beschriebenen Verfahren verwendet werden.
+
+Bei wissenschaftlicher Nutzung wird um eine Zitierung der zugehörigen Masterarbeit gebeten.
