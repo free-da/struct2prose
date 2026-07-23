@@ -323,22 +323,17 @@ def render_latex(results: list[QuestionResult], generated_at: str, top_k: int) -
 \lstdefinestyle{{EvaluationChunk}}{{
   basicstyle=\ttfamily\small,
   frame=single,
-
   breaklines=true,
   breakatwhitespace=false,
   columns=flexible,
   keepspaces=true,
   showstringspaces=false,
-
   xleftmargin=1em,
   xrightmargin=1em,
-
   framexleftmargin=1em,
   framexrightmargin=1em,
-
   aboveskip=1.5em,
   belowskip=1.5em,
-
   framesep=8pt
 }}
 
