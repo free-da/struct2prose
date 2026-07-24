@@ -113,11 +113,12 @@ Aufgabe:
 - Die interne Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der strukturierten Datensammlung.
 - Interne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
 - Ermittle sinnvoll, welches die Entität ist, die beschrieben wird, aus Inhalt der Datenzeilen, Dokumenttitel und Abschnittsüberschrift.
+- Erkenne selbst, ob es eine Kopfzeile gibt, oder eine vertikale Schlüssel-Wert-Tabelle ist. In dem Fall müssen die Werte sinnvoll zu der Entität zugeordnet werden.
 - Verwende die Attributnamen und vorausgehende Abschnittsüberschriften sowie Dokumenttitel zur Interpretation der Werte und ihrer Beziehungen.
 - Abkürzungen werden beibehalten und nicht interpretiert.
 - Für jede Datenzeile muss mindestens eine vollständige Beschreibung der beschriebenen Entität erzeugt werden. Kein Wert darf ausgelassen werden. 
 - Die Beschreibungen sollen so kurz und prägnant wie möglich, aber so ausführlich wie nötig sein. Nutze keine ausschmückenden Formulierungen.
-- Wenn eine Zelle aus mehreren Werten besteht, verkette sie wie in einer normalen Aufzählung miteinander.
+- Wenn eine Zelle aus mehreren Werten besteht, zähle sie allesamt als entsprechende Attribut zur Entität auf, lasse keinen Wert aus.
 
 Beispiel Eingabe:
 Dokumenttitel: Poly-VK

@@ -45,7 +45,6 @@ Regeln:
 - Nutze alle bereitgestellten Kontextinformationen unabhängig von ihrer Darstellung. Informationen können als Fließtext, Listen, Tabellen oder andere strukturierte Inhalte vorliegen.- Wenn mehrere Quellen dieselbe fachliche Entität beschreiben (z. B. denselben Standort, dasselbe System, denselben Server oder dieselbe Person), führe die Informationen zusammen, auch wenn die Eigenschaften auf verschiedene Quellen verteilt sind.
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Wenn relevante Informationen über mehrere Quellen verteilt liegen, aggregiere sie und gib sie im sinnvollen Zusammenhang miteinander wieder.
-- Erkenne selbst, ob es eine Kopfzeile gibt, oder eine vertikale Schlüssel-Wert-Tabelle ist. In dem Fall müssen die Werte sinnvoll zu der Entität zugeordnet werden, die aus der Tabellen-, Abschnitts- oder Dokumentüberschrift zu ermitteln ist.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 
