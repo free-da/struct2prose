@@ -215,3 +215,13 @@ contextualized_data_bk
 processed_data
 stripped_data
 evaluation/results/
+evaluation/questions.json
+
+        evaluation/auswertung/ratings.csv
+        evaluation/auswertung/summary.csv
+        evaluation/auswertung/summary.tex
+        evaluation/auswertung/summary_totals.csv
+        evaluation/evaluation_results/
+        evaluation_results.aux
+        evaluation_results.out
+        evaluation_results.toc

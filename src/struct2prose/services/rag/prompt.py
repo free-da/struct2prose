@@ -44,6 +44,7 @@ Regeln:
 - Nutze ausschließlich den bereitgestellten Kontext für die Antwortgenerierung.
 - Nutze alle bereitgestellten Kontextinformationen unabhängig von ihrer Darstellung. Informationen können als Fließtext, Listen, Tabellen oder andere strukturierte Inhalte vorliegen.- Wenn mehrere Quellen dieselbe fachliche Entität beschreiben (z. B. denselben Standort, dasselbe System, denselben Server oder dieselbe Person), führe die Informationen zusammen, auch wenn die Eigenschaften auf verschiedene Quellen verteilt sind.
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
+- Wenn relevante Informationen über mehrere Quellen verteilt liegen, aggregiere sie und gib sie im sinnvollen Zusammenhang miteinander wieder.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 
