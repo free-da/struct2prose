@@ -109,16 +109,12 @@ Aufgabe:
 - Verwende ausschließlich Informationen aus den gegebenen Daten sowie bereitgestellte Dokumenttitel und Abschnittsüberschriften.
 - Erfinde keine Informationen, die nicht aus diesen Quellen hervorgehen.
 - Formuliere vollständige, grammatikalisch korrekte Sätze.
-- Besteht eine Zeile nur aus einem einzelnen befüllten Wert, interpretiere sie als interne Abschnittsüberschrift. 
-- Die interne Überschrift gilt für alle folgenden Zeilen bis zur nächsten Abschnittsüberschrift oder bis zum Ende der strukturierten Datensammlung.
-- Interne Abschnittsüberschriften gelten nur als Kontext und nicht als Zellwert.
-- Ermittle sinnvoll, welches die Entität ist, die beschrieben wird, aus Inhalt der Datenzeilen, Dokumenttitel und Abschnittsüberschrift.
-- Erkenne selbst, ob es eine Kopfzeile gibt, oder eine vertikale Schlüssel-Wert-Tabelle ist. In dem Fall müssen die Werte sinnvoll zu der Entität zugeordnet werden.
-- Verwende die Attributnamen und vorausgehende Abschnittsüberschriften sowie Dokumenttitel zur Interpretation der Werte und ihrer Beziehungen.
+- Ermittle anhand von Dokumenttitel, Abschnittsüberschriften, Tabellenstruktur und Datenzeilen selbstständig die beschriebene Entität sowie die Bedeutung ihrer Attribute.- Erkenne selbst, ob es eine Kopfzeile gibt, oder eine vertikale Schlüssel-Wert-Tabelle ist. In dem Fall müssen die Werte sinnvoll zu der Entität zugeordnet werden.
+- Erkenne selbstständig die Struktur der Eingabedaten (z. B. Tabellen mit Kopfzeile, Schlüssel-Wert-Tabellen oder Listen) und interpretiere die Beziehungen zwischen Entitäten und Attributen entsprechend.
 - Abkürzungen werden beibehalten und nicht interpretiert.
-- Für jede Datenzeile muss mindestens eine vollständige Beschreibung der beschriebenen Entität erzeugt werden. Kein Wert darf ausgelassen werden. 
-- Die Beschreibungen sollen so kurz und prägnant wie möglich, aber so ausführlich wie nötig sein. Nutze keine ausschmückenden Formulierungen.
-- Wenn eine Zelle aus mehreren Werten besteht, zähle sie allesamt als entsprechende Attribut zur Entität auf, lasse keinen Wert aus.
+- Für jede Datenzeile müssen alle enthaltenen Informationen vollständig in einem oder mehreren vollständigen Sätzen beschrieben werden. Kein Attribut und kein Wert darf ausgelassen werden.
+- Die Beschreibungen sollen so kurz und prägnant wie möglich, aber so ausführlich wie nötig sein. Nutze keine ausschmückenden Formulierungen. Formuliere Fließtext statt bloßer Schlüssel-Wert-Aufzählungen..
+- Wenn eine Zelle aus mehreren Werten besteht, zähle sie allesamt als entsprechende Attribute zur Entität, getrennt voneinander, auf, lasse keinen Wert aus.
 
 Beispiel Eingabe:
 Dokumenttitel: Poly-VK
