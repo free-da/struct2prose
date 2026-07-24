@@ -192,7 +192,7 @@ Für einzelne Verarbeitungsschritte stehen zusätzliche CLI-Befehle zur Verfügu
 
 Startet den REST-Service für das Retrieval-Augmented-Generation-System.
 ```bash
-python -m struct2prose.services.rag.api
+python -m uvicorn struct2prose.services.rag.api:app   --host 0.0.0.0   --port 8000
 ```
 ## Evaluation ausführen
 
