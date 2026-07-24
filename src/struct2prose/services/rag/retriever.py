@@ -26,7 +26,7 @@ class RagRetriever:
             query: str,
             *,
             collection_name: str,
-            top_k: int = 5,
+            top_k: int = 3,
     ) -> list[RetrievedChunk]:
         query_vector = self.embedder.encode(query).tolist()
 
