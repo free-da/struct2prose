@@ -46,6 +46,7 @@ Regeln:
 - Sammle sämtliche Informationen zur abgefragten Entität aus allen bereitgestellten Kontextstellen, bevor du die Antwort formulierst.
 - Wenn die Antwort nicht ausreichend aus dem Kontext ableitbar ist, sage klar, welche Information fehlt.
 - Beantworte die Frage vollständig. Enthält der Kontext weitere Eigenschaften, die unmittelbar zur abgefragten Entität gehören und für die Beantwortung erforderlich sind, berücksichtige auch diese.
+- Wenn nach Personen, Standorten, Systemen oder anderen aufzählbaren Entitäten gefragt wird, überprüfe vor der Ausgabe, ob alle im Kontext genannten Entitäten berücksichtigt wurden. Lasse keine passende Entität aus.
 - Erfinde keine Details.
 - Antworte präzise und sachlich.
 
