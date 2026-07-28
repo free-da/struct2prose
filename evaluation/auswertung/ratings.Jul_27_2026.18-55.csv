@@ -1,0 +1,41 @@
+﻿Frage-ID;Frage;System;Modell;Relevanz Chunk 1 (0-2);Relevanz Chunk 2 (0-2);Relevanz Chunk 3 (0-2);Fachliche Korrektheit (0-2);Vollständigkeit (0-2);Fragebezug (0-2);Quellennachvollziehbarkeit (0-2);Bemerkungen
+F01;Welche Ansprechpartner der Netze des Bundes gibt es für Ultramobile IT und wie kann man sie erreichen?;Untersuchungssystem;struct2prose-rag;2;1;0;2;2;2;2;
+F01;Welche Ansprechpartner der Netze des Bundes gibt es für Ultramobile IT und wie kann man sie erreichen?;Referenzsystem;baseline-rag;0;2;0;2;1;2;2;nur 1/2 AP -> Fehler: Unvollständig
+F02;Was sind die interne und externe IP für SDS-GW1 Server?;Untersuchungssystem;struct2prose-rag;2;1;2;0;2;2;2;intern/extern falsch zugeordnet, im Chunk korrekt aber auch Halluzinationen
+F02;Was sind die interne und externe IP für SDS-GW1 Server?;Referenzsystem;baseline-rag;1;0;1;0;0;0;0;zu viele irrelevante Infos über andere Entität
+F03;Wofür wird die DNS-Zone pki.intern.example verwendet?;Untersuchungssystem;struct2prose-rag;2;0;0;2;2;2;2;
+F03;Wofür wird die DNS-Zone pki.intern.example verwendet?;Referenzsystem;baseline-rag;0;2;0;2;1;2;2;eine Info weniger als struct2prose
+F04;Welche DNS-Zone ist für Mobile Device Management vorgesehen?;Untersuchungssystem;struct2prose-rag;0;2;0;0;0;0;0;
+F04;Welche DNS-Zone ist für Mobile Device Management vorgesehen?;Referenzsystem;baseline-rag;0;0;2;2;2;2;2;
+F05;Wie heißt die DNS-Zone zu 10.42.8.0/24 und wofür wird sie verwendet?;Untersuchungssystem;struct2prose-rag;1;0;2;2;2;2;2;
+F05;Wie heißt die DNS-Zone zu 10.42.8.0/24 und wofür wird sie verwendet?;Referenzsystem;baseline-rag;0;0;2;2;2;2;2;
+F06;Sind die Dienste Gitlab, Scandienst und PKI für ORGA relevant?;Untersuchungssystem;struct2prose-rag;2;2;0;1;1;2;2;Chunk über Scandienst fehlt, wird auch offengelegt
+F06;Sind die Dienste Gitlab, Scandienst und PKI für ORGA relevant?;Referenzsystem;baseline-rag;2;0;0;0;0;1;1;Findet nur 1/3, erfindet noch einen weiteren
+F07;Wer ist für den Dienst EGVP verantwortlich?;Untersuchungssystem;struct2prose-rag;0;0;1;0;0;0;0;
+F07;Wer ist für den Dienst EGVP verantwortlich?;Referenzsystem;baseline-rag;0;2;0;0;0;0;0;
+F08;Welche Infrastrukturdienste haben den Status unbekannt bei der Relevanz für ORGA?;Untersuchungssystem;struct2prose-rag;0;2;0;0;0;0;0;Hier sind Daten in Kont. Verloren gegangen
+F08;Welche Infrastrukturdienste haben den Status unbekannt bei der Relevanz für ORGA?;Referenzsystem;baseline-rag;0;2;0;2;2;2;2;
+F09;Welche Konsolidierungsdienste liegen in der Verantwortlichkeit von Petra König?;Untersuchungssystem;struct2prose-rag;2;1;0;2;2;2;2;
+F09;Welche Konsolidierungsdienste liegen in der Verantwortlichkeit von Petra König?;Referenzsystem;baseline-rag;0;0;0;0;0;0;0;
+F10;Gib mir Namen, VK-Modell, IP-Adressen und MAC-Adressen der VK-Anlage und des Touch-Control-Geräts am Standort1 B008 Mobil 2.;Untersuchungssystem;struct2prose-rag;0;0;2;1;1;2;2;nur 1/2 Geräte, entspr. Chunk fehlt
+F10;Gib mir Namen, VK-Modell, IP-Adressen und MAC-Adressen der VK-Anlage und des Touch-Control-Geräts am Standort1 B008 Mobil 2.;Referenzsystem;baseline-rag;0;0;2;0;1;2;2;wollte 2 Geräte aufzählen, hat aber 2x dieselben Angaben gemacht
+F11;Welches VK-Modell wird im Konferenzraum Standort2 A.1.1 eingesetzt?;Untersuchungssystem;struct2prose-rag;0;0;0;0;0;0;0;Retrieval ungenügend
+F11;Welches VK-Modell wird im Konferenzraum Standort2 A.1.1 eingesetzt?;Referenzsystem;baseline-rag;2;0;0;2;2;2;2;
+F12;Wie kann man technische Ansprechpartner beim BRAIN kontaktieren?;Untersuchungssystem;struct2prose-rag;2;0;1;2;1;2;2;Alle AP da, aber jew. Nur 1/2 Telefonnummern -> Kont.-Verlust!
+F12;Wie kann man technische Ansprechpartner beim BRAIN kontaktieren?;Referenzsystem;baseline-rag;0;0;1;0;0;0;0;
+F13;Zu welcher Domäne gehört der Dienst “Schriftgutverwaltung” und ist er für die Dienstekonsolidierung für ORGA relevant?;Untersuchungssystem;struct2prose-rag;2;0;0;0;1;1;2;Halluzination
+F13;Zu welcher Domäne gehört der Dienst “Schriftgutverwaltung” und ist er für die Dienstekonsolidierung für ORGA relevant?;Referenzsystem;baseline-rag;0;0;0;0;0;0;0;
+F14;Wie sind die S0FTW4RE-Defaultwerte der Version 5.0 am 05.01.2024?;Untersuchungssystem;struct2prose-rag;2;1;0;2;2;2;2;
+F14;Wie sind die S0FTW4RE-Defaultwerte der Version 5.0 am 05.01.2024?;Referenzsystem;baseline-rag;0;0;0;0;0;0;0;
+F15;Wie sind IP, Port, SID und User der Produktiv-Datenbanken von Rechnung ERS?;Untersuchungssystem;struct2prose-rag;2;1;1;2;2;1;2;Quatscht Nonsens über Ports, sonst alles richtig
+F15;Wie sind IP, Port, SID und User der Produktiv-Datenbanken von Rechnung ERS?;Referenzsystem;baseline-rag;2;0;0;2;2;2;2;Tippfehler in Frage suggeriert… sonst richtig
+F16;Wie heißen die 4 Punk Frösche und ihre Sprecher??;Untersuchungssystem;struct2prose-rag;2;0;0;2;1;2;2;nur deutsche Sprecher, obwohl nicht präzisiert
+F16;Wie heißen die 4 Punk Frösche und ihre Sprecher??;Referenzsystem;baseline-rag;2;0;0;2;2;2;2;
+F17;Ist nach einer Installation des PDF-Viewer ein Neustart notwendig?;Untersuchungssystem;struct2prose-rag;0;0;2;2;2;2;2;
+F17;Ist nach einer Installation des PDF-Viewer ein Neustart notwendig?;Referenzsystem;baseline-rag;0;0;0;0;0;0;0;
+F18;Welche Paket-Version des Web-Proxy ist derzeit in der Softwareverteilung freigegeben?;Untersuchungssystem;struct2prose-rag;2;0;0;2;2;2;2;
+F18;Welche Paket-Version des Web-Proxy ist derzeit in der Softwareverteilung freigegeben?;Referenzsystem;baseline-rag;2;0;0;2;2;2;2;
+F19;Was ist Alarmklasse A3? Was ist die zweite Stufe der Eskalationskette?;Untersuchungssystem;struct2prose-rag;2;2;0;1;2;2;2;Inf.verlust durch Kont.
+F19;Was ist Alarmklasse A3? Was ist die zweite Stufe der Eskalationskette?;Referenzsystem;baseline-rag;1;0;2;2;2;2;2;
+F20;Wie viele Tage lang wird das Netzwerkmonitoring vorgehalten?;Untersuchungssystem;struct2prose-rag;2;0;2;2;2;2;2;
+F20;Wie viele Tage lang wird das Netzwerkmonitoring vorgehalten?;Referenzsystem;baseline-rag;0;0;0;0;0;0;0;
